@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lettuce.mall.dao.MallCarouselDao">
+    <resultMap id="BaseResultMap" type="com.lettuce.mall.entity.Carousel">
+        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="carouselUrl" jdbcType="VARCHAR" property="carouselUrl"/>
+        <result column="redirectUrl" jdbcType="VARCHAR" property="redirectUrl"/>
+        <result column="usePlaceId" jdbcType="INTEGER" property="usePlaceId"/>
+        <result column="carouselRank" jdbcType="INTEGER" property="carouselRank"/>
+        <result column="isDeleted" jdbcType="TINYINT" property="isDeleted"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createUserId" jdbcType="INTEGER" property="createUserId"/>
+        <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
+        <result column="gmtUserId" jdbcType="INTEGER" property="gmtUserId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        tid, carouselUrl, redirectUrl, usePlaceId, carouselRank, isDeleted, createTime,
+    createUserId, gmtTime, gmtUserId
+    </sql>
+
+    <select id="getCarousel" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mall_carousel
+        where isDeleted = 0
+        order by carouselRank asc
+    </select>
+</mapper>
