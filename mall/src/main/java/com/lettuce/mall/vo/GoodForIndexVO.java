@@ -1,9 +1,11 @@
 package com.lettuce.mall.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Code is far away from bug with the animal protected
@@ -43,8 +45,13 @@ public class GoodForIndexVO implements Serializable {
     private String goodCoverImg;
     @ApiModelProperty("商品优惠金额")
     private BigDecimal discountPrice;
+    @ApiModelProperty("购买人数")
+    private Integer paymentNo;
     @ApiModelProperty("库存")
     private Integer stock;
+    @ApiModelProperty("售卖时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date sellTime;
 
     public Long getGoodId() {
         return goodId;
@@ -94,11 +101,27 @@ public class GoodForIndexVO implements Serializable {
         this.discountPrice = discountPrice;
     }
 
+    public Integer getPaymentNo() {
+        return paymentNo;
+    }
+
+    public void setPaymentNo(Integer paymentNo) {
+        this.paymentNo = paymentNo;
+    }
+
     public Integer getStock() {
         return stock;
     }
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Date getSellTime() {
+        return sellTime;
+    }
+
+    public void setSellTime(Date sellTime) {
+        this.sellTime = sellTime;
     }
 }

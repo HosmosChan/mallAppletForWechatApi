@@ -56,17 +56,68 @@ public class MallGoodServiceImpl implements MallGoodService {
         if (!CollectionUtils.isEmpty(goodBaseInfos)) {
             goodForIndexVOs = BeanUtil.copyList(goodBaseInfos, GoodForIndexVO.class);
             for (GoodForIndexVO goodForIndexVO : goodForIndexVOs) {
-                String goodName = goodForIndexVO.getGoodName();
-                // 字符串过长导致文字超出的问题
-                if (goodName.length() > 30) {
-                    goodName = goodName.substring(0, 30) + "...";
-                    goodForIndexVO.setGoodName(goodName);
-                }
+                shortenGoodTitle(goodForIndexVO);
                 if (goodForIndexVO.getDiscountPrice().compareTo(BigDecimal.ZERO) != 0) {
                     goodForIndexVO.setDiscountPrice(goodForIndexVO.getGoodPrice().subtract(goodForIndexVO.getDiscountPrice()));
                 }
             }
         }
         return goodForIndexVOs;
+    }
+
+    /**
+     * @param null
+     * @return List<GoodForIndexVO>
+     * @description 返回热卖商品对象(首页调用)
+     * @author Hosmos
+     * @date 2021-07-05
+     */
+    @Override
+    public List<GoodForIndexVO> getHotGoodsForIndex(int number) {
+        List<GoodForIndexVO> goodForIndexVOs = new ArrayList<>();
+        List<GoodBase> goodBaseInfos = mallGoodDao.getHotGoodBaseInfo(number);
+        if (!CollectionUtils.isEmpty(goodBaseInfos)) {
+            goodForIndexVOs = BeanUtil.copyList(goodBaseInfos, GoodForIndexVO.class);
+            for (GoodForIndexVO goodForIndexVO : goodForIndexVOs) {
+                shortenGoodTitle(goodForIndexVO);
+            }
+        }
+        return goodForIndexVOs;
+    }
+
+    /**
+     * @param null
+     * @return List<GoodForIndexVO>
+     * @description 返回最新商品对象(首页调用)
+     * @author Hosmos
+     * @date 2021-07-05
+     */
+    @Override
+    public List<GoodForIndexVO> getNewGoodsForIndex(int number) {
+        List<GoodForIndexVO> goodForIndexVOs = new ArrayList<>();
+        List<GoodBase> goodBaseInfos = mallGoodDao.getNewGoodBaseInfo(number);
+        if (!CollectionUtils.isEmpty(goodBaseInfos)) {
+            goodForIndexVOs = BeanUtil.copyList(goodBaseInfos, GoodForIndexVO.class);
+            for (GoodForIndexVO goodForIndexVO : goodForIndexVOs) {
+                shortenGoodTitle(goodForIndexVO);
+            }
+        }
+        return goodForIndexVOs;
+    }
+
+    /**
+     * @param
+     * @return
+     * @description 商品标题字符串过长导致文字超出的问题
+     * @author Hosmos
+     * @date 2021-07-05
+     */
+    private static GoodForIndexVO shortenGoodTitle(GoodForIndexVO goodForIndexVO) {
+        String goodName = goodForIndexVO.getGoodName();
+        if (goodName.length() > 30) {
+            goodName = goodName.substring(0, 30) + "...";
+            goodForIndexVO.setGoodName(goodName);
+        }
+        return goodForIndexVO;
     }
 }

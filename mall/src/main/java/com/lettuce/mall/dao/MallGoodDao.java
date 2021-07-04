@@ -30,4 +30,8 @@ import java.util.List;
  */
 public interface MallGoodDao {
     List<GoodBase> getDiscountGoodBaseInfo(int number);
+
+    List<GoodBase> getHotGoodBaseInfo(int number);
+
+    List<GoodBase> getNewGoodBaseInfo(int number);
 }

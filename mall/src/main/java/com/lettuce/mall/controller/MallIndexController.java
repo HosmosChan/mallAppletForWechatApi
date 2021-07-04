@@ -72,10 +72,38 @@ public class MallIndexController {
      * @author Hosmos
      * @date 2021/6/27
      */
-    @RequestMapping(value = "/get_discounted_goods", method = RequestMethod.GET)
+    @RequestMapping(value = "/get_discount_goods", method = RequestMethod.GET)
     @ApiOperation(value = "获取特价商品数据")
     public Result<GoodForIndexVO> getDiscountedGoods() {
         List<GoodForIndexVO> discountedGoods = mallGoodService.getDiscountGoodsForIndex(Constants.INDEX_GOODS_DISCOUNT_NUMBER);
         return ResultGenerator.genSuccessResult(discountedGoods);
+    }
+
+    /**
+     * @param null
+     * @return Result<GoodForIndexVO>
+     * @description 获取热卖商品数据
+     * @author Hosmos
+     * @date 2021-07-05
+     */
+    @RequestMapping(value = "/get_hot_goods", method = RequestMethod.GET)
+    @ApiOperation(value = "获取热卖商品数据")
+    public Result<GoodForIndexVO> getHotGoods() {
+        List<GoodForIndexVO> hotGoods = mallGoodService.getHotGoodsForIndex(Constants.INDEX_GOODS_HOT_NUMBER);
+        return ResultGenerator.genSuccessResult(hotGoods);
+    }
+
+    /**
+     * @param null
+     * @return Result<GoodForIndexVO>
+     * @description 获取最新商品数据
+     * @author Hosmos
+     * @date 2021-07-05
+     */
+    @RequestMapping(value = "/get_new_goods", method = RequestMethod.GET)
+    @ApiOperation(value = "获取最新商品数据")
+    public Result<GoodForIndexVO> getNewGoods() {
+        List<GoodForIndexVO> newGoods = mallGoodService.getNewGoodsForIndex(Constants.INDEX_GOODS_NEW_NUMBER);
+        return ResultGenerator.genSuccessResult(newGoods);
     }
 }

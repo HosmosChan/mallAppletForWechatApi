@@ -1,6 +1,9 @@
 package com.lettuce.mall.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Code is far away from bug with the animal protected
@@ -41,6 +44,8 @@ public class GoodBase extends BaseEntity<Long> {
     private Integer markNo;
     private Integer commentNo;
     private Byte sellStatus;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date sellTime;
     private Long creatUserId;
     private Long gmtUserId;
 
@@ -146,6 +151,14 @@ public class GoodBase extends BaseEntity<Long> {
 
     public void setSellStatus(Byte sellStatus) {
         this.sellStatus = sellStatus;
+    }
+
+    public Date getSellTime() {
+        return sellTime;
+    }
+
+    public void setSellTime(Date sellTime) {
+        this.sellTime = sellTime;
     }
 
     public Long getCreatUserId() {

@@ -37,4 +37,22 @@ public interface MallGoodService {
      * @date 2021-06-27
      */
     List<GoodForIndexVO> getDiscountGoodsForIndex(int number);
+
+    /**
+     * @param null
+     * @return List<GoodForIndexVO>
+     * @description 返回热卖商品对象(首页调用)
+     * @author Hosmos
+     * @date 2021-07-05
+     */
+    List<GoodForIndexVO> getHotGoodsForIndex(int number);
+
+    /**
+     * @param null
+     * @return List<GoodForIndexVO>
+     * @description 返回最新商品对象(首页调用)
+     * @author Hosmos
+     * @date 2021-07-05
+     */
+    List<GoodForIndexVO> getNewGoodsForIndex(int number);
 }

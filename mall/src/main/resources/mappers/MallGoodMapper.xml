@@ -17,6 +17,7 @@
         <result column="markNo" jdbcType="INTEGER" property="markNo"/>
         <result column="commentNo" jdbcType="INTEGER" property="commentNo"/>
         <result column="sellStatus" jdbcType="TINYINT" property="sellStatus"/>
+        <result column="sellTime" jdbcType="TIMESTAMP" property="sellTime"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
@@ -24,8 +25,8 @@
     </resultMap>
     <sql id="Good_Base_List">
         tid, goodId, parentId, goodName, goodPrice, goodUrl, goodCoverImg, isDiscount,
-        discountPrice, paymentNo, stock, markNo, commentNo, sellStatus, createTime,
-        createUserId, gmtTime, gmtUserId
+        discountPrice, paymentNo, stock, markNo, commentNo, sellStatus, sellTime,
+        createTime, createUserId, gmtTime, gmtUserId
     </sql>
 
     <select id="getDiscountGoodBaseInfo" resultMap="GoodBaseResultMap">
@@ -35,6 +36,26 @@
         where isDiscount = 1
         and sellStatus = 1
         order by discountPrice desc
+        <if test="number!=null">
+            limit #{number}
+        </if>
+    </select>
+    <select id="getHotGoodBaseInfo" resultMap="GoodBaseResultMap">
+        select
+        <include refid="Good_Base_List"/>
+        from mall_good_base
+        where sellStatus = 1
+        order by paymentNo desc
+        <if test="number!=null">
+            limit #{number}
+        </if>
+    </select>
+    <select id="getNewGoodBaseInfo" resultMap="GoodBaseResultMap">
+        select
+        <include refid="Good_Base_List"/>
+        from mall_good_base
+        where sellStatus = 1
+        order by sellTime desc
         <if test="number!=null">
             limit #{number}
         </if>
