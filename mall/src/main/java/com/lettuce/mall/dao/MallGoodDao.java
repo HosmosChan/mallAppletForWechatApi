@@ -1,6 +1,6 @@
 package com.lettuce.mall.dao;
 
-import com.lettuce.mall.entity.Carousel;
+import com.lettuce.mall.entity.GoodBase;
 
 import java.util.List;
 
@@ -25,9 +25,9 @@ import java.util.List;
  * 　　　┗┻┛　┗┻┛
  *
  * @author Hosmos
- * @description 轮换图dao层
- * @date 2021年06月25日
+ * @description 商品dao层
+ * @date 2021年06月28日
  */
-public interface MallCarouselDao {
-    List<Carousel> getCarousel(Byte usePlaceId, Long parentId);
+public interface MallGoodDao {
+    List<GoodBase> getDiscountGoodBaseInfo(int number);
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lettuce.mall.dao.MallGoodDao">
+    <resultMap id="GoodBaseResultMap" type="com.lettuce.mall.entity.GoodBase">
+        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="goodId" jdbcType="BIGINT" property="goodId"/>
+        <result column="parentId" jdbcType="BIGINT" property="parentId"/>
+        <result column="goodName" jdbcType="VARCHAR" property="goodName"/>
+        <result column="goodPrice" jdbcType="DECIMAL" property="goodPrice"/>
+        <result column="goodUrl" jdbcType="VARCHAR" property="goodUrl"/>
+        <result column="goodCoverImg" jdbcType="VARCHAR" property="goodCoverImg"/>
+        <result column="isDiscount" jdbcType="TINYINT" property="isDiscount"/>
+        <result column="discountPrice" jdbcType="DECIMAL" property="discountPrice"/>
+        <result column="paymentNo" jdbcType="INTEGER" property="paymentNo"/>
+        <result column="stock" jdbcType="INTEGER" property="stock"/>
+        <result column="markNo" jdbcType="INTEGER" property="markNo"/>
+        <result column="commentNo" jdbcType="INTEGER" property="commentNo"/>
+        <result column="sellStatus" jdbcType="TINYINT" property="sellStatus"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
+        <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
+        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
+    </resultMap>
+    <sql id="Good_Base_List">
+        tid, goodId, parentId, goodName, goodPrice, goodUrl, goodCoverImg, isDiscount,
+        discountPrice, paymentNo, stock, markNo, commentNo, sellStatus, createTime,
+        createUserId, gmtTime, gmtUserId
+    </sql>
+
+    <select id="getDiscountGoodBaseInfo" resultMap="GoodBaseResultMap">
+        select
+        <include refid="Good_Base_List"/>
+        from mall_good_base
+        where isDiscount = 1
+        and sellStatus = 1
+        order by discountPrice desc
+        <if test="number!=null">
+            limit #{number}
+        </if>
+    </select>
+</mapper>

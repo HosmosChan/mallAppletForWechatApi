@@ -4,19 +4,21 @@
 <mapper namespace="com.lettuce.mall.dao.MallCarouselDao">
     <resultMap id="BaseResultMap" type="com.lettuce.mall.entity.Carousel">
         <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="carouselId" jdbcType="BIGINT" property="carouselId"/>
         <result column="carouselUrl" jdbcType="VARCHAR" property="carouselUrl"/>
         <result column="redirectUrl" jdbcType="VARCHAR" property="redirectUrl"/>
-        <result column="usePlaceId" jdbcType="INTEGER" property="usePlaceId"/>
+        <result column="parentId" jdbcType="BIGINT" property="parentId"/>
+        <result column="usePlaceId" jdbcType="TINYINT" property="usePlaceId"/>
         <result column="carouselRank" jdbcType="INTEGER" property="carouselRank"/>
         <result column="isDeleted" jdbcType="TINYINT" property="isDeleted"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="createUserId" jdbcType="INTEGER" property="createUserId"/>
+        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
-        <result column="gmtUserId" jdbcType="INTEGER" property="gmtUserId"/>
+        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
     <sql id="Base_Column_List">
-        tid, carouselUrl, redirectUrl, usePlaceId, carouselRank, isDeleted, createTime,
-    createUserId, gmtTime, gmtUserId
+        tid, carouselId, carouselUrl, redirectUrl, parentId, usePlaceId, carouselRank,
+        isDeleted, createTime, createUserId, gmtTime, gmtUserId
     </sql>
 
     <select id="getCarousel" resultMap="BaseResultMap">
@@ -24,6 +26,10 @@
         <include refid="Base_Column_List"/>
         from mall_carousel
         where isDeleted = 0
+        and usePlaceId = #{usePlaceId}
+        <if test="parentId!=null">
+            and parentId = #{parentId}
+        </if>
         order by carouselRank asc
     </select>
 </mapper>

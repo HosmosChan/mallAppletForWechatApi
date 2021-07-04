@@ -1,14 +1,18 @@
-package com.lettuce.mall.controller.mall;
+package com.lettuce.mall.controller;
 
+import com.lettuce.common.enums.Constants;
 import com.lettuce.common.utils.Result;
 import com.lettuce.common.utils.ResultGenerator;
 import com.lettuce.mall.service.MallCarouselService;
+import com.lettuce.mall.service.MallGoodService;
 import com.lettuce.mall.vo.CarouselsForIndexVO;
+import com.lettuce.mall.vo.GoodForIndexVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -34,15 +38,18 @@ import java.util.List;
  * 　　　┗┻┛　┗┻┛
  *
  * @author Hosmos
- * @description 轮播图controller层
+ * @description 首页controller层
  * @date 2021年06月25日
  */
-@RestController
 @Api(value = "index", tags = "首页接口")
+@RestController
 @RequestMapping("/mall/index")
 public class MallIndexController {
+    private static final Logger logger = LoggerFactory.getLogger(MallIndexController.class);
     @Resource
-    private MallCarouselService mallcarouselService;
+    private MallCarouselService mallCarouselService;
+    @Resource
+    private MallGoodService mallGoodService;
 
     /**
      * @param null
@@ -51,10 +58,24 @@ public class MallIndexController {
      * @author Hosmos
      * @date 2021/6/25
      */
-    @GetMapping("/get_carousel")
+    @RequestMapping(value = "/get_carousel", method = RequestMethod.GET)
     @ApiOperation(value = "获取轮播图数据")
     public Result<CarouselsForIndexVO> getCarousel() {
-        List<CarouselsForIndexVO> carousels = mallcarouselService.getCarouselsForIndex();
+        List<CarouselsForIndexVO> carousels = mallCarouselService.getCarouselsForIndex();
         return ResultGenerator.genSuccessResult(carousels);
+    }
+
+    /**
+     * @param null
+     * @return Result<GoodForIndexVO>
+     * @description 获取特价商品数据
+     * @author Hosmos
+     * @date 2021/6/27
+     */
+    @RequestMapping(value = "/get_discounted_goods", method = RequestMethod.GET)
+    @ApiOperation(value = "获取特价商品数据")
+    public Result<GoodForIndexVO> getDiscountedGoods() {
+        List<GoodForIndexVO> discountedGoods = mallGoodService.getDiscountGoodsForIndex(Constants.INDEX_GOODS_DISCOUNT_NUMBER);
+        return ResultGenerator.genSuccessResult(discountedGoods);
     }
 }

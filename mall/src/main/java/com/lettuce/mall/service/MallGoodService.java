@@ -1,6 +1,6 @@
-package com.lettuce.mall.dao;
+package com.lettuce.mall.service;
 
-import com.lettuce.mall.entity.Carousel;
+import com.lettuce.mall.vo.GoodForIndexVO;
 
 import java.util.List;
 
@@ -25,9 +25,16 @@ import java.util.List;
  * 　　　┗┻┛　┗┻┛
  *
  * @author Hosmos
- * @description 轮换图dao层
- * @date 2021年06月25日
+ * @description 特价商品业务层
+ * @date 2021年06月27日
  */
-public interface MallCarouselDao {
-    List<Carousel> getCarousel(Byte usePlaceId, Long parentId);
+public interface MallGoodService {
+    /**
+     * @param null
+     * @return List<GoodForIndexVO>
+     * @description 返回特价商品对象(首页调用)
+     * @author Hosmos
+     * @date 2021-06-27
+     */
+    List<GoodForIndexVO> getDiscountGoodsForIndex(int number);
 }

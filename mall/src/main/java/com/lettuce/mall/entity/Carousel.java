@@ -30,13 +30,23 @@ import java.util.Date;
  */
 public class Carousel extends BaseEntity<Long> {
     private static final long serialVersionUID = 7007693915657921940L;
+    private Long carouselId;
     private String carouselUrl;
     private String redirectUrl;
-    private Integer usePlaceId;
+    private Long parentId;
+    private Byte usePlaceId;
     private Integer carouselRank;
     private Byte isDeleted;
-    private Integer createUserId;
-    private Integer gmtUserId;
+    private Long createUserId;
+    private Long gmtUserId;
+
+    public Long getCarouselId() {
+        return carouselId;
+    }
+
+    public void setCarouselId(Long carouselId) {
+        this.carouselId = carouselId;
+    }
 
     public String getCarouselUrl() {
         return carouselUrl;
@@ -54,11 +64,19 @@ public class Carousel extends BaseEntity<Long> {
         this.redirectUrl = redirectUrl;
     }
 
-    public Integer getUsePlaceId() {
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public Byte getUsePlaceId() {
         return usePlaceId;
     }
 
-    public void setUsePlaceId(Integer usePlaceId) {
+    public void setUsePlaceId(Byte usePlaceId) {
         this.usePlaceId = usePlaceId;
     }
 
@@ -78,19 +96,19 @@ public class Carousel extends BaseEntity<Long> {
         this.isDeleted = isDeleted;
     }
 
-    public Integer getCreateUserId() {
+    public Long getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Integer createUserId) {
+    public void setCreateUserId(Long createUserId) {
         this.createUserId = createUserId;
     }
 
-    public Integer getGmtUserId() {
+    public Long getGmtUserId() {
         return gmtUserId;
     }
 
-    public void setGmtUserId(Integer gmtUserId) {
+    public void setGmtUserId(Long gmtUserId) {
         this.gmtUserId = gmtUserId;
     }
 }

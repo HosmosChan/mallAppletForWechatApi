@@ -1,5 +1,6 @@
 package com.lettuce.mall.service.impl;
 
+import com.lettuce.common.enums.Constants;
 import com.lettuce.common.utils.BeanUtil;
 import com.lettuce.mall.dao.MallCarouselDao;
 import com.lettuce.mall.entity.Carousel;
@@ -36,15 +37,22 @@ import java.util.List;
  * @description 轮换图实现层
  * @date 2021年06月25日
  */
-@Service
+@Service("mallCarouselService")
 public class MallCarouselServiceImpl implements MallCarouselService {
     @Autowired
     private MallCarouselDao mallcarouselDao;
 
+    /**
+     * @param null
+     * @return List<CarouselsForIndexVO>
+     * @description 轮播图实现层
+     * @author Hosmos
+     * @date 2021-06-27
+     */
     @Override
     public List<CarouselsForIndexVO> getCarouselsForIndex() {
         List<CarouselsForIndexVO> carouselsForIndexVOs = new ArrayList<>();
-        List<Carousel> carousels = mallcarouselDao.getCarousel();
+        List<Carousel> carousels = mallcarouselDao.getCarousel(Constants.INDEX_CAROUSEL_INDEX, null);
         if (!CollectionUtils.isEmpty(carousels)) {
             carouselsForIndexVOs = BeanUtil.copyList(carousels, CarouselsForIndexVO.class);
         }

@@ -1,4 +1,4 @@
-package com.lettuce.common.utils;
+package com.lettuce.common.enums;
 
 /**
  * Code is far away from bug with the animal protected
@@ -27,13 +27,11 @@ package com.lettuce.common.utils;
 public class Constants {
     public final static String FILE_UPLOAD_DIC = "D:\\upload\\";//上传文件的默认url前缀，根据部署设置自行修改
 
-    public final static int INDEX_CAROUSEL_NUMBER = 5;//首页轮播图数量(可根据自身需求修改)
+    public final static Byte INDEX_CAROUSEL_INDEX = 0;//首页轮播图
 
-    public final static int INDEX_CATEGORY_NUMBER = 10;//首页一级分类的最大数量
-
-    public final static int INDEX_GOODS_HOT_NUMBER = 4;//首页热卖商品数量
-    public final static int INDEX_GOODS_NEW_NUMBER = 5;//首页新品数量
-    public final static int INDEX_GOODS_RECOMMOND_NUMBER = 10;//首页推荐商品数量
+    public final static int INDEX_GOODS_DISCOUNT_NUMBER = 3;//首页特价商品数量(2.0用dict控制)
+    public final static int INDEX_GOODS_HOT_NUMBER = 3;//首页热卖商品数量(2.0用dict控制)
+    public final static int INDEX_GOODS_NEW_NUMBER = 6;//首页最新商品数量(2.0用dict控制)
 
     public final static int SHOPPING_CART_ITEM_TOTAL_NUMBER = 20;//购物车中商品的最大数量(可根据自身需求修改)
 
