@@ -1,7 +1,5 @@
 package com.lettuce.mall.service;
 
-import com.lettuce.mall.entity.GoodBase;
-import com.lettuce.mall.entity.GoodDetail;
 import com.lettuce.mall.vo.GoodDetailVO;
 import com.lettuce.mall.vo.GoodForIndexVO;
 
@@ -28,12 +26,12 @@ import java.util.List;
  * 　　　┗┻┛　┗┻┛
  *
  * @author Hosmos
- * @description 特价商品业务层
+ * @description 商品业务层
  * @date 2021年06月27日
  */
 public interface MallGoodService {
     /**
-     * @param null
+     * @param number
      * @return List<GoodForIndexVO>
      * @description 返回特价商品对象(首页调用)
      * @author Hosmos
@@ -42,7 +40,16 @@ public interface MallGoodService {
     List<GoodForIndexVO> getSpecialPriceGoodsForIndex(int number);
 
     /**
-     * @param null
+     * @param number
+     * @return List<GoodForIndexVO>
+     * @description 返回折扣商品对象(首页调用)
+     * @author Hosmos
+     * @date 2021-07-06
+     */
+    List<GoodForIndexVO> getDiscountGoodsForIndex(int number);
+
+    /**
+     * @param number
      * @return List<GoodForIndexVO>
      * @description 返回热卖商品对象(首页调用)
      * @author Hosmos
@@ -51,7 +58,7 @@ public interface MallGoodService {
     List<GoodForIndexVO> getHotGoodsForIndex(int number);
 
     /**
-     * @param null
+     * @param number
      * @return List<GoodForIndexVO>
      * @description 返回最新商品对象(首页调用)
      * @author Hosmos
@@ -67,6 +74,4 @@ public interface MallGoodService {
      * @date 2021-07-05
      */
     GoodDetailVO getGoodDetailByGoodId(Long goodId);
-
-    List<GoodForIndexVO> getDiscountGoodsForIndex(int indexGoodsDiscountNumber);
 }

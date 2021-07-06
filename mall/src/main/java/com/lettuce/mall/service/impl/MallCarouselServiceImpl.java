@@ -69,6 +69,11 @@ public class MallCarouselServiceImpl implements MallCarouselService {
      */
     @Override
     public List<CarouselsForGoodVO> getCarouselsForGood(Long goodId) {
-        return null;
+        List<CarouselsForGoodVO> carouselsForGoodVOS = new ArrayList<>();
+        List<Carousel> carousels = mallcarouselDao.getCarousel(Constants.INDEX_CAROUSEL_GOOD, goodId);
+        if (!CollectionUtils.isEmpty(carousels)) {
+            carouselsForGoodVOS = BeanUtil.copyList(carousels, CarouselsForGoodVO.class);
+        }
+        return carouselsForGoodVOS;
     }
 }

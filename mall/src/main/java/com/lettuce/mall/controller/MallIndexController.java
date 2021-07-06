@@ -77,6 +77,7 @@ public class MallIndexController {
         List<GoodForIndexVO> specialPriceGoods = mallGoodService.getSpecialPriceGoodsForIndex(Constants.INDEX_GOODS_SPECIAL_PRICE_NUMBER);
         return ResultGenerator.genSuccessResult(specialPriceGoods);
     }
+
     /**
      * @param null
      * @return Result<GoodForIndexVO>

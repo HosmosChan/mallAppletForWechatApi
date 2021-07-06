@@ -28,6 +28,7 @@ public class Constants {
     public final static String FILE_UPLOAD_DIC = "D:\\upload\\";//上传文件的默认url前缀，根据部署设置自行修改
 
     public final static Byte INDEX_CAROUSEL_INDEX = 0;//首页轮播图
+    public final static Byte INDEX_CAROUSEL_GOOD = 1;//商品页轮播图
 
     public final static int INDEX_GOODS_SPECIAL_PRICE_NUMBER = 3;//首页特价商品数量(2.0用dict控制)
     public final static int INDEX_GOODS_DISCOUNT_NUMBER = 3;//首页折扣商品数量(2.0用dict控制)

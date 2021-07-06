@@ -1,9 +1,5 @@
 package com.lettuce.mall.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.util.Date;
-
 /**
  * Code is far away from bug with the animal protected
  * 　┏┓　　  ┏┓
@@ -33,7 +29,7 @@ public class Carousel extends BaseEntity<Long> {
     private Long carouselId;
     private String carouselUrl;
     private String redirectUrl;
-    private Long parentId;
+    private Long goodId;
     private Byte usePlaceId;
     private Integer carouselRank;
     private Byte isDeleted;
@@ -64,12 +60,12 @@ public class Carousel extends BaseEntity<Long> {
         this.redirectUrl = redirectUrl;
     }
 
-    public Long getParentId() {
-        return parentId;
+    public Long getGoodId() {
+        return goodId;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setGoodId(Long goodId) {
+        this.goodId = goodId;
     }
 
     public Byte getUsePlaceId() {

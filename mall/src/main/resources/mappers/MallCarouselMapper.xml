@@ -7,7 +7,7 @@
         <result column="carouselId" jdbcType="BIGINT" property="carouselId"/>
         <result column="carouselUrl" jdbcType="VARCHAR" property="carouselUrl"/>
         <result column="redirectUrl" jdbcType="VARCHAR" property="redirectUrl"/>
-        <result column="parentId" jdbcType="BIGINT" property="parentId"/>
+        <result column="goodId" jdbcType="BIGINT" property="goodId"/>
         <result column="usePlaceId" jdbcType="TINYINT" property="usePlaceId"/>
         <result column="carouselRank" jdbcType="INTEGER" property="carouselRank"/>
         <result column="isDeleted" jdbcType="TINYINT" property="isDeleted"/>
@@ -17,7 +17,7 @@
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
     <sql id="Base_Column_List">
-        tid, carouselId, carouselUrl, redirectUrl, parentId, usePlaceId, carouselRank,
+        tid, carouselId, carouselUrl, redirectUrl, goodId, usePlaceId, carouselRank,
         isDeleted, createTime, createUserId, gmtTime, gmtUserId
     </sql>
 
@@ -27,8 +27,8 @@
         from mall_carousel
         where isDeleted = 0
         and usePlaceId = #{usePlaceId}
-        <if test="parentId!=null">
-            and parentId = #{parentId}
+        <if test="goodId!=null">
+            and goodId = #{goodId}
         </if>
         order by carouselRank asc
     </select>

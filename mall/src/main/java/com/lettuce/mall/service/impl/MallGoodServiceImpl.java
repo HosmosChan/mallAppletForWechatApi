@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class MallGoodServiceImpl implements MallGoodService {
     private MallGoodDao mallGoodDao;
 
     /**
-     * @param null
+     * @param number
      * @return List<GoodForIndexVO>
      * @description 特价商品实现层(首页调用)
      * @author Hosmos
@@ -67,7 +66,7 @@ public class MallGoodServiceImpl implements MallGoodService {
     }
 
     /**
-     * @param null
+     * @param number
      * @return List<GoodForIndexVO>
      * @description 折扣商品实现层(首页调用)
      * @author Hosmos
@@ -87,7 +86,7 @@ public class MallGoodServiceImpl implements MallGoodService {
     }
 
     /**
-     * @param null
+     * @param number
      * @return List<GoodForIndexVO>
      * @description 热卖商品实现层(首页调用)
      * @author Hosmos
@@ -107,7 +106,7 @@ public class MallGoodServiceImpl implements MallGoodService {
     }
 
     /**
-     * @param null
+     * @param number
      * @return List<GoodForIndexVO>
      * @description 最新商品实现层(首页调用)
      * @author Hosmos
