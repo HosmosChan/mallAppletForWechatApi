@@ -11,7 +11,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -58,7 +57,7 @@ public class MallIndexController {
      * @author Hosmos
      * @date 2021/6/25
      */
-    @RequestMapping(value = "/get_carousel", method = RequestMethod.GET)
+    @RequestMapping(value = "/carousel", method = RequestMethod.GET)
     @ApiOperation(value = "获取轮播图数据")
     public Result<CarouselsForIndexVO> getCarousel() {
         List<CarouselsForIndexVO> carousels = mallCarouselService.getCarouselsForIndex();
@@ -72,11 +71,24 @@ public class MallIndexController {
      * @author Hosmos
      * @date 2021/6/27
      */
-    @RequestMapping(value = "/get_discount_goods", method = RequestMethod.GET)
+    @RequestMapping(value = "/specialPriceGoods", method = RequestMethod.GET)
     @ApiOperation(value = "获取特价商品数据")
-    public Result<GoodForIndexVO> getDiscountedGoods() {
-        List<GoodForIndexVO> discountedGoods = mallGoodService.getDiscountGoodsForIndex(Constants.INDEX_GOODS_DISCOUNT_NUMBER);
-        return ResultGenerator.genSuccessResult(discountedGoods);
+    public Result<GoodForIndexVO> getSpecialPriceGoods() {
+        List<GoodForIndexVO> specialPriceGoods = mallGoodService.getSpecialPriceGoodsForIndex(Constants.INDEX_GOODS_SPECIAL_PRICE_NUMBER);
+        return ResultGenerator.genSuccessResult(specialPriceGoods);
+    }
+    /**
+     * @param null
+     * @return Result<GoodForIndexVO>
+     * @description 获取折扣商品数据
+     * @author Hosmos
+     * @date 2021/7/06
+     */
+    @RequestMapping(value = "/DiscountGoods", method = RequestMethod.GET)
+    @ApiOperation(value = "获取特价商品数据")
+    public Result<GoodForIndexVO> getDiscountGoods() {
+        List<GoodForIndexVO> discountGoods = mallGoodService.getDiscountGoodsForIndex(Constants.INDEX_GOODS_DISCOUNT_NUMBER);
+        return ResultGenerator.genSuccessResult(discountGoods);
     }
 
     /**
@@ -86,7 +98,7 @@ public class MallIndexController {
      * @author Hosmos
      * @date 2021-07-05
      */
-    @RequestMapping(value = "/get_hot_goods", method = RequestMethod.GET)
+    @RequestMapping(value = "/hotGoods", method = RequestMethod.GET)
     @ApiOperation(value = "获取热卖商品数据")
     public Result<GoodForIndexVO> getHotGoods() {
         List<GoodForIndexVO> hotGoods = mallGoodService.getHotGoodsForIndex(Constants.INDEX_GOODS_HOT_NUMBER);
@@ -100,7 +112,7 @@ public class MallIndexController {
      * @author Hosmos
      * @date 2021-07-05
      */
-    @RequestMapping(value = "/get_new_goods", method = RequestMethod.GET)
+    @RequestMapping(value = "/getNewGoods", method = RequestMethod.GET)
     @ApiOperation(value = "获取最新商品数据")
     public Result<GoodForIndexVO> getNewGoods() {
         List<GoodForIndexVO> newGoods = mallGoodService.getNewGoodsForIndex(Constants.INDEX_GOODS_NEW_NUMBER);

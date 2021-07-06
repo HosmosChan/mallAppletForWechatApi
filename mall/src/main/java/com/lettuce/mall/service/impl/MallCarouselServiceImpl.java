@@ -5,6 +5,7 @@ import com.lettuce.common.utils.BeanUtil;
 import com.lettuce.mall.dao.MallCarouselDao;
 import com.lettuce.mall.entity.Carousel;
 import com.lettuce.mall.service.MallCarouselService;
+import com.lettuce.mall.vo.CarouselsForGoodVO;
 import com.lettuce.mall.vo.CarouselsForIndexVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class MallCarouselServiceImpl implements MallCarouselService {
     /**
      * @param null
      * @return List<CarouselsForIndexVO>
-     * @description 轮播图实现层
+     * @description 轮播图实现层(首页调用)
      * @author Hosmos
      * @date 2021-06-27
      */
@@ -57,5 +58,17 @@ public class MallCarouselServiceImpl implements MallCarouselService {
             carouselsForIndexVOs = BeanUtil.copyList(carousels, CarouselsForIndexVO.class);
         }
         return carouselsForIndexVOs;
+    }
+
+    /**
+     * @param goodId
+     * @return List<CarouselsForGoodVO>
+     * @description 轮播图实现层(商品页调用)
+     * @author Hosmos
+     * @date 2021-07-05
+     */
+    @Override
+    public List<CarouselsForGoodVO> getCarouselsForGood(Long goodId) {
+        return null;
     }
 }

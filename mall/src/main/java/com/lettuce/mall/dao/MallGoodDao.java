@@ -1,6 +1,9 @@
 package com.lettuce.mall.dao;
 
 import com.lettuce.mall.entity.GoodBase;
+import com.lettuce.mall.entity.GoodDetail;
+import com.lettuce.mall.entity.GoodDeliverWay;
+import com.lettuce.mall.entity.GoodDiscount;
 
 import java.util.List;
 
@@ -29,9 +32,19 @@ import java.util.List;
  * @date 2021年06月28日
  */
 public interface MallGoodDao {
-    List<GoodBase> getDiscountGoodBaseInfo(int number);
+    List<GoodBase> getSpecialPriceGoodBaseInfo(int number);
 
     List<GoodBase> getHotGoodBaseInfo(int number);
 
     List<GoodBase> getNewGoodBaseInfo(int number);
+
+    List<GoodBase> getDiscountGoodBaseInfo(int number);
+
+    GoodBase getGoodBaseInfo(Long goodId);
+
+    GoodDetail getGoodDetailInfo(Long goodId);
+
+    List<GoodDeliverWay> getGoodDeliverWay(Long goodId);
+
+    GoodDiscount getGoodDiscount(Long goodId);
 }

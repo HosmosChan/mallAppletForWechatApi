@@ -1,5 +1,6 @@
 package com.lettuce.mall.service;
 
+import com.lettuce.mall.vo.CarouselsForGoodVO;
 import com.lettuce.mall.vo.CarouselsForIndexVO;
 
 import java.util.List;
@@ -37,4 +38,13 @@ public interface MallCarouselService {
      * @date 2021/6/25
      */
     List<CarouselsForIndexVO> getCarouselsForIndex();
+
+    /**
+     * @param null
+     * @return List<CarouselsForGoodVO>
+     * @description 返回轮播图对象(商品页调用)
+     * @author Hosmos
+     * @date 2021/7/05
+     */
+    List<CarouselsForGoodVO> getCarouselsForGood(Long goodId);
 }

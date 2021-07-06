@@ -43,8 +43,12 @@ public class GoodForIndexVO implements Serializable {
     private String goodUrl;
     @ApiModelProperty("商品封面")
     private String goodCoverImg;
-    @ApiModelProperty("商品优惠金额")
-    private BigDecimal discountPrice;
+    @ApiModelProperty("商品特价金额")
+    private BigDecimal specialPrice;
+    @ApiModelProperty("商品折扣数")
+    private Double discountOff;
+    @ApiModelProperty("满金额折扣")
+    private BigDecimal fullPrice;
     @ApiModelProperty("购买人数")
     private Integer paymentNo;
     @ApiModelProperty("库存")
@@ -93,12 +97,28 @@ public class GoodForIndexVO implements Serializable {
         this.goodCoverImg = goodCoverImg;
     }
 
-    public BigDecimal getDiscountPrice() {
-        return discountPrice;
+    public BigDecimal getSpecialPrice() {
+        return specialPrice;
     }
 
-    public void setDiscountPrice(BigDecimal discountPrice) {
-        this.discountPrice = discountPrice;
+    public void setSpecialPrice(BigDecimal specialPrice) {
+        this.specialPrice = specialPrice;
+    }
+
+    public Double getDiscountOff() {
+        return discountOff;
+    }
+
+    public void setDiscountOff(Double discountOff) {
+        this.discountOff = discountOff;
+    }
+
+    public BigDecimal getFullPrice() {
+        return fullPrice;
+    }
+
+    public void setFullPrice(BigDecimal fullPrice) {
+        this.fullPrice = fullPrice;
     }
 
     public Integer getPaymentNo() {

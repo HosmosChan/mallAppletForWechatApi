@@ -1,9 +1,8 @@
-package com.lettuce.mall.entity;
+package com.lettuce.mall.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
 
 /**
  * Code is far away from bug with the animal protected
@@ -26,17 +25,15 @@ import java.util.Date;
  * 　　　┗┻┛　┗┻┛
  *
  * @author Hosmos
- * @description 商品基础实体类
- * @date 2021年06月28日
+ * @description 商品信息VO
+ * @date 2021年07月05日
  */
-public class GoodBase extends BaseEntity<Long> {
-    private static final long serialVersionUID = 1494147529004393101L;
+public class GoodDetailVO implements Serializable {
+    public static final long serialVersionUID = 2173986850096865968L;
     private Long goodId;
     private Long parentId;
     private String goodName;
     private BigDecimal goodPrice;
-    private String goodUrl;
-    private String goodCoverImg;
     private Byte isSpecialPrice;
     private BigDecimal specialPrice;
     private Byte isDiscount;
@@ -45,10 +42,12 @@ public class GoodBase extends BaseEntity<Long> {
     private Integer markNo;
     private Integer commentNo;
     private Byte sellStatus;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date sellTime;
-    private Long creatUserId;
-    private Long gmtUserId;
+    private String goodDescribe;
+    private Double goodSize;
+    private Long companyId;
+    private Double discountOff;
+    private BigDecimal fullPrice;
+    private List<String> deliverWay;
 
     public Long getGoodId() {
         return goodId;
@@ -80,22 +79,6 @@ public class GoodBase extends BaseEntity<Long> {
 
     public void setGoodPrice(BigDecimal goodPrice) {
         this.goodPrice = goodPrice;
-    }
-
-    public String getGoodUrl() {
-        return goodUrl;
-    }
-
-    public void setGoodUrl(String goodUrl) {
-        this.goodUrl = goodUrl;
-    }
-
-    public String getGoodCoverImg() {
-        return goodCoverImg;
-    }
-
-    public void setGoodCoverImg(String goodCoverImg) {
-        this.goodCoverImg = goodCoverImg;
     }
 
     public Byte getIsSpecialPrice() {
@@ -162,27 +145,51 @@ public class GoodBase extends BaseEntity<Long> {
         this.sellStatus = sellStatus;
     }
 
-    public Date getSellTime() {
-        return sellTime;
+    public String getGoodDescribe() {
+        return goodDescribe;
     }
 
-    public void setSellTime(Date sellTime) {
-        this.sellTime = sellTime;
+    public void setGoodDescribe(String goodDescribe) {
+        this.goodDescribe = goodDescribe;
     }
 
-    public Long getCreatUserId() {
-        return creatUserId;
+    public Double getGoodSize() {
+        return goodSize;
     }
 
-    public void setCreatUserId(Long creatUserId) {
-        this.creatUserId = creatUserId;
+    public void setGoodSize(Double goodSize) {
+        this.goodSize = goodSize;
     }
 
-    public Long getGmtUserId() {
-        return gmtUserId;
+    public Long getCompanyId() {
+        return companyId;
     }
 
-    public void setGmtUserId(Long gmtUserId) {
-        this.gmtUserId = gmtUserId;
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public Double getDiscountOff() {
+        return discountOff;
+    }
+
+    public void setDiscountOff(Double discountOff) {
+        this.discountOff = discountOff;
+    }
+
+    public BigDecimal getFullPrice() {
+        return fullPrice;
+    }
+
+    public void setFullPrice(BigDecimal fullPrice) {
+        this.fullPrice = fullPrice;
+    }
+
+    public List<String> getDeliverWay() {
+        return deliverWay;
+    }
+
+    public void setDeliverWay(List<String> deliverWay) {
+        this.deliverWay = deliverWay;
     }
 }

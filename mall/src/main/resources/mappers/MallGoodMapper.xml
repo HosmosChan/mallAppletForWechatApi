@@ -10,8 +10,9 @@
         <result column="goodPrice" jdbcType="DECIMAL" property="goodPrice"/>
         <result column="goodUrl" jdbcType="VARCHAR" property="goodUrl"/>
         <result column="goodCoverImg" jdbcType="VARCHAR" property="goodCoverImg"/>
+        <result column="isSpecialPrice" jdbcType="TINYINT" property="isSpecialPrice"/>
+        <result column="specialPrice" jdbcType="DECIMAL" property="specialPrice"/>
         <result column="isDiscount" jdbcType="TINYINT" property="isDiscount"/>
-        <result column="discountPrice" jdbcType="DECIMAL" property="discountPrice"/>
         <result column="paymentNo" jdbcType="INTEGER" property="paymentNo"/>
         <result column="stock" jdbcType="INTEGER" property="stock"/>
         <result column="markNo" jdbcType="INTEGER" property="markNo"/>
@@ -23,19 +24,74 @@
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
+    <resultMap id="GoodDetailResultMap" type="com.lettuce.mall.entity.GoodDetail">
+        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="goodId" jdbcType="BIGINT" property="goodId"/>
+        <result column="goodDescribe" jdbcType="VARCHAR" property="goodDescribe"/>
+        <result column="goodSize" jdbcType="DOUBLE" property="goodSize"/>
+        <result column="companyId" jdbcType="BIGINT" property="companyId"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
+        <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
+        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
+    </resultMap>
+    <resultMap id="GoodDeliverWayResultMap" type="com.lettuce.mall.entity.GoodDeliverWay">
+        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="goodId" jdbcType="BIGINT" property="goodId"/>
+        <result column="deliverWay" jdbcType="VARCHAR" property="deliverWay"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
+        <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
+        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
+    </resultMap>
+    <resultMap id="GoodDiscountResultMap" type="com.lettuce.mall.entity.GoodDiscount">
+        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="goodId" jdbcType="BIGINT" property="goodId"/>
+        <result column="discountOff" jdbcType="DOUBLE" property="discountOff"/>
+        <result column="fullPrice" jdbcType="DECIMAL" property="fullPrice"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
+        <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
+        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
+    </resultMap>
     <sql id="Good_Base_List">
-        tid, goodId, parentId, goodName, goodPrice, goodUrl, goodCoverImg, isDiscount,
-        discountPrice, paymentNo, stock, markNo, commentNo, sellStatus, sellTime,
-        createTime, createUserId, gmtTime, gmtUserId
+        mgb.tid, mgb.goodId, parentId, goodName, goodPrice, goodUrl, goodCoverImg,
+        isSpecialPrice, specialPrice, isDiscount, paymentNo, stock, markNo,
+        commentNo, sellStatus, sellTime, mgb.createTime, mgb.createUserId,
+        mgb.gmtTime, mgb.gmtUserId
+    </sql>
+    <sql id="Good_Detail_List">
+        mgd.tid, mgd.goodId, goodDescribe, goodSize, companyId, mgd.createTime,
+        mgd.createUserId, mgd.gmtTime, mgd.gmtUserId
+    </sql>
+    <sql id="Good_Deliver_Way_List">
+        mgdw.tid, mgdw.goodId, deliverWay, mgdw.createTime, mgdw.createUserId,
+        mgdw.gmtTime, mgdw.gmtUserId
+    </sql>
+    <sql id="Good_Discount_List">
+        discountOff, fullPrice
     </sql>
 
-    <select id="getDiscountGoodBaseInfo" resultMap="GoodBaseResultMap">
+    <select id="getSpecialPriceGoodBaseInfo" resultMap="GoodBaseResultMap">
         select
         <include refid="Good_Base_List"/>
-        from mall_good_base
+        from mall_good_base as mgb
+        where isSpecialPrice = 1
+        and sellStatus = 1
+        order by specialPrice desc
+        <if test="number!=null">
+            limit #{number}
+        </if>
+    </select>
+    <select id="getDiscountGoodBaseInfo" resultMap="GoodBaseResultMap, GoodDiscountResultMap">
+        select
+        <include refid="Good_Base_List"/>
+        <include refid="Good_Discount_List"/>
+        from mall_good_base as mgb
+        right join mall_good_discount as mgd
+        on mgb.goodId = mgd.goodId
         where isDiscount = 1
         and sellStatus = 1
-        order by discountPrice desc
         <if test="number!=null">
             limit #{number}
         </if>
@@ -43,7 +99,7 @@
     <select id="getHotGoodBaseInfo" resultMap="GoodBaseResultMap">
         select
         <include refid="Good_Base_List"/>
-        from mall_good_base
+        from mall_good_base as mgb
         where sellStatus = 1
         order by paymentNo desc
         <if test="number!=null">
@@ -53,11 +109,36 @@
     <select id="getNewGoodBaseInfo" resultMap="GoodBaseResultMap">
         select
         <include refid="Good_Base_List"/>
-        from mall_good_base
+        from mall_good_base as mgb
         where sellStatus = 1
         order by sellTime desc
         <if test="number!=null">
             limit #{number}
         </if>
+    </select>
+    <select id="getGoodBaseInfo" resultMap="GoodBaseResultMap">
+        select
+        <include refid="Good_Base_List"/>
+        from mall_good_base as mgb
+        where sellStatus = 1
+        and mgb.goodId = #{goodId}
+    </select>
+    <select id="getGoodDetailInfo" resultMap="GoodDetailResultMap">
+        select
+        <include refid="Good_Detail_List"/>
+        from mall_good_detail as mgd
+        where mgd.goodId = #{goodId}
+    </select>
+    <select id="getGoodDeliverWay" resultMap="GoodDeliverWayResultMap">
+        select
+        <include refid="Good_Deliver_Way_List"/>
+        from mall_good_deliver_way as mgdw
+        where mgdw.goodId = #{goodId}
+    </select>
+    <select id="getGoodDiscount" resultMap="GoodDiscountResultMap">
+        select
+        <include refid="Good_Discount_List"/>
+        from mall_good_Discount as mgdi
+        where mgdi.goodId = #{goodId}
     </select>
 </mapper>

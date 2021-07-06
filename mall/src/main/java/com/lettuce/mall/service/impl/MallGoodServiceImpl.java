@@ -3,7 +3,11 @@ package com.lettuce.mall.service.impl;
 import com.lettuce.common.utils.BeanUtil;
 import com.lettuce.mall.dao.MallGoodDao;
 import com.lettuce.mall.entity.GoodBase;
+import com.lettuce.mall.entity.GoodDetail;
+import com.lettuce.mall.entity.GoodDeliverWay;
+import com.lettuce.mall.entity.GoodDiscount;
 import com.lettuce.mall.service.MallGoodService;
+import com.lettuce.mall.vo.GoodDetailVO;
 import com.lettuce.mall.vo.GoodForIndexVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,9 +49,29 @@ public class MallGoodServiceImpl implements MallGoodService {
     /**
      * @param null
      * @return List<GoodForIndexVO>
-     * @description 返回特价商品对象(首页调用)
+     * @description 特价商品实现层(首页调用)
      * @author Hosmos
      * @date 2021-06-27
+     */
+    @Override
+    public List<GoodForIndexVO> getSpecialPriceGoodsForIndex(int number) {
+        List<GoodForIndexVO> goodForIndexVOs = new ArrayList<>();
+        List<GoodBase> goodBaseInfos = mallGoodDao.getSpecialPriceGoodBaseInfo(number);
+        if (!CollectionUtils.isEmpty(goodBaseInfos)) {
+            goodForIndexVOs = BeanUtil.copyList(goodBaseInfos, GoodForIndexVO.class);
+            for (GoodForIndexVO goodForIndexVO : goodForIndexVOs) {
+                shortenGoodTitle(goodForIndexVO);
+            }
+        }
+        return goodForIndexVOs;
+    }
+
+    /**
+     * @param null
+     * @return List<GoodForIndexVO>
+     * @description 折扣商品实现层(首页调用)
+     * @author Hosmos
+     * @date 2021-07-06
      */
     @Override
     public List<GoodForIndexVO> getDiscountGoodsForIndex(int number) {
@@ -57,9 +81,6 @@ public class MallGoodServiceImpl implements MallGoodService {
             goodForIndexVOs = BeanUtil.copyList(goodBaseInfos, GoodForIndexVO.class);
             for (GoodForIndexVO goodForIndexVO : goodForIndexVOs) {
                 shortenGoodTitle(goodForIndexVO);
-                if (goodForIndexVO.getDiscountPrice().compareTo(BigDecimal.ZERO) != 0) {
-                    goodForIndexVO.setDiscountPrice(goodForIndexVO.getGoodPrice().subtract(goodForIndexVO.getDiscountPrice()));
-                }
             }
         }
         return goodForIndexVOs;
@@ -68,7 +89,7 @@ public class MallGoodServiceImpl implements MallGoodService {
     /**
      * @param null
      * @return List<GoodForIndexVO>
-     * @description 返回热卖商品对象(首页调用)
+     * @description 热卖商品实现层(首页调用)
      * @author Hosmos
      * @date 2021-07-05
      */
@@ -88,7 +109,7 @@ public class MallGoodServiceImpl implements MallGoodService {
     /**
      * @param null
      * @return List<GoodForIndexVO>
-     * @description 返回最新商品对象(首页调用)
+     * @description 最新商品实现层(首页调用)
      * @author Hosmos
      * @date 2021-07-05
      */
@@ -106,8 +127,38 @@ public class MallGoodServiceImpl implements MallGoodService {
     }
 
     /**
-     * @param
-     * @return
+     * @param goodId
+     * @return GoodDetailVO
+     * @description 商品信息实现层(商品页调用)
+     * @author Hosmos
+     * @date 2021-07-05
+     */
+    @Override
+    public GoodDetailVO getGoodDetailByGoodId(Long goodId) {
+        GoodBase goodBase = mallGoodDao.getGoodBaseInfo(goodId);
+        if (goodBase == null) {
+            return null;
+        }
+        GoodDetail goodDetail = mallGoodDao.getGoodDetailInfo(goodId);
+        List<GoodDeliverWay> goodDeliverWay = mallGoodDao.getGoodDeliverWay(goodId);
+        List<String> goodDeliverWayList = null;
+        if (!CollectionUtils.isEmpty(goodDeliverWay)) {
+            for (GoodDeliverWay goodDeliverWayStr : goodDeliverWay) {
+                goodDeliverWayList.add(goodDeliverWayStr.getDeliverWay());
+            }
+        }
+        GoodDiscount goodDiscount = mallGoodDao.getGoodDiscount(goodId);
+        GoodDetailVO goodsDetailVO = new GoodDetailVO();
+        BeanUtil.copyProperties(goodBase, goodsDetailVO);
+        BeanUtil.copyProperties(goodDetail, goodsDetailVO);
+        BeanUtil.copyProperties(goodDeliverWay, goodsDetailVO);
+        goodsDetailVO.setDeliverWay(goodDeliverWayList);
+        return goodsDetailVO;
+    }
+
+    /**
+     * @param goodForIndexVO
+     * @return GoodForIndexVO
      * @description 商品标题字符串过长导致文字超出的问题
      * @author Hosmos
      * @date 2021-07-05
