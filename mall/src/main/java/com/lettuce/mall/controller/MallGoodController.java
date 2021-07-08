@@ -9,6 +9,7 @@ import com.lettuce.mall.service.MallCarouselService;
 import com.lettuce.mall.service.MallGoodService;
 import com.lettuce.mall.vo.CarouselsForGoodVO;
 import com.lettuce.mall.vo.GoodDetailVO;
+import com.lettuce.mall.vo.GoodInfoVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -99,12 +100,29 @@ public class MallGoodController {
                 MallException.fail(ServiceResultEnum.GOODS_PUT_OFF.getResult());
                 break;
             }
-            case Constants.SELL_STATUS_ON:{
+            case Constants.SELL_STATUS_ON: {
                 break;
             }
             default:
                 return ResultGenerator.genFailResult("参数异常");
         }
         return ResultGenerator.genSuccessResult(goodDetailVO);
+    }
+
+    /**
+     * @param goodId
+     * @return List<GoodInfoVO>
+     * @description 获取商品下拉详细信息数据
+     * @author Hosmos
+     * @date 2021-07-08
+     */
+    @RequestMapping(value = "/info/{goodId}", method = RequestMethod.POST)
+    @ApiOperation(value = "获取下拉详细信息数据", notes = "传参为商品id")
+    public Result<List<GoodInfoVO>> getGoodInfo(@ApiParam(value = "商品id") @PathVariable("goodId") Long goodId) {
+        if (goodId < 1) {
+            return ResultGenerator.genFailResult("参数异常");
+        }
+        List<GoodInfoVO> goodInfos = mallGoodService.getGoodInfoByGoodId(goodId);
+        return ResultGenerator.genSuccessResult(goodInfos);
     }
 }

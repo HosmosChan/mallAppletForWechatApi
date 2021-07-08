@@ -2,6 +2,7 @@ package com.lettuce.mall.service;
 
 import com.lettuce.mall.vo.GoodDetailVO;
 import com.lettuce.mall.vo.GoodForIndexVO;
+import com.lettuce.mall.vo.GoodInfoVO;
 
 import java.util.List;
 
@@ -74,4 +75,13 @@ public interface MallGoodService {
      * @date 2021-07-05
      */
     GoodDetailVO getGoodDetailByGoodId(Long goodId);
+
+    /**
+     * @param goodId
+     * @return GoodDetailVO
+     * @description 返回商品下拉详细信息对象(商品页调用)
+     * @author Hosmos
+     * @date 2021-07-08
+     */
+    List<GoodInfoVO> getGoodInfoByGoodId(Long goodId);
 }

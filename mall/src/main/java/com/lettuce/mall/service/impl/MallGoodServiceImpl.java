@@ -2,13 +2,11 @@ package com.lettuce.mall.service.impl;
 
 import com.lettuce.common.utils.BeanUtil;
 import com.lettuce.mall.dao.MallGoodDao;
-import com.lettuce.mall.entity.GoodBase;
-import com.lettuce.mall.entity.GoodDetail;
-import com.lettuce.mall.entity.GoodDeliverWay;
-import com.lettuce.mall.entity.GoodDiscount;
+import com.lettuce.mall.entity.*;
 import com.lettuce.mall.service.MallGoodService;
 import com.lettuce.mall.vo.GoodDetailVO;
 import com.lettuce.mall.vo.GoodForIndexVO;
+import com.lettuce.mall.vo.GoodInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -151,8 +149,26 @@ public class MallGoodServiceImpl implements MallGoodService {
         BeanUtil.copyProperties(goodBase, goodsDetailVO);
         BeanUtil.copyProperties(goodDetail, goodsDetailVO);
         BeanUtil.copyProperties(goodDeliverWay, goodsDetailVO);
+        BeanUtil.copyProperties(goodDiscount, goodsDetailVO);
         goodsDetailVO.setDeliverWay(goodDeliverWayList);
         return goodsDetailVO;
+    }
+
+    /**
+     * @param goodId
+     * @return GoodDetailVO
+     * @description 商品下拉详细信息实现层(商品页调用)
+     * @author Hosmos
+     * @date 2021-07-08
+     */
+    @Override
+    public List<GoodInfoVO> getGoodInfoByGoodId(Long goodId) {
+        List<GoodInfo> goodInfos = mallGoodDao.getGoodInfoList(goodId);
+        List<GoodInfoVO> goodInfoVOs = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(goodInfos)) {
+            goodInfoVOs = BeanUtil.copyList(goodInfos, GoodInfoVO.class);
+        }
+        return goodInfoVOs;
     }
 
     /**

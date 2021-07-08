@@ -32,7 +32,7 @@ import java.util.Date;
 public class GoodBase extends BaseEntity<Long> {
     private static final long serialVersionUID = 1494147529004393101L;
     private Long goodId;
-    private Long parentId;
+    private Long categoryId;
     private String goodName;
     private BigDecimal goodPrice;
     private String goodUrl;
@@ -58,12 +58,12 @@ public class GoodBase extends BaseEntity<Long> {
         this.goodId = goodId;
     }
 
-    public Long getParentId() {
-        return parentId;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getGoodName() {
