@@ -11,6 +11,7 @@
     <modules>
         <module>mall</module>
         <module>common</module>
+        <module>management</module>
     </modules>
 
     <parent>
