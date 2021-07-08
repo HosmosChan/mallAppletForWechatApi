@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lettuce.mall.dao.MallSearchDao">
+    <resultMap id="GoodBaseResultMap" type="com.lettuce.mall.entity.GoodBase">
+        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="goodId" jdbcType="BIGINT" property="goodId"/>
+        <result column="categoryId" jdbcType="BIGINT" property="categoryId"/>
+        <result column="goodName" jdbcType="VARCHAR" property="goodName"/>
+        <result column="goodPrice" jdbcType="DECIMAL" property="goodPrice"/>
+        <result column="goodUrl" jdbcType="VARCHAR" property="goodUrl"/>
+        <result column="goodCoverImg" jdbcType="VARCHAR" property="goodCoverImg"/>
+        <result column="isSpecialPrice" jdbcType="TINYINT" property="isSpecialPrice"/>
+        <result column="specialPrice" jdbcType="DECIMAL" property="specialPrice"/>
+        <result column="isDiscount" jdbcType="TINYINT" property="isDiscount"/>
+        <result column="paymentNo" jdbcType="INTEGER" property="paymentNo"/>
+        <result column="stock" jdbcType="INTEGER" property="stock"/>
+        <result column="markNo" jdbcType="INTEGER" property="markNo"/>
+        <result column="commentNo" jdbcType="INTEGER" property="commentNo"/>
+        <result column="sellStatus" jdbcType="TINYINT" property="sellStatus"/>
+        <result column="sellTime" jdbcType="TIMESTAMP" property="sellTime"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
+        <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
+        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
+    </resultMap>
+    <sql id="Good_Base_List">
+        mgb.tid, mgb.goodId, categoryId, goodName, goodPrice, goodUrl, goodCoverImg,
+        isSpecialPrice, specialPrice, isDiscount, paymentNo, stock, markNo,
+        commentNo, sellStatus, sellTime, mgb.createTime, mgb.createUserId,
+        mgb.gmtTime, mgb.gmtUserId
+    </sql>
+    <select id="getGoodsListBySearch" parameterType="Map" resultMap="GoodBaseResultMap">
+        select
+        <include refid="Good_Base_List"/>
+        from mall_good_base as mgb
+        right join mall_good_tag as mgt on mgb.goodId = mgt.goodId
+        right join mall_good_tag_list as mgtl on mgt.tagId = mgtl.tagId
+        <where>
+            <if test="keyWord!=null and keyWord!=''">
+                and (goodName like CONCAT('%',#{keyWord},'%') or (tagName like CONCAT('%',#{keyWord},'%')))
+            </if>
+            <if test="categoryId!=null and categoryId!=''">
+                and categoryId = #{categoryId}
+            </if>
+        </where>
+        <if test="orderBy!=null and orderBy!=''">
+            <choose>
+                <when test="orderBy == 'new'">
+                    <!-- 按照发布时间倒序排列 -->
+                    order by sellTime desc
+                </when>
+                <when test="orderBy == 'price'">
+                    <!-- 按照售价从小到大排列 -->
+                    order by goodPrice asc
+                </when>
+                <otherwise>
+                    <!-- 默认按照库存数量从大到小排列 -->
+                    order by stock desc
+                </otherwise>
+            </choose>
+        </if>
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
+    <select id="getSearchNumber" parameterType="Map" resultType="int">
+        select count(*)
+        from mall_good_base as mgb
+        right join mall_good_tag as mgt on mgb.goodId = mgt.goodId
+        right join mall_good_tag_list as mgtl on mgt.tagId = mgtl.tagId
+        <where>
+            <if test="keyWord!=null and keyWord!=''">
+                and (goodName like CONCAT('%',#{keyWord},'%') or (tagName like CONCAT('%',#{keyWord},'%')))
+            </if>
+            <if test="categoryId!=null and categoryId!=''">
+                and categoryId = #{categoryId}
+            </if>
+        </where>
+    </select>
+</mapper>
