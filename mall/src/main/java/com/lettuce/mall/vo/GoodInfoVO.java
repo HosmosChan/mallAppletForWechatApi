@@ -30,10 +30,20 @@ import java.io.Serializable;
  */
 public class GoodInfoVO implements Serializable {
     private static final long serialVersionUID = 3743179908280249987L;
+    @ApiModelProperty("APPId")
+    private String appId;
     @ApiModelProperty("信息类型")
     private Byte infoType;
     @ApiModelProperty("信息内容")
     private String info;
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     public Byte getInfoType() {
         return infoType;

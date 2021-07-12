@@ -45,15 +45,16 @@ public class MallGoodServiceImpl implements MallGoodService {
 
     /**
      * @param number
+     * @param appId
      * @return List<GoodForIndexVO>
      * @description 特价商品实现层(首页调用)
      * @author Hosmos
      * @date 2021-06-27
      */
     @Override
-    public List<GoodForIndexVO> getSpecialPriceGoodsForIndex(int number) {
+    public List<GoodForIndexVO> getSpecialPriceGoodsForIndex(int number, String appId) {
         List<GoodForIndexVO> goodForIndexVOs = new ArrayList<>();
-        List<GoodBase> goodBaseInfos = mallGoodDao.getSpecialPriceGoodBaseInfo(number);
+        List<GoodBase> goodBaseInfos = mallGoodDao.getSpecialPriceGoodBaseInfo(number, appId);
         if (!CollectionUtils.isEmpty(goodBaseInfos)) {
             goodForIndexVOs = BeanUtil.copyList(goodBaseInfos, GoodForIndexVO.class);
             for (GoodForIndexVO goodForIndexVO : goodForIndexVOs) {
@@ -65,15 +66,16 @@ public class MallGoodServiceImpl implements MallGoodService {
 
     /**
      * @param number
+     * @param appId
      * @return List<GoodForIndexVO>
      * @description 折扣商品实现层(首页调用)
      * @author Hosmos
      * @date 2021-07-06
      */
     @Override
-    public List<GoodForIndexVO> getDiscountGoodsForIndex(int number) {
+    public List<GoodForIndexVO> getDiscountGoodsForIndex(int number, String appId) {
         List<GoodForIndexVO> goodForIndexVOs = new ArrayList<>();
-        List<GoodBase> goodBaseInfos = mallGoodDao.getDiscountGoodBaseInfo(number);
+        List<GoodBase> goodBaseInfos = mallGoodDao.getDiscountGoodBaseInfo(number, appId);
         if (!CollectionUtils.isEmpty(goodBaseInfos)) {
             goodForIndexVOs = BeanUtil.copyList(goodBaseInfos, GoodForIndexVO.class);
             for (GoodForIndexVO goodForIndexVO : goodForIndexVOs) {
@@ -85,15 +87,16 @@ public class MallGoodServiceImpl implements MallGoodService {
 
     /**
      * @param number
+     * @param appId
      * @return List<GoodForIndexVO>
      * @description 热卖商品实现层(首页调用)
      * @author Hosmos
      * @date 2021-07-05
      */
     @Override
-    public List<GoodForIndexVO> getHotGoodsForIndex(int number) {
+    public List<GoodForIndexVO> getHotGoodsForIndex(int number, String appId) {
         List<GoodForIndexVO> goodForIndexVOs = new ArrayList<>();
-        List<GoodBase> goodBaseInfos = mallGoodDao.getHotGoodBaseInfo(number);
+        List<GoodBase> goodBaseInfos = mallGoodDao.getHotGoodBaseInfo(number, appId);
         if (!CollectionUtils.isEmpty(goodBaseInfos)) {
             goodForIndexVOs = BeanUtil.copyList(goodBaseInfos, GoodForIndexVO.class);
             for (GoodForIndexVO goodForIndexVO : goodForIndexVOs) {
@@ -105,15 +108,16 @@ public class MallGoodServiceImpl implements MallGoodService {
 
     /**
      * @param number
+     * @param appId
      * @return List<GoodForIndexVO>
      * @description 最新商品实现层(首页调用)
      * @author Hosmos
      * @date 2021-07-05
      */
     @Override
-    public List<GoodForIndexVO> getNewGoodsForIndex(int number) {
+    public List<GoodForIndexVO> getNewGoodsForIndex(int number, String appId) {
         List<GoodForIndexVO> goodForIndexVOs = new ArrayList<>();
-        List<GoodBase> goodBaseInfos = mallGoodDao.getNewGoodBaseInfo(number);
+        List<GoodBase> goodBaseInfos = mallGoodDao.getNewGoodBaseInfo(number, appId);
         if (!CollectionUtils.isEmpty(goodBaseInfos)) {
             goodForIndexVOs = BeanUtil.copyList(goodBaseInfos, GoodForIndexVO.class);
             for (GoodForIndexVO goodForIndexVO : goodForIndexVOs) {
@@ -125,26 +129,27 @@ public class MallGoodServiceImpl implements MallGoodService {
 
     /**
      * @param goodId
+     * @param appId
      * @return GoodDetailVO
      * @description 商品信息实现层(商品页调用)
      * @author Hosmos
      * @date 2021-07-05
      */
     @Override
-    public GoodDetailVO getGoodDetailByGoodId(Long goodId) {
-        GoodBase goodBase = mallGoodDao.getGoodBaseInfo(goodId);
+    public GoodDetailVO getGoodDetailByGoodId(Long goodId, String appId) {
+        GoodBase goodBase = mallGoodDao.getGoodBaseInfo(goodId, appId);
         if (goodBase == null) {
             return null;
         }
-        GoodDetail goodDetail = mallGoodDao.getGoodDetailInfo(goodId);
-        List<GoodDeliverWay> goodDeliverWay = mallGoodDao.getGoodDeliverWay(goodId);
+        GoodDetail goodDetail = mallGoodDao.getGoodDetailInfo(goodId, appId);
+        List<GoodDeliverWay> goodDeliverWay = mallGoodDao.getGoodDeliverWay(goodId, appId);
         List<String> goodDeliverWayList = null;
         if (!CollectionUtils.isEmpty(goodDeliverWay)) {
             for (GoodDeliverWay goodDeliverWayStr : goodDeliverWay) {
                 goodDeliverWayList.add(goodDeliverWayStr.getDeliverWay());
             }
         }
-        GoodDiscount goodDiscount = mallGoodDao.getGoodDiscount(goodId);
+        GoodDiscount goodDiscount = mallGoodDao.getGoodDiscount(goodId, appId);
         GoodDetailVO goodsDetailVO = new GoodDetailVO();
         BeanUtil.copyProperties(goodBase, goodsDetailVO);
         BeanUtil.copyProperties(goodDetail, goodsDetailVO);
@@ -156,14 +161,15 @@ public class MallGoodServiceImpl implements MallGoodService {
 
     /**
      * @param goodId
+     * @param appId
      * @return GoodDetailVO
      * @description 商品下拉详细信息实现层(商品页调用)
      * @author Hosmos
      * @date 2021-07-08
      */
     @Override
-    public List<GoodInfoVO> getGoodInfoByGoodId(Long goodId) {
-        List<GoodInfo> goodInfos = mallGoodDao.getGoodInfoList(goodId);
+    public List<GoodInfoVO> getGoodInfoByGoodId(Long goodId, String appId) {
+        List<GoodInfo> goodInfos = mallGoodDao.getGoodInfoList(goodId, appId);
         List<GoodInfoVO> goodInfoVOs = new ArrayList<>();
         if (!CollectionUtils.isEmpty(goodInfos)) {
             goodInfoVOs = BeanUtil.copyList(goodInfos, GoodInfoVO.class);

@@ -30,10 +30,20 @@ import java.io.Serializable;
  */
 public class CarouselsForGoodVO implements Serializable {
     private static final long serialVersionUID = 7408647933710267384L;
+    @ApiModelProperty("APPId")
+    private String appId;
     @ApiModelProperty("商品Id")
     private Long goodId;
     @ApiModelProperty("轮播图图片地址")
     private String carouselUrl;
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     public Long getGoodId() {
         return goodId;

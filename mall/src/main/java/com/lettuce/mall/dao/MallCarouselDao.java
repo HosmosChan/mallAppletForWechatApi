@@ -29,5 +29,5 @@ import java.util.List;
  * @date 2021年06月25日
  */
 public interface MallCarouselDao {
-    List<Carousel> getCarousel(Byte usePlaceId, Long parentId);
+    List<Carousel> getCarousel(Byte usePlaceId, Long goodId, String appId);
 }

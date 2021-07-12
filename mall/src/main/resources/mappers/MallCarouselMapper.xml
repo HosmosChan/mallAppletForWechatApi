@@ -4,6 +4,7 @@
 <mapper namespace="com.lettuce.mall.dao.MallCarouselDao">
     <resultMap id="BaseResultMap" type="com.lettuce.mall.entity.Carousel">
         <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="appId" jdbcType="BIGINT" property="appId"/>
         <result column="carouselId" jdbcType="BIGINT" property="carouselId"/>
         <result column="carouselUrl" jdbcType="VARCHAR" property="carouselUrl"/>
         <result column="redirectUrl" jdbcType="VARCHAR" property="redirectUrl"/>
@@ -17,7 +18,7 @@
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
     <sql id="Base_Column_List">
-        tid, carouselId, carouselUrl, redirectUrl, goodId, usePlaceId, carouselRank,
+        tid, appId, carouselId, carouselUrl, redirectUrl, goodId, usePlaceId, carouselRank,
         isDeleted, createTime, createUserId, gmtTime, gmtUserId
     </sql>
 
@@ -27,6 +28,9 @@
         from mall_carousel
         where isDeleted = 0
         and usePlaceId = #{usePlaceId}
+        <if test="appId!=null">
+            and appId = #{appId}
+        </if>
         <if test="goodId!=null">
             and goodId = #{goodId}
         </if>

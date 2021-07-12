@@ -33,6 +33,8 @@ import java.util.Date;
  */
 public class MallSearchVO implements Serializable {
     private static final long serialVersionUID = -4751582924299529726L;
+    @ApiModelProperty("APPId")
+    private String appId;
     @ApiModelProperty("商品Id")
     private Long goodId;
     @ApiModelProperty("商品名")
@@ -56,6 +58,14 @@ public class MallSearchVO implements Serializable {
     @ApiModelProperty("售卖时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date sellTime;
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     public Long getGoodId() {
         return goodId;

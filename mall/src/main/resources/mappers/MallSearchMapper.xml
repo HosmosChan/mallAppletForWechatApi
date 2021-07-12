@@ -4,6 +4,7 @@
 <mapper namespace="com.lettuce.mall.dao.MallSearchDao">
     <resultMap id="GoodBaseResultMap" type="com.lettuce.mall.entity.GoodBase">
         <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="appId" jdbcType="BIGINT" property="appId"/>
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
         <result column="categoryId" jdbcType="BIGINT" property="categoryId"/>
         <result column="goodName" jdbcType="VARCHAR" property="goodName"/>
@@ -25,7 +26,7 @@
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
     <sql id="Good_Base_List">
-        mgb.tid, mgb.goodId, categoryId, goodName, goodPrice, goodUrl, goodCoverImg,
+        mgb.tid, mgb.appId, mgb.goodId, categoryId, goodName, goodPrice, goodUrl, goodCoverImg,
         isSpecialPrice, specialPrice, isDiscount, paymentNo, stock, markNo,
         commentNo, sellStatus, sellTime, mgb.createTime, mgb.createUserId,
         mgb.gmtTime, mgb.gmtUserId
@@ -42,6 +43,9 @@
             </if>
             <if test="categoryId!=null and categoryId!=''">
                 and categoryId = #{categoryId}
+            </if>
+            <if test="appId!=null and appId!=''">
+                and mgb.appId = #{appId}
             </if>
         </where>
         <if test="orderBy!=null and orderBy!=''">
@@ -75,6 +79,9 @@
             </if>
             <if test="categoryId!=null and categoryId!=''">
                 and categoryId = #{categoryId}
+            </if>
+            <if test="appId!=null and appId!=''">
+                and mgb.appId = #{appId}
             </if>
         </where>
     </select>

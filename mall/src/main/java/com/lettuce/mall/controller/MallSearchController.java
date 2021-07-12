@@ -14,10 +14,7 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -55,16 +52,21 @@ public class MallSearchController {
     private static final Logger logger = LoggerFactory.getLogger(MallSearchController.class);
     @Resource
     private MallSearchService mallSearchService;
+
     /**
-     * @param
-     * @return
+     * @param keyWord
+     * @param categoryId
+     * @param orderBy
+     * @param pageNumber
+     * @param appId
+     * @return Result<PageResult < List < MallSearchVO>>>
      * @description 商品搜索(根据关键字和分类id进行搜索)
      * @author Hosmos
      * @date 2021-07-06
      */
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ApiOperation(value = "商品搜索")
-    public Result<PageResult<List<MallSearchVO>>> search(@RequestParam(required = false) @ApiParam(value = "搜索关键字") String keyWord, @RequestParam(required = false) @ApiParam(value = "分类id") Long categoryId, @RequestParam(required = false) @ApiParam(value = "orderBy") String orderBy, @RequestParam(required = false) @ApiParam(value = "页码") Integer pageNumber) {
+    public Result<PageResult<List<MallSearchVO>>> search(@RequestParam(required = false) @ApiParam(value = "搜索关键字") String keyWord, @RequestParam(required = false) @ApiParam(value = "分类id") Long categoryId, @RequestParam(required = false) @ApiParam(value = "orderBy") String orderBy, @RequestParam(required = false) @ApiParam(value = "页码") Integer pageNumber, @ApiParam(value = "APPID") String appId) {
         Map params = new HashMap(8);
         //两个搜索参数都为空，直接返回异常
         if (categoryId == null && StringUtils.isEmpty(keyWord)) {
@@ -76,6 +78,7 @@ public class MallSearchController {
         params.put("categoryId", categoryId);
         params.put("page", pageNumber);
         params.put("limit", Constants.GOODS_SEARCH_PAGE_LIMIT);
+        params.put("appId", appId);
         //对keyword做过滤 去掉空格
         if (!StringUtils.isEmpty(keyWord)) {
             params.put("keyWord", keyWord);

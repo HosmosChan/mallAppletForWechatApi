@@ -31,20 +31,21 @@ import java.util.List;
  */
 public interface MallCarouselService {
     /**
-     * @param null
+     * @param appId
      * @return List<CarouselsForIndexVO>
      * @description 返回轮播图对象(首页调用)
      * @author Hosmos
      * @date 2021/6/25
      */
-    List<CarouselsForIndexVO> getCarouselsForIndex();
+    List<CarouselsForIndexVO> getCarouselsForIndex(String appId);
 
     /**
-     * @param null
+     * @param goodId
+     * @param appId
      * @return List<CarouselsForGoodVO>
      * @description 返回轮播图对象(商品页调用)
      * @author Hosmos
      * @date 2021/7/05
      */
-    List<CarouselsForGoodVO> getCarouselsForGood(Long goodId);
+    List<CarouselsForGoodVO> getCarouselsForGood(Long goodId, String appId);
 }

@@ -30,11 +30,20 @@ import java.io.Serializable;
  */
 public class CarouselsForIndexVO implements Serializable {
     private static final long serialVersionUID = -5423785602293091690L;
+    @ApiModelProperty("APPId")
+    private String appId;
     @ApiModelProperty("轮播图图片地址")
     private String carouselUrl;
-
     @ApiModelProperty("轮播图点击后的跳转路径")
     private String redirectUrl;
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     public String getCarouselUrl() {
         return carouselUrl;

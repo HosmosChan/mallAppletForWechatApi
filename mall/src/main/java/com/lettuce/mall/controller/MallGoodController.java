@@ -56,6 +56,7 @@ public class MallGoodController {
 
     /**
      * @param goodId
+     * @param appId
      * @return Result<CarouselsForGoodVO>
      * @description 获取商品轮播图数据
      * @author Hosmos
@@ -63,11 +64,11 @@ public class MallGoodController {
      */
     @RequestMapping(value = "/detail/carousels/{goodId}", method = RequestMethod.POST)
     @ApiOperation(value = "获取商品轮播图数据", notes = "传参为商品id")
-    public Result<CarouselsForGoodVO> getGoodCarousels(@ApiParam(value = "商品id") @PathVariable("goodId") Long goodId) {
+    public Result<CarouselsForGoodVO> getGoodCarousels(@ApiParam(value = "商品id") @PathVariable("goodId") Long goodId, @ApiParam(value = "APPID") String appId) {
         if (goodId < 1) {
             return ResultGenerator.genFailResult("参数异常");
         }
-        List<CarouselsForGoodVO> carousels = mallCarouselService.getCarouselsForGood(goodId);
+        List<CarouselsForGoodVO> carousels = mallCarouselService.getCarouselsForGood(goodId, appId);
         if (carousels == null) {
             return ResultGenerator.genFailResult("参数异常");
         }
@@ -76,6 +77,7 @@ public class MallGoodController {
 
     /**
      * @param goodId
+     * @param appId
      * @return Result<GoodDetailVO>
      * @description 获取商品信息数据
      * @author Hosmos
@@ -83,14 +85,11 @@ public class MallGoodController {
      */
     @RequestMapping(value = "/detail/{goodId}", method = RequestMethod.POST)
     @ApiOperation(value = "获取商品详情数据", notes = "传参为商品id")
-    public Result<GoodDetailVO> getGoodDetail(@ApiParam(value = "商品id") @PathVariable("goodId") Long goodId) {
+    public Result<GoodDetailVO> getGoodDetail(@ApiParam(value = "商品id") @PathVariable("goodId") Long goodId, @ApiParam(value = "APPID") String appId) {
         if (goodId < 1) {
             return ResultGenerator.genFailResult("参数异常");
         }
-        GoodDetailVO goodDetailVO = mallGoodService.getGoodDetailByGoodId(goodId);
-        if (goodDetailVO == null) {
-            return ResultGenerator.genFailResult("参数异常");
-        }
+        GoodDetailVO goodDetailVO = mallGoodService.getGoodDetailByGoodId(goodId, appId);
         switch (goodDetailVO.getSellStatus()) {
             case Constants.SELL_STATUS_EXAMINE: {
                 MallException.fail(ServiceResultEnum.GOODS_PUT_EXAMINE.getResult());
@@ -111,6 +110,7 @@ public class MallGoodController {
 
     /**
      * @param goodId
+     * @param appId
      * @return List<GoodInfoVO>
      * @description 获取商品下拉详细信息数据
      * @author Hosmos
@@ -118,11 +118,11 @@ public class MallGoodController {
      */
     @RequestMapping(value = "/info/{goodId}", method = RequestMethod.POST)
     @ApiOperation(value = "获取下拉详细信息数据", notes = "传参为商品id")
-    public Result<List<GoodInfoVO>> getGoodInfo(@ApiParam(value = "商品id") @PathVariable("goodId") Long goodId) {
+    public Result<List<GoodInfoVO>> getGoodInfo(@ApiParam(value = "商品id") @PathVariable("goodId") Long goodId, @ApiParam(value = "APPID") String appId) {
         if (goodId < 1) {
             return ResultGenerator.genFailResult("参数异常");
         }
-        List<GoodInfoVO> goodInfos = mallGoodService.getGoodInfoByGoodId(goodId);
+        List<GoodInfoVO> goodInfos = mallGoodService.getGoodInfoByGoodId(goodId, appId);
         return ResultGenerator.genSuccessResult(goodInfos);
     }
 }

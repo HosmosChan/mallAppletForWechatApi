@@ -1,5 +1,7 @@
 package com.lettuce.mall.vo;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -30,6 +32,8 @@ import java.util.List;
  */
 public class GoodDetailVO implements Serializable {
     public static final long serialVersionUID = 2173986850096865968L;
+    @ApiModelProperty("APPId")
+    private String appId;
     private Long goodId;
     private Long parentId;
     private String goodName;
@@ -48,6 +52,14 @@ public class GoodDetailVO implements Serializable {
     private Double discountOff;
     private BigDecimal fullPrice;
     private List<String> deliverWay;
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     public Long getGoodId() {
         return goodId;

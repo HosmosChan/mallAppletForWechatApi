@@ -29,21 +29,21 @@ import java.util.List;
  * @date 2021年06月28日
  */
 public interface MallGoodDao {
-    List<GoodBase> getSpecialPriceGoodBaseInfo(int number);
+    List<GoodBase> getSpecialPriceGoodBaseInfo(int number, String appId);
 
-    List<GoodBase> getHotGoodBaseInfo(int number);
+    List<GoodBase> getHotGoodBaseInfo(int number, String appId);
 
-    List<GoodBase> getNewGoodBaseInfo(int number);
+    List<GoodBase> getNewGoodBaseInfo(int number, String appId);
 
-    List<GoodBase> getDiscountGoodBaseInfo(int number);
+    List<GoodBase> getDiscountGoodBaseInfo(int number, String appId);
 
-    GoodBase getGoodBaseInfo(Long goodId);
+    GoodBase getGoodBaseInfo(Long goodId, String appId);
 
-    GoodDetail getGoodDetailInfo(Long goodId);
+    GoodDetail getGoodDetailInfo(Long goodId, String appId);
 
-    List<GoodDeliverWay> getGoodDeliverWay(Long goodId);
+    List<GoodDeliverWay> getGoodDeliverWay(Long goodId, String appId);
 
-    GoodDiscount getGoodDiscount(Long goodId);
+    GoodDiscount getGoodDiscount(Long goodId, String appId);
 
-    List<GoodInfo> getGoodInfoList(Long goodId);
+    List<GoodInfo> getGoodInfoList(Long goodId, String appId);
 }
