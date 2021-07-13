@@ -12,6 +12,7 @@
         <module>mall</module>
         <module>common</module>
         <module>management</module>
+        <module>productsShown</module>
     </modules>
 
     <parent>
