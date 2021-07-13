@@ -39,8 +39,10 @@ public class GoodForIndexVO implements Serializable {
     private Long goodId;
     @ApiModelProperty("商品名")
     private String goodName;
-    @ApiModelProperty("商品原价")
-    private BigDecimal goodPrice;
+    @ApiModelProperty("商品最高原价")
+    private BigDecimal goodMaxPrice;
+    @ApiModelProperty("商品最低原价")
+    private BigDecimal goodMinPrice;
     @ApiModelProperty("商品详情跳转url")
     private String goodUrl;
     @ApiModelProperty("商品封面")
@@ -83,12 +85,20 @@ public class GoodForIndexVO implements Serializable {
         this.goodName = goodName;
     }
 
-    public BigDecimal getGoodPrice() {
-        return goodPrice;
+    public BigDecimal getGoodMaxPrice() {
+        return goodMaxPrice;
     }
 
-    public void setGoodPrice(BigDecimal goodPrice) {
-        this.goodPrice = goodPrice;
+    public void setGoodMaxPrice(BigDecimal goodMaxPrice) {
+        this.goodMaxPrice = goodMaxPrice;
+    }
+
+    public BigDecimal getGoodMinPrice() {
+        return goodMinPrice;
+    }
+
+    public void setGoodMinPrice(BigDecimal goodMinPrice) {
+        this.goodMinPrice = goodMinPrice;
     }
 
     public String getGoodUrl() {

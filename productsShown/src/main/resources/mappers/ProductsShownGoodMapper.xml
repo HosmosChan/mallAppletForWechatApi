@@ -8,7 +8,8 @@
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
         <result column="categoryId" jdbcType="BIGINT" property="categoryId"/>
         <result column="goodName" jdbcType="VARCHAR" property="goodName"/>
-        <result column="goodPrice" jdbcType="DECIMAL" property="goodPrice"/>
+        <result column="goodMaxPrice" jdbcType="DECIMAL" property="goodMaxPrice"/>
+        <result column="goodMinPrice" jdbcType="DECIMAL" property="goodMinPrice"/>
         <result column="goodUrl" jdbcType="VARCHAR" property="goodUrl"/>
         <result column="goodCoverImg" jdbcType="VARCHAR" property="goodCoverImg"/>
         <result column="isSpecialPrice" jdbcType="TINYINT" property="isSpecialPrice"/>
@@ -71,7 +72,7 @@
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
     <sql id="Good_Base_List">
-        mgb.tid, mgb.appId, mgb.goodId, categoryId, goodName, goodPrice, goodUrl, goodCoverImg,
+        mgb.tid, mgb.appId, mgb.goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl, goodCoverImg,
         isSpecialPrice, specialPrice, isDiscount, paymentNo, stock, markNo,
         commentNo, sellStatus, sellTime, mgb.createTime, mgb.createUserId,
         mgb.gmtTime, mgb.gmtUserId

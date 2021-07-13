@@ -31,7 +31,7 @@ import java.util.Date;
  * @description
  * @date 2021年07月06日
  */
-public class ProductsShownSearchVO implements Serializable {
+public class SearchVO implements Serializable {
     private static final long serialVersionUID = -4751582924299529726L;
     @ApiModelProperty("APPId")
     private String appId;
@@ -39,8 +39,10 @@ public class ProductsShownSearchVO implements Serializable {
     private Long goodId;
     @ApiModelProperty("商品名")
     private String goodName;
-    @ApiModelProperty("商品原价")
-    private BigDecimal goodPrice;
+    @ApiModelProperty("商品最高原价")
+    private BigDecimal goodMaxPrice;
+    @ApiModelProperty("商品最低原价")
+    private BigDecimal goodMinPrice;
     @ApiModelProperty("商品详情跳转url")
     private String goodUrl;
     @ApiModelProperty("商品封面")
@@ -83,12 +85,20 @@ public class ProductsShownSearchVO implements Serializable {
         this.goodName = goodName;
     }
 
-    public BigDecimal getGoodPrice() {
-        return goodPrice;
+    public BigDecimal getGoodMaxPrice() {
+        return goodMaxPrice;
     }
 
-    public void setGoodPrice(BigDecimal goodPrice) {
-        this.goodPrice = goodPrice;
+    public void setGoodMaxPrice(BigDecimal goodMaxPrice) {
+        this.goodMaxPrice = goodMaxPrice;
+    }
+
+    public BigDecimal getGoodMinPrice() {
+        return goodMinPrice;
+    }
+
+    public void setGoodMinPrice(BigDecimal goodMinPrice) {
+        this.goodMinPrice = goodMinPrice;
     }
 
     public String getGoodUrl() {

@@ -34,7 +34,8 @@ public class GoodBase extends BaseEntity<Long> {
     private Long goodId;
     private Long categoryId;
     private String goodName;
-    private BigDecimal goodPrice;
+    private BigDecimal goodMaxPrice;
+    private BigDecimal goodMinPrice;
     private String goodUrl;
     private String goodCoverImg;
     private Byte isSpecialPrice;
@@ -74,12 +75,20 @@ public class GoodBase extends BaseEntity<Long> {
         this.goodName = goodName;
     }
 
-    public BigDecimal getGoodPrice() {
-        return goodPrice;
+    public BigDecimal getGoodMaxPrice() {
+        return goodMaxPrice;
     }
 
-    public void setGoodPrice(BigDecimal goodPrice) {
-        this.goodPrice = goodPrice;
+    public void setGoodMaxPrice(BigDecimal goodMaxPrice) {
+        this.goodMaxPrice = goodMaxPrice;
+    }
+
+    public BigDecimal getGoodMinPrice() {
+        return goodMinPrice;
+    }
+
+    public void setGoodMinPrice(BigDecimal goodMinPrice) {
+        this.goodMinPrice = goodMinPrice;
     }
 
     public String getGoodUrl() {

@@ -87,7 +87,7 @@ public class ProductsShownIndexController {
      * @date 2021/7/06
      */
     @RequestMapping(value = "/discountGoods", method = RequestMethod.POST)
-    @ApiOperation(value = "获取特价商品数据")
+    @ApiOperation(value = "获取折扣商品数据")
     public Result<GoodForIndexVO> getDiscountGoods(@ApiParam(value = "APPID") String appId) {
         List<GoodForIndexVO> discountGoods = productsShownGoodService.getDiscountGoodsForIndex(Constants.INDEX_GOODS_DISCOUNT_NUMBER, appId);
         return ResultGenerator.genSuccessResult(discountGoods);

@@ -32,7 +32,7 @@ public class Constants {
 
     public final static int INDEX_GOODS_SPECIAL_PRICE_NUMBER = 3;//首页特价商品数量(2.0用dict控制)
     public final static int INDEX_GOODS_DISCOUNT_NUMBER = 3;//首页折扣商品数量(2.0用dict控制)
-    public final static int INDEX_GOODS_HOT_NUMBER = 3;//首页热卖商品数量(2.0用dict控制)
+    public final static int INDEX_GOODS_HOT_NUMBER = 6;//首页热卖商品数量(2.0用dict控制)
     public final static int INDEX_GOODS_NEW_NUMBER = 6;//首页最新商品数量(2.0用dict控制)
 
     public final static int SHOPPING_CART_ITEM_TOTAL_NUMBER = 20;//购物车中商品的最大数量(可根据自身需求修改)

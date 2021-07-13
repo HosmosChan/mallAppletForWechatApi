@@ -37,7 +37,8 @@ public class GoodDetailVO implements Serializable {
     private Long goodId;
     private Long parentId;
     private String goodName;
-    private BigDecimal goodPrice;
+    private BigDecimal goodMaxPrice;
+    private BigDecimal goodMinPrice;
     private Byte isSpecialPrice;
     private BigDecimal specialPrice;
     private Byte isDiscount;
@@ -85,12 +86,20 @@ public class GoodDetailVO implements Serializable {
         this.goodName = goodName;
     }
 
-    public BigDecimal getGoodPrice() {
-        return goodPrice;
+    public BigDecimal getGoodMaxPrice() {
+        return goodMaxPrice;
     }
 
-    public void setGoodPrice(BigDecimal goodPrice) {
-        this.goodPrice = goodPrice;
+    public void setGoodMaxPrice(BigDecimal goodMaxPrice) {
+        this.goodMaxPrice = goodMaxPrice;
+    }
+
+    public BigDecimal getGoodMinPrice() {
+        return goodMinPrice;
+    }
+
+    public void setGoodMinPrice(BigDecimal goodMinPrice) {
+        this.goodMinPrice = goodMinPrice;
     }
 
     public Byte getIsSpecialPrice() {
