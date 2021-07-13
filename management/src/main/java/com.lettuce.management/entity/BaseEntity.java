@@ -3,6 +3,30 @@ package com.lettuce.management.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Code is far away from bug with the animal protected
+ * 　┏┓　　  ┏┓
+ * ┏┻┻━━━┻┻┓
+ * ┃　　　　　　　┃
+ * ┃　　　━　　　┃
+ * ┃　┳┛　┗┳　┃
+ * ┃　　　　　　　┃
+ * ┃　　　┻　　　┃
+ * ┃　　　　　　　┃
+ * ┗━┓　　　┏━┛
+ * 　　┃　　　┃神兽保佑
+ * 　　┃　　　┃代码无BUG！
+ * 　　┃　　　┗━━━┓
+ * 　　┃　　　　　　　┣┓
+ * 　　┃　　　　　　　┣┛
+ * 　　┗┳┓┏━┳┓┏┛
+ * 　　　┃┫┫　┃┫┫
+ * 　　　┗┻┛　┗┻┛
+ *
+ * @author Hosmos
+ * @description 基础实体类
+ * @date 2021年07月13日
+ */
 public abstract class BaseEntity<ID extends Serializable> implements Serializable {
     private static final long serialVersionUID = 5406929891162490190L;
     private ID tid;

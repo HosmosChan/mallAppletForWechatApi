@@ -5,6 +5,30 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
+/**
+ * Code is far away from bug with the animal protected
+ * 　┏┓　　  ┏┓
+ * ┏┻┻━━━┻┻┓
+ * ┃　　　　　　　┃
+ * ┃　　　━　　　┃
+ * ┃　┳┛　┗┳　┃
+ * ┃　　　　　　　┃
+ * ┃　　　┻　　　┃
+ * ┃　　　　　　　┃
+ * ┗━┓　　　┏━┛
+ * 　　┃　　　┃神兽保佑
+ * 　　┃　　　┃代码无BUG！
+ * 　　┃　　　┗━━━┓
+ * 　　┃　　　　　　　┣┓
+ * 　　┃　　　　　　　┣┛
+ * 　　┗┳┓┏━┳┓┏┛
+ * 　　　┃┫┫　┃┫┫
+ * 　　　┗┻┛　┗┻┛
+ *
+ * @author Hosmos
+ * @description 用户实体类
+ * @date 2021年07月13日
+ */
 public class User extends BaseEntity<Long> {
     private static final long serialVersionUID = 831768647726043503L;
     private Long userId;

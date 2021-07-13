@@ -1,5 +1,29 @@
 package com.lettuce.management.entity;
 
+/**
+ * Code is far away from bug with the animal protected
+ * 　┏┓　　  ┏┓
+ * ┏┻┻━━━┻┻┓
+ * ┃　　　　　　　┃
+ * ┃　　　━　　　┃
+ * ┃　┳┛　┗┳　┃
+ * ┃　　　　　　　┃
+ * ┃　　　┻　　　┃
+ * ┃　　　　　　　┃
+ * ┗━┓　　　┏━┛
+ * 　　┃　　　┃神兽保佑
+ * 　　┃　　　┃代码无BUG！
+ * 　　┃　　　┗━━━┓
+ * 　　┃　　　　　　　┣┓
+ * 　　┃　　　　　　　┣┛
+ * 　　┗┳┓┏━┳┓┏┛
+ * 　　　┃┫┫　┃┫┫
+ * 　　　┗┻┛　┗┻┛
+ *
+ * @author Hosmos
+ * @description 角色实体类
+ * @date 2021年07月13日
+ */
 public class Role extends BaseEntity<Long> {
     private static final long serialVersionUID = -2847274114682650712L;
     private Long roleId;

@@ -2,6 +2,30 @@ package com.lettuce.management.entity;
 
 import java.util.List;
 
+/**
+ * Code is far away from bug with the animal protected
+ * 　┏┓　　  ┏┓
+ * ┏┻┻━━━┻┻┓
+ * ┃　　　　　　　┃
+ * ┃　　　━　　　┃
+ * ┃　┳┛　┗┳　┃
+ * ┃　　　　　　　┃
+ * ┃　　　┻　　　┃
+ * ┃　　　　　　　┃
+ * ┗━┓　　　┏━┛
+ * 　　┃　　　┃神兽保佑
+ * 　　┃　　　┃代码无BUG！
+ * 　　┃　　　┗━━━┓
+ * 　　┃　　　　　　　┣┓
+ * 　　┃　　　　　　　┣┛
+ * 　　┗┳┓┏━┳┓┏┛
+ * 　　　┃┫┫　┃┫┫
+ * 　　　┗┻┛　┗┻┛
+ *
+ * @author Hosmos
+ * @description 权限实体类
+ * @date 2021年07月13日
+ */
 public class Permission extends BaseEntity<Long> {
     private static final long serialVersionUID = -4861195523079061649L;
     private Long permissionId;

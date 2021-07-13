@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lettuce.management.dao.ManagementDictDao">
+    <resultMap id="DictResultMap" type="com.lettuce.management.entity.Dict">
+        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="key" jdbcType="VARCHAR" property="key"/>
+        <result column="value" jdbcType="VARCHAR" property="value"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
+    </resultMap>
+    <sql id="Dict_List">
+        tid, type, key, value, createTime, gmtTime
+    </sql>
+    <sql id="where">
+        <where>
+            <if test="params.tid != null and params.tid != ''">
+                and tid = #{params.tid}
+            </if>
+            <if test="params.type != null and params.type != ''">
+                and type = #{params.type}
+            </if>
+            <if test="params.key != null and params.key != ''">
+                and key = #{params.key}
+            </if>
+            <if test="params.value != null and params.value != ''">
+                and value = #{params.value}
+            </if>
+        </where>
+    </sql>
+    <select id="getByTypeAndKey" resultMap="Dict_List">
+        select
+        <include refid="Dict_List"/>
+        from management_dict
+        where type = #{type} and key = #{key}
+    </select>
+    <insert id="save">
+        insert into management_dict
+        (type, key, value, createTime)
+        value
+        (#{type}, #{key}, #{value}, now())
+    </insert>
+    <select id="getByTid" resultMap="Dict_List">
+        select
+        <include refid="Dict_List"/>
+        from management_dict
+        where tid = #{tid}
+    </select>
+    <update id="update">
+        update management_dict
+        <set>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="key != null">
+                key = #{key},
+            </if>
+            <if test="value != null">
+                value = #{value},
+            </if>
+            gmtTime = now()
+        </set>
+        where tid = #{tid}
+    </update>
+    <select id="list" resultMap="DictResultMap">
+        select
+        <include refid="Dict_List"/>
+        from management_dict
+        <include refid="where"/>
+        ${params.orderBy}
+        limit #{offset}, #{limit}
+    </select>
+    <select id="count" resultType="int">
+        select count(1) from management_dict
+        <include refid="where"/>
+    </select>
+    <delete id="delete">
+        delete from management_dict
+        where tid = #{tid}
+    </delete>
+    <select id="listByType" resultMap="Dict_List">
+        select
+        <include refid="Dict_List"/>
+        from management_dict
+        where type = #{type}
+    </select>
+</mapper>

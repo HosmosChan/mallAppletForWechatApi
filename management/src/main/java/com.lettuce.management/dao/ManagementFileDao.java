@@ -1,4 +1,9 @@
-package com.lettuce.management.entity;
+package com.lettuce.management.dao;
+
+import com.lettuce.management.entity.FileInfo;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Code is far away from bug with the animal protected
@@ -21,37 +26,17 @@ package com.lettuce.management.entity;
  * 　　　┗┻┛　┗┻┛
  *
  * @author Hosmos
- * @description 字典实体类
+ * @description 文件dao层
  * @date 2021年07月13日
  */
-public class Dict extends BaseEntity<Long> {
+public interface ManagementFileDao {
+    FileInfo getByFileIdAndAppId(String fileId, String appId);
 
-    private static final long serialVersionUID = 4609570483531883147L;
-    private String type;
-    private String key;
-    private String value;
+    void save(FileInfo fileInfo);
 
-    public String getType() {
-        return type;
-    }
+    int count(Map<String, Object> params);
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    List<FileInfo> list(Map<String, Object> params, Integer offset, Integer limit);
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
+    void delete(String fileId, String appId);
 }

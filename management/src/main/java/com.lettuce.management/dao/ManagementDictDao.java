@@ -1,4 +1,9 @@
-package com.lettuce.management.entity;
+package com.lettuce.management.dao;
+
+import com.lettuce.management.entity.Dict;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Code is far away from bug with the animal protected
@@ -21,37 +26,23 @@ package com.lettuce.management.entity;
  * 　　　┗┻┛　┗┻┛
  *
  * @author Hosmos
- * @description 字典实体类
+ * @description 字典dao层
  * @date 2021年07月13日
  */
-public class Dict extends BaseEntity<Long> {
+public interface ManagementDictDao {
+    Dict getByTypeAndKey(String type, String key);
 
-    private static final long serialVersionUID = 4609570483531883147L;
-    private String type;
-    private String key;
-    private String value;
+    void save(Dict dict);
 
-    public String getType() {
-        return type;
-    }
+    Dict getByTid(Long tid);
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    void update(Dict dict);
 
-    public String getKey() {
-        return key;
-    }
+    List<Dict> list(Map<String, Object> params, Integer offset, Integer limit);
 
-    public void setKey(String key) {
-        this.key = key;
-    }
+    int count(Map<String, Object> params);
 
-    public String getValue() {
-        return value;
-    }
+    void delete(Long tid);
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+    List<Dict> listByType(String type);
 }
