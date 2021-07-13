@@ -6,7 +6,7 @@ import com.lettuce.common.utils.PageResult;
 import com.lettuce.productsShown.dao.ProductsShownSearchDao;
 import com.lettuce.productsShown.entity.GoodBase;
 import com.lettuce.productsShown.service.ProductsShownSearchService;
-import com.lettuce.productsShown.vo.ProductsShownSearchVO;
+import com.lettuce.productsShown.vo.SearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -54,10 +54,10 @@ public class ProductsShownSearchServiceImpl implements ProductsShownSearchServic
     public PageResult searchGoods(PageQueryUtil pageUtil) {
         List<GoodBase> goodBaseList = productsShownSearchDao.getGoodsListBySearch(pageUtil);
         int totalNo = productsShownSearchDao.getSearchNumber(pageUtil);
-        List<ProductsShownSearchVO> productsShownSearchVOS = new ArrayList<>();
+        List<SearchVO> productsShownSearchVOS = new ArrayList<>();
         if (!CollectionUtils.isEmpty(goodBaseList)) {
-            productsShownSearchVOS = BeanUtil.copyList(goodBaseList, ProductsShownSearchVO.class);
-            for (ProductsShownSearchVO productsShownSearchVO : productsShownSearchVOS) {
+            productsShownSearchVOS = BeanUtil.copyList(goodBaseList, SearchVO.class);
+            for (SearchVO productsShownSearchVO : productsShownSearchVOS) {
                 String goodsName = productsShownSearchVO.getGoodName();
                 // 字符串过长导致文字超出的问题
                 if (goodsName.length() > 28) {

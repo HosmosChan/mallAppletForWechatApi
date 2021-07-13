@@ -31,7 +31,7 @@ import java.util.Date;
  * @description
  * @date 2021年07月06日
  */
-public class MallSearchVO implements Serializable {
+public class SearchVO implements Serializable {
     private static final long serialVersionUID = -4751582924299529726L;
     @ApiModelProperty("APPId")
     private String appId;

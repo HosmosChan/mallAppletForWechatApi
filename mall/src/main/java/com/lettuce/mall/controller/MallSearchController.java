@@ -7,7 +7,7 @@ import com.lettuce.common.utils.PageResult;
 import com.lettuce.common.utils.Result;
 import com.lettuce.common.utils.ResultGenerator;
 import com.lettuce.mall.service.MallSearchService;
-import com.lettuce.mall.vo.MallSearchVO;
+import com.lettuce.mall.vo.SearchVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -66,7 +66,7 @@ public class MallSearchController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ApiOperation(value = "商品搜索")
-    public Result<PageResult<List<MallSearchVO>>> search(@RequestParam(required = false) @ApiParam(value = "搜索关键字") String keyWord, @RequestParam(required = false) @ApiParam(value = "分类id") Long categoryId, @RequestParam(required = false) @ApiParam(value = "orderBy") String orderBy, @RequestParam(required = false) @ApiParam(value = "页码") Integer pageNumber, @ApiParam(value = "APPID") String appId) {
+    public Result<PageResult<List<SearchVO>>> search(@RequestParam(required = false) @ApiParam(value = "搜索关键字") String keyWord, @RequestParam(required = false) @ApiParam(value = "分类id") Long categoryId, @RequestParam(required = false) @ApiParam(value = "orderBy") String orderBy, @RequestParam(required = false) @ApiParam(value = "页码") Integer pageNumber, @ApiParam(value = "APPID") String appId) {
         Map params = new HashMap(8);
         //两个搜索参数都为空，直接返回异常
         if (categoryId == null && StringUtils.isEmpty(keyWord)) {

@@ -6,7 +6,7 @@ import com.lettuce.common.utils.PageResult;
 import com.lettuce.mall.dao.MallSearchDao;
 import com.lettuce.mall.entity.GoodBase;
 import com.lettuce.mall.service.MallSearchService;
-import com.lettuce.mall.vo.MallSearchVO;
+import com.lettuce.mall.vo.SearchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -54,10 +54,10 @@ public class MallSearchServiceImpl implements MallSearchService {
     public PageResult searchGoods(PageQueryUtil pageUtil) {
         List<GoodBase> goodBaseList = mallSearchDao.getGoodsListBySearch(pageUtil);
         int totalNo = mallSearchDao.getSearchNumber(pageUtil);
-        List<MallSearchVO> mallSearchVOS = new ArrayList<>();
+        List<SearchVO> mallSearchVOS = new ArrayList<>();
         if (!CollectionUtils.isEmpty(goodBaseList)) {
-            mallSearchVOS = BeanUtil.copyList(goodBaseList, MallSearchVO.class);
-            for (MallSearchVO mallSearchVO : mallSearchVOS) {
+            mallSearchVOS = BeanUtil.copyList(goodBaseList, SearchVO.class);
+            for (SearchVO mallSearchVO : mallSearchVOS) {
                 String goodsName = mallSearchVO.getGoodName();
                 // 字符串过长导致文字超出的问题
                 if (goodsName.length() > 28) {

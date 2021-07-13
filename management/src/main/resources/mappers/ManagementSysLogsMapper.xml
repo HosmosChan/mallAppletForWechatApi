@@ -36,7 +36,7 @@
         insert into management_logs
         (userId, module, flag, remark, createTime)
         values
-        (#{user.id}, #{module}, #{flag}, #{remark}, now())
+        (#{user.userId}, #{module}, #{flag}, #{remark}, now())
     </insert>
     <select id="count" resultType="int">
         select count(1) from management_logs ml left join management_user mu on ml.userId = mu.userId

@@ -59,7 +59,7 @@ public class ProductsShownSearchController {
      * @param orderBy
      * @param pageNumber
      * @param appId
-     * @return Result<PageResult < List < ProductsShownSearchVO>>>
+     * @return Result<PageResult < List < SearchVO>>>
      * @description 商品搜索(根据关键字和分类id进行搜索)
      * @author Hosmos
      * @date 2021-07-06
