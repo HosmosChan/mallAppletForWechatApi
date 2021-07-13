@@ -1,9 +1,7 @@
-package com.lettuce.management;
-
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+package com.lettuce.management.config;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 /**
  * Code is far away from bug with the animal protected
  * 　┏┓　　  ┏┓
@@ -25,13 +23,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 　　　┗┻┛　┗┻┛
  *
  * @author Hosmos
- * @description 创建运行application
+ * @description Ehcache配置
  * @date 2021年07月08日
  */
-@SpringBootApplication
-@MapperScan("com.lettuce.management.dao")
-public class ManagementApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(ManagementApplication.class, args);
+@Configuration
+public class EhCacheConfig {
+    @Bean("ehCacheManager")
+    public EhCacheManager cacheManager() {
+        EhCacheManager cacheManager = new EhCacheManager();
+        cacheManager.setCacheManagerConfigFile("classpath:ehcache.xml");
+        return cacheManager;
     }
 }

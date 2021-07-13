@@ -58,7 +58,7 @@
     <logger name="adminLogger" level="${mylevel}" additivity="true">
         <appender-ref ref="adminLog"/>
     </logger>
-    <logger name="com.lettuce.mall.dao" level="DEBUG" additivity="true">
+    <logger name="com.lettuce.management.dao" level="DEBUG" additivity="true">
         <appender-ref ref="sqlLog"/>
     </logger>
     <root level="${rootlevel}">

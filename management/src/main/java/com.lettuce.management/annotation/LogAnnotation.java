@@ -1,9 +1,9 @@
-package com.lettuce.management;
+package com.lettuce.management.annotation;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 /**
  * Code is far away from bug with the animal protected
  * 　┏┓　　  ┏┓
@@ -25,13 +25,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 　　　┗┻┛　┗┻┛
  *
  * @author Hosmos
- * @description 创建运行application
+ * @description 日志注解
  * @date 2021年07月08日
  */
-@SpringBootApplication
-@MapperScan("com.lettuce.management.dao")
-public class ManagementApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(ManagementApplication.class, args);
-    }
+@Target({ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LogAnnotation {
+    String module() default "";
 }

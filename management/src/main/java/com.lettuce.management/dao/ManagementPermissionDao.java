@@ -1,8 +1,8 @@
-package com.lettuce.management;
+package com.lettuce.management.dao;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.lettuce.management.entity.Permission;
+
+import java.util.List;
 
 /**
  * Code is far away from bug with the animal protected
@@ -25,13 +25,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 　　　┗┻┛　┗┻┛
  *
  * @author Hosmos
- * @description 创建运行application
+ * @description 权限dao层
  * @date 2021年07月08日
  */
-@SpringBootApplication
-@MapperScan("com.lettuce.management.dao")
-public class ManagementApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(ManagementApplication.class, args);
-    }
+public interface ManagementPermissionDao {
+    List<Permission> listByUserId(Long userId);
 }

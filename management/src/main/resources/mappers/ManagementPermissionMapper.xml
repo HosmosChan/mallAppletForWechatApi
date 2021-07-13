@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lettuce.management.dao.ManagementPermissionDao">
+    <resultMap id="PermissionResultMap" type="com.lettuce.management.entity.Permission">
+        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="permissionId" jdbcType="BIGINT" property="permissionId"/>
+        <result column="parentId" jdbcType="BIGINT" property="parentId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="css" jdbcType="VARCHAR" property="css"/>
+        <result column="href" jdbcType="VARCHAR" property="href"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
+        <result column="permission" jdbcType="VARCHAR" property="permission"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
+        <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
+        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
+    </resultMap>
+    <sql id="Permission_List">
+        mp.tid, mp.permissionId, mp.parentId, mp.name, mp.css, mp.href, mp.type,
+        mp.permission, mp.sort, mp.createTime, mp.createUserId, mp.gmtTime, mp.gmtUserId
+    </sql>
+    <select id="listByUserId" resultMap="PermissionResultMap">
+        select distinct
+        <include refid="Permission_List"/>
+        from management_permission as mp
+        inner join management_role_permission as mrp
+        on mp.permissionId = mrp.permissionId
+        inner join management_user_role as mur
+        on mrp.roleId = mur.roleId
+        where 1 = 1
+        <if test="userId!=null">
+            and mur.userId = #{userId}
+        </if>
+        order by mp.sort
+    </select>
+</mapper>
