@@ -3,6 +3,9 @@ package com.lettuce.management.service;
 import com.lettuce.management.dto.UserDto;
 import com.lettuce.management.entity.User;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Code is far away from bug with the animal protected
  * 　┏┓　　  ┏┓
@@ -22,35 +25,92 @@ import com.lettuce.management.entity.User;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 用户业务层
  *
  * @author Hosmos
- * @description
  * @date 2021年07月08日
  */
 public interface ManagementUserService {
     /**
-     * @description 通过用户名获取用户信息
+     * 通过用户名获取用户信息
+     *
+     * @param username 用户名
+     * @return User
      * @author Hosmos
      * @date 2021-07-10
-     * @param username
-     * @return User
      */
     User getUser(String username);
+
     /**
-     * @description 保存用户信息
+     * 保存用户信息
+     *
+     * @param userDto userDto实体类
+     * @return User
      * @author Hosmos
      * @date 2021-07-10
-     * @param userDto
-     * @return User
      */
     User saveUser(UserDto userDto);
+
     /**
-     * @description 用户密码签名
+     * 用户密码签名
+     *
+     * @param credentials 用户输入的密码
+     * @param salt        盐
+     * @return String
      * @author Hosmos
      * @date 2021-07-10
-     * @param credentials
-     * @param salt
-     * @return String
      */
     String passwordEncoder(String credentials, String salt);
+
+    /**
+     * 更新用户信息
+     *
+     * @param userDto userDto实体类
+     * @return User
+     * @author Hosmos
+     * @date 2021-07-14
+     */
+    User updateUser(UserDto userDto);
+
+    /**
+     * 修改密码
+     *
+     * @param username    用户名
+     * @param oldPassword 旧密码
+     * @param newPassword 新密码
+     * @author Hosmos
+     * @date 2021-07-14
+     */
+    void changePassword(String username, String oldPassword, String newPassword);
+
+    /**
+     * 用户信息列表个数，list中页码计数
+     *
+     * @param params 搜索参数
+     * @return int
+     * @author Hosmos
+     * @date 2021-07-14
+     */
+    int count(Map<String, Object> params);
+
+    /**
+     * 通过搜索参数获取用户信息列表
+     *
+     * @param params 搜索参数
+     * @param offset 每页起始序列
+     * @param limit  每页显示个数
+     * @return List<User>
+     * @author Hosmos
+     * @date 2021-07-14
+     */
+    List<User> list(Map<String, Object> params, Integer offset, Integer limit);
+/**
+ * 通过用户id获取用户信息
+ *
+ * @param tid user id
+ * @return User
+ * @author Hosmos
+ * @date 2021-07-14
+ */
+    User getByUserId(Long tid);
 }

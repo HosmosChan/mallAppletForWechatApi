@@ -32,9 +32,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 字典controller层
  *
  * @author Hosmos
- * @description 字典controller层
  * @date 2021年07月13日
  */
 @Api(value = "dict", tags = "字典接口")
@@ -45,6 +45,14 @@ public class ManagementDictController {
     @Resource
     private ManagementDictService managementDictService;
 
+    /**
+     * 保存字典
+     *
+     * @param dict 字典实体类
+     * @return Dict
+     * @author Hosmos
+     * @date 2021-07-14
+     */
     @RequiresPermissions("dict:add")
     @PostMapping
     @ApiOperation(value = "保存")
@@ -56,6 +64,7 @@ public class ManagementDictController {
         managementDictService.save(dict);
         return dict;
     }
+
     @GetMapping("/{tid}")
     @ApiOperation(value = "根据tid获取")
     public Dict get(@PathVariable Long tid) {

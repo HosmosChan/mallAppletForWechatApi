@@ -3,7 +3,7 @@ package com.lettuce.management.advice;
 import com.lettuce.management.annotation.LogAnnotation;
 import com.lettuce.management.dao.ManagementUserDao;
 import com.lettuce.management.entity.SysLogs;
-import com.lettuce.management.service.ManagementSysLogService;
+import com.lettuce.management.service.ManagementSysLogsService;
 import com.lettuce.management.utils.UserUtil;
 import io.swagger.annotations.ApiOperation;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -41,7 +41,7 @@ import org.springframework.util.StringUtils;
 @Component
 public class LogAdvice {
     @Autowired
-    private ManagementSysLogService logService;
+    private ManagementSysLogsService managementSysLogsService;
     @Autowired
     private ManagementUserDao managementUserDao;
 
@@ -65,15 +65,15 @@ public class LogAdvice {
         try {
             Object object = joinPoint.proceed();
             sysLogs.setFlag(true);
-            logService.save(sysLogs);
+            managementSysLogsService.save(sysLogs);
             if (module.contains("登陆")) {
-                managementUserDao.lastLogin(UserUtil.getCurrentUser().getUserId());
+                managementUserDao.lastLogin(UserUtil.getCurrentUser().getTid());
             }
             return object;
         } catch (Exception e) {
             sysLogs.setFlag(false);
             sysLogs.setRemark(e.getMessage());
-            logService.save(sysLogs);
+            managementSysLogsService.save(sysLogs);
             throw e;
         }
     }

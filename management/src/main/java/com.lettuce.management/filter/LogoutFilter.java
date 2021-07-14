@@ -3,7 +3,7 @@ package com.lettuce.management.filter;
 import com.alibaba.fastjson.JSONObject;
 import com.lettuce.management.dto.ResponseInfo;
 import com.lettuce.management.entity.User;
-import com.lettuce.management.service.ManagementSysLogService;
+import com.lettuce.management.service.ManagementSysLogsService;
 import com.lettuce.management.service.ManagementTokenManager;
 import com.lettuce.management.utils.SpringUtil;
 import com.lettuce.management.utils.UserUtil;
@@ -51,7 +51,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
         if (StringUtils.isBlank(loginToken)) {
             boolean flag = super.preHandle(request, response);
             log.debug("{}退出成功", user.getUsername());
-            SpringUtil.getBean(ManagementSysLogService.class).save(user.getUserId(), "退出", true, null);
+            SpringUtil.getBean(ManagementSysLogsService.class).save(user.getTid(), "退出", true, null);
             return flag;
         } else {
             ManagementTokenManager managementTokenManager = SpringUtil.getBean(ManagementTokenManager.class);
@@ -62,7 +62,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
             } else {
                 RestfulFilter.writeResponse(WebUtils.toHttp(response), HttpStatus.BAD_REQUEST.value(), ERR_INFO);
             }
-            SpringUtil.getBean(ManagementSysLogService.class).save(user.getUserId(), "token方式退出", flag, null);
+            SpringUtil.getBean(ManagementSysLogsService.class).save(user.getTid(), "token方式退出", flag, null);
             return false;
         }
     }

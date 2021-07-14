@@ -34,9 +34,9 @@ import java.util.concurrent.TimeUnit;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * redis实现的Token
  *
  * @author Hosmos
- * @description redis实现的Token
  * @date 2021年07月08日
  */
 @Service

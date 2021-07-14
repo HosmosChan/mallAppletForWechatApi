@@ -24,79 +24,87 @@ import java.util.Map;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 字典业务层
  *
  * @author Hosmos
- * @description 字典业务层
  * @date 2021年07月13日
  */
 public interface ManagementDictService {
     /**
-     * @param type
-     * @param key
+     * 通过字典type和key获取字典包含value值的整条字典信息
+     *
+     * @param type 字典类型
+     * @param key  字典值
      * @return Dict
-     * @description 通过字典type和key获取字典包含value值的整条字典信息
      * @author Hosmos
      * @date 2021-07-13
      */
     Dict getByTypeAndKey(String type, String key);
 
     /**
-     * @param dict
-     * @description 保存字典信息
+     * 保存字典信息
+     *
+     * @param dict dict实体类
      * @author Hosmos
      * @date 2021-07-13
      */
     void save(Dict dict);
 
     /**
-     * @param tid
+     * 通过字典tid获取字典信息
+     *
+     * @param tid dict id
      * @return Dict
-     * @description 通过字典tid获取字典信息
      * @author Hosmos
      * @date 2021-07-13
      */
     Dict getByTid(Long tid);
 
     /**
-     * @param dict
-     * @description 更新字典信息
+     * 更新字典信息
+     *
+     * @param dict dict实体类
      * @author Hosmos
      * @date 2021-07-13
      */
     void update(Dict dict);
 
     /**
-     * @param params
+     * 字典信息列表个数，list中页码计数
+     *
+     * @param params 搜索参数
      * @return int
-     * @description 通过搜索参数获取字典信息列表个数，用于list方法中进行页码计数
      * @author Hosmos
      * @date 2021-07-13
      */
     int count(Map<String, Object> params);
 
     /**
-     * @param params
-     * @param offset
-     * @param limit
+     * 通过搜索参数获取字典信息列表
+     *
+     * @param params 搜索参数
+     * @param offset 每页起始序列
+     * @param limit  每页显示个数
      * @return List<Dict>
-     * @description 通过搜索参数获取字典信息列表
      * @author Hosmos
      * @date 2021-07-13
      */
     List<Dict> list(Map<String, Object> params, Integer offset, Integer limit);
 
     /**
-     * @param tid
-     * @description 通过字典tid删除字典信息
+     * 通过字典id删除字典信息
+     *
+     * @param tid dict id
      * @author Hosmos
      * @date 2021-07-13
      */
     void delete(Long tid);
 
     /**
-     * @param type
+     * 通过字典类型获取字典信息列表
+     *
+     * @param type 字典类型
      * @return List<Dict>
-     * @description 通过字典类型获取字典信息列表
      * @author Hosmos
      * @date 2021-07-13
      */

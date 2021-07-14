@@ -17,9 +17,11 @@ public class ColumnProUtil {
     /**
      * 获取java类属性和表字段对应关系
      *
-     * @param dao
-     * @param id
-     * @return
+     * @param dao java类属性
+     * @param id  表字段
+     * @return Map<String, String>
+     * @author Hosmos
+     * @date 2021-07-08
      */
     public static Map<String, String> getColumnPro(Class<?> dao, String... id) {
         Map<String, String> map = new HashMap<>();
@@ -44,7 +46,9 @@ public class ColumnProUtil {
      *
      * @param request
      * @param map
-     * @return
+     * @return String
+     * @author Hosmos
+     * @date 2021-07-08
      */
     public static String pro2Column(PageTableRequest request, Map<String, String> map) {
         String orderBy = (String) request.getParams().get("orderBy");

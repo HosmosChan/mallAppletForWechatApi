@@ -3,27 +3,82 @@
 <mapper namespace="com.lettuce.management.dao.ManagementRoleDao">
     <resultMap id="RoleResultMap" type="com.lettuce.management.entity.Role">
         <id column="tid" jdbcType="INTEGER" property="tid"/>
-        <result column="roleId" jdbcType="BIGINT" property="roleId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
+        <result column="createUserId" jdbcType="INTEGER" property="createUserId"/>
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
-        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
+        <result column="gmtUserId" jdbcType="INTEGER" property="gmtUserId"/>
     </resultMap>
     <sql id="Role_List">
-        mr.tid, mr.roleId, mr.name, mr.description, mr.createTime, mr.createUserId,
+        mr.tid, mr.name, mr.description, mr.createTime, mr.createUserId,
         mr.gmtTime, mr.gmtUserId
+    </sql>
+    <sql id="where">
+        <where>
+            <if test="params.name != null and params.name != ''">
+                and mr.name like concat('%', #{params.name}, '%')
+            </if>
+        </where>
     </sql>
     <select id="listByUserId" resultMap="RoleResultMap">
         select
         <include refid="Role_List"/>
         from management_role as mr
         inner join management_user_role as mur
-        on mr.roleId = mur.roleId
+        on mr.tid = mur.roleId
         where 1 = 1
         <if test="userId!=null">
             and mur.userId = #{userId}
         </if>
     </select>
+    <select id="getRole" resultMap="RoleResultMap">
+        select
+        <include refid="Role_List"/>
+        from management_role as mr
+        where mr.name = #{name}
+    </select>
+    <update id="updateRole">
+        update management_role mr
+        set mr.name = #{name}, mr.description = #{description}, mr.gmtTime = now(), mr.gmtUserId = #{gmtUserId}
+        where mr.tid = #{tid}
+    </update>
+    <insert id="saveRole">
+        insert into management_role ((name, description, createTime, createUserId) values (#{name}, #{description}, now(), #{createUserId});
+    </insert>
+    <select id="count" resultType="int">
+        select count(1) from management_role as mr
+        <include refid="where"/>
+    </select>
+    <select id="list" resultMap="RoleResultMap">
+        select
+        <include refid="Role_List"/>
+        from management_role as mr
+        <include refid="where"/>
+        ${params.orderBy}
+        <if test="offset != null and offset >= 0 and limit != null and limit >= 0">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="getByRoleId" resultMap="RoleResultMap">
+        select
+        <include refid="Role_List"/>
+        from management_role as mr
+        where mr.tid = #{tid}
+    </select>
+    <delete id="deleteRolePermission">
+        delete from management_role_permission where roleId = #{roleId}
+    </delete>
+    <delete id="deleteRoleUser">
+        delete from management_user_role where roleId = #{roleId}
+    </delete>
+    <delete id="delete">
+        delete from management_role where tid = #{tid}
+    </delete>
+    <insert id="saveRolePermission">
+        insert into management_role_permission(roleId, permissionId, createTime, createUserId) values
+        <foreach collection="permissionIds" item="permissionId" separator=",">
+            (#{roleId}, #{permissionId}, now(), #{createUserId})
+        </foreach>
+    </insert>
 </mapper>

@@ -26,7 +26,6 @@ package com.lettuce.management.entity;
  */
 public class FileInfo extends BaseEntity<String> {
     private static final long serialVersionUID = 2121766355695048540L;
-    private String fileId;
     private String contentType;
     private Long size;
     private String path;
@@ -35,14 +34,6 @@ public class FileInfo extends BaseEntity<String> {
     private String appId;
     private Long createUserId;
     private Long gmtUserId;
-
-    public String getFileId() {
-        return fileId;
-    }
-
-    public void setFileId(String fileId) {
-        this.fileId = fileId;
-    }
 
     public String getContentType() {
         return contentType;

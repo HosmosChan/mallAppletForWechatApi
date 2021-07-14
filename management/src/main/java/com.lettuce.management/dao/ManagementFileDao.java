@@ -30,7 +30,7 @@ import java.util.Map;
  * @date 2021年07月13日
  */
 public interface ManagementFileDao {
-    FileInfo getByFileIdAndAppId(String fileId, String appId);
+    FileInfo getByFileIdAndAppId(String tid, String appId);
 
     void save(FileInfo fileInfo);
 
@@ -38,5 +38,5 @@ public interface ManagementFileDao {
 
     List<FileInfo> list(Map<String, Object> params, Integer offset, Integer limit);
 
-    void delete(String fileId, String appId);
+    void delete(String tid, String appId);
 }

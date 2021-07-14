@@ -35,9 +35,9 @@ import java.util.UUID;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * EhCache实现的Token, 默认采用此实现
  *
  * @author Hosmos
- * @description EhCache实现的Token, 默认采用此实现
  * @date 2021年07月08日
  */
 @Primary

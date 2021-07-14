@@ -30,4 +30,22 @@ import java.util.List;
  */
 public interface ManagementPermissionDao {
     List<Permission> listByUserId(Long userId);
+
+    List<Permission> listAll();
+
+    List<Permission> listParents();
+
+    List<Permission> listByRoleId(Long roleId);
+
+    void savePermission(Permission permission);
+
+    Permission getByPermissionId(Long tid);
+
+    void updatePermission(Permission permission);
+
+    void deleteRolePermission(Long tid);
+
+    void deletePermission(Long tid);
+
+    void deleteByParentId(Long parentId);
 }

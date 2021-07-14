@@ -6,11 +6,12 @@ import com.lettuce.management.service.impl.RedisTokenManager;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 /**
- * Token管理器<br>
- * 目前提供两种实现<br>
+ * Token管理器
+ * 目前提供两种实现
  * 默认基于ehcache，如需更改，使用@Primary注解
  *
- * @author chenhuayang
+ * @author Hosmos
+ * @date 2021年07月08日
  * @see EhCacheTokenManager
  * @see RedisTokenManager
  */
@@ -20,6 +21,8 @@ public interface ManagementTokenManager {
      *
      * @param token token
      * @return Token
+     * @author Hosmos
+     * @date 2021年07月08日
      */
     Token saveToken(UsernamePasswordToken token);
 
@@ -28,6 +31,8 @@ public interface ManagementTokenManager {
      *
      * @param key token
      * @return UsernamePasswordToken 用户凭证
+     * @author Hosmos
+     * @date 2021年07月08日
      */
     UsernamePasswordToken getToken(String key);
 
@@ -35,6 +40,8 @@ public interface ManagementTokenManager {
      * 删除token
      *
      * @param key token
+     * @author Hosmos
+     * @date 2021年07月08日
      */
     boolean deleteToken(String key);
 }

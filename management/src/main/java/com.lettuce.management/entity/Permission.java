@@ -28,7 +28,6 @@ import java.util.List;
  */
 public class Permission extends BaseEntity<Long> {
     private static final long serialVersionUID = -4861195523079061649L;
-    private Long permissionId;
     private Long parentId;
     private String name;
     private String css;
@@ -39,14 +38,6 @@ public class Permission extends BaseEntity<Long> {
     private Long createUserId;
     private Long gmtUserId;
     private List<Permission> child;
-
-    public Long getPermissionId() {
-        return permissionId;
-    }
-
-    public void setPermissionId(Long permissionId) {
-        this.permissionId = permissionId;
-    }
 
     public Long getParentId() {
         return parentId;

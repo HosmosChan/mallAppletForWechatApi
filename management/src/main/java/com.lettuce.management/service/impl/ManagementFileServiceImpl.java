@@ -33,9 +33,9 @@ import java.io.IOException;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 文件实现层
  *
  * @author Hosmos
- * @description 文件实现层
  * @date 2021年07月13日
  */
 @Service
@@ -63,13 +63,13 @@ public class ManagementFileServiceImpl implements ManagementFileService {
 
         long size = file.getSize();
         String contentType = file.getContentType();
-        fileInfo.setFileId(md5);
+        fileInfo.setTid(md5);
         fileInfo.setContentType(contentType);
         fileInfo.setSize(size);
         fileInfo.setPath(fullPath);
         fileInfo.setUrl(pathname);
         fileInfo.setType(contentType.startsWith("image/") ? 1 : 0);
-        fileInfo.setCreateUserId(UserUtil.getCurrentUser().getUserId());
+        fileInfo.setCreateUserId(UserUtil.getCurrentUser().getTid());
         managementFileDao.save(fileInfo);
 
         log.debug("上传文件{}", fullPath);
@@ -78,12 +78,12 @@ public class ManagementFileServiceImpl implements ManagementFileService {
     }
 
     @Override
-    public void delete(String fileId, String appId) {
-        FileInfo fileInfo = managementFileDao.getByFileIdAndAppId(fileId, appId);
+    public void delete(String tid, String appId) {
+        FileInfo fileInfo = managementFileDao.getByFileIdAndAppId(tid, appId);
         if (fileInfo != null) {
             String fullPath = fileInfo.getPath();
             FileUtil.deleteFile(fullPath);
-            managementFileDao.delete(fileId, appId);
+            managementFileDao.delete(tid, appId);
             log.debug("删除文件：{}", fileInfo.getPath());
         }
     }

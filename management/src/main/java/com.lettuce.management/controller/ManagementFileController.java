@@ -48,6 +48,15 @@ public class ManagementFileController {
     @Resource
     private ManagementFileDao managementFileDao;
 
+    /**
+     * 文件上传
+     *
+     * @param file  文件
+     * @param appId app id
+     * @return FileInfo
+     * @author Hosmos
+     * @date 2021-07-13
+     */
     @LogAnnotation
     @PostMapping
     @ApiOperation(value = "文件上传")
@@ -60,8 +69,10 @@ public class ManagementFileController {
      *
      * @param file
      * @param domain
-     * @return
+     * @return LayuiFile
      * @throws IOException
+     * @author Hosmos
+     * @date 2021-07-13
      */
     @LogAnnotation
     @PostMapping("/layui")
@@ -79,6 +90,14 @@ public class ManagementFileController {
         return layuiFile;
     }
 
+    /**
+     * 文件查询
+     *
+     * @param request 查询信息
+     * @return PageTableResponse
+     * @author Hosmos
+     * @date 2021-07-13
+     */
     @GetMapping
     @ApiOperation(value = "文件查询")
     @RequiresPermissions("sys:file:query")
@@ -99,11 +118,19 @@ public class ManagementFileController {
         }).handle(request);
     }
 
+    /**
+     * 文件删除
+     *
+     * @param tid file id
+     * @param appId  app id
+     * @author Hosmos
+     * @date 2021-07-13
+     */
     @LogAnnotation
-    @DeleteMapping("/{fileId}")
+    @DeleteMapping("/{tid}")
     @ApiOperation(value = "文件删除")
     @RequiresPermissions("sys:file:del")
-    public void delete(@PathVariable String fileId, String appId) {
-        managementFileService.delete(fileId, appId);
+    public void delete(@PathVariable String tid, String appId) {
+        managementFileService.delete(tid, appId);
     }
 }

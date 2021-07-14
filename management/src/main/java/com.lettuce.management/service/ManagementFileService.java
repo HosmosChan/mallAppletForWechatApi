@@ -24,13 +24,30 @@ import java.io.IOException;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 文件业务层
  *
  * @author Hosmos
- * @description 文件业务层
  * @date 2021年07月13日
  */
 public interface ManagementFileService {
+    /**
+     * 保存文件
+     *
+     * @param file  文件
+     * @param appId 应用app id
+     * @return FileInfo
+     * @author Hosmos
+     * @date 2021-07-14
+     */
     FileInfo save(MultipartFile file, String appId) throws IOException;
 
-    void delete(String fileId, String appId);
+    /**
+     * 删除文件
+     *
+     * @param tid   file id
+     * @param appId 应用app id
+     * @author Hosmos
+     * @date 2021-07-14
+     */
+    void delete(String tid, String appId);
 }

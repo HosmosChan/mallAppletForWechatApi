@@ -26,19 +26,10 @@ package com.lettuce.management.entity;
  */
 public class Role extends BaseEntity<Long> {
     private static final long serialVersionUID = -2847274114682650712L;
-    private Long roleId;
     private String name;
     private String description;
     private Long createUserId;
     private Long gmtUserId;
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
 
     public String getName() {
         return name;

@@ -3,7 +3,7 @@ package com.lettuce.management.service.impl;
 import com.lettuce.management.dao.ManagementSysLogsDao;
 import com.lettuce.management.entity.SysLogs;
 import com.lettuce.management.entity.User;
-import com.lettuce.management.service.ManagementSysLogService;
+import com.lettuce.management.service.ManagementSysLogsService;
 import com.lettuce.management.utils.UserUtil;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -36,13 +36,13 @@ import java.util.Map;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 日志实现层
  *
  * @author Hosmos
- * @description 日志实现层
  * @date 2021年07月13日
  */
 @Service
-public class ManagementSysLogServiceImpl implements ManagementSysLogService {
+public class ManagementSysLogsServiceImpl implements ManagementSysLogsService {
     private static final Logger log = LoggerFactory.getLogger("adminLogger");
     @Autowired(required = false)
     private ManagementSysLogsDao managementSysLogsDao;
@@ -50,7 +50,7 @@ public class ManagementSysLogServiceImpl implements ManagementSysLogService {
     @Override
     public void save(SysLogs sysLogs) {
         User user = UserUtil.getCurrentUser();
-        if (user == null || user.getUserId() == null) {
+        if (user == null || user.getTid() == null) {
             return;
         }
         sysLogs.setUser(user);
@@ -65,7 +65,7 @@ public class ManagementSysLogServiceImpl implements ManagementSysLogService {
         sysLogs.setModule(module);
         sysLogs.setRemark(remark);
         User user = new User();
-        user.setUserId(userId);
+        user.setTid(userId);
         sysLogs.setUser(user);
         managementSysLogsDao.save(sysLogs);
     }

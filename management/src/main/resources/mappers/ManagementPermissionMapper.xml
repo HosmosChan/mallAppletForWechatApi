@@ -3,8 +3,7 @@
 <mapper namespace="com.lettuce.management.dao.ManagementPermissionDao">
     <resultMap id="PermissionResultMap" type="com.lettuce.management.entity.Permission">
         <id column="tid" jdbcType="INTEGER" property="tid"/>
-        <result column="permissionId" jdbcType="BIGINT" property="permissionId"/>
-        <result column="parentId" jdbcType="BIGINT" property="parentId"/>
+        <result column="parentId" jdbcType="INTEGER" property="parentId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="css" jdbcType="VARCHAR" property="css"/>
         <result column="href" jdbcType="VARCHAR" property="href"/>
@@ -12,12 +11,12 @@
         <result column="permission" jdbcType="VARCHAR" property="permission"/>
         <result column="sort" jdbcType="INTEGER" property="sort"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
+        <result column="createUserId" jdbcType="INTEGER" property="createUserId"/>
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
-        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
+        <result column="gmtUserId" jdbcType="INTEGER" property="gmtUserId"/>
     </resultMap>
     <sql id="Permission_List">
-        mp.tid, mp.permissionId, mp.parentId, mp.name, mp.css, mp.href, mp.type,
+        mp.tid, mp.parentId, mp.name, mp.css, mp.href, mp.type,
         mp.permission, mp.sort, mp.createTime, mp.createUserId, mp.gmtTime, mp.gmtUserId
     </sql>
     <select id="listByUserId" resultMap="PermissionResultMap">
@@ -25,7 +24,7 @@
         <include refid="Permission_List"/>
         from management_permission as mp
         inner join management_role_permission as mrp
-        on mp.permissionId = mrp.permissionId
+        on mp.tid = mrp.permissionId
         inner join management_user_role as mur
         on mrp.roleId = mur.roleId
         where 1 = 1
@@ -34,4 +33,57 @@
         </if>
         order by mp.sort
     </select>
+    <select id="listAll" resultMap="PermissionResultMap">
+        select
+        <include refid="Permission_List"/>
+        from management_permission as mp
+        order by mp.sort
+    </select>
+    <select id="listParents" resultMap="PermissionResultMap">
+        select
+        <include refid="Permission_List"/>
+        from management_permission as mp
+        where mp.type = 1 order by mp.sort
+    </select>
+    <select id="listByRoleId" resultMap="PermissionResultMap">
+        select
+        <include refid="Permission_List"/>
+        from management_permission as mp
+        inner join management_role_permission as mrp
+        on mp.tid = mrp.permissionId
+        where mrp.roleId = #{roleId}
+        order by mp.sort
+    </select>
+    <insert id="savePermission">
+        insert into management_permission
+        (parentId, name, css, href, type, permission, sort,
+        createTime, createUserId)
+        values(#{parentId}, #{name}, #{css}, #{href}, #{type},
+        #{permission}, #{sort}, now(), #{createUserId})
+    </insert>
+    <select id="getByPermissionId" resultMap="PermissionResultMap">
+        select
+        <include refid="Permission_List"/>
+        from management_permission as mp
+        where mp.tid = #{tid}
+    </select>
+    <update id="updatePermission">
+        update management_permission
+        set parentId = #{parentId}, name = #{name}, css = #{css}, href = #{href},
+        type = #{type}, permission = #{permission}, sort = #{sort}, gmtTime = now(),
+        gmtUserId = #{gmtUserId}
+        where tid = #{tid}
+    </update>
+    <delete id="deleteRolePermission">
+        delete from management_role_permission
+        where tid = #{tid}
+    </delete>
+    <delete id="deletePermission">
+        delete from management_permission
+        where tid = #{tid}
+    </delete>
+    <delete id="deleteByParentId">
+        delete from management_permission
+        where parentId = #{parentId}
+    </delete>
 </mapper>
