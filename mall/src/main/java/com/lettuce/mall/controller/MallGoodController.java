@@ -46,7 +46,7 @@ import java.util.List;
  */
 @Api(value = "good", tags = "商品接口")
 @RestController
-@RequestMapping("/mall/good")
+@RequestMapping("/good")
 public class MallGoodController {
     private static final Logger logger = LoggerFactory.getLogger(MallGoodController.class);
     @Resource

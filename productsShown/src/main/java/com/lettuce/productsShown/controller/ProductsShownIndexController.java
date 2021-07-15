@@ -43,7 +43,7 @@ import java.util.List;
  */
 @Api(value = "index", tags = "首页接口")
 @RestController
-@RequestMapping("/productsShown/index")
+@RequestMapping("/index")
 public class ProductsShownIndexController {
     private static final Logger logger = LoggerFactory.getLogger(ProductsShownIndexController.class);
     @Resource

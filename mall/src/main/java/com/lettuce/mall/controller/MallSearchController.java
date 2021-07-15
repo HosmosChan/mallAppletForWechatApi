@@ -47,7 +47,7 @@ import java.util.Map;
  */
 @Api(value = "search", tags = "搜索接口")
 @RestController
-@RequestMapping("/mall/search")
+@RequestMapping("/search")
 public class MallSearchController {
     private static final Logger logger = LoggerFactory.getLogger(MallSearchController.class);
     @Resource
