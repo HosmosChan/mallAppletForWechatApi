@@ -7,7 +7,7 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="css" jdbcType="VARCHAR" property="css"/>
         <result column="href" jdbcType="VARCHAR" property="href"/>
-        <result column="type" jdbcType="TINYINT" property="type"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="permission" jdbcType="VARCHAR" property="permission"/>
         <result column="sort" jdbcType="INTEGER" property="sort"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
@@ -56,7 +56,7 @@
     </select>
     <insert id="savePermission">
         insert into management_permission
-        (parentId, name, css, href, type, permission, sort,
+        (parentId, 'name', css, href, 'type', permission, sort,
         createTime, createUserId)
         values(#{parentId}, #{name}, #{css}, #{href}, #{type},
         #{permission}, #{sort}, now(), #{createUserId})
@@ -69,7 +69,7 @@
     </select>
     <update id="updatePermission">
         update management_permission
-        set parentId = #{parentId}, name = #{name}, css = #{css}, href = #{href},
+        set parentId = #{parentId}, 'name' = #{name}, css = #{css}, href = #{href},
         type = #{type}, permission = #{permission}, sort = #{sort}, gmtTime = now(),
         gmtUserId = #{gmtUserId}
         where tid = #{tid}

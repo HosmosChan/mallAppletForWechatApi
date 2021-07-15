@@ -39,13 +39,13 @@ import java.util.List;
  */
 @Api(tags = "日志")
 @RestController
-@RequestMapping("/management/logs")
+@RequestMapping("/log")
 public class ManagementSysLogsController {
     @Resource
     private ManagementSysLogsService managementSysLogsService;
 
     @GetMapping
-    @RequiresPermissions(value = "sys:log:query")
+    @RequiresPermissions(value = "management:log:query")
     @ApiOperation(value = "日志列表")
     public PageTableResponse list(PageTableRequest request) {
         return new PageTableHandler(new PageTableHandler.CountHandler() {

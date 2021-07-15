@@ -39,7 +39,7 @@ import java.util.List;
  */
 @Api(value = "dict", tags = "字典接口")
 @RestController
-@RequestMapping("/management/dict")
+@RequestMapping("/dict")
 public class ManagementDictController {
     private static final Logger logger = LoggerFactory.getLogger(ManagementDictController.class);
     @Resource

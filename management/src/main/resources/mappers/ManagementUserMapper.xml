@@ -23,14 +23,16 @@
     </sql>
     <sql id="where">
         <where>
-            <if test="params.username != null and params.username != ''">
-                and mu.username like concat('%', #{params.username}, '%')
-            </if>
-            <if test="params.nickName != null and params.nickName != ''">
-                and mu.nickName like concat('%', #{params.nickName}, '%')
-            </if>
-            <if test="params.status != null and params.status != ''">
-                and mu.status = #{params.status}
+            <if test="params !=null and params != ''">
+                <if test="params.username != null and params.username != ''">
+                    and mu.username like concat('%', #{params.username}, '%')
+                </if>
+                <if test="params.nickName != null and params.nickName != ''">
+                    and mu.nickName like concat('%', #{params.nickName}, '%')
+                </if>
+                <if test="params.status != null and params.status != ''">
+                    and mu.status = #{params.status}
+                </if>
             </if>
         </where>
     </sql>

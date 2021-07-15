@@ -54,18 +54,18 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/fonts/**", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/sys/login/**", "anon");
-        filterChainDefinitionMap.put("/files/*", "anon");
+        filterChainDefinitionMap.put("/login/**", "anon");
+        filterChainDefinitionMap.put("/file/*", "anon");
         filterChainDefinitionMap.put("/swagger-resources/**", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/**", "authc");
         //未登录状态页面开启重定向url
-        shiroFilterFactoryBean.setLoginUrl("/login.html");
+        shiroFilterFactoryBean.setLoginUrl("/management/login.html");
         //已登录状态页面开启重定向url
-        shiroFilterFactoryBean.setSuccessUrl("/index.html");
+        shiroFilterFactoryBean.setSuccessUrl("/management/index.html");
         //登出状态页面开启重定向url
         LogoutFilter logoutFilter = new LogoutFilter();
-        logoutFilter.setRedirectUrl("/login.html");
+        logoutFilter.setRedirectUrl("/management/login.html");
         RestfulFilter restfulFilter = new RestfulFilter();
         shiroFilterFactoryBean.getFilters().put("authc", restfulFilter);
         shiroFilterFactoryBean.getFilters().put("logout", logoutFilter);

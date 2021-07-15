@@ -32,7 +32,7 @@ public class Permission extends BaseEntity<Long> {
     private String name;
     private String css;
     private String href;
-    private Byte type;
+    private Integer type;
     private String permission;
     private Integer sort;
     private Long createUserId;
@@ -71,11 +71,11 @@ public class Permission extends BaseEntity<Long> {
         this.href = href;
     }
 
-    public Byte getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Byte type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

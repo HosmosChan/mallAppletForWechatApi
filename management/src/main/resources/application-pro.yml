@@ -3,6 +3,7 @@ server:
   servlet:
     session:
       timeout: 30m
+    path: /management
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -44,7 +45,7 @@ mybatis:
   configuration:
     mapUnderscoreToCamelCase: true
 files:
-  path: ${file-path:/home/testProject/mallAppletForWechatApi/files}
+  path: ${file-path:/home/testProject/mallAppletForWechatApi/file}
 logging:
   config: classpath:logback-admin.xml
 log:

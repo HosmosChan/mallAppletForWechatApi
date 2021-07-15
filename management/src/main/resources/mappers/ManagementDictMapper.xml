@@ -10,7 +10,7 @@
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
     </resultMap>
     <sql id="Dict_List">
-        tid, type, key, value, createTime, gmtTime
+        tid, 'type', 'key', 'value', createTime, gmtTime
     </sql>
     <sql id="where">
         <where>
@@ -18,29 +18,29 @@
                 and tid = #{params.tid}
             </if>
             <if test="params.type != null and params.type != ''">
-                and type = #{params.type}
+                and 'type' = #{params.type}
             </if>
             <if test="params.key != null and params.key != ''">
-                and key = #{params.key}
+                and 'key' = #{params.key}
             </if>
             <if test="params.value != null and params.value != ''">
                 and value = #{params.value}
             </if>
         </where>
     </sql>
-    <select id="getByTypeAndKey" resultMap="Dict_List">
+    <select id="getByTypeAndKey" resultMap="DictResultMap">
         select
         <include refid="Dict_List"/>
         from management_dict
-        where type = #{type} and key = #{key}
+        where 'type' = #{type} and 'key' = #{key}
     </select>
     <insert id="save">
         insert into management_dict
-        (type, key, value, createTime)
+        ('type', 'key', 'value', createTime)
         value
         (#{type}, #{key}, #{value}, now())
     </insert>
-    <select id="getByTid" resultMap="Dict_List">
+    <select id="getByTid" resultMap="DictResultMap">
         select
         <include refid="Dict_List"/>
         from management_dict
@@ -50,13 +50,13 @@
         update management_dict
         <set>
             <if test="type != null">
-                type = #{type},
+                'type' = #{type},
             </if>
             <if test="key != null">
-                key = #{key},
+                'key' = #{key},
             </if>
             <if test="value != null">
-                value = #{value},
+                'value' = #{value},
             </if>
             gmtTime = now()
         </set>
@@ -78,10 +78,10 @@
         delete from management_dict
         where tid = #{tid}
     </delete>
-    <select id="listByType" resultMap="Dict_List">
+    <select id="listByType" resultMap="DictResultMap">
         select
         <include refid="Dict_List"/>
         from management_dict
-        where type = #{type}
+        where 'type' = #{type}
     </select>
 </mapper>

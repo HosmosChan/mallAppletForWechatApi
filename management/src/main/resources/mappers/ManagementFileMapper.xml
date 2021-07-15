@@ -15,7 +15,7 @@
         <result column="gmtUserId" jdbcType="INTEGER" property="gmtUserId"/>
     </resultMap>
     <sql id="File_List">
-        tid, contentType, size, path, url, type, appId, createTime,
+        tid, contentType, 'size', path, url, 'type', appId, createTime,
         createUserId, gmtTime, gmtUserId
     </sql>
     <sql id="where">
@@ -33,7 +33,7 @@
     </select>
     <insert id="save">
         insert into file_info
-        (tid, contentType, size, path, url, type, appId, createTime,createUserId, gmtTime, gmtUserId)
+        (tid, contentType, 'size', path, url, 'type', appId, createTime,createUserId, gmtTime, gmtUserId)
         values(#{tid}, #{contentType}, #{size}, #{path}, #{url}, #{type}, #{appId}, now(), #{createUserId})
     </insert>
     <select id="count" resultType="int">

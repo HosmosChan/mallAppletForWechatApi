@@ -43,7 +43,7 @@ import java.util.List;
  */
 @Api(tags = "用户")
 @RestController
-@RequestMapping("/management/user")
+@RequestMapping("/user")
 public class ManagementUserController {
     private static final Logger log = LoggerFactory.getLogger("adminLogger");
     @Resource
@@ -51,7 +51,7 @@ public class ManagementUserController {
     @LogAnnotation
     @PostMapping("/register")
     @ApiOperation(value = "保存用户")
-    @RequiresPermissions("sys:user:add")
+    @RequiresPermissions("management:user:add")
     public User saveUser(@RequestBody UserDto userDto) {
         User u = managementUserService.getUser(userDto.getUsername());
         if (u != null) {
@@ -63,7 +63,7 @@ public class ManagementUserController {
     @LogAnnotation
     @PutMapping
     @ApiOperation(value = "修改用户")
-    @RequiresPermissions("sys:user:add")
+    @RequiresPermissions("management:user:add")
     public User updateUser(@RequestBody UserDto userDto) {
         return managementUserService.updateUser(userDto);
     }
@@ -83,14 +83,14 @@ public class ManagementUserController {
     @LogAnnotation
     @PutMapping("/{username}")
     @ApiOperation(value = "修改密码")
-    @RequiresPermissions("sys:user:password")
+    @RequiresPermissions("management:user:password")
     public void changePassword(@PathVariable String username, String oldPassword, String newPassword) {
         managementUserService.changePassword(username, oldPassword, newPassword);
     }
 
     @GetMapping
     @ApiOperation(value = "用户列表")
-    @RequiresPermissions("sys:user:query")
+    @RequiresPermissions("management:user:query")
     public PageTableResponse listUsers(PageTableRequest request) {
         return new PageTableHandler(new PageTableHandler.CountHandler() {
             @Override
@@ -114,7 +114,7 @@ public class ManagementUserController {
 
     @ApiOperation(value = "根据用户id获取用户")
     @GetMapping("/{tid}")
-    @RequiresPermissions("sys:user:query")
+    @RequiresPermissions("management:user:query")
     public User user(@PathVariable Long tid) {
         return managementUserService.getByUserId(tid);
     }

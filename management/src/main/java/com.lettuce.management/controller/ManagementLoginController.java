@@ -45,7 +45,7 @@ import javax.annotation.Resource;
  */
 @Api(value = "login", tags = "登录接口")
 @RestController
-@RequestMapping("/management/dict")
+@RequestMapping
 public class ManagementLoginController {
     private static final Logger logger = LoggerFactory.getLogger(ManagementLoginController.class);
     @Resource
@@ -55,7 +55,7 @@ public class ManagementLoginController {
 
     @LogAnnotation
     @ApiOperation(value = "web端登陆")
-    @PostMapping("/sys/login")
+    @PostMapping("/login")
     public void login(String username, String password) {
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
         SecurityUtils.getSubject().login(usernamePasswordToken);
@@ -65,7 +65,7 @@ public class ManagementLoginController {
 
     @LogAnnotation
     @ApiOperation(value = "Restful方式登陆,前后端分离时登录接口")
-    @PostMapping("/sys/login/restful")
+    @PostMapping("/login/restful")
     public Token restfulLogin(String username, String password) {
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
         SecurityUtils.getSubject().login(usernamePasswordToken);
@@ -73,7 +73,7 @@ public class ManagementLoginController {
     }
 
     @ApiOperation(value = "当前登录用户")
-    @GetMapping("/sys/login")
+    @GetMapping("/login")
     public User getLoginInfo() {
         return UserUtil.getCurrentUser();
     }

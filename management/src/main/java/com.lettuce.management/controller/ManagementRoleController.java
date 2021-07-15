@@ -43,7 +43,7 @@ import java.util.List;
  */
 @Api(value = "permissions", tags = "角色接口")
 @RestController
-@RequestMapping("/management/roles")
+@RequestMapping("/role")
 public class ManagementRoleController {
     private static final Logger logger = LoggerFactory.getLogger(ManagementRoleController.class);
     @Resource
@@ -58,7 +58,7 @@ public class ManagementRoleController {
     @LogAnnotation
     @PostMapping
     @ApiOperation(value = "保存角色")
-    @RequiresPermissions("sys:role:add")
+    @RequiresPermissions("management:role:add")
     public void saveRole(@RequestBody RoleDto roleDto) {
         managementRoleService.saveRole(roleDto);
     }
@@ -72,7 +72,7 @@ public class ManagementRoleController {
      */
     @GetMapping
     @ApiOperation(value = "角色列表")
-    @RequiresPermissions("sys:role:query")
+    @RequiresPermissions("management:role:query")
     public PageTableResponse listRoles(PageTableRequest request) {
         return new PageTableHandler(new PageTableHandler.CountHandler() {
             @Override
@@ -97,7 +97,7 @@ public class ManagementRoleController {
      */
     @GetMapping("/{tid}")
     @ApiOperation(value = "根据角色id获取角色")
-    @RequiresPermissions("sys:role:query")
+    @RequiresPermissions("management:role:query")
     public Role get(@PathVariable Long tid) {
         return managementRoleService.getByRoleId(tid);
     }
@@ -110,7 +110,7 @@ public class ManagementRoleController {
      */
     @GetMapping("/all")
     @ApiOperation(value = "所有角色")
-    @RequiresPermissions(value = {"sys:user:query", "sys:role:query"}, logical = Logical.OR)
+    @RequiresPermissions(value = {"management:user:query", "management:role:query"}, logical = Logical.OR)
     public List<Role> roles() {
         return managementRoleService.list(Maps.newHashMap(), null, null);
     }
@@ -124,7 +124,7 @@ public class ManagementRoleController {
      */
     @GetMapping(params = "userId")
     @ApiOperation(value = "根据用户id获取拥有的角色")
-    @RequiresPermissions(value = {"sys:user:query", "sys:role:query"}, logical = Logical.OR)
+    @RequiresPermissions(value = {"management:user:query", "management:role:query"}, logical = Logical.OR)
     public List<Role> roles(Long userId) {
         return managementRoleService.listByUserId(userId);
     }
@@ -138,7 +138,7 @@ public class ManagementRoleController {
     @LogAnnotation
     @DeleteMapping("/{tid}")
     @ApiOperation(value = "删除角色")
-    @RequiresPermissions(value = {"sys:role:del"})
+    @RequiresPermissions(value = {"management:role:del"})
     public void delete(@PathVariable Long tid) {
         managementRoleService.deleteRole(tid);
     }

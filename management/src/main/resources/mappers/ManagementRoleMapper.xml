@@ -44,7 +44,8 @@
         where mr.tid = #{tid}
     </update>
     <insert id="saveRole">
-        insert into management_role ((name, description, createTime, createUserId) values (#{name}, #{description}, now(), #{createUserId});
+        insert into management_role ('name', description, createTime, createUserId)
+        values (#{name}, #{description}, now(), #{createUserId});
     </insert>
     <select id="count" resultType="int">
         select count(1) from management_role as mr
@@ -76,7 +77,8 @@
         delete from management_role where tid = #{tid}
     </delete>
     <insert id="saveRolePermission">
-        insert into management_role_permission(roleId, permissionId, createTime, createUserId) values
+        insert into management_role_permission(roleId, permissionId, createTime, createUserId)
+        values
         <foreach collection="permissionIds" item="permissionId" separator=",">
             (#{roleId}, #{permissionId}, now(), #{createUserId})
         </foreach>

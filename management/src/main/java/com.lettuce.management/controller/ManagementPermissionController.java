@@ -50,7 +50,7 @@ import java.util.stream.Collectors;
  */
 @Api(value = "permissions", tags = "权限接口")
 @RestController
-@RequestMapping("/management/permissions")
+@RequestMapping("/permission")
 public class ManagementPermissionController {
     private static final Logger logger = LoggerFactory.getLogger(ManagementPermissionController.class);
     @Resource
@@ -89,7 +89,7 @@ public class ManagementPermissionController {
      */
     @GetMapping
     @ApiOperation(value = "权限列表")
-    @RequiresPermissions("sys:menu:query")
+    @RequiresPermissions("management:menu:query")
     public List<Permission> permissionsList() {
         List<Permission> permissionsAll = managementPermissionService.listAll();
         List<Permission> list = Lists.newArrayList();
@@ -106,7 +106,7 @@ public class ManagementPermissionController {
      */
     @GetMapping("/all")
     @ApiOperation(value = "所有权限")
-    @RequiresPermissions("sys:menu:query")
+    @RequiresPermissions("management:menu:query")
     public JSONArray permissionsAll() {
         List<Permission> permissionsAll = managementPermissionService.listAll();
         JSONArray array = new JSONArray();
@@ -123,7 +123,7 @@ public class ManagementPermissionController {
      */
     @GetMapping("/parents")
     @ApiOperation(value = "父级权限")
-    @RequiresPermissions("sys:menu:query")
+    @RequiresPermissions("management:menu:query")
     public List<Permission> parentMenu() {
         List<Permission> parents = managementPermissionService.listParents();
         return parents;
@@ -139,7 +139,7 @@ public class ManagementPermissionController {
      */
     @GetMapping(params = "roleId")
     @ApiOperation(value = "根据角色id删除权限")
-    @RequiresPermissions(value = {"sys:menu:query", "sys:role:query"}, logical = Logical.OR)
+    @RequiresPermissions(value = {"management:menu:query", "management:role:query"}, logical = Logical.OR)
     public List<Permission> listByRoleId(Long roleId) {
         return managementPermissionService.listByRoleId(roleId);
     }
@@ -154,7 +154,7 @@ public class ManagementPermissionController {
     @LogAnnotation
     @PostMapping
     @ApiOperation(value = "保存权限")
-    @RequiresPermissions("sys:menu:add")
+    @RequiresPermissions("management:menu:add")
     public void savePermission(@RequestBody Permission permission) {
         managementPermissionService.savePermission(permission);
     }
@@ -169,7 +169,7 @@ public class ManagementPermissionController {
      */
     @GetMapping("/{tid}")
     @ApiOperation(value = "根据权限tid获取权限")
-    @RequiresPermissions("sys:menu:query")
+    @RequiresPermissions("management:menu:query")
     public Permission getByPermissionTid(@PathVariable Long tid) {
         return managementPermissionService.getByPermissionId(tid);
     }
@@ -184,7 +184,7 @@ public class ManagementPermissionController {
     @LogAnnotation
     @PutMapping
     @ApiOperation(value = "修改权限")
-    @RequiresPermissions("sys:menu:add")
+    @RequiresPermissions("management:menu:add")
     public void updatePermission(@RequestBody Permission permission) {
         managementPermissionService.updatePermission(permission);
     }
@@ -216,7 +216,7 @@ public class ManagementPermissionController {
     @LogAnnotation
     @DeleteMapping("/{tid}")
     @ApiOperation(value = "根据权限tid删除权限")
-    @RequiresPermissions(value = {"sys:menu:del"})
+    @RequiresPermissions(value = {"management:menu:del"})
     public void deletePermission(@PathVariable Long tid) {
         managementPermissionService.deletePermission(tid);
     }

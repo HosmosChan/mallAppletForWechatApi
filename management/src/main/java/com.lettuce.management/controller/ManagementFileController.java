@@ -6,12 +6,10 @@ import com.lettuce.management.dao.ManagementFileDao;
 import com.lettuce.management.dto.LayuiFile;
 import com.lettuce.management.entity.FileInfo;
 import com.lettuce.management.service.ManagementFileService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -42,6 +40,9 @@ import java.util.List;
  * @description 文件controller层
  * @date 2021年07月13日
  */
+@Api(value = "dict", tags = "文件接口")
+@RestController
+@RequestMapping("/file")
 public class ManagementFileController {
     @Resource
     private ManagementFileService managementFileService;
@@ -84,7 +85,7 @@ public class ManagementFileController {
         layuiFile.setCode(0);
         LayuiFile.LayuiFileData data = new LayuiFile.LayuiFileData();
         layuiFile.setData(data);
-        data.setSrc(domain + "/files" + fileInfo.getUrl());
+        data.setSrc(domain + "/file" + fileInfo.getUrl());
         data.setTitle(file.getOriginalFilename());
 
         return layuiFile;
@@ -100,7 +101,7 @@ public class ManagementFileController {
      */
     @GetMapping
     @ApiOperation(value = "文件查询")
-    @RequiresPermissions("sys:file:query")
+    @RequiresPermissions("management:file:query")
     public PageTableResponse listFiles(PageTableRequest request) {
         return new PageTableHandler(new PageTableHandler.CountHandler() {
 
@@ -129,7 +130,7 @@ public class ManagementFileController {
     @LogAnnotation
     @DeleteMapping("/{tid}")
     @ApiOperation(value = "文件删除")
-    @RequiresPermissions("sys:file:del")
+    @RequiresPermissions("management:file:del")
     public void delete(@PathVariable String tid, String appId) {
         managementFileService.delete(tid, appId);
     }
