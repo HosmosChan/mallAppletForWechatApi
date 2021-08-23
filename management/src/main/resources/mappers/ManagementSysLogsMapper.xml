@@ -8,18 +8,18 @@
         <result column="flag" property="flag"/>
         <result column="createTime" property="createTime"/>
         <association property="user" javaType="com.lettuce.management.entity.User">
-            <result property="userId" column="userId"/>
+            <result property="id" column="userId"/>
             <result property="username" column="username"/>
-            <result property="nickName" column="nickName"/>
         </association>
     </resultMap>
     <sql id="where">
         <where>
+        <if test="params != null and params != ''">
             <if test="params.flag != null and params.flag != ''">
                 and ml.flag = #{params.flag}
             </if>
-            <if test="params.nickName != null and params.nickName != ''">
-                and mu.nickName like concat('%', #{params.nickName}, '%')
+            <if test="params.username != null and params.username != ''">
+                and mu.username like concat('%', #{params.username}, '%')
             </if>
             <if test="params.beginTime != null and params.beginTime != ''">
                 and ml.createTime &gt;= #{params.beginTime}
@@ -27,6 +27,7 @@
             <if test="params.endTime != null and params.endTime != ''">
                 and ml.createTime &lt;= #{params.endTime}
             </if>
+        </if>
         </where>
     </sql>
     <sql id="System_Logs_List">
@@ -43,8 +44,8 @@
         <include refid="where"/>
     </select>
     <select id="list" resultMap="SystemLogsResultMap">
-        select ml.*, mu.username, mu.nickName from management_logs ml left join management_user mu on ml.userId =
-        mu.userId
+        select ml.*, mu.username from management_logs ml left join management_user mu on ml.userId =
+        mu.id
         <include refid="where"/>
         ${params.orderBy}
         limit #{offset}, #{limit}

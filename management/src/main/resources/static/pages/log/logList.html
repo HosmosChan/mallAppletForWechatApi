@@ -18,8 +18,8 @@
                             <td>
                                 <form class="form-inline" onsubmit="return false">
                                     <div class="form-group">
-                                        <label for="nickName">昵称：</label>
-                                        <input id="nickName" type="text" class="form-control" placeholder="昵称">
+                                        <label for="username">用户名：</label>
+                                        <input id="username" type="text" class="form-control" placeholder="昵称">
                                         <label for="beginTime">时间：</label>
                                         <input type="text" class="form-control" placeholder="开始时间" id="beginTime">
                                         <input type="text" class="form-control" placeholder="结束时间" id="endTime">
@@ -47,7 +47,7 @@
                         </tr>
                         <tr>
                             <th width="5%">id</th>
-                            <th width="15%">昵称</th>
+                            <th width="15%">用户名</th>
                             <th width="20%">模块</th>
                             <th width="5%">状态</th>
                             <th>备注</th>
@@ -94,11 +94,11 @@
                     "url": "/js/plugin/datatables/Chinese.lang"
                 },
                 "ajax": {
-                    "url": "/logs",
+                    "url": "/log",
                     "type": "get",
                     "data": function (d) {
                         d.flag = $('#flag').val();
-                        d.nickName = $('#nickName').val();
+                        d.username = $('#username').val();
                         d.beginTime = $('#beginTime').val();
                         d.endTime = $('#endTime').val();
                     },
@@ -116,7 +116,7 @@
                         "orderable": false,
                         "render": function (data, type, row) {
                             var user = row['user'];
-                            return user['nickName'];
+                            return user['username'];
                         }
                     },
                     {"data": "module", "defaultContent": ""},
