@@ -19,9 +19,9 @@ package com.lettuce.common.enums;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品类型enum，0-普通商品，1-（首页）特价商品，2-（首页）热卖商品，3-（首页）最新商品
  *
  * @author Hosmos
- * @description 商品类型enum，0-普通商品，1-（首页）特价商品，2-（首页）热卖商品，3-（首页）最新商品
  * @date 2021年06月27日
  */
 public enum GoodTypeEnum {

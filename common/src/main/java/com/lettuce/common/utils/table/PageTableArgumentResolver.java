@@ -33,9 +33,9 @@ import java.util.Map;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 分页、查询参数解析
  *
  * @author Hosmos
- * @description 分页、查询参数解析
  * @date 2021年07月08日
  */
 public class PageTableArgumentResolver implements HandlerMethodArgumentResolver {
@@ -71,9 +71,9 @@ public class PageTableArgumentResolver implements HandlerMethodArgumentResolver 
     }
 
     /**
-     * @param tableRequest
-     * @return void
-     * @description 去除datatables分页带的一些复杂参数
+     * 去除datatables分页带的一些复杂参数
+     *
+     * @param tableRequest data tables 分页
      * @author Hosmos
      * @date 2021-07-08
      */
@@ -91,10 +91,10 @@ public class PageTableArgumentResolver implements HandlerMethodArgumentResolver 
     }
 
     /**
-     * @param tableRequest
-     * @param map
-     * @return void
-     * @description 从datatables分页请求数据中解析排序
+     * 从datatables分页请求数据中解析排序
+     *
+     * @param tableRequest data tables 分页
+     * @param map          数据
      * @author Hosmos
      * @date 2021-07-08
      */

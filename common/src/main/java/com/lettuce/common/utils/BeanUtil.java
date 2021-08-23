@@ -28,9 +28,9 @@ import java.util.*;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * Bean工具类
  *
  * @author Hosmos
- * @description Bean工具类
  * @date 2021年06月25日
  */
 public abstract class BeanUtil {

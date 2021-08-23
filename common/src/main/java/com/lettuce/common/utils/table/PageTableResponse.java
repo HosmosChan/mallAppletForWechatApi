@@ -22,9 +22,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 分页查询返回
  *
  * @author Hosmos
- * @description 分页查询返回
  * @date 2021年07月08日
  */
 public class PageTableResponse implements Serializable {

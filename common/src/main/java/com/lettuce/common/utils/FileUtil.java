@@ -25,9 +25,9 @@ import java.time.LocalDate;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 文件工具类
  *
  * @author Hosmos
- * @description 文件工具类
  * @date 2021年07月08日
  */
 public class FileUtil {

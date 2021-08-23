@@ -22,9 +22,9 @@ import java.util.Map;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 分页查询参数
  *
  * @author Hosmos
- * @description 分页查询参数
  * @date 2021年07月08日
  */
 public class PageTableRequest implements Serializable {

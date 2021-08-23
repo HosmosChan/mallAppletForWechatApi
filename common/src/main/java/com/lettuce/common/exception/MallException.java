@@ -19,9 +19,9 @@ package com.lettuce.common.exception;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 异常工具类
  *
  * @author Hosmos
- * @description 异常工具类
  * @date 2021年07月05日
  */
 public class MallException extends RuntimeException {
@@ -35,7 +35,7 @@ public class MallException extends RuntimeException {
     /**
      * 丢出异常
      *
-     * @param message
+     * @param message 异常信息
      */
     public static void fail(String message) {
         throw new MallException(message);

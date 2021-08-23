@@ -22,9 +22,9 @@ import java.util.Map;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 分页工具类
  *
  * @author Hosmos
- * @description 分页工具类
  * @date 2021年07月06日
  */
 public class PageQueryUtil extends LinkedHashMap<String, Object> {

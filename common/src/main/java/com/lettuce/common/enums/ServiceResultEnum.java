@@ -7,6 +7,7 @@
  * 版权所有，侵权必究！
  */
 package com.lettuce.common.enums;
+
 /**
  * Code is far away from bug with the animal protected
  * 　┏┓　　  ┏┓
@@ -26,9 +27,9 @@ package com.lettuce.common.enums;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 数据返回类型enum
  *
  * @author Hosmos
- * @description 数据返回类型enum
  * @date 2021年07月05日
  */
 public enum ServiceResultEnum {

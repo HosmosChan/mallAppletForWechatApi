@@ -24,9 +24,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 页码结果工具类
  *
  * @author Hosmos
- * @description 页码结果工具类
  * @date 2021年07月06日
  */
 public class PageResult<T> implements Serializable {
