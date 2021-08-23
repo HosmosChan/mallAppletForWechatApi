@@ -1,6 +1,7 @@
 package com.lettuce.common.utils;
 
 import com.google.common.collect.Lists;
+
 import java.util.List;
 
 /**
@@ -22,18 +23,18 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 字符串转换工具类
  *
  * @author Hosmos
- * @description 字符串转换工具类
  * @date 2021年06月22日
  */
 public class StrUtils {
     /**
+     * @param str
+     * @return String
      * @description 字符串转为驼峰
      * @author Hosmos
      * @date 2021/6/22
-     * @param str
-     * @return String
      */
     public static String str2hump(String str) {
         StringBuilder builder = new StringBuilder();

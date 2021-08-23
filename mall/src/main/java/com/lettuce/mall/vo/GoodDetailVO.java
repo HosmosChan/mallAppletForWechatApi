@@ -1,6 +1,7 @@
 package com.lettuce.mall.vo;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -25,11 +26,12 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品信息VO
  *
  * @author Hosmos
- * @description 商品信息VO
  * @date 2021年07月05日
  */
+@Data
 public class GoodDetailVO implements Serializable {
     public static final long serialVersionUID = 2173986850096865968L;
     @ApiModelProperty("APPId")

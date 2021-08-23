@@ -39,9 +39,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品controller层
  *
  * @author Hosmos
- * @description 商品controller层
  * @date 2021年07月05日
  */
 @Api(value = "good", tags = "商品接口")
@@ -55,10 +55,11 @@ public class MallGoodController {
     private MallGoodService mallGoodService;
 
     /**
-     * @param goodId
-     * @param appId
+     * 获取商品轮播图数据
+     *
+     * @param goodId 商品 id
+     * @param appId  app id
      * @return Result<CarouselsForGoodVO>
-     * @description 获取商品轮播图数据
      * @author Hosmos
      * @date 2021-07-05
      */
@@ -76,10 +77,11 @@ public class MallGoodController {
     }
 
     /**
-     * @param goodId
-     * @param appId
+     * 获取商品信息数据
+     *
+     * @param goodId 商品 id
+     * @param appId  app id
      * @return Result<GoodDetailVO>
-     * @description 获取商品信息数据
      * @author Hosmos
      * @date 2021-07-05
      */
@@ -109,10 +111,11 @@ public class MallGoodController {
     }
 
     /**
-     * @param goodId
-     * @param appId
+     * 获取商品下拉详细信息数据
+     *
+     * @param goodId 商品 id
+     * @param appId  app id
      * @return List<GoodInfoVO>
-     * @description 获取商品下拉详细信息数据
      * @author Hosmos
      * @date 2021-07-08
      */

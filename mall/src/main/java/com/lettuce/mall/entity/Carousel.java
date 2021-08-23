@@ -19,9 +19,9 @@ package com.lettuce.mall.entity;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 轮播图实体类
  *
  * @author Hosmos
- * @description 轮播图实体类
  * @date 2021年06月25日
  */
 public class Carousel extends BaseEntity<Long> {

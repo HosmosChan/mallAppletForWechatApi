@@ -22,16 +22,17 @@ import com.lettuce.common.utils.PageResult;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 搜索业务层
  *
  * @author Hosmos
- * @description 搜索业务层
  * @date 2021年07月06日
  */
 public interface MallSearchService {
     /**
-     * @param pageUtil
+     * 返回商品搜索信息对象
+     *
+     * @param pageUtil 页码信息
      * @return PageResult
-     * @description 返回商品搜索信息对象
      * @author Hosmos
      * @date 2021-07-06
      */

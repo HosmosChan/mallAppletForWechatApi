@@ -2,6 +2,7 @@ package com.lettuce.mall.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -26,11 +27,12 @@ import java.util.Date;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 折扣商品VO
  *
  * @author Hosmos
- * @description 折扣商品VO
  * @date 2021年06月27日
  */
+@Data
 public class GoodForIndexVO implements Serializable {
     private static final long serialVersionUID = -2821148629411447420L;
     @ApiModelProperty("APPId")

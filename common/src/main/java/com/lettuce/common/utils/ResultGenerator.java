@@ -21,9 +21,8 @@ import org.springframework.util.StringUtils;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
- *
+ * 返回参数
  * @author Hosmos
- * @description
  * @date 2021年06月25日
  */
 public class ResultGenerator {

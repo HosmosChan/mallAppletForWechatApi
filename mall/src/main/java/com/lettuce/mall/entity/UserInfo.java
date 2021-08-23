@@ -19,9 +19,9 @@ package com.lettuce.mall.entity;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 用户实体类
  *
  * @author Hosmos
- * @description 用户实体类
  * @date 2021年06月22日
  */
 public class UserInfo extends BaseEntity<Long> {

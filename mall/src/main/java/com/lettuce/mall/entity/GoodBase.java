@@ -24,9 +24,9 @@ import java.util.Date;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品基础实体类
  *
  * @author Hosmos
- * @description 商品基础实体类
  * @date 2021年06月28日
  */
 public class GoodBase extends BaseEntity<Long> {

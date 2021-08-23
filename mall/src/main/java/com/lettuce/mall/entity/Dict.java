@@ -19,12 +19,12 @@ package com.lettuce.mall.entity;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 字典实体类
  *
  * @author Hosmos
- * @description 字典实体类
  * @date 2021年06月22日
  */
-public class Dict extends BaseEntity<Long>{
+public class Dict extends BaseEntity<Long> {
     private static final long serialVersionUID = 3614193192035793368L;
     private String type;
     private String key;

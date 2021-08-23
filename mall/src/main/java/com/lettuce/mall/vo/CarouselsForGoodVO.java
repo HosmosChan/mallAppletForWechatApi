@@ -1,6 +1,7 @@
 package com.lettuce.mall.vo;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -23,11 +24,12 @@ import java.io.Serializable;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品页轮播图VO
  *
  * @author Hosmos
- * @description 商品页轮播图VO
  * @date 2021年07月05日
  */
+@Data
 public class CarouselsForGoodVO implements Serializable {
     private static final long serialVersionUID = 7408647933710267384L;
     @ApiModelProperty("APPId")

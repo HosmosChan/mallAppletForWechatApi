@@ -33,9 +33,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 轮换图实现层
  *
  * @author Hosmos
- * @description 轮换图实现层
  * @date 2021年06月25日
  */
 @Service("mallCarouselService")
@@ -44,9 +44,10 @@ public class MallCarouselServiceImpl implements MallCarouselService {
     private MallCarouselDao mallcarouselDao;
 
     /**
-     * @param appId
+     * 轮播图实现层(首页调用)
+     *
+     * @param appId app id
      * @return List<CarouselsForIndexVO>
-     * @description 轮播图实现层(首页调用)
      * @author Hosmos
      * @date 2021-06-27
      */
@@ -61,10 +62,11 @@ public class MallCarouselServiceImpl implements MallCarouselService {
     }
 
     /**
-     * @param goodId
-     * @param appId
+     * 轮播图实现层(商品页调用)
+     *
+     * @param goodId 商品 id
+     * @param appId  app id
      * @return List<CarouselsForGoodVO>
-     * @description 轮播图实现层(商品页调用)
      * @author Hosmos
      * @date 2021-07-05
      */

@@ -40,9 +40,9 @@ import java.util.Map;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 搜索controller层
  *
  * @author Hosmos
- * @description 搜索controller层
  * @date 2021年07月06日
  */
 @Api(value = "search", tags = "搜索接口")
@@ -54,13 +54,14 @@ public class MallSearchController {
     private MallSearchService mallSearchService;
 
     /**
-     * @param keyWord
-     * @param categoryId
-     * @param orderBy
-     * @param pageNumber
-     * @param appId
+     * 商品搜索(根据关键字和分类id进行搜索)
+     *
+     * @param keyWord    关键词
+     * @param categoryId 分类 id
+     * @param orderBy    排序字段
+     * @param pageNumber 页码
+     * @param appId      app id
      * @return Result<PageResult < List < MallSearchVO>>>
-     * @description 商品搜索(根据关键字和分类id进行搜索)
      * @author Hosmos
      * @date 2021-07-06
      */

@@ -33,9 +33,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 获取商品实现层
  *
  * @author Hosmos
- * @description 获取商品实现层
  * @date 2021年06月27日
  */
 @Service("mallGoodService")
@@ -44,10 +44,11 @@ public class MallGoodServiceImpl implements MallGoodService {
     private MallGoodDao mallGoodDao;
 
     /**
-     * @param number
-     * @param appId
+     * 特价商品实现层(首页调用)
+     *
+     * @param number 特价商品数量
+     * @param appId  app id
      * @return List<GoodForIndexVO>
-     * @description 特价商品实现层(首页调用)
      * @author Hosmos
      * @date 2021-06-27
      */
@@ -65,10 +66,11 @@ public class MallGoodServiceImpl implements MallGoodService {
     }
 
     /**
-     * @param number
-     * @param appId
+     * 折扣商品实现层(首页调用)
+     *
+     * @param number 折扣商品数量
+     * @param appId  app id
      * @return List<GoodForIndexVO>
-     * @description 折扣商品实现层(首页调用)
      * @author Hosmos
      * @date 2021-07-06
      */
@@ -86,10 +88,11 @@ public class MallGoodServiceImpl implements MallGoodService {
     }
 
     /**
-     * @param number
-     * @param appId
+     * 热卖商品实现层(首页调用)
+     *
+     * @param number 热卖商品数量
+     * @param appId  app id
      * @return List<GoodForIndexVO>
-     * @description 热卖商品实现层(首页调用)
      * @author Hosmos
      * @date 2021-07-05
      */
@@ -107,10 +110,11 @@ public class MallGoodServiceImpl implements MallGoodService {
     }
 
     /**
-     * @param number
-     * @param appId
+     * 最新商品实现层(首页调用)
+     *
+     * @param number 最新商品数量
+     * @param appId  app id
      * @return List<GoodForIndexVO>
-     * @description 最新商品实现层(首页调用)
      * @author Hosmos
      * @date 2021-07-05
      */
@@ -128,10 +132,11 @@ public class MallGoodServiceImpl implements MallGoodService {
     }
 
     /**
-     * @param goodId
-     * @param appId
+     * 商品信息实现层(商品页调用)
+     *
+     * @param goodId 商品 id
+     * @param appId  app id
      * @return GoodDetailVO
-     * @description 商品信息实现层(商品页调用)
      * @author Hosmos
      * @date 2021-07-05
      */
@@ -143,7 +148,7 @@ public class MallGoodServiceImpl implements MallGoodService {
         }
         GoodDetail goodDetail = mallGoodDao.getGoodDetailInfo(goodId, appId);
         List<GoodDeliverWay> goodDeliverWay = mallGoodDao.getGoodDeliverWay(goodId, appId);
-        List<String> goodDeliverWayList = null;
+        List<String> goodDeliverWayList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(goodDeliverWay)) {
             for (GoodDeliverWay goodDeliverWayStr : goodDeliverWay) {
                 goodDeliverWayList.add(goodDeliverWayStr.getDeliverWay());
@@ -160,10 +165,11 @@ public class MallGoodServiceImpl implements MallGoodService {
     }
 
     /**
-     * @param goodId
-     * @param appId
+     * 商品下拉详细信息实现层(商品页调用)
+     *
+     * @param goodId good id
+     * @param appId  app id
      * @return GoodDetailVO
-     * @description 商品下拉详细信息实现层(商品页调用)
      * @author Hosmos
      * @date 2021-07-08
      */
@@ -178,16 +184,18 @@ public class MallGoodServiceImpl implements MallGoodService {
     }
 
     /**
-     * @param goodForIndexVO
+     * 商品标题字符串过长导致文字超出的问题
+     *
+     * @param goodForIndexVO 商品信息
      * @return GoodForIndexVO
-     * @description 商品标题字符串过长导致文字超出的问题
      * @author Hosmos
      * @date 2021-07-05
      */
     private static GoodForIndexVO shortenGoodTitle(GoodForIndexVO goodForIndexVO) {
         String goodName = goodForIndexVO.getGoodName();
-        if (goodName.length() > 30) {
-            goodName = goodName.substring(0, 30) + "...";
+        int goodNameLength = 30;
+        if (goodName.length() > goodNameLength) {
+            goodName = goodName.substring(0, goodNameLength) + "...";
             goodForIndexVO.setGoodName(goodName);
         }
         return goodForIndexVO;

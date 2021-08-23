@@ -21,9 +21,9 @@ import java.math.BigDecimal;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品折扣信息实体类
  *
  * @author Hosmos
- * @description 商品折扣信息实体类
  * @date 2021年07月06日
  */
 public class GoodDiscount extends BaseEntity<Long> {

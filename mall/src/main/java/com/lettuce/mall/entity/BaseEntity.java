@@ -22,9 +22,9 @@ import java.util.Date;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 基础实体类
  *
  * @author Hosmos
- * @description 基础实体类
  * @date 2021年06月22日
  */
 public abstract class BaseEntity<ID extends Serializable> implements Serializable {

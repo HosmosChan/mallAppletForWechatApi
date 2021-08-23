@@ -23,9 +23,9 @@ import java.io.Serializable;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 结果发送前端格式
  *
  * @author Hosmos
- * @description 结果发送前端格式
  * @date 2021年06月25日
  */
 public class Result<T> implements Serializable {

@@ -19,9 +19,9 @@ package com.lettuce.mall.entity;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品配送方式实体类
  *
  * @author Hosmos
- * @description 商品配送方式实体类
  * @date 2021年07月06日
  */
 public class GoodDeliverWay extends BaseEntity<Long> {

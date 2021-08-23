@@ -1,6 +1,7 @@
 package com.lettuce.mall.vo;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -23,11 +24,12 @@ import java.io.Serializable;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品下拉详细信息VO
  *
  * @author Hosmos
- * @description 商品下拉详细信息VO
  * @date 2021年07月07日
  */
+@Data
 public class GoodInfoVO implements Serializable {
     private static final long serialVersionUID = 3743179908280249987L;
     @ApiModelProperty("APPId")

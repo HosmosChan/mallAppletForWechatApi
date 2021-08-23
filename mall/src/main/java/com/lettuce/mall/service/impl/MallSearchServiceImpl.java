@@ -33,9 +33,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 搜索商品实现层
  *
  * @author Hosmos
- * @description
  * @date 2021年07月06日
  */
 @Service
@@ -44,9 +44,10 @@ public class MallSearchServiceImpl implements MallSearchService {
     private MallSearchDao mallSearchDao;
 
     /**
-     * @param pageUtil
+     * 商品搜索信息实现层
+     *
+     * @param pageUtil 页码信息
      * @return PageResult
-     * @description 商品搜索信息实现层
      * @author Hosmos
      * @date 2021-07-06
      */

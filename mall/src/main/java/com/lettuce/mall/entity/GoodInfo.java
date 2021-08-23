@@ -19,9 +19,9 @@ package com.lettuce.mall.entity;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品下拉详细信息实体类
  *
  * @author Hosmos
- * @description 商品下拉详细信息实体类
  * @date 2021年07月06日
  */
 public class GoodInfo extends BaseEntity<Long> {
