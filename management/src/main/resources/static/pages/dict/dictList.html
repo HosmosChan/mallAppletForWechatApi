@@ -45,8 +45,8 @@
                         <tr>
                             <th>id</th>
                             <th>type</th>
-                            <th>k</th>
-                            <th>val</th>
+                            <th>key</th>
+                            <th>value</th>
                             <th>createTime</th>
                             <th>gmtTime</th>
                             <th>操作</th>
@@ -82,7 +82,7 @@
                     "url": "/js/plugin/datatables/Chinese.lang"
                 },
                 "ajax": {
-                    "url": "/dicts",
+                    "url": "/dict",
                     "type": "get",
                     "data": function (d) {
                         d.type = $("#type").val();
@@ -92,8 +92,8 @@
                 "columns": [
                     {"data": "id", "defaultContent": ""},
                     {"data": "type", "defaultContent": ""},
-                    {"data": "k", "defaultContent": ""},
-                    {"data": "val", "defaultContent": ""},
+                    {"data": "key", "defaultContent": ""},
+                    {"data": "value", "defaultContent": ""},
                     {"data": "createTime", "defaultContent": ""},
                     {"data": "gmtTime", "defaultContent": ""},
                     {
@@ -123,7 +123,7 @@
         }, function () {
             $.ajax({
                 type: 'delete',
-                url: '/dicts/' + id,
+                url: '/dict/' + id,
                 success: function (data) {
                     example.ajax.reload();
                     layer.msg("删除成功");

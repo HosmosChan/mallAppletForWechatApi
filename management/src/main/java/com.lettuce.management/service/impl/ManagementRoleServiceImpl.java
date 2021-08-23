@@ -65,6 +65,7 @@ public class ManagementRoleServiceImpl implements ManagementRoleService {
             }
             role.setCreateUserId(UserUtil.getCurrentUser().getId());
             managementRoleDao.saveRole(role);
+            role = managementRoleDao.getRole(role.getName());
             log.debug("新增角色{}", role.getName());
         }
         saveRolePermission(role.getId(), roleDto.getPermissionIds());

@@ -14,6 +14,7 @@
     </sql>
     <sql id="where">
         <where>
+        <if test="params != null and params != ''">
             <if test="params.id != null and params.id != ''">
                 and id = #{params.id}
             </if>
@@ -26,6 +27,7 @@
             <if test="params.value != null and params.value != ''">
                 and value = #{params.value}
             </if>
+        </if>
         </where>
     </sql>
     <select id="getByTypeAndKey" resultMap="DictResultMap">

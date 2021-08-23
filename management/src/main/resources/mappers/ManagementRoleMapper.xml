@@ -77,10 +77,10 @@
         delete from management_role where id = #{id}
     </delete>
     <insert id="saveRolePermission">
-        insert into management_role_permission(roleId, permissionId, createTime, createUserId)
+        insert into management_role_permission(roleId, permissionId)
         values
         <foreach collection="permissionIds" item="permissionId" separator=",">
-            (#{roleId}, #{permissionId}, now(), #{createUserId})
+            (#{roleId}, #{permissionId})
         </foreach>
     </insert>
 </mapper>
