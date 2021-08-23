@@ -36,7 +36,7 @@ function loginInfo() {
     var user = "";
     $.ajax({
         type: 'get',
-        url: '/management/login',
+        url: '/login',
         async: false,
         success: function (data) {
             if (data != null && data != "") {

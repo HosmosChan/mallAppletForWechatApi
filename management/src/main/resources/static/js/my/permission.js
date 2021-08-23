@@ -2,7 +2,7 @@ function checkPermission() {
     var permissions = [];
     $.ajax({
         type: 'get',
-        url: '/management/permission/owns',
+        url: '/permission/owns',
         contentType: "application/json; charset=utf-8",
         async: false,
         success: function (data) {

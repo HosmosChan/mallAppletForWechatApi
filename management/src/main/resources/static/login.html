@@ -32,7 +32,7 @@
     }
     var user = loginInfo();
     if (user != "") {
-        location.href = '/management/';
+        location.href = '/';
     }
 
     function login(obj) {
@@ -45,10 +45,10 @@
         } else {
             $.ajax({
                 type: 'post',
-                url: '/management/login',
+                url: '/login',
                 data: $("#login-form").serialize(),
                 success: function () {
-                    location.href = '/management/';
+                    location.href = '/';
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     var msg = xhr.responseText;

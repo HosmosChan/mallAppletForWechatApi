@@ -50,22 +50,24 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-        filterChainDefinitionMap.put("/management/css/**", "anon");
-        filterChainDefinitionMap.put("/management/fonts/**", "anon");
-        filterChainDefinitionMap.put("/management/img/**", "anon");
-        filterChainDefinitionMap.put("/management/js/**", "anon");
-        filterChainDefinitionMap.put("/management/login/**", "anon");
-        filterChainDefinitionMap.put("/management/file/*", "anon");
-        filterChainDefinitionMap.put("/management/swagger-resources/**", "anon");
-        filterChainDefinitionMap.put("/management/logout", "logout");
-        filterChainDefinitionMap.put("/management/**", "authc");
+        filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/fonts/**", "anon");
+        filterChainDefinitionMap.put("/img/**", "anon");
+        filterChainDefinitionMap.put("/js/**", "anon");
+        filterChainDefinitionMap.put("/login/**", "anon");
+        filterChainDefinitionMap.put("/file/*", "anon");
+        filterChainDefinitionMap.put("/swagger-resources/**", "anon");
+        filterChainDefinitionMap.put("/mall/**", "anon");
+        filterChainDefinitionMap.put("/productsShown/**", "anon");
+        filterChainDefinitionMap.put("/logout", "logout");
+        filterChainDefinitionMap.put("/**", "authc");
         //未登录状态页面开启重定向url
-        shiroFilterFactoryBean.setLoginUrl("/management/login.html");
+        shiroFilterFactoryBean.setLoginUrl("/login.html");
         //已登录状态页面开启重定向url
-        shiroFilterFactoryBean.setSuccessUrl("/management/index.html");
+        shiroFilterFactoryBean.setSuccessUrl("/index.html");
         //登出状态页面开启重定向url
         LogoutFilter logoutFilter = new LogoutFilter();
-        logoutFilter.setRedirectUrl("/management/login.html");
+        logoutFilter.setRedirectUrl("/login.html");
         RestfulFilter restfulFilter = new RestfulFilter();
         shiroFilterFactoryBean.getFilters().put("authc", restfulFilter);
         shiroFilterFactoryBean.getFilters().put("logout", logoutFilter);

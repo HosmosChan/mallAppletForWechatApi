@@ -1,7 +1,7 @@
 function initRoles() {
     $.ajax({
         type: 'get',
-        url: '/management/role/all',
+        url: '/role/all',
         async: false,
         success: function (data) {
             var r = $("#roles");
@@ -31,7 +31,7 @@ function getCheckedRoleIds() {
 function initRoleDatas(userId) {
     $.ajax({
         type: 'get',
-        url: '/management/role?userId=' + userId,
+        url: '/role?userId=' + userId,
         success: function (data) {
             var length = data.length;
             for (var i = 0; i < length; i++) {

@@ -18,7 +18,7 @@
     <div class="layui-header header header-demo">
         <div class="layui-main">
             <div class="admin-login-box">
-                <a class="logo" style="left: 0;" href="/management/">
+                <a class="logo" style="left: 0;" href="/">
                     <span style="font-size: 22px;">后台管理系统</span>
                 </a>
                 <div class="admin-side-toggle">
@@ -45,7 +45,7 @@
                             </a>
                         </dd>
                         <dd>
-                            <a href="/management/logout">
+                            <a href="/logout">
                                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                                 退出
                             </a>
@@ -97,7 +97,7 @@
 
     function initMenu() {
         $.ajax({
-            url: "/management/permission/current",
+            url: "/permission/current",
             type: "get",
             async: false,
             success: function (data) {
@@ -160,7 +160,7 @@
     function showLoginInfo() {
         $.ajax({
             type: 'get',
-            url: '/management/user/current',
+            url: '/user/current',
             async: false,
             success: function (data) {
                 $(".admin-header-user span").text(data.nickName);
@@ -169,9 +169,9 @@
                 var domain = pro + "//" + host;
                 var url = data.headImgUrl;
                 if (url == null || url == "") {
-                    url = domain + "/management/img/images/icon_user_default.png";
+                    url = domain + "/img/images/icon_user_default.png";
                 } else {
-                    url = domain + "/management/file" + url;
+                    url = domain + "/file" + url;
                 }
                 var img = $(".admin-header-user img");
                 img.attr("src", url);

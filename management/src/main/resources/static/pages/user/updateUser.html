@@ -74,7 +74,7 @@
         if (id != "") {
             $.ajax({
                 type: 'get',
-                url: '/management/user/' + id,
+                url: '/user/' + id,
                 async: false,
                 success: function (data) {
                     $("#id").val(data.id);
@@ -100,7 +100,7 @@
         formdata.roleIds = getCheckedRoleIds();
         $.ajax({
             type: 'put',
-            url: '/management/user',
+            url: '/user',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {

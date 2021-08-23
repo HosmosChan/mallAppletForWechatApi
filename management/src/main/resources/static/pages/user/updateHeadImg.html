@@ -26,13 +26,13 @@
     function initData() {
         $.ajax({
             type: 'get',
-            url: '/management/user/current',
+            url: '/user/current',
             async: false,
             success: function (data) {
                 var url = data.headImgUrl;
                 username = data.username;
                 if (url != null && url !== "") {
-                    var src = domain + "/management/file" + url;
+                    var src = domain + "/file" + url;
                     var a = "<a target='_blank' href='" + src + "'><img src='" + src + "' alt='头像'/></a>";
                     $("#headImgDiv").html(a);
                 }
@@ -46,7 +46,7 @@
         upload.render({
             elem: '#test1' //绑定元素
             , accept: 'images' //允许上传的文件类型
-            , url: '/management/file' //上传接口
+            , url: '/file' //上传接口
             , data: {usage: function () {
                     if (username != null) {
                         return 'userHeadImg(' + username + ')';
@@ -56,11 +56,11 @@
                 var url = res.url;
                 $.ajax({
                     type: 'put',
-                    url: '/management/user?headImgUrl=' + url,
+                    url: '/user?headImgUrl=' + url,
                     async: false,
                     success: function (data) {
                         layer.msg("上传成功");
-                        var src = domain + "/management/file" + url;
+                        var src = domain + "/file" + url;
                         var a = "<a target='_blank' href='" + src + "'><img src='" + src + "' alt='头像'/></a>";
                         $("#headImgDiv").html(a);
                         var img = parent.$(".admin-header-user img");

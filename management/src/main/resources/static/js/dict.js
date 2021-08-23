@@ -19,7 +19,7 @@ function getDict(type) {
     if (v == null || v == "" || v == "{}") {
         $.ajax({
             type: 'get',
-            url: '/management/dict?type=' + type,
+            url: '/dict?type=' + type,
             async: false,
             success: function (data) {
                 v = {};

@@ -58,7 +58,7 @@
     function initMenuList() {
         $.ajax({
             type: 'get',
-            url: '/management/permission',
+            url: '/permission',
             contentType: "application/json; charset=utf-8",
             async: false,
             success: function (data) {
@@ -110,7 +110,7 @@
         }, function () {
             $.ajax({
                 type: 'delete',
-                url: '/management/permission/' + id,
+                url: '/permission/' + id,
                 success: function (data) {
                     location.reload();
                 }

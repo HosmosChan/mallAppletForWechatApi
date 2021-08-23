@@ -121,7 +121,7 @@
         beanFields.html("");
         $.ajax({
             type: 'get',
-            url: '/management/generate',
+            url: '/generate',
             data: "tableName=" + $("#tableName").val(),
             success: function (data) {
                 $("#detail").show();
@@ -166,7 +166,7 @@
         var formdata = $("#form").serializeObject();
         $.ajax({
             type: 'post',
-            url: '/management/generate',
+            url: '/generate',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {

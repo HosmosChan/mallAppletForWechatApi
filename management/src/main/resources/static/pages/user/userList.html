@@ -90,7 +90,7 @@
                     "url": "/js/plugin/datatables/Chinese.lang"
                 },
                 "ajax": {
-                    "url": "/management/user",
+                    "url": "/user",
                     "type": "get",
                     "data": function (d) {
                         d.username = $('#username').val();
@@ -137,7 +137,7 @@
         }, function () {
             $.ajax({
                 type: 'delete',
-                url: '/management/user/' + id,
+                url: '/user/' + id,
                 success: function (data) {
                     location.reload();
                 }

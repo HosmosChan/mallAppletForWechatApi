@@ -6,7 +6,7 @@ function getMenuTree() {
     };
     $.ajax({
         type: 'get',
-        url: '/management/permission/all',
+        url: '/permission/all',
         contentType: "application/json; charset=utf-8",
         async: false,
         success: function (data) {
@@ -26,7 +26,7 @@ function getMenuTree() {
 function initMenuDatas(roleId) {
     $.ajax({
         type: 'get',
-        url: '/management/permission?roleId=' + roleId,
+        url: '/permission?roleId=' + roleId,
         success: function (data) {
             var length = data.length;
             var ids = [];
@@ -91,7 +91,7 @@ function createNode(d) {
 function initParentMenuSelect() {
     $.ajax({
         type: 'get',
-        url: '/management/permission/parents',
+        url: '/permission/parents',
         async: false,
         success: function (data) {
             var select = $("#parentId");
