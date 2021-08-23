@@ -163,7 +163,11 @@
             url: '/user/current',
             async: false,
             success: function (data) {
-                $(".admin-header-user span").text(data.nickName);
+                if (data.nickName != null) {
+                    $(".admin-header-user span").text(data.nickName);
+                } else {
+                    $(".admin-header-user span").text(data.username);
+                }
                 var pro = window.location.protocol;
                 var host = window.location.host;
                 var domain = pro + "//" + host;
