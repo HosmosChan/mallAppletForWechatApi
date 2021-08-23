@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lettuce.management.dao.ManagementRoleDao">
     <resultMap id="RoleResultMap" type="com.lettuce.management.entity.Role">
-        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
@@ -11,7 +11,7 @@
         <result column="gmtUserId" jdbcType="INTEGER" property="gmtUserId"/>
     </resultMap>
     <sql id="Role_List">
-        mr.tid, mr.name, mr.description, mr.createTime, mr.createUserId,
+        mr.id, mr.name, mr.description, mr.createTime, mr.createUserId,
         mr.gmtTime, mr.gmtUserId
     </sql>
     <sql id="where">
@@ -26,7 +26,7 @@
         <include refid="Role_List"/>
         from management_role as mr
         inner join management_user_role as mur
-        on mr.tid = mur.roleId
+        on mr.id = mur.roleId
         where 1 = 1
         <if test="userId!=null">
             and mur.userId = #{userId}
@@ -41,10 +41,10 @@
     <update id="updateRole">
         update management_role mr
         set mr.name = #{name}, mr.description = #{description}, mr.gmtTime = now(), mr.gmtUserId = #{gmtUserId}
-        where mr.tid = #{tid}
+        where mr.id = #{id}
     </update>
     <insert id="saveRole">
-        insert into management_role ('name', description, createTime, createUserId)
+        insert into management_role (management_role.name, description, createTime, createUserId)
         values (#{name}, #{description}, now(), #{createUserId});
     </insert>
     <select id="count" resultType="int">
@@ -65,16 +65,16 @@
         select
         <include refid="Role_List"/>
         from management_role as mr
-        where mr.tid = #{tid}
+        where mr.id = #{id}
     </select>
     <delete id="deleteRolePermission">
-        delete from management_role_permission where roleId = #{roleId}
+        delete from management_role_permission where roleId = #{id}
     </delete>
     <delete id="deleteRoleUser">
-        delete from management_user_role where roleId = #{roleId}
+        delete from management_user_role where roleId = #{id}
     </delete>
     <delete id="delete">
-        delete from management_role where tid = #{tid}
+        delete from management_role where id = #{id}
     </delete>
     <insert id="saveRolePermission">
         insert into management_role_permission(roleId, permissionId, createTime, createUserId)

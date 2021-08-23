@@ -50,15 +50,15 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-        filterChainDefinitionMap.put("/css/**", "anon");
-        filterChainDefinitionMap.put("/fonts/**", "anon");
-        filterChainDefinitionMap.put("/img/**", "anon");
-        filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/login/**", "anon");
-        filterChainDefinitionMap.put("/file/*", "anon");
-        filterChainDefinitionMap.put("/swagger-resources/**", "anon");
-        filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/management/css/**", "anon");
+        filterChainDefinitionMap.put("/management/fonts/**", "anon");
+        filterChainDefinitionMap.put("/management/img/**", "anon");
+        filterChainDefinitionMap.put("/management/js/**", "anon");
+        filterChainDefinitionMap.put("/management/login/**", "anon");
+        filterChainDefinitionMap.put("/management/file/*", "anon");
+        filterChainDefinitionMap.put("/management/swagger-resources/**", "anon");
+        filterChainDefinitionMap.put("/management/logout", "logout");
+        filterChainDefinitionMap.put("/management/**", "authc");
         //未登录状态页面开启重定向url
         shiroFilterFactoryBean.setLoginUrl("/management/login.html");
         //已登录状态页面开启重定向url

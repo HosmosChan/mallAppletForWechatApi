@@ -51,7 +51,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
         if (StringUtils.isBlank(loginToken)) {
             boolean flag = super.preHandle(request, response);
             log.debug("{}退出成功", user.getUsername());
-            SpringUtil.getBean(ManagementSysLogsService.class).save(user.getTid(), "退出", true, null);
+            SpringUtil.getBean(ManagementSysLogsService.class).save(user.getId(), "退出", true, null);
             return flag;
         } else {
             ManagementTokenManager managementTokenManager = SpringUtil.getBean(ManagementTokenManager.class);
@@ -62,7 +62,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
             } else {
                 RestfulFilter.writeResponse(WebUtils.toHttp(response), HttpStatus.BAD_REQUEST.value(), ERR_INFO);
             }
-            SpringUtil.getBean(ManagementSysLogsService.class).save(user.getTid(), "token方式退出", flag, null);
+            SpringUtil.getBean(ManagementSysLogsService.class).save(user.getId(), "token方式退出", flag, null);
             return false;
         }
     }

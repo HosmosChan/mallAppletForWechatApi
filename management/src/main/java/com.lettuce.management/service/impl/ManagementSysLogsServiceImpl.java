@@ -50,7 +50,7 @@ public class ManagementSysLogsServiceImpl implements ManagementSysLogsService {
     @Override
     public void save(SysLogs sysLogs) {
         User user = UserUtil.getCurrentUser();
-        if (user == null || user.getTid() == null) {
+        if (user == null || user.getId() == null) {
             return;
         }
         sysLogs.setUser(user);
@@ -65,7 +65,7 @@ public class ManagementSysLogsServiceImpl implements ManagementSysLogsService {
         sysLogs.setModule(module);
         sysLogs.setRemark(remark);
         User user = new User();
-        user.setTid(userId);
+        user.setId(userId);
         sysLogs.setUser(user);
         managementSysLogsDao.save(sysLogs);
     }

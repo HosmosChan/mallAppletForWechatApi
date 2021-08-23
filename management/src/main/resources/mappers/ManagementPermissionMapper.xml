@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lettuce.management.dao.ManagementPermissionDao">
     <resultMap id="PermissionResultMap" type="com.lettuce.management.entity.Permission">
-        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="parentId" jdbcType="INTEGER" property="parentId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="css" jdbcType="VARCHAR" property="css"/>
@@ -16,7 +16,7 @@
         <result column="gmtUserId" jdbcType="INTEGER" property="gmtUserId"/>
     </resultMap>
     <sql id="Permission_List">
-        mp.tid, mp.parentId, mp.name, mp.css, mp.href, mp.type,
+        mp.id, mp.parentId, mp.name, mp.css, mp.href, mp.type,
         mp.permission, mp.sort, mp.createTime, mp.createUserId, mp.gmtTime, mp.gmtUserId
     </sql>
     <select id="listByUserId" resultMap="PermissionResultMap">
@@ -24,7 +24,7 @@
         <include refid="Permission_List"/>
         from management_permission as mp
         inner join management_role_permission as mrp
-        on mp.tid = mrp.permissionId
+        on mp.id = mrp.permissionId
         inner join management_user_role as mur
         on mrp.roleId = mur.roleId
         where 1 = 1
@@ -50,14 +50,13 @@
         <include refid="Permission_List"/>
         from management_permission as mp
         inner join management_role_permission as mrp
-        on mp.tid = mrp.permissionId
+        on mp.id = mrp.permissionId
         where mrp.roleId = #{roleId}
         order by mp.sort
     </select>
     <insert id="savePermission">
         insert into management_permission
-        (parentId, 'name', css, href, 'type', permission, sort,
-        createTime, createUserId)
+        (parentId, name, css, href, type, permission, sort, createTime, createUserId)
         values(#{parentId}, #{name}, #{css}, #{href}, #{type},
         #{permission}, #{sort}, now(), #{createUserId})
     </insert>
@@ -65,22 +64,23 @@
         select
         <include refid="Permission_List"/>
         from management_permission as mp
-        where mp.tid = #{tid}
+        where mp.id = #{id}
     </select>
     <update id="updatePermission">
         update management_permission
-        set parentId = #{parentId}, 'name' = #{name}, css = #{css}, href = #{href},
+        set parentId = #{parentId}, name = #{name},
+        css = #{css}, href = #{href},
         type = #{type}, permission = #{permission}, sort = #{sort}, gmtTime = now(),
         gmtUserId = #{gmtUserId}
-        where tid = #{tid}
+        where id = #{id}
     </update>
     <delete id="deleteRolePermission">
         delete from management_role_permission
-        where tid = #{tid}
+        where id = #{id}
     </delete>
     <delete id="deletePermission">
         delete from management_permission
-        where tid = #{tid}
+        where id = #{id}
     </delete>
     <delete id="deleteByParentId">
         delete from management_permission

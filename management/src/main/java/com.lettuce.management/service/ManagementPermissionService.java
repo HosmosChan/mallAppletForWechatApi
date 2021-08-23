@@ -79,12 +79,12 @@ public interface ManagementPermissionService {
     /**
      * 通过权限id获取权限信息
      *
-     * @param tid permission id
+     * @param id permission id
      * @return Permission
      * @author Hosmos
      * @date 2021-07-14
      */
-    Permission getByPermissionId(Long tid);
+    Permission getByPermissionId(Long id);
 
     /**
      * 更新权限信息
@@ -98,9 +98,9 @@ public interface ManagementPermissionService {
     /**
      * 通过权限id删除权限信息
      *
-     * @param tid permission id
+     * @param id permission id
      * @author Hosmos
      * @date 2021-07-14
      */
-    void deletePermission(Long tid);
+    void deletePermission(Long id);
 }

@@ -44,10 +44,10 @@ public interface ManagementFileService {
     /**
      * 删除文件
      *
-     * @param tid   file id
+     * @param id   file id
      * @param appId 应用app id
      * @author Hosmos
      * @date 2021-07-14
      */
-    void delete(String tid, String appId);
+    void delete(String id, String appId);
 }

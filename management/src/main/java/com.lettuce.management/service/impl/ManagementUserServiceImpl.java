@@ -60,9 +60,9 @@ public class ManagementUserServiceImpl implements ManagementUserService {
         userDto.setSalt(DigestUtils.md5Hex(UUID.randomUUID().toString() + System.currentTimeMillis() + UUID.randomUUID().toString()));
         userDto.setPassword(passwordEncoder(userDto.getPassword(), userDto.getSalt()));
         userDto.setStatus(User.Status.VALID);
-        userDto.setCreateUserId(UserUtil.getCurrentUser().getTid());
+        userDto.setCreateUserId(UserUtil.getCurrentUser().getId());
         managementUserDao.saveUser(userDto);
-        saveUserRoles(userDto.getTid(), userDto.getRoleIds());
+        saveUserRoles(userDto.getId(), userDto.getRoleIds());
         log.debug("新增用户{}", userDto.getUsername());
         return userDto;
     }
@@ -75,10 +75,10 @@ public class ManagementUserServiceImpl implements ManagementUserService {
 
     @Override
     public User updateUser(UserDto userDto) {
-        userDto.setGmtUserId(UserUtil.getCurrentUser().getTid());
+        userDto.setGmtUserId(UserUtil.getCurrentUser().getId());
         managementUserDao.updateUser(userDto);
-        saveUserRoles(userDto.getTid(), userDto.getRoleIds());
-        updateUserSession(userDto.getTid());
+        saveUserRoles(userDto.getId(), userDto.getRoleIds());
+        updateUserSession(userDto.getId());
         return userDto;
     }
 
@@ -91,8 +91,8 @@ public class ManagementUserServiceImpl implements ManagementUserService {
         if (!u.getPassword().equals(passwordEncoder(oldPassword, u.getSalt()))) {
             throw new IllegalArgumentException("密码错误");
         }
-        Long gmtUserId = UserUtil.getCurrentUser().getTid();
-        managementUserDao.changePassword(u.getTid(), passwordEncoder(newPassword, u.getSalt()), gmtUserId);
+        Long gmtUserId = UserUtil.getCurrentUser().getId();
+        managementUserDao.changePassword(u.getId(), passwordEncoder(newPassword, u.getSalt()), gmtUserId);
         log.debug("修改{}的密码", username);
     }
 
@@ -107,24 +107,24 @@ public class ManagementUserServiceImpl implements ManagementUserService {
     }
 
     @Override
-    public User getByUserId(Long tid) {
-        return managementUserDao.getByUserId(tid);
+    public User getByUserId(Long id) {
+        return managementUserDao.getByUserId(id);
     }
 
     private void saveUserRoles(Long userId, List<Long> roleIds) {
         if (roleIds != null) {
             managementUserDao.deleteUserRole(userId);
             if (!CollectionUtils.isEmpty(roleIds)) {
-                Long creatUserId = UserUtil.getCurrentUser().getTid();
+                Long creatUserId = UserUtil.getCurrentUser().getId();
                 managementUserDao.saveUserRoles(userId, roleIds, creatUserId);
             }
         }
     }
 
-    private void updateUserSession(Long tid) {
+    private void updateUserSession(Long id) {
         User current = UserUtil.getCurrentUser();
-        if (current.getTid().equals(tid)) {
-            User user = managementUserDao.getByUserId(tid);
+        if (current.getId().equals(id)) {
+            User user = managementUserDao.getByUserId(id);
             UserUtil.setUserSession(user);
         }
     }

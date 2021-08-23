@@ -37,7 +37,7 @@ import java.util.List;
  * @author Hosmos
  * @date 2021年07月14日
  */
-@Api(tags = "日志")
+@Api(value = "log", tags = "日志接口")
 @RestController
 @RequestMapping("/log")
 public class ManagementSysLogsController {

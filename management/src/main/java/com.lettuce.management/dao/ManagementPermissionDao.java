@@ -39,13 +39,13 @@ public interface ManagementPermissionDao {
 
     void savePermission(Permission permission);
 
-    Permission getByPermissionId(Long tid);
+    Permission getByPermissionId(Long id);
 
     void updatePermission(Permission permission);
 
-    void deleteRolePermission(Long tid);
+    void deleteRolePermission(Long id);
 
-    void deletePermission(Long tid);
+    void deletePermission(Long id);
 
     void deleteByParentId(Long parentId);
 }

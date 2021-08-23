@@ -48,7 +48,7 @@ import java.util.stream.Collectors;
  * @description 权限controller层
  * @date 2021年07月13日
  */
-@Api(value = "permissions", tags = "权限接口")
+@Api(value = "permission", tags = "权限接口")
 @RestController
 @RequestMapping("/permission")
 public class ManagementPermissionController {
@@ -69,7 +69,7 @@ public class ManagementPermissionController {
         List<Permission> list = UserUtil.getCurrentPermissions();
         if (list == null) {
             User user = UserUtil.getCurrentUser();
-            list = managementPermissionService.listByUserId(user.getTid());
+            list = managementPermissionService.listByUserId(user.getId());
             UserUtil.setPermissionSession(list);
         }
         final List<Permission> permissions = list.stream().filter(l -> l.getType().equals(1)).collect(Collectors.toList());
@@ -130,7 +130,7 @@ public class ManagementPermissionController {
     }
 
     /**
-     * 根据角色id删除权限
+     * 根据角色id获取权限列表
      *
      * @param roleId role id
      * @return List<Permission>
@@ -138,7 +138,7 @@ public class ManagementPermissionController {
      * @date 2021-07-14
      */
     @GetMapping(params = "roleId")
-    @ApiOperation(value = "根据角色id删除权限")
+    @ApiOperation(value = "根据角色id获取权限列表")
     @RequiresPermissions(value = {"management:menu:query", "management:role:query"}, logical = Logical.OR)
     public List<Permission> listByRoleId(Long roleId) {
         return managementPermissionService.listByRoleId(roleId);
@@ -160,18 +160,18 @@ public class ManagementPermissionController {
     }
 
     /**
-     * 根据权限tid获取权限
+     * 根据权限id获取权限
      *
-     * @param tid permission tid
+     * @param id permission id
      * @return Permission
      * @author Hosmos
      * @date 2021-07-14
      */
-    @GetMapping("/{tid}")
-    @ApiOperation(value = "根据权限tid获取权限")
+    @GetMapping("/{id}")
+    @ApiOperation(value = "根据权限id获取权限")
     @RequiresPermissions("management:menu:query")
-    public Permission getByPermissionTid(@PathVariable Long tid) {
-        return managementPermissionService.getByPermissionId(tid);
+    public Permission getByPermissionId(@PathVariable Long id) {
+        return managementPermissionService.getByPermissionId(id);
     }
 
     /**
@@ -207,18 +207,18 @@ public class ManagementPermissionController {
     }
 
     /**
-     * 根据权限tid删除权限
+     * 根据权限id删除权限
      *
-     * @param tid permission tid
+     * @param id permission id
      * @author Hosmos
      * @date 2021-07-14
      */
     @LogAnnotation
-    @DeleteMapping("/{tid}")
-    @ApiOperation(value = "根据权限tid删除权限")
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "根据权限id删除权限")
     @RequiresPermissions(value = {"management:menu:del"})
-    public void deletePermission(@PathVariable Long tid) {
-        managementPermissionService.deletePermission(tid);
+    public void deletePermission(@PathVariable Long id) {
+        managementPermissionService.deletePermission(id);
     }
 
     /**
@@ -230,7 +230,7 @@ public class ManagementPermissionController {
      * @date 2021-07-14
      */
     private void setChild(Permission permission, List<Permission> permissions) {
-        List<Permission> child = permissions.parallelStream().filter(a -> a.getParentId().equals(permission.getTid())).collect(Collectors.toList());
+        List<Permission> child = permissions.parallelStream().filter(a -> a.getParentId().equals(permission.getId())).collect(Collectors.toList());
         permission.setChild(child);
         if (!CollectionUtils.isEmpty(child)) {
             child.parallelStream().forEach(c -> {
@@ -243,18 +243,18 @@ public class ManagementPermissionController {
     /**
      * 设置权限列表
      *
-     * @param tid   permission tid
+     * @param id   permission id
      * @param permissionsAll 欲添加permission列表
      * @param list           原有permission列表
      * @author Hosmos
      * @date 2021-07-14
      */
-    private void setPermissionsList(Long tid, List<Permission> permissionsAll, List<Permission> list) {
+    private void setPermissionsList(Long id, List<Permission> permissionsAll, List<Permission> list) {
         for (Permission permission : permissionsAll) {
-            if (permission.getParentId().equals(tid)) {
+            if (permission.getParentId().equals(id)) {
                 list.add(permission);
-                if (permissionsAll.stream().filter(p -> p.getParentId().equals(permission.getTid())).findAny() != null) {
-                    setPermissionsList(permission.getTid(), permissionsAll, list);
+                if (permissionsAll.stream().filter(p -> p.getParentId().equals(permission.getId())).findAny() != null) {
+                    setPermissionsList(permission.getId(), permissionsAll, list);
                 }
             }
         }
@@ -263,23 +263,22 @@ public class ManagementPermissionController {
     /**
      * 设置菜单树
      *
-     * @param tid   permission tid
+     * @param id   permission id
      * @param permissionsAll 所有permission列表
      * @param array          用JSONArray显示permission
      * @author Hosmos
      * @date 2021-07-14
      */
-    private void setPermissionsTree(Long tid, List<Permission> permissionsAll, JSONArray array) {
+    private void setPermissionsTree(Long id, List<Permission> permissionsAll, JSONArray array) {
         for (Permission per : permissionsAll) {
-            if (per.getParentId().equals(tid)) {
+            if (per.getParentId().equals(id)) {
                 String string = JSONObject.toJSONString(per);
                 JSONObject parent = (JSONObject) JSONObject.parse(string);
                 array.add(parent);
-                if (permissionsAll.stream().filter(p -> p.getParentId().equals(per.getTid())).findAny() != null) {
+                if (permissionsAll.stream().filter(p -> p.getParentId().equals(per.getId())).findAny() != null) {
                     JSONArray child = new JSONArray();
                     parent.put("child", child);
-                    setPermissionsTree(per.getTid(), permissionsAll, child);
-                    setPermissionsTree(per.getTid(), permissionsAll, child);
+                    setPermissionsTree(per.getId(), permissionsAll, child);
                 }
             }
         }

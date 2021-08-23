@@ -40,7 +40,7 @@ import java.util.List;
  * @description 文件controller层
  * @date 2021年07月13日
  */
-@Api(value = "dict", tags = "文件接口")
+@Api(value = "file", tags = "文件接口")
 @RestController
 @RequestMapping("/file")
 public class ManagementFileController {
@@ -122,16 +122,16 @@ public class ManagementFileController {
     /**
      * 文件删除
      *
-     * @param tid file id
+     * @param id file id
      * @param appId  app id
      * @author Hosmos
      * @date 2021-07-13
      */
     @LogAnnotation
-    @DeleteMapping("/{tid}")
+    @DeleteMapping("/{id}")
     @ApiOperation(value = "文件删除")
     @RequiresPermissions("management:file:del")
-    public void delete(@PathVariable String tid, String appId) {
-        managementFileService.delete(tid, appId);
+    public void delete(@PathVariable String id, String appId) {
+        managementFileService.delete(id, appId);
     }
 }

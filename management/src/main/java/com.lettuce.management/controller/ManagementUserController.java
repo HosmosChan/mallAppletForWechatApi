@@ -41,13 +41,14 @@ import java.util.List;
  * @author Hosmos
  * @date 2021年07月14日
  */
-@Api(tags = "用户")
+@Api(value = "user", tags = "用户接口")
 @RestController
 @RequestMapping("/user")
 public class ManagementUserController {
     private static final Logger log = LoggerFactory.getLogger("adminLogger");
     @Resource
     private ManagementUserService managementUserService;
+
     @LogAnnotation
     @PostMapping("/register")
     @ApiOperation(value = "保存用户")
@@ -113,9 +114,9 @@ public class ManagementUserController {
     }
 
     @ApiOperation(value = "根据用户id获取用户")
-    @GetMapping("/{tid}")
+    @GetMapping("/{id}")
     @RequiresPermissions("management:user:query")
-    public User user(@PathVariable Long tid) {
-        return managementUserService.getByUserId(tid);
+    public User user(@PathVariable Long id) {
+        return managementUserService.getByUserId(id);
     }
 }

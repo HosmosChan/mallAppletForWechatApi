@@ -51,14 +51,14 @@ public interface ManagementDictService {
     void save(Dict dict);
 
     /**
-     * 通过字典tid获取字典信息
+     * 通过字典id获取字典信息
      *
-     * @param tid dict id
+     * @param id dict id
      * @return Dict
      * @author Hosmos
      * @date 2021-07-13
      */
-    Dict getByTid(Long tid);
+    Dict getById(Long id);
 
     /**
      * 更新字典信息
@@ -94,11 +94,11 @@ public interface ManagementDictService {
     /**
      * 通过字典id删除字典信息
      *
-     * @param tid dict id
+     * @param id dict id
      * @author Hosmos
      * @date 2021-07-13
      */
-    void delete(Long tid);
+    void delete(Long id);
 
     /**
      * 通过字典类型获取字典信息列表

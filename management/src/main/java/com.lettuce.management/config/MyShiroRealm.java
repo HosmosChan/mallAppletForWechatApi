@@ -75,10 +75,10 @@ public class MyShiroRealm extends AuthorizingRealm {
         log.debug("权限配置");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         User user = UserUtil.getCurrentUser();
-        List<Role> roles = SpringUtil.getBean(ManagementRoleDao.class).listByUserId(user.getTid());
+        List<Role> roles = SpringUtil.getBean(ManagementRoleDao.class).listByUserId(user.getId());
         Set<String> roleNames = roles.stream().map(Role::getName).collect(Collectors.toSet());
         authorizationInfo.setRoles(roleNames);
-        List<Permission> permissionList = SpringUtil.getBean(ManagementPermissionDao.class).listByUserId(user.getTid());
+        List<Permission> permissionList = SpringUtil.getBean(ManagementPermissionDao.class).listByUserId(user.getId());
         UserUtil.setPermissionSession(permissionList);
         Set<String> permissions = permissionList.stream().filter(p -> !StringUtils.isEmpty(p.getPermission())).map(Permission::getPermission).collect(Collectors.toSet());
         authorizationInfo.setStringPermissions(permissions);
@@ -91,7 +91,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         Object object = principalCollection.getPrimaryPrincipal();
         if (object instanceof User) {
             User user = (User) object;
-            return "authorization:cache:key:users:" + user.getTid();
+            return "authorization:cache:key:users:" + user.getId();
         }
         return super.getAuthorizationCacheKey(principals);
     }

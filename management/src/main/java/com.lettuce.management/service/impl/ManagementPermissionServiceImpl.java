@@ -63,27 +63,27 @@ public class ManagementPermissionServiceImpl implements ManagementPermissionServ
 
     @Override
     public void savePermission(Permission permission) {
-        permission.setCreateUserId(UserUtil.getCurrentUser().getTid());
+        permission.setCreateUserId(UserUtil.getCurrentUser().getId());
         managementPermissionDao.savePermission(permission);
         log.debug("新增权限{}", permission.getName());
     }
 
     @Override
-    public Permission getByPermissionId(Long tid) {
-        return managementPermissionDao.getByPermissionId(tid);
+    public Permission getByPermissionId(Long id) {
+        return managementPermissionDao.getByPermissionId(id);
     }
 
     @Override
     public void updatePermission(Permission permission) {
-        permission.setGmtUserId(UserUtil.getCurrentUser().getTid());
+        permission.setGmtUserId(UserUtil.getCurrentUser().getId());
         managementPermissionDao.updatePermission(permission);
     }
 
     @Override
-    public void deletePermission(Long tid) {
-        managementPermissionDao.deleteRolePermission(tid);
-        managementPermissionDao.deletePermission(tid);
-        managementPermissionDao.deleteByParentId(tid);
-        log.debug("删除权限id:{}", tid);
+    public void deletePermission(Long id) {
+        managementPermissionDao.deleteRolePermission(id);
+        managementPermissionDao.deletePermission(id);
+        managementPermissionDao.deleteByParentId(id);
+        log.debug("删除权限id:{}", id);
     }
 }

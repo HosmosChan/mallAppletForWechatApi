@@ -49,8 +49,8 @@ public class ManagementDictServiceImpl implements ManagementDictService {
     }
 
     @Override
-    public Dict getByTid(Long tid) {
-        return managementDictDao.getByTid(tid);
+    public Dict getById(Long id) {
+        return managementDictDao.getById(id);
     }
 
     @Override
@@ -69,8 +69,8 @@ public class ManagementDictServiceImpl implements ManagementDictService {
     }
 
     @Override
-    public void delete(Long tid) {
-        managementDictDao.delete(tid);
+    public void delete(Long id) {
+        managementDictDao.delete(id);
     }
 
     @Override

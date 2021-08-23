@@ -104,13 +104,14 @@ public interface ManagementUserService {
      * @date 2021-07-14
      */
     List<User> list(Map<String, Object> params, Integer offset, Integer limit);
-/**
- * 通过用户id获取用户信息
- *
- * @param tid user id
- * @return User
- * @author Hosmos
- * @date 2021-07-14
- */
-    User getByUserId(Long tid);
+
+    /**
+     * 通过用户id获取用户信息
+     *
+     * @param id user id
+     * @return User
+     * @author Hosmos
+     * @date 2021-07-14
+     */
+    User getByUserId(Long id);
 }

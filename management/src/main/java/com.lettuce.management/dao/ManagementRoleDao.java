@@ -1,6 +1,7 @@
 package com.lettuce.management.dao;
 
 import com.lettuce.management.entity.Role;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -38,17 +39,17 @@ public interface ManagementRoleDao {
 
     void saveRole(Role role);
 
-    int count(Map<String, Object> params);
+    int count(@Param("params") Map<String, Object> params);
 
-    List<Role> list(Map<String, Object> params, Integer offset, Integer limit);
+    List<Role> list(@Param("params") Map<String, Object> params, Integer offset, Integer limit);
 
-    Role getByRoleId(Long tid);
+    Role getByRoleId(Long id);
 
-    void deleteRolePermission(Long tid);
+    void deleteRolePermission(Long id);
 
-    void deleteRoleUser(Long tid);
+    void deleteRoleUser(Long id);
 
-    void delete(Long tid);
+    void delete(Long id);
 
     void saveRolePermission(Long roleId, List<Long> permissionIds, Long createUserId);
 }

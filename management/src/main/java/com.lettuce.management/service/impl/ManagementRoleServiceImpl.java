@@ -49,13 +49,13 @@ public class ManagementRoleServiceImpl implements ManagementRoleService {
     @Transactional(rollbackFor = Exception.class)
     public void saveRole(RoleDto roleDto) {
         Role role = roleDto;
-        if (role.getTid() != null) {
+        if (role.getId() != null) {
             // 修改
             Role r = managementRoleDao.getRole(role.getName());
-            if (r != null && !r.getTid().equals(role.getTid())) {
+            if (r != null && !r.getId().equals(role.getId())) {
                 throw new IllegalArgumentException(role.getName() + "已存在");
             }
-            role.setGmtUserId(UserUtil.getCurrentUser().getTid());
+            role.setGmtUserId(UserUtil.getCurrentUser().getId());
             managementRoleDao.updateRole(role);
         } else {
             // 新增
@@ -63,11 +63,11 @@ public class ManagementRoleServiceImpl implements ManagementRoleService {
             if (r != null) {
                 throw new IllegalArgumentException(role.getName() + "已存在");
             }
-            role.setCreateUserId(UserUtil.getCurrentUser().getTid());
+            role.setCreateUserId(UserUtil.getCurrentUser().getId());
             managementRoleDao.saveRole(role);
             log.debug("新增角色{}", role.getName());
         }
-        saveRolePermission(role.getTid(), roleDto.getPermissionIds());
+        saveRolePermission(role.getId(), roleDto.getPermissionIds());
     }
 
     @Override
@@ -81,8 +81,8 @@ public class ManagementRoleServiceImpl implements ManagementRoleService {
     }
 
     @Override
-    public Role getByRoleId(Long tid) {
-        return managementRoleDao.getByRoleId(tid);
+    public Role getByRoleId(Long id) {
+        return managementRoleDao.getByRoleId(id);
     }
 
     @Override
@@ -91,18 +91,18 @@ public class ManagementRoleServiceImpl implements ManagementRoleService {
     }
 
     @Override
-    public void deleteRole(Long tid) {
-        managementRoleDao.deleteRolePermission(tid);
-        managementRoleDao.deleteRoleUser(tid);
-        managementRoleDao.delete(tid);
-        log.debug("删除角色id:{}", tid);
+    public void deleteRole(Long id) {
+        managementRoleDao.deleteRolePermission(id);
+        managementRoleDao.deleteRoleUser(id);
+        managementRoleDao.delete(id);
+        log.debug("删除角色id:{}", id);
     }
 
     private void saveRolePermission(Long roleId, List<Long> permissionIds) {
         managementRoleDao.deleteRolePermission(roleId);
         permissionIds.remove(0L);
         if (!CollectionUtils.isEmpty(permissionIds)) {
-            Long createUserId = UserUtil.getCurrentUser().getTid();
+            Long createUserId = UserUtil.getCurrentUser().getId();
             managementRoleDao.saveRolePermission(roleId, permissionIds, createUserId);
         }
     }

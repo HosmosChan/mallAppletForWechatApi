@@ -67,7 +67,7 @@ public class LogAdvice {
             sysLogs.setFlag(true);
             managementSysLogsService.save(sysLogs);
             if (module.contains("登陆")) {
-                managementUserDao.lastLogin(UserUtil.getCurrentUser().getTid());
+                managementUserDao.lastLogin(UserUtil.getCurrentUser().getId());
             }
             return object;
         } catch (Exception e) {

@@ -41,7 +41,7 @@ import java.util.List;
  * @description 角色controller层
  * @date 2021年07月14日
  */
-@Api(value = "permissions", tags = "角色接口")
+@Api(value = "role", tags = "角色接口")
 @RestController
 @RequestMapping("/role")
 public class ManagementRoleController {
@@ -89,17 +89,17 @@ public class ManagementRoleController {
     }
 
     /**
-     * @param tid role id
+     * @param id role id
      * @return Role
      * @description 根据角色id获取角色
      * @author Hosmos
      * @date 2021-07-14
      */
-    @GetMapping("/{tid}")
+    @GetMapping("/{id}")
     @ApiOperation(value = "根据角色id获取角色")
     @RequiresPermissions("management:role:query")
-    public Role get(@PathVariable Long tid) {
-        return managementRoleService.getByRoleId(tid);
+    public Role get(@PathVariable Long id) {
+        return managementRoleService.getByRoleId(id);
     }
 
     /**
@@ -130,16 +130,16 @@ public class ManagementRoleController {
     }
 
     /**
-     * @param tid role id
+     * @param id role id
      * @description 删除角色
      * @author Hosmos
      * @date 2021-07-14
      */
     @LogAnnotation
-    @DeleteMapping("/{tid}")
+    @DeleteMapping("/{id}")
     @ApiOperation(value = "删除角色")
     @RequiresPermissions(value = {"management:role:del"})
-    public void delete(@PathVariable Long tid) {
-        managementRoleService.deleteRole(tid);
+    public void delete(@PathVariable Long id) {
+        managementRoleService.deleteRole(id);
     }
 }

@@ -63,13 +63,13 @@ public class ManagementFileServiceImpl implements ManagementFileService {
 
         long size = file.getSize();
         String contentType = file.getContentType();
-        fileInfo.setTid(md5);
+        fileInfo.setId(md5);
         fileInfo.setContentType(contentType);
         fileInfo.setSize(size);
         fileInfo.setPath(fullPath);
         fileInfo.setUrl(pathname);
         fileInfo.setType(contentType.startsWith("image/") ? 1 : 0);
-        fileInfo.setCreateUserId(UserUtil.getCurrentUser().getTid());
+        fileInfo.setCreateUserId(UserUtil.getCurrentUser().getId());
         managementFileDao.save(fileInfo);
 
         log.debug("上传文件{}", fullPath);
@@ -78,12 +78,12 @@ public class ManagementFileServiceImpl implements ManagementFileService {
     }
 
     @Override
-    public void delete(String tid, String appId) {
-        FileInfo fileInfo = managementFileDao.getByFileIdAndAppId(tid, appId);
+    public void delete(String id, String appId) {
+        FileInfo fileInfo = managementFileDao.getByFileIdAndAppId(id, appId);
         if (fileInfo != null) {
             String fullPath = fileInfo.getPath();
             FileUtil.deleteFile(fullPath);
-            managementFileDao.delete(tid, appId);
+            managementFileDao.delete(id, appId);
             log.debug("删除文件：{}", fileInfo.getPath());
         }
     }

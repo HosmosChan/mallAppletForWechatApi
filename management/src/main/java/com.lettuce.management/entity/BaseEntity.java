@@ -29,16 +29,16 @@ import java.util.Date;
  */
 public abstract class BaseEntity<ID extends Serializable> implements Serializable {
     private static final long serialVersionUID = 5406929891162490190L;
-    private ID tid;
+    private ID id;
     private Date createTime = new Date();
     private Date gmtTime = new Date();
 
-    public ID getTid() {
-        return tid;
+    public ID getId() {
+        return id;
     }
 
-    public void setTid(ID tid) {
-        this.tid = tid;
+    public void setId(ID id) {
+        this.id = id;
     }
 
     public Date getCreateTime() {

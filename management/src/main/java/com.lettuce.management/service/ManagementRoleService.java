@@ -65,12 +65,12 @@ public interface ManagementRoleService {
     /**
      * 通过角色id获取角色信息
      *
-     * @param tid role id
+     * @param id role id
      * @return Role
      * @author Hosmos
      * @date 2021-07-14
      */
-    Role getByRoleId(Long tid);
+    Role getByRoleId(Long id);
 
     /**
      * 通过用户id获取角色信息列表
@@ -85,9 +85,9 @@ public interface ManagementRoleService {
     /**
      * 通过角色id删除角色信息
      *
-     * @param tid role id
+     * @param id role id
      * @author Hosmos
      * @date 2021-07-14
      */
-    void deleteRole(Long tid);
+    void deleteRole(Long id);
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lettuce.management.dao.ManagementUserDao">
     <resultMap id="UserResultMap" type="com.lettuce.management.entity.User">
-        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="salt" jdbcType="VARCHAR" property="salt"/>
@@ -17,7 +17,7 @@
         <result column="gmtUserId" jdbcType="INTEGER" property="gmtUserId"/>
     </resultMap>
     <sql id="User_List">
-        mu.tid, mu.username, mu.password, mu.salt, mu.nickName, mu.headImgUrl,
+        mu.id, mu.username, mu.password, mu.salt, mu.nickName, mu.headImgUrl,
         mu.phone, mu.status, mu.lastLoginTime, mu.createTime, mu.createUserId,
         mu.gmtTime, mu.gmtUserId
     </sql>
@@ -41,7 +41,7 @@
         <set>
             lastLoginTime = now()
         </set>
-        where tid = #{tid}
+        where id = #{id}
     </update>
     <select id="getUser" resultMap="UserResultMap">
         select
@@ -52,7 +52,7 @@
     <insert id="saveUser">
         insert into management_user
         (username, password, salt, nickName, headImgUrl, phone, status, createTime, createUserId)
-        values(#{username}, #{password}, #{salt}, #{nickname}, #{headImgUrl}, #{phone}, #{status}, now(), #{createUserId})
+        values(#{username}, #{password}, #{salt}, #{nickName}, #{headImgUrl}, #{phone}, #{status}, now(), #{createUserId})
     </insert>
     <update id="updateUser">
         update management_user
@@ -75,10 +75,10 @@
             gmtUserId = #{user.gmtUserId},
             gmtTime = now()
         </set>
-        where tid = #{user.tid}
+        where id = #{user.id}
     </update>
     <update id="changePassword">
-        update management_user set password = #{password}, gmtUserId = {gmtUserId}, gmtTime = now() where tid = #{tid}
+        update management_user set password = #{passwordEncoder}, gmtUserId = #{gmtUserId}, gmtTime = now() where id = #{id}
     </update>
     <select id="count" resultType="int">
         select count(1) from management_user as mu
@@ -96,7 +96,7 @@
         select
         <include refid="User_List"/>
         from management_user as mu
-        where tid = #{tid}
+        where id = #{id}
     </select>
     <delete id="deleteUserRole">
         delete from management_user_role where userId = #{userId}

@@ -65,10 +65,10 @@ public class ManagementDictController {
         return dict;
     }
 
-    @GetMapping("/{tid}")
-    @ApiOperation(value = "根据tid获取")
-    public Dict get(@PathVariable Long tid) {
-        return managementDictService.getByTid(tid);
+    @GetMapping("/{id}")
+    @ApiOperation(value = "根据id获取")
+    public Dict get(@PathVariable Long id) {
+        return managementDictService.getById(id);
     }
 
     @RequiresPermissions("dict:add")
@@ -97,10 +97,10 @@ public class ManagementDictController {
     }
 
     @RequiresPermissions("dict:del")
-    @DeleteMapping("/{tid}")
+    @DeleteMapping("/{id}")
     @ApiOperation(value = "删除")
-    public void delete(@PathVariable Long tid) {
-        managementDictService.delete(tid);
+    public void delete(@PathVariable Long id) {
+        managementDictService.delete(id);
     }
 
     @GetMapping(params = "type")

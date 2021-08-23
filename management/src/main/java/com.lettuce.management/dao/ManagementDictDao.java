@@ -34,7 +34,7 @@ public interface ManagementDictDao {
 
     void save(Dict dict);
 
-    Dict getByTid(Long tid);
+    Dict getById(Long id);
 
     void update(Dict dict);
 
@@ -42,7 +42,7 @@ public interface ManagementDictDao {
 
     int count(Map<String, Object> params);
 
-    void delete(Long tid);
+    void delete(Long id);
 
     List<Dict> listByType(String type);
 }
