@@ -34,9 +34,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 代码生成controller层
  *
  * @author Hosmos
- * @description 代码生成controller层
  * @date 2021年08月23日
  */
 @Api(value = "generate", tags = "代码生成")
@@ -46,6 +46,7 @@ public class ManagementGenerateController {
     private static final Logger logger = LoggerFactory.getLogger(ManagementLoginController.class);
     @Resource
     private ManagementGenerateService managementGenerateService;
+
     @ApiOperation("根据表名显示表信息")
     @GetMapping(params = {"tableName"})
     @RequiresPermissions("generate:edit")

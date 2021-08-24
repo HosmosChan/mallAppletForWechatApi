@@ -32,16 +32,17 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * WebMVC配置
  *
  * @author Hosmos
- * @description WebMVC配置
  * @date 2021年07月08日
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
     /**
+     * 跨域支持
+     *
      * @return WebMvcConfigurer
-     * @description 跨域支持
      * @author Hosmos
      * @date 2021-07-08
      */
@@ -56,8 +57,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     /**
+     * datatable分页解析
+     *
      * @return PageTableArgumentResolver
-     * @description datatable分页解析
      * @author Hosmos
      * @date 2021-07-08
      */
@@ -78,9 +80,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private String filesPath;
 
     /**
+     * 外部文件访问
+     *
      * @param registry
-     * @return void
-     * @description 外部文件访问
      * @author Hosmos
      * @date 2021-07-08
      */

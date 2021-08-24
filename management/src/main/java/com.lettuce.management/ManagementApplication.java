@@ -23,9 +23,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 创建运行application
  *
  * @author Hosmos
- * @description 创建运行application
  * @date 2021年07月08日
  */
 @SpringBootApplication

@@ -12,6 +12,30 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Code is far away from bug with the animal protected
+ * 　┏┓　　  ┏┓
+ * ┏┻┻━━━┻┻┓
+ * ┃　　　　　　　┃
+ * ┃　　　━　　　┃
+ * ┃　┳┛　┗┳　┃
+ * ┃　　　　　　　┃
+ * ┃　　　┻　　　┃
+ * ┃　　　　　　　┃
+ * ┗━┓　　　┏━┛
+ * 　　┃　　　┃神兽保佑
+ * 　　┃　　　┃代码无BUG！
+ * 　　┃　　　┗━━━┓
+ * 　　┃　　　　　　　┣┓
+ * 　　┃　　　　　　　┣┛
+ * 　　┗┳┓┏━┳┓┏┛
+ * 　　　┃┫┫　┃┫┫
+ * 　　　┗┻┛　┗┻┛
+ * Template工具类
+ *
+ * @author Hosmos
+ * @date 2021年07月08日
+ */
 public class TemplateUtil {
     private static final Logger log = LoggerFactory.getLogger("adminLogger");
 

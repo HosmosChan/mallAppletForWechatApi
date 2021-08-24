@@ -22,9 +22,8 @@ import com.lettuce.common.utils.PageResult;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
- *
+ * 搜索业务层
  * @author Hosmos
- * @description 搜索业务层
  * @date 2021年07月06日
  */
 public interface ProductsShownSearchService {

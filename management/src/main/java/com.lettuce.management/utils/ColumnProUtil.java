@@ -11,6 +11,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Code is far away from bug with the animal protected
+ * 　┏┓　　  ┏┓
+ * ┏┻┻━━━┻┻┓
+ * ┃　　　　　　　┃
+ * ┃　　　━　　　┃
+ * ┃　┳┛　┗┳　┃
+ * ┃　　　　　　　┃
+ * ┃　　　┻　　　┃
+ * ┃　　　　　　　┃
+ * ┗━┓　　　┏━┛
+ * 　　┃　　　┃神兽保佑
+ * 　　┃　　　┃代码无BUG！
+ * 　　┃　　　┗━━━┓
+ * 　　┃　　　　　　　┣┓
+ * 　　┃　　　　　　　┣┛
+ * 　　┗┳┓┏━┳┓┏┛
+ * 　　　┃┫┫　┃┫┫
+ * 　　　┗┻┛　┗┻┛
+ * 变量工具类
+ *
+ * @author Hosmos
+ * @date 2021年07月08日
+ */
 public class ColumnProUtil {
     private static String DEFAULT_ID = "BaseResultMap";
 
@@ -44,8 +68,8 @@ public class ColumnProUtil {
     /**
      * 将java类属性替换为表字段
      *
-     * @param request
-     * @param map
+     * @param request 搜索参数
+     * @param map     返回参数
      * @return String
      * @author Hosmos
      * @date 2021-07-08

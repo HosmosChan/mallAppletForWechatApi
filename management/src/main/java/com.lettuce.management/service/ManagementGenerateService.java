@@ -24,9 +24,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 代码生成业务层
  *
  * @author Hosmos
- * @description 代码生成业务层
  * @date 2021年08月23日
  */
 public interface ManagementGenerateService {

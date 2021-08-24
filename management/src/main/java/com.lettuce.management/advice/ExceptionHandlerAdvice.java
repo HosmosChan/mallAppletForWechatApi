@@ -34,9 +34,9 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * SpringMVC异常处理
  *
  * @author Hosmos
- * @description SpringMVC异常处理
  * @date 2021年07月08日
  */
 @RestControllerAdvice

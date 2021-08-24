@@ -37,9 +37,9 @@ import java.io.IOException;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * Restful方式登陆, 在参数中或者header里加参数login-token作为登陆凭证, 参数值是登陆成功后的返回值中获取
  *
  * @author Hosmos
- * @description Restful方式登陆, 在参数中或者header里加参数login-token作为登陆凭证, 参数值是登陆成功后的返回值中获取
  * @date 2021年07月08日
  */
 public class RestfulFilter extends UserFilter {
@@ -67,9 +67,10 @@ public class RestfulFilter extends UserFilter {
     }
 
     /**
-     * @param request
+     * 根据参数或者header获取login-token
+     *
+     * @param request 服务器参数
      * @return String
-     * @description 根据参数或者header获取login-token
      * @author Hosmos
      * @date 2021-07-08
      */

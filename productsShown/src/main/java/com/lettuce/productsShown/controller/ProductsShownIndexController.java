@@ -36,9 +36,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 首页controller层
  *
  * @author Hosmos
- * @description 首页controller层
  * @date 2021年06月25日
  */
 @Api(value = "index", tags = "首页接口")
@@ -52,9 +52,9 @@ public class ProductsShownIndexController {
     private ProductsShownGoodService productsShownGoodService;
 
     /**
+     * 获取轮播图数据
      * @param appId
      * @return Result<CarouselsForIndexVO>
-     * @description 获取轮播图数据
      * @author Hosmos
      * @date 2021/6/25
      */
@@ -66,9 +66,9 @@ public class ProductsShownIndexController {
     }
 
     /**
-     * @param appId
+     * 获取特价商品数据
+     * @param appId app id
      * @return Result<GoodForIndexVO>
-     * @description 获取特价商品数据
      * @author Hosmos
      * @date 2021/6/27
      */
@@ -80,9 +80,9 @@ public class ProductsShownIndexController {
     }
 
     /**
-     * @param appId
+     * 获取折扣商品数据
+     * @param appId app id
      * @return Result<GoodForIndexVO>
-     * @description 获取折扣商品数据
      * @author Hosmos
      * @date 2021/7/06
      */
@@ -94,9 +94,9 @@ public class ProductsShownIndexController {
     }
 
     /**
-     * @param appId
+     * 获取热卖商品数据
+     * @param appId app id
      * @return Result<GoodForIndexVO>
-     * @description 获取热卖商品数据
      * @author Hosmos
      * @date 2021-07-05
      */
@@ -108,9 +108,9 @@ public class ProductsShownIndexController {
     }
 
     /**
-     * @param appId
+     * 获取最新商品数据
+     * @param appId app id
      * @return Result<GoodForIndexVO>
-     * @description 获取最新商品数据
      * @author Hosmos
      * @date 2021-07-05
      */

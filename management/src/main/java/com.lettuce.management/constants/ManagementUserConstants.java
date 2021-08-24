@@ -19,9 +19,9 @@ package com.lettuce.management.constants;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 用户相关常量
  *
  * @author Hosmos
- * @description 用户相关常量
  * @date 2021年07月08日
  */
 public interface ManagementUserConstants {

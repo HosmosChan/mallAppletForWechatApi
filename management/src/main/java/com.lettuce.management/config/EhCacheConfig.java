@@ -1,7 +1,9 @@
 package com.lettuce.management.config;
+
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 /**
  * Code is far away from bug with the animal protected
  * 　┏┓　　  ┏┓
@@ -21,9 +23,9 @@ import org.springframework.context.annotation.Configuration;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * Ehcache配置
  *
  * @author Hosmos
- * @description Ehcache配置
  * @date 2021年07月08日
  */
 @Configuration

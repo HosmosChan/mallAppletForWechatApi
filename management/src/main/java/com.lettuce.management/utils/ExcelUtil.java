@@ -27,9 +27,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * excel工具类
  *
  * @author Hosmos
- * @description excel工具类
  * @date 2021年07月08日
  */
 public class ExcelUtil {
@@ -75,12 +75,12 @@ public class ExcelUtil {
     }
 
     /**
-     * @param fileName
-     * @param headers
-     * @param datas
-     * @param response
-     * @return void
-     * @description 导出excel
+     * 导出excel
+     *
+     * @param fileName 文件名
+     * @param headers  列头
+     * @param datas    数据
+     * @param response 请求信息
      * @author Hosmos
      * @date 2021-07-08
      */
@@ -121,7 +121,6 @@ public class ExcelUtil {
      * @param headers 列头
      * @param datas   数据
      * @return Workbook
-     * @description
      * @author Hosmos
      * @date 2021-07-08
      */

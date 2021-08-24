@@ -37,9 +37,9 @@ import java.util.Map;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * Shiro配置
  *
  * @author Hosmos
- * @description Shiro配置
  * @date 2021年07月08日
  */
 @Configuration
@@ -57,8 +57,6 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/login/**", "anon");
         filterChainDefinitionMap.put("/file/*", "anon");
         filterChainDefinitionMap.put("/swagger-resources/**", "anon");
-        filterChainDefinitionMap.put("/mall/**", "anon");
-        filterChainDefinitionMap.put("/productsShown/**", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/**", "authc");
         //未登录状态页面开启重定向url
@@ -91,8 +89,9 @@ public class ShiroConfig {
     }
 
     /**
+     * 凭证匹配器
+     *
      * @return HashedCredentialsMatcher
-     * @description 凭证匹配器
      * @author Hosmos
      * @date 2021-07-08
      */
@@ -106,8 +105,9 @@ public class ShiroConfig {
     }
 
     /**
+     * Shiro生命周期处理器
+     *
      * @return LifecycleBeanPostProcessor
-     * @description Shiro生命周期处理器
      * @author Hosmos
      * @date 2021-07-08
      */
@@ -117,8 +117,9 @@ public class ShiroConfig {
     }
 
     /**
+     * 开启Shiro的注解(如 @ RequiresRoles, @ RequiresPermissions), 需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
+     *
      * @return DefaultAdvisorAutoProxyCreator
-     * @description 开启Shiro的注解(如 @ RequiresRoles, @ RequiresPermissions), 需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
      * @author Hosmos
      * @date 2021-07-08
      */

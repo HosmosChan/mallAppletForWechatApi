@@ -42,9 +42,9 @@ import java.util.stream.Collectors;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 用户Shiro权限领域配置
  *
  * @author Hosmos
- * @description 用户Shiro权限领域配置
  * @date 2021年07月08日
  */
 public class MyShiroRealm extends AuthorizingRealm {

@@ -35,9 +35,9 @@ import javax.servlet.ServletResponse;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 退出方式: web退出和restful方式退出, 后者会删除缓存的token
  *
  * @author Hosmos
- * @description 退出方式: web退出和restful方式退出, 后者会删除缓存的token
  * @date 2021年07月08日
  */
 public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter {

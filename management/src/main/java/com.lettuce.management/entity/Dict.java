@@ -19,9 +19,9 @@ package com.lettuce.management.entity;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 字典实体类
  *
  * @author Hosmos
- * @description 字典实体类
  * @date 2021年07月13日
  */
 public class Dict extends BaseEntity<Long> {

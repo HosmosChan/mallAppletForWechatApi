@@ -21,9 +21,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 权限实体类
  *
  * @author Hosmos
- * @description 权限实体类
  * @date 2021年07月13日
  */
 public class Permission extends BaseEntity<Long> {

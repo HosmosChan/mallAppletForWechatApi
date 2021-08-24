@@ -31,9 +31,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * swagger文档
  *
  * @author Hosmos
- * @description swagger文档
  * @date 2021年07月08日
  */
 @Configuration

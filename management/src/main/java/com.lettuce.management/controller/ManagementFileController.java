@@ -35,9 +35,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 文件controller层
  *
  * @author Hosmos
- * @description 文件controller层
  * @date 2021年07月13日
  */
 @Api(value = "file", tags = "文件接口")
@@ -68,8 +68,8 @@ public class ManagementFileController {
     /**
      * layui富文本文件自定义上传
      *
-     * @param file
-     * @param domain
+     * @param file   文件
+     * @param domain 主域
      * @return LayuiFile
      * @throws IOException
      * @author Hosmos
@@ -122,8 +122,8 @@ public class ManagementFileController {
     /**
      * 文件删除
      *
-     * @param id file id
-     * @param appId  app id
+     * @param id    file id
+     * @param appId app id
      * @author Hosmos
      * @date 2021-07-13
      */

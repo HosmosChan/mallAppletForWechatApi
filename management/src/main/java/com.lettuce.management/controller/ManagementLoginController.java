@@ -38,9 +38,9 @@ import javax.annotation.Resource;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 登陆controller层
  *
  * @author Hosmos
- * @description 登陆controller层
  * @date 2021年07月13日
  */
 @Api(value = "login", tags = "登录接口")

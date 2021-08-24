@@ -19,9 +19,9 @@ package com.lettuce.management.entity;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 日志实体类
  *
  * @author Hosmos
- * @description 日志实体类
  * @date 2021年07月13日
  */
 public class SysLogs extends BaseEntity<Long> {

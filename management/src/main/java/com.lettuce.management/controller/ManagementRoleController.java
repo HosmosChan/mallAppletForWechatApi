@@ -36,9 +36,9 @@ import java.util.List;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 角色controller层
  *
  * @author Hosmos
- * @description 角色controller层
  * @date 2021年07月14日
  */
 @Api(value = "role", tags = "角色接口")
@@ -50,8 +50,9 @@ public class ManagementRoleController {
     private ManagementRoleService managementRoleService;
 
     /**
-     * @param roleDto
-     * @description 保存角色
+     * 保存角色
+     *
+     * @param roleDto 角色dto
      * @author Hosmos
      * @date 2021-07-14
      */
@@ -64,9 +65,10 @@ public class ManagementRoleController {
     }
 
     /**
-     * @param request
+     * 角色列表
+     *
+     * @param request 返回参数
      * @return PageTableResponse
-     * @description 角色列表
      * @author Hosmos
      * @date 2021-07-14
      */
@@ -82,16 +84,16 @@ public class ManagementRoleController {
         }, new PageTableHandler.ListHandler() {
             @Override
             public List<Role> list(PageTableRequest request) {
-                List<Role> list = managementRoleService.list(request.getParams(), request.getOffset(), request.getLimit());
-                return list;
+                return managementRoleService.list(request.getParams(), request.getOffset(), request.getLimit());
             }
         }).handle(request);
     }
 
     /**
+     * 根据角色id获取角色
+     *
      * @param id role id
      * @return Role
-     * @description 根据角色id获取角色
      * @author Hosmos
      * @date 2021-07-14
      */
@@ -103,8 +105,9 @@ public class ManagementRoleController {
     }
 
     /**
+     * 所有角色
+     *
      * @return List<Role>
-     * @description 所有角色
      * @author Hosmos
      * @date 2021-07-14
      */
@@ -116,9 +119,10 @@ public class ManagementRoleController {
     }
 
     /**
+     * 根据用户id获取拥有的角色
+     *
      * @param userId user id
      * @return List<Role>
-     * @description 根据用户id获取拥有的角色
      * @author Hosmos
      * @date 2021-07-14
      */
@@ -130,8 +134,9 @@ public class ManagementRoleController {
     }
 
     /**
+     * 删除角色
+     *
      * @param id role id
-     * @description 删除角色
      * @author Hosmos
      * @date 2021-07-14
      */

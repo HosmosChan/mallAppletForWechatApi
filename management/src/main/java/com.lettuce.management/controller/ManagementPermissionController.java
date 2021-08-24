@@ -43,9 +43,9 @@ import java.util.stream.Collectors;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 权限controller层
  *
  * @author Hosmos
- * @description 权限controller层
  * @date 2021年07月13日
  */
 @Api(value = "permission", tags = "权限接口")
@@ -243,7 +243,7 @@ public class ManagementPermissionController {
     /**
      * 设置权限列表
      *
-     * @param id   permission id
+     * @param id             permission id
      * @param permissionsAll 欲添加permission列表
      * @param list           原有permission列表
      * @author Hosmos
@@ -263,7 +263,7 @@ public class ManagementPermissionController {
     /**
      * 设置菜单树
      *
-     * @param id   permission id
+     * @param id             permission id
      * @param permissionsAll 所有permission列表
      * @param array          用JSONArray显示permission
      * @author Hosmos

@@ -13,6 +13,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
 /**
  * Code is far away from bug with the animal protected
  * 　┏┓　　  ┏┓
@@ -32,9 +33,9 @@ import org.springframework.util.StringUtils;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 统一日志处理
  *
  * @author Hosmos
- * @description 统一日志处理
  * @date 2021年07月08日
  */
 @Aspect

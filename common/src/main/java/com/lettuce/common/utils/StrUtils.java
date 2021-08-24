@@ -30,9 +30,10 @@ import java.util.List;
  */
 public class StrUtils {
     /**
-     * @param str
+     * 字符串转为驼峰
+     *
+     * @param str 字符串
      * @return String
-     * @description 字符串转为驼峰
      * @author Hosmos
      * @date 2021/6/22
      */
