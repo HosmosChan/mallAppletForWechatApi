@@ -30,7 +30,7 @@ public class GoodInfo extends BaseEntity<Long> {
     private Byte infoType;
     private String info;
     private Integer infoRank;
-    private Long creatUserId;
+    private Long createUserId;
     private Long gmtUserId;
 
     public Long getGoodId() {
@@ -65,12 +65,12 @@ public class GoodInfo extends BaseEntity<Long> {
         this.infoRank = infoRank;
     }
 
-    public Long getCreatUserId() {
-        return creatUserId;
+    public Long getCreateUserId() {
+        return createUserId;
     }
 
-    public void setCreatUserId(Long creatUserId) {
-        this.creatUserId = creatUserId;
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
     }
 
     public Long getGmtUserId() {

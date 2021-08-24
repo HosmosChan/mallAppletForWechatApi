@@ -28,7 +28,7 @@ public class GoodDeliverWay extends BaseEntity<Long> {
     private static final long serialVersionUID = -265910838120062021L;
     private Long goodId;
     private String deliverWay;
-    private Long creatUserId;
+    private Long createUserId;
     private Long gmtUserId;
 
     public Long getGoodId() {
@@ -47,12 +47,12 @@ public class GoodDeliverWay extends BaseEntity<Long> {
         this.deliverWay = deliverWay;
     }
 
-    public Long getCreatUserId() {
-        return creatUserId;
+    public Long getCreateUserId() {
+        return createUserId;
     }
 
-    public void setCreatUserId(Long creatUserId) {
-        this.creatUserId = creatUserId;
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
     }
 
     public Long getGmtUserId() {

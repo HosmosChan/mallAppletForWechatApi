@@ -1,4 +1,4 @@
-package com.lettuce.productsShown.entity;
+package com.lettuce.management.entity;
 
 import java.math.BigDecimal;
 
@@ -21,13 +21,13 @@ import java.math.BigDecimal;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品折扣信息实体类
  *
  * @author Hosmos
- * @description 商品折扣信息实体类
  * @date 2021年07月06日
  */
 public class GoodDiscount extends BaseEntity<Long> {
-    private static final long serialVersionUID = 861083417512823378L;
+    private static final long serialVersionUID = 5955319871134387377L;
     private Long goodId;
     private Double discountOff;
     private BigDecimal fullPrice;

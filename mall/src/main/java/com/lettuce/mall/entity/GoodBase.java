@@ -31,10 +31,12 @@ import java.util.Date;
  */
 public class GoodBase extends BaseEntity<Long> {
     private static final long serialVersionUID = 1494147529004393101L;
+    private String appId;
     private Long goodId;
     private Long categoryId;
     private String goodName;
-    private BigDecimal goodPrice;
+    private BigDecimal goodMaxPrice;
+    private BigDecimal goodMinPrice;
     private String goodUrl;
     private String goodCoverImg;
     private Byte isSpecialPrice;
@@ -47,8 +49,16 @@ public class GoodBase extends BaseEntity<Long> {
     private Byte sellStatus;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date sellTime;
-    private Long creatUserId;
+    private Long createUserId;
     private Long gmtUserId;
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     public Long getGoodId() {
         return goodId;
@@ -74,12 +84,20 @@ public class GoodBase extends BaseEntity<Long> {
         this.goodName = goodName;
     }
 
-    public BigDecimal getGoodPrice() {
-        return goodPrice;
+    public BigDecimal getGoodMaxPrice() {
+        return goodMaxPrice;
     }
 
-    public void setGoodPrice(BigDecimal goodPrice) {
-        this.goodPrice = goodPrice;
+    public void setGoodMaxPrice(BigDecimal goodMaxPrice) {
+        this.goodMaxPrice = goodMaxPrice;
+    }
+
+    public BigDecimal getGoodMinPrice() {
+        return goodMinPrice;
+    }
+
+    public void setGoodMinPrice(BigDecimal goodMinPrice) {
+        this.goodMinPrice = goodMinPrice;
     }
 
     public String getGoodUrl() {
@@ -170,12 +188,12 @@ public class GoodBase extends BaseEntity<Long> {
         this.sellTime = sellTime;
     }
 
-    public Long getCreatUserId() {
-        return creatUserId;
+    public Long getCreateUserId() {
+        return createUserId;
     }
 
-    public void setCreatUserId(Long creatUserId) {
-        this.creatUserId = creatUserId;
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
     }
 
     public Long getGmtUserId() {

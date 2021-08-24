@@ -115,8 +115,8 @@ public class ManagementUserServiceImpl implements ManagementUserService {
         if (roleIds != null) {
             managementUserDao.deleteUserRole(userId);
             if (!CollectionUtils.isEmpty(roleIds)) {
-                Long creatUserId = UserUtil.getCurrentUser().getId();
-                managementUserDao.saveUserRoles(userId, roleIds, creatUserId);
+                Long createUserId = UserUtil.getCurrentUser().getId();
+                managementUserDao.saveUserRoles(userId, roleIds, createUserId);
             }
         }
     }

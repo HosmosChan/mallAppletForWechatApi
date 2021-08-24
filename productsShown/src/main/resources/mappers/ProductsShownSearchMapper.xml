@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lettuce.productsShown.dao.ProductsShownSearchDao">
     <resultMap id="GoodBaseResultMap" type="com.lettuce.productsShown.entity.GoodBase">
-        <id column="tid" jdbcType="INTEGER" property="tid"/>
+        <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="appId" jdbcType="BIGINT" property="appId"/>
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
         <result column="categoryId" jdbcType="BIGINT" property="categoryId"/>
@@ -27,7 +27,7 @@
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
     <sql id="Good_Base_List">
-        mgb.tid, mgb.appId, mgb.goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl, goodCoverImg,
+        mgb.id, mgb.appId, mgb.goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl, goodCoverImg,
         isSpecialPrice, specialPrice, isDiscount, paymentNo, stock, markNo,
         commentNo, sellStatus, sellTime, mgb.createTime, mgb.createUserId,
         mgb.gmtTime, mgb.gmtUserId

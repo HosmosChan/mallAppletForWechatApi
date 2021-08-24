@@ -1,6 +1,4 @@
-package com.lettuce.productsShown.entity;
-
-import java.math.BigDecimal;
+package com.lettuce.management.entity;
 
 /**
  * Code is far away from bug with the animal protected
@@ -21,16 +19,15 @@ import java.math.BigDecimal;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品配送方式实体类
  *
  * @author Hosmos
- * @description 商品折扣信息实体类
  * @date 2021年07月06日
  */
-public class GoodDiscount extends BaseEntity<Long> {
-    private static final long serialVersionUID = 861083417512823378L;
+public class GoodDeliverWay extends BaseEntity<Long> {
+    private static final long serialVersionUID = -1808371709749702446L;
     private Long goodId;
-    private Double discountOff;
-    private BigDecimal fullPrice;
+    private String deliverWay;
     private Long createUserId;
     private Long gmtUserId;
 
@@ -42,20 +39,12 @@ public class GoodDiscount extends BaseEntity<Long> {
         this.goodId = goodId;
     }
 
-    public Double getDiscountOff() {
-        return discountOff;
+    public String getDeliverWay() {
+        return deliverWay;
     }
 
-    public void setDiscountOff(Double discountOff) {
-        this.discountOff = discountOff;
-    }
-
-    public BigDecimal getFullPrice() {
-        return fullPrice;
-    }
-
-    public void setFullPrice(BigDecimal fullPrice) {
-        this.fullPrice = fullPrice;
+    public void setDeliverWay(String deliverWay) {
+        this.deliverWay = deliverWay;
     }
 
     public Long getCreateUserId() {

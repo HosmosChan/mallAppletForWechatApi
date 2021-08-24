@@ -1,6 +1,4 @@
-package com.lettuce.productsShown.entity;
-
-import java.math.BigDecimal;
+package com.lettuce.management.entity;
 
 /**
  * Code is far away from bug with the animal protected
@@ -21,16 +19,17 @@ import java.math.BigDecimal;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品下拉详细信息实体类
  *
  * @author Hosmos
- * @description 商品折扣信息实体类
  * @date 2021年07月06日
  */
-public class GoodDiscount extends BaseEntity<Long> {
-    private static final long serialVersionUID = 861083417512823378L;
+public class GoodInfo extends BaseEntity<Long> {
+    private static final long serialVersionUID = -8946506737843746740L;
     private Long goodId;
-    private Double discountOff;
-    private BigDecimal fullPrice;
+    private Byte infoType;
+    private String info;
+    private Integer infoRank;
     private Long createUserId;
     private Long gmtUserId;
 
@@ -42,20 +41,28 @@ public class GoodDiscount extends BaseEntity<Long> {
         this.goodId = goodId;
     }
 
-    public Double getDiscountOff() {
-        return discountOff;
+    public Byte getInfoType() {
+        return infoType;
     }
 
-    public void setDiscountOff(Double discountOff) {
-        this.discountOff = discountOff;
+    public void setInfoType(Byte infoType) {
+        this.infoType = infoType;
     }
 
-    public BigDecimal getFullPrice() {
-        return fullPrice;
+    public String getInfo() {
+        return info;
     }
 
-    public void setFullPrice(BigDecimal fullPrice) {
-        this.fullPrice = fullPrice;
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public Integer getInfoRank() {
+        return infoRank;
+    }
+
+    public void setInfoRank(Integer infoRank) {
+        this.infoRank = infoRank;
     }
 
     public Long getCreateUserId() {

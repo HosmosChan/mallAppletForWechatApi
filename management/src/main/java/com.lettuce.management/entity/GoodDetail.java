@@ -1,6 +1,4 @@
-package com.lettuce.productsShown.entity;
-
-import java.math.BigDecimal;
+package com.lettuce.management.entity;
 
 /**
  * Code is far away from bug with the animal protected
@@ -21,16 +19,17 @@ import java.math.BigDecimal;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品详细信息实体类
  *
  * @author Hosmos
- * @description 商品折扣信息实体类
- * @date 2021年07月06日
+ * @date 2021年07月05日
  */
-public class GoodDiscount extends BaseEntity<Long> {
-    private static final long serialVersionUID = 861083417512823378L;
+public class GoodDetail extends BaseEntity<Long> {
+    private static final long serialVersionUID = -6457698499973500328L;
     private Long goodId;
-    private Double discountOff;
-    private BigDecimal fullPrice;
+    private String goodDescribe;
+    private Double goodSize;
+    private Long companyId;
     private Long createUserId;
     private Long gmtUserId;
 
@@ -42,20 +41,28 @@ public class GoodDiscount extends BaseEntity<Long> {
         this.goodId = goodId;
     }
 
-    public Double getDiscountOff() {
-        return discountOff;
+    public String getGoodDescribe() {
+        return goodDescribe;
     }
 
-    public void setDiscountOff(Double discountOff) {
-        this.discountOff = discountOff;
+    public void setGoodDescribe(String goodDescribe) {
+        this.goodDescribe = goodDescribe;
     }
 
-    public BigDecimal getFullPrice() {
-        return fullPrice;
+    public Double getGoodSize() {
+        return goodSize;
     }
 
-    public void setFullPrice(BigDecimal fullPrice) {
-        this.fullPrice = fullPrice;
+    public void setGoodSize(Double goodSize) {
+        this.goodSize = goodSize;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public Long getCreateUserId() {

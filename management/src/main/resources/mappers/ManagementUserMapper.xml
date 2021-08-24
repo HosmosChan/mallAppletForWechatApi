@@ -104,7 +104,7 @@
     <insert id="saveUserRoles">
         insert into management_user_role (roleId, userId, createTime, createUserId) values
         <foreach collection="roleIds" item="roleId" separator=",">
-            (#{roleId}, #{userId}, now(), #{creatUserId})
+            (#{roleId}, #{userId}, now(), #{createUserId})
         </foreach>
     </insert>
 </mapper>

@@ -31,7 +31,7 @@ public class GoodDiscount extends BaseEntity<Long> {
     private Long goodId;
     private Double discountOff;
     private BigDecimal fullPrice;
-    private Long creatUserId;
+    private Long createUserId;
     private Long gmtUserId;
 
     public Long getGoodId() {
@@ -58,12 +58,12 @@ public class GoodDiscount extends BaseEntity<Long> {
         this.fullPrice = fullPrice;
     }
 
-    public Long getCreatUserId() {
-        return creatUserId;
+    public Long getCreateUserId() {
+        return createUserId;
     }
 
-    public void setCreatUserId(Long creatUserId) {
-        this.creatUserId = creatUserId;
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
     }
 
     public Long getGmtUserId() {

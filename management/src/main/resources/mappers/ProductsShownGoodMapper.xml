@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lettuce.productsShown.dao.ProductsShownGoodDao">
-    <resultMap id="GoodBaseResultMap" type="com.lettuce.productsShown.entity.GoodBase">
+<mapper namespace="com.lettuce.management.dao.ProductsShownGoodDao">
+    <resultMap id="GoodBaseResultMap" type="com.lettuce.management.dto.GoodBaseDto">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="appId" jdbcType="BIGINT" property="appId"/>
+        <result column="appId" jdbcType="VARCHAR" property="appId"/>
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
         <result column="categoryId" jdbcType="BIGINT" property="categoryId"/>
+        <result column="categoryName" jdbcType="VARCHAR" property="categoryName"/>
         <result column="goodName" jdbcType="VARCHAR" property="goodName"/>
         <result column="goodMaxPrice" jdbcType="DECIMAL" property="goodMaxPrice"/>
         <result column="goodMinPrice" jdbcType="DECIMAL" property="goodMinPrice"/>
+        <result column="goodPrice" jdbcType="VARCHAR" property="goodPrice"/>
         <result column="goodUrl" jdbcType="VARCHAR" property="goodUrl"/>
         <result column="goodCoverImg" jdbcType="VARCHAR" property="goodCoverImg"/>
         <result column="isSpecialPrice" jdbcType="TINYINT" property="isSpecialPrice"/>
@@ -26,7 +28,7 @@
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
-    <resultMap id="GoodDetailResultMap" type="com.lettuce.productsShown.entity.GoodDetail">
+    <resultMap id="GoodDetailResultMap" type="com.lettuce.management.entity.GoodDetail">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="appId" jdbcType="BIGINT" property="appId"/>
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
@@ -38,7 +40,7 @@
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
-    <resultMap id="GoodDeliverWayResultMap" type="com.lettuce.productsShown.entity.GoodDeliverWay">
+    <resultMap id="GoodDeliverWayResultMap" type="com.lettuce.management.entity.GoodDeliverWay">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="appId" jdbcType="BIGINT" property="appId"/>
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
@@ -48,7 +50,7 @@
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
-    <resultMap id="GoodDiscountResultMap" type="com.lettuce.productsShown.entity.GoodDiscount">
+    <resultMap id="GoodDiscountResultMap" type="com.lettuce.management.entity.GoodDiscount">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="appId" jdbcType="BIGINT" property="appId"/>
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
@@ -59,7 +61,7 @@
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
-    <resultMap id="GoodInfoResultMap" type="com.lettuce.productsShown.entity.GoodInfo">
+    <resultMap id="GoodInfoResultMap" type="com.lettuce.management.entity.GoodInfo">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="appId" jdbcType="BIGINT" property="appId"/>
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
@@ -72,127 +74,60 @@
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
     <sql id="Good_Base_List">
-        mgb.id, mgb.appId, mgb.goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl, goodCoverImg,
-        isSpecialPrice, specialPrice, isDiscount, paymentNo, stock, markNo,
-        commentNo, sellStatus, sellTime, mgb.createTime, mgb.createUserId,
-        mgb.gmtTime, mgb.gmtUserId
+        psgb.id, psgb.appId, psgb.goodId, psgb.categoryId, goodName, goodMaxPrice,
+        goodMinPrice, goodUrl, goodCoverImg, isSpecialPrice, specialPrice,
+        isDiscount, paymentNo, stock, markNo, commentNo, sellStatus, sellTime,
+        psgb.createTime, psgb.createUserId, psgb.gmtTime, psgb.gmtUserId
     </sql>
     <sql id="Good_Detail_List">
-        mgd.id, mgd.appId, mgd.goodId, goodDescribe, goodSize, companyId, mgd.createTime,
-        mgd.createUserId, mgd.gmtTime, mgd.gmtUserId
+        psgd.id, psgd.appId, psgd.goodId, goodDescribe, goodSize, companyId, psgd.createTime,
+        psgd.createUserId, psgd.gmtTime, psgd.gmtUserId
     </sql>
     <sql id="Good_Deliver_Way_List">
-        mgdw.id, mgdw.appId, mgdw.goodId, deliverWay, mgdw.createTime, mgdw.createUserId,
-        mgdw.gmtTime, mgdw.gmtUserId
+        psgdw.id, psgdw.appId, psgdw.goodId, deliverWay, psgdw.createTime, psgdw.createUserId,
+        psgdw.gmtTime, psgdw.gmtUserId
     </sql>
     <sql id="Good_Discount_List">
-        mgd.id, mgd.appId, mgd.goodId, discountOff, fullPrice, mgd.createUserId,
-        mgd.createTime, mgd.gmtUserId, mgd.gmtTime
+        psgd.id, psgd.appId, psgd.goodId, discountOff, fullPrice, psgd.createUserId,
+        psgd.createTime, psgd.gmtUserId, psgd.gmtTime
     </sql>
     <sql id="Good_Info_List">
-        mgi.id, mgi.appId, mgi.goodId, infoType, info, infoRank, mgi.createUserId,
-        mgi.createTime, mgi.gmtUserId, mgi.gmtTime
+        psgi.id, psgi.appId, psgi.goodId, infoType, info, infoRank, psgi.createUserId,
+        psgi.createTime, psgi.gmtUserId, psgi.gmtTime
     </sql>
-    <select id="getSpecialPriceGoodBaseInfo" resultMap="GoodBaseResultMap">
+    <sql id="GoodBaseWhere">
+        <where>
+            <if test="params != null and params != ''">
+                <if test="params.appId != null and params.appId != ''">
+                    and psgb.appId = #{params.appId}
+                </if>
+                <if test="params.goodId != null and params.goodId != ''">
+                    and psgb.goodId = #{params.goodId}
+                </if>
+                <if test="params.categoryName != null and params.categoryName != ''">
+                    and psc.categoryName like CONCAT('%',#{params.categoryName},'%')
+                </if>
+                <if test="params.goodName != null and params.goodName != ''">
+                    and psgb.goodName like CONCAT('%',#{params.goodName},'%')
+                </if>
+                <if test="params.sellStatus != null and params.sellStatus != ''">
+                    and psgb.sellStatus = #{params.sellStatus}
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="list" resultMap="GoodBaseResultMap">
         select
-        <include refid="Good_Base_List"/>
-        from products_shown_good_base as mgb
-        where isSpecialPrice = 1
-        and sellStatus = 1
-        <if test="appId!=null">
-            and mgb.appId = #{appId}
-        </if>
-        <if test="number!=null">
-            limit #{number}
-        </if>
+        <include refid="Good_Base_List"/>, psc.categoryName
+        from products_shown_good_base as psgb
+        left join products_shown_category as psc on psgb.categoryId = psc.categoryId
+        <include refid="GoodBaseWhere"/>
+        ${params.orderBy}
+        limit #{offset}, #{limit}
     </select>
-    <select id="getDiscountGoodBaseInfo" resultMap="GoodBaseResultMap, GoodDiscountResultMap">
-        select
-        <include refid="Good_Base_List"/>,
-        <include refid="Good_Discount_List"/>
-        from products_shown_good_base as mgb
-        right join products_shown_good_discount as mgd
-        on mgb.goodId = mgd.goodId
-        where isDiscount = 1
-        and sellStatus = 1
-        <if test="appId!=null">
-            and mgb.appId = #{appId}
-        </if>
-        <if test="number!=null">
-            limit #{number}
-        </if>
-    </select>
-    <select id="getHotGoodBaseInfo" resultMap="GoodBaseResultMap">
-        select
-        <include refid="Good_Base_List"/>
-        from products_shown_good_base as mgb
-        where sellStatus = 1
-        <if test="appId!=null">
-            and mgb.appId = #{appId}
-        </if>
-        order by paymentNo desc
-        <if test="number!=null">
-            limit #{number}
-        </if>
-    </select>
-    <select id="getNewGoodBaseInfo" resultMap="GoodBaseResultMap">
-        select
-        <include refid="Good_Base_List"/>
-        from products_shown_good_base as mgb
-        where sellStatus = 1
-        <if test="appId!=null">
-            and mgb.appId = #{appId}
-        </if>
-        order by sellTime desc
-        <if test="number!=null">
-            limit #{number}
-        </if>
-    </select>
-    <select id="getGoodBaseInfo" resultMap="GoodBaseResultMap">
-        select
-        <include refid="Good_Base_List"/>
-        from products_shown_good_base as mgb
-        where sellStatus = 1
-        <if test="appId!=null">
-            and mgb.appId = #{appId}
-        </if>
-        and mgb.goodId = #{goodId}
-    </select>
-    <select id="getGoodDetailInfo" resultMap="GoodDetailResultMap">
-        select
-        <include refid="Good_Detail_List"/>
-        from products_shown_good_detail as mgd
-        where mgd.goodId = #{goodId}
-        <if test="appId!=null">
-            and mgd.appId = #{appId}
-        </if>
-    </select>
-    <select id="getGoodDeliverWay" resultMap="GoodDeliverWayResultMap">
-        select
-        <include refid="Good_Deliver_Way_List"/>
-        from products_shown_good_deliver_way as mgdw
-        where mgdw.goodId = #{goodId}
-        <if test="appId!=null">
-            and mgdw.appId = #{appId}
-        </if>
-    </select>
-    <select id="getGoodDiscount" resultMap="GoodDiscountResultMap">
-        select
-        <include refid="Good_Discount_List"/>
-        from products_shown_good_Discount as mgdi
-        where mgdi.goodId = #{goodId}
-        <if test="appId!=null">
-            and mgdi.appId = #{appId}
-        </if>
-    </select>
-    <select id="getGoodInfoList" resultMap="GoodInfoResultMap">
-        select
-        <include refid="Good_Info_List"/>
-        from products_shown_good_info as mgi
-        where mgi.goodId = #{goodId}
-        <if test="appId!=null">
-            and mgi.appId = #{appId}
-        </if>
-        order by infoRank asc
+    <select id="count" resultType="int">
+        select count(1) from products_shown_good_base as psgb
+        left join products_shown_category as psc on psgb.categoryId = psc.categoryId
+        <include refid="GoodBaseWhere"/>
     </select>
 </mapper>

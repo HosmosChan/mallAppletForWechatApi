@@ -30,7 +30,7 @@ public class GoodDetail extends BaseEntity<Long> {
     private String goodDescribe;
     private Double goodSize;
     private Long companyId;
-    private Long creatUserId;
+    private Long createUserId;
     private Long gmtUserId;
 
     public Long getGoodId() {
@@ -65,12 +65,12 @@ public class GoodDetail extends BaseEntity<Long> {
         this.companyId = companyId;
     }
 
-    public Long getCreatUserId() {
-        return creatUserId;
+    public Long getCreateUserId() {
+        return createUserId;
     }
 
-    public void setCreatUserId(Long creatUserId) {
-        this.creatUserId = creatUserId;
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
     }
 
     public Long getGmtUserId() {

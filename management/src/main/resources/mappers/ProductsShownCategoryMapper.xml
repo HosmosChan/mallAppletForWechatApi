@@ -1,0 +1,49 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lettuce.management.dao.ProductsShownCategoryDao">
+    <resultMap id="CategoryResultMap" type="com.lettuce.management.entity.Category">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="appId" jdbcType="VARCHAR" property="appId"/>
+        <result column="categoryId" jdbcType="BIGINT" property="categoryId"/>
+        <result column="categoryName" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
+        <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
+        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
+    </resultMap>
+    <sql id="Category_List">
+        psc.id, psc.appId, psc.categoryId, categoryName, psc.createUserId,
+        psc.createTime, psc.gmtUserId, psc.gmtTime
+    </sql>
+    <sql id="where">
+        <where>
+            <if test="params != null and params != ''">
+                <if test="params.appId != null and params.appId != ''">
+                    and psc.appId = #{params.appId}
+                </if>
+                <if test="params.categoryId != null and params.categoryId != ''">
+                    and psc.categoryId = #{params.categoryId}
+                </if>
+                <if test="params.categoryName != null and params.categoryName != ''">
+                    and psc.categoryName like CONCAT('%',#{params.categoryName},'%')
+                </if>
+            </if>
+        </where>
+    </sql>
+    <select id="listAll" resultMap="CategoryResultMap">
+        select
+        <include refid="Category_List"/>
+        from products_shown_category as psc
+    </select>
+    <select id="list" resultMap="CategoryResultMap">
+        select
+        <include refid="Category_List"/>
+        from products_shown_category as psc
+        <include refid="where"/>
+        ${params.orderBy}
+        limit #{offset}, #{limit}
+    </select>
+    <select id="count" resultType="int">
+        select count(1) from products_shown_category
+        <include refid="where"/>
+    </select>
+</mapper>

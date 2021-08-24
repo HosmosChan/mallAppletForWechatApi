@@ -126,9 +126,9 @@ public interface ManagementUserDao {
      *
      * @param userId      用户 id
      * @param roleIds     角色 id 列表
-     * @param creatUserId 创建用户 id
+     * @param createUserId 创建用户 id
      * @author Hosmos
      * @date 2021-08-24
      */
-    void saveUserRoles(Long userId, List<Long> roleIds, Long creatUserId);
+    void saveUserRoles(Long userId, List<Long> roleIds, Long createUserId);
 }

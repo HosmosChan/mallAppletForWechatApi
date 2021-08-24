@@ -1,4 +1,4 @@
-package com.lettuce.productsShown.entity;
+package com.lettuce.management.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -24,13 +24,14 @@ import java.util.Date;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 商品基础实体类
  *
  * @author Hosmos
- * @description 商品基础实体类
  * @date 2021年06月28日
  */
 public class GoodBase extends BaseEntity<Long> {
-    private static final long serialVersionUID = 1494147529004393101L;
+    private static final long serialVersionUID = -8602792486800000389L;
+    private String appId;
     private Long goodId;
     private Long categoryId;
     private String goodName;
@@ -50,6 +51,14 @@ public class GoodBase extends BaseEntity<Long> {
     private Date sellTime;
     private Long createUserId;
     private Long gmtUserId;
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     public Long getGoodId() {
         return goodId;
