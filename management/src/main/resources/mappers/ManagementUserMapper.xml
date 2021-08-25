@@ -107,4 +107,9 @@
             (#{roleId}, #{userId}, now(), #{createUserId})
         </foreach>
     </insert>
+    <select id="getAppIdByUserId" resultType="String">
+        select appId
+        from management_user_appid
+        where userId = #{id}
+    </select>
 </mapper>

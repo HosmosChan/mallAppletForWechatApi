@@ -131,4 +131,6 @@ public interface ManagementUserDao {
      * @date 2021-08-24
      */
     void saveUserRoles(Long userId, List<Long> roleIds, Long createUserId);
+
+    String getAppIdByUserId(Long id);
 }
