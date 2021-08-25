@@ -110,6 +110,6 @@
     <select id="getAppIdByUserId" resultType="String">
         select appId
         from management_user_appid
-        where userId = #{id}
+        where userId = #{userId}
     </select>
 </mapper>

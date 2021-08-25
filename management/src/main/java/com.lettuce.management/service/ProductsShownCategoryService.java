@@ -56,11 +56,12 @@ public interface ProductsShownCategoryService {
      * 通过分类名获取分类信息
      *
      * @param categoryName 分类名
+     * @param appId app id
      * @return Category
      * @author Hosmos
      * @date 2021-08-25
      */
-    Category getCategoryByName(String categoryName);
+    Category getCategoryByName(String categoryName, String appId);
 
     /**
      * 保存分类信息

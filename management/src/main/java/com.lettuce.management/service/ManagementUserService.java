@@ -114,4 +114,12 @@ public interface ManagementUserService {
      * @date 2021-07-14
      */
     User getByUserId(Long id);
+    /**
+     * 通过当前用户获取app id
+     *
+     * @return String
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    String getAppIdByUserId();
 }

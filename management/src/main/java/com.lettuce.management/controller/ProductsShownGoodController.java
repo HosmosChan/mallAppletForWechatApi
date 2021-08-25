@@ -4,15 +4,14 @@ import com.lettuce.common.utils.table.PageTableHandler;
 import com.lettuce.common.utils.table.PageTableRequest;
 import com.lettuce.common.utils.table.PageTableResponse;
 import com.lettuce.management.dto.GoodBaseDto;
+import com.lettuce.management.entity.GoodBase;
 import com.lettuce.management.service.ProductsShownGoodService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -71,5 +70,24 @@ public class ProductsShownGoodController {
                 return productsShownGoodService.list(request.getParams(), request.getOffset(), request.getLimit());
             }
         }).handle(request);
+    }
+    /**
+     * 保存商品
+     *
+     * @param goodBase 商品实体类
+     * @return Category
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    @RequiresPermissions("productsShown:category:add")
+    @PostMapping
+    @ApiOperation(value = "保存")
+    public GoodBase save(@RequestBody GoodBase goodBase) {
+        GoodBase d = productsShownGoodService.getGoodByName(goodBase.getGoodName(), goodBase.getAppId());
+        if (d != null) {
+            throw new IllegalArgumentException("商品已存在");
+        }
+        productsShownGoodService.save(goodBase);
+        return goodBase;
     }
 }

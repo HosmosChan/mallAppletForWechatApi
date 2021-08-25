@@ -111,6 +111,12 @@ public class ManagementUserServiceImpl implements ManagementUserService {
         return managementUserDao.getByUserId(id);
     }
 
+    @Override
+    public String getAppIdByUserId() {
+        Long userId = UserUtil.getCurrentUser().getId();
+        return managementUserDao.getAppIdByUserId(userId);
+    }
+
     private void saveUserRoles(Long userId, List<Long> roleIds) {
         if (roleIds != null) {
             managementUserDao.deleteUserRole(userId);

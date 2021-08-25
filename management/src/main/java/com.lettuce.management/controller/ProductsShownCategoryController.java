@@ -84,7 +84,7 @@ public class ProductsShownCategoryController {
     @PostMapping
     @ApiOperation(value = "保存")
     public Category save(@RequestBody Category category) {
-        Category d = productsShownCategoryService.getCategoryByName(category.getCategoryName());
+        Category d = productsShownCategoryService.getCategoryByName(category.getCategoryName(), category.getAppId());
         if (d != null) {
             throw new IllegalArgumentException("分类已存在");
         }

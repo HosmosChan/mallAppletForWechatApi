@@ -3,6 +3,7 @@ package com.lettuce.management.controller;
 import com.lettuce.common.utils.table.*;
 import com.lettuce.management.annotation.LogAnnotation;
 import com.lettuce.management.dto.UserDto;
+import com.lettuce.management.entity.SysLogs;
 import com.lettuce.management.entity.User;
 import com.lettuce.management.service.ManagementUserService;
 import com.lettuce.management.utils.UserUtil;
@@ -118,5 +119,11 @@ public class ManagementUserController {
     @RequiresPermissions("management:user:query")
     public User user(@PathVariable Long id) {
         return managementUserService.getByUserId(id);
+    }
+
+    @ApiOperation(value = "根据当前用户获取appId")
+    @GetMapping("/appId")
+    public String getAppIdByUserId() {
+        return managementUserService.getAppIdByUserId();
     }
 }

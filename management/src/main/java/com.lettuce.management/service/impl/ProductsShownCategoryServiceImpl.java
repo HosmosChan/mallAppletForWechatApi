@@ -65,16 +65,12 @@ public class ProductsShownCategoryServiceImpl implements ProductsShownCategorySe
     }
 
     @Override
-    public Category getCategoryByName(String categoryName) {
-        String appId = managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+    public Category getCategoryByName(String categoryName, String appId) {
         return productsShownCategoryDao.getCategoryByName(categoryName, appId);
     }
 
     @Override
     public void save(Category category) {
-        if (StringUtils.isEmpty(category.getAppId())) {
-            category.setAppId(managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId()));
-        }
         category.setCategoryId(StrUtils.createRamdomNo());
         category.setCreateUserId(UserUtil.getCurrentUser().getId());
         productsShownCategoryDao.save(category);

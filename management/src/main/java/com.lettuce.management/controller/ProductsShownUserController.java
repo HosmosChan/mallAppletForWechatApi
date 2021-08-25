@@ -1,5 +1,6 @@
 package com.lettuce.management.controller;
 
+import com.lettuce.management.service.ProductsShownUserService;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

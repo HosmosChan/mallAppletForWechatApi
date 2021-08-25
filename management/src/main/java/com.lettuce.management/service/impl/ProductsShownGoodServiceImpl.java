@@ -1,11 +1,13 @@
 package com.lettuce.management.service.impl;
 
+import com.lettuce.common.utils.StrUtils;
 import com.lettuce.management.dao.ManagementUserDao;
-import com.lettuce.management.dao.ProductsShownCategoryDao;
 import com.lettuce.management.dao.ProductsShownGoodDao;
 import com.lettuce.management.dto.GoodBaseDto;
+import com.lettuce.management.entity.GoodBase;
 import com.lettuce.management.service.ProductsShownGoodService;
 import com.lettuce.management.utils.UserUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +47,6 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     @Autowired
     private ProductsShownGoodDao productsShownGoodDao;
     @Autowired
-    private ProductsShownCategoryDao productsShownCategoryDao;
-    @Autowired
     private ManagementUserDao managementUserDao;
 
     @Override
@@ -65,6 +65,24 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
             goodBaseDto.setGoodPrice(goodPrice);
         }
         return goodBaseDtoList;
+    }
+
+    @Override
+    public GoodBase getGoodByName(String goodName, String appId) {
+        if (appId == null) {
+            appId = managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        }
+        return productsShownGoodDao.getGoodByName(goodName, appId);
+    }
+
+    @Override
+    public void save(GoodBase goodBase) {
+        if (StringUtils.isEmpty(goodBase.getAppId())) {
+            goodBase.setAppId(managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId()));
+        }
+        goodBase.setGoodId(StrUtils.createRamdomNo());
+        goodBase.setCreateUserId(UserUtil.getCurrentUser().getId());
+        productsShownGoodDao.save(goodBase);
     }
 
     /**

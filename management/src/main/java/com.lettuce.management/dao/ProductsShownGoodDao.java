@@ -71,6 +71,7 @@ public interface ProductsShownGoodDao {
      * @date 2021-08-25
      */
     void deleteGoodBaseByGoodIdList(List<Long> goodIdList);
+
     /**
      * 根据商品id列表删除商品信息表
      *
@@ -79,6 +80,7 @@ public interface ProductsShownGoodDao {
      * @date 2021-08-25
      */
     void deleteGoodInfoByGoodIdList(List<Long> goodIdList);
+
     /**
      * 根据商品id列表删除商品详情表
      *
@@ -87,6 +89,7 @@ public interface ProductsShownGoodDao {
      * @date 2021-08-25
      */
     void deleteGoodDetailByGoodIdList(List<Long> goodIdList);
+
     /**
      * 根据商品id列表删除商品配送方式表
      *
@@ -95,6 +98,7 @@ public interface ProductsShownGoodDao {
      * @date 2021-08-25
      */
     void deleteGoodDeliverWayByGoodIdList(List<Long> goodIdList);
+
     /**
      * 根据商品id列表删除商品折扣表
      *
@@ -104,4 +108,23 @@ public interface ProductsShownGoodDao {
      */
     void deleteGoodDiscountByGoodIdList(List<Long> goodIdList);
 
+    /**
+     * 通过商品名获取商品信息
+     *
+     * @param goodName 商品名
+     * @param appId    app id
+     * @return GoodBase
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    GoodBase getGoodByName(String goodName, String appId);
+
+    /**
+     * 保存商品信息
+     *
+     * @param goodBase 商品实体类
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    void save(GoodBase goodBase);
 }

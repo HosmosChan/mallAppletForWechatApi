@@ -12,7 +12,8 @@
             <div class='form-group'>
                 <label class='col-md-2 control-label'>appId</label>
                 <div class='col-md-10'>
-                    <input class='form-control' placeholder='app id' type='text' name='appId' id='appId'>
+                    <input class='form-control' placeholder='app id' type='text' name='appId' id='appId'
+                           data-bv-notempty='true' data-bv-notempty-message='app id不能為空'>
                 </div>
             </div>
             <div class='form-group'>
@@ -46,6 +47,21 @@
     layui.use(['layer', 'laydate'], function () {
         var layer = layui.layer;
     });
+    initData();
+
+    function initData() {
+        $.ajax({
+            type: 'get',
+            url: '/user/appId',
+            async: false,
+            success: function (data) {
+                $('#appId').val(data);
+                if (data != null && data !=="") {
+                    document.getElementById("appId").readOnly=true;
+                }
+            }
+        });
+    }
 
     function add() {
         $('#form').bootstrapValidator();

@@ -131,6 +131,13 @@ public interface ManagementUserDao {
      * @date 2021-08-24
      */
     void saveUserRoles(Long userId, List<Long> roleIds, Long createUserId);
-
-    String getAppIdByUserId(Long id);
+    /**
+     * 通过用户id获取app id
+     *
+     * @param userId user id
+     * @return String
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    String getAppIdByUserId(Long userId);
 }
