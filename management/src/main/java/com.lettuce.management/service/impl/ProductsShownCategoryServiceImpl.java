@@ -1,10 +1,13 @@
 package com.lettuce.management.service.impl;
 
+import com.lettuce.common.utils.StrUtils;
 import com.lettuce.management.dao.ManagementUserDao;
 import com.lettuce.management.dao.ProductsShownCategoryDao;
+import com.lettuce.management.dao.ProductsShownGoodDao;
 import com.lettuce.management.entity.Category;
 import com.lettuce.management.service.ProductsShownCategoryService;
 import com.lettuce.management.utils.UserUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +46,8 @@ public class ProductsShownCategoryServiceImpl implements ProductsShownCategorySe
     @Autowired
     private ProductsShownCategoryDao productsShownCategoryDao;
     @Autowired
+    private ProductsShownGoodDao productsShownGoodDao;
+    @Autowired
     private ManagementUserDao managementUserDao;
 
     @Override
@@ -67,9 +72,36 @@ public class ProductsShownCategoryServiceImpl implements ProductsShownCategorySe
 
     @Override
     public void save(Category category) {
-        String appId = managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
-        category.setAppId(appId);
+        if (StringUtils.isEmpty(category.getAppId())) {
+            category.setAppId(managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId()));
+        }
+        category.setCategoryId(StrUtils.createRamdomNo());
         category.setCreateUserId(UserUtil.getCurrentUser().getId());
         productsShownCategoryDao.save(category);
+    }
+
+    @Override
+    public void update(Category category) {
+        category.setGmtUserId(UserUtil.getCurrentUser().getId());
+        productsShownCategoryDao.update(category);
+    }
+
+    @Override
+    public Category getById(Long id) {
+        return productsShownCategoryDao.getById(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Long CategoryId = productsShownCategoryDao.getById(id).getCategoryId();
+        List<Long> goodIdList = productsShownGoodDao.getGoodIdByCategoryId(CategoryId);
+        if (goodIdList != null && goodIdList.size() != 0) {
+            productsShownGoodDao.deleteGoodDiscountByGoodIdList(goodIdList);
+            productsShownGoodDao.deleteGoodDeliverWayByGoodIdList(goodIdList);
+            productsShownGoodDao.deleteGoodDetailByGoodIdList(goodIdList);
+            productsShownGoodDao.deleteGoodInfoByGoodIdList(goodIdList);
+            productsShownGoodDao.deleteGoodBaseByGoodIdList(goodIdList);
+        }
+        productsShownCategoryDao.delete(id);
     }
 }

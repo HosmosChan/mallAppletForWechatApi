@@ -71,6 +71,7 @@ public class ProductsShownCategoryController {
             }
         }).handle(request);
     }
+
     /**
      * 保存分类
      *
@@ -89,5 +90,49 @@ public class ProductsShownCategoryController {
         }
         productsShownCategoryService.save(category);
         return category;
+    }
+
+    /**
+     * 修改分类
+     *
+     * @param category 分类实体类
+     * @return Category
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    @RequiresPermissions("productsShown:category:add")
+    @PutMapping
+    @ApiOperation(value = "修改")
+    public Category update(@RequestBody Category category) {
+        productsShownCategoryService.update(category);
+        return category;
+    }
+
+    /**
+     * 根据id获取分类
+     *
+     * @param id 分类 id
+     * @return Category
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    @GetMapping("/{id}")
+    @ApiOperation(value = "根据id获取分类")
+    public Category get(@PathVariable Long id) {
+        return productsShownCategoryService.getById(id);
+    }
+
+    /**
+     * 删除分类
+     *
+     * @param id 分类 id
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    @RequiresPermissions("productsShown:category:del")
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "删除")
+    public void delete(@PathVariable Long id) {
+        productsShownCategoryService.delete(id);
     }
 }

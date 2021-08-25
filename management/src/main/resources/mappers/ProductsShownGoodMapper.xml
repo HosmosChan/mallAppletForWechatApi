@@ -130,4 +130,43 @@
         left join products_shown_category as psc on psgb.categoryId = psc.categoryId
         <include refid="GoodBaseWhere"/>
     </select>
+    <select id="getGoodIdByCategoryId" resultType="java.lang.Long">
+        select goodId from products_shown_good_base
+        where categoryId = #{categoryId}
+    </select>
+    <delete id="deleteGoodBaseByGoodIdList" parameterType="java.lang.Long">
+        delete from products_shown_good_base
+        where goodId in
+        <foreach collection="list" item="goodId" separator="," open="(" close=")">
+            #{goodId, jdbcType=NUMERIC}
+        </foreach>
+    </delete>
+    <delete id="deleteGoodInfoByGoodIdList" parameterType="java.lang.Long">
+        delete from products_shown_good_info
+        where goodId in
+        <foreach collection="list" item="goodId" separator="," open="(" close=")">
+            #{goodId, jdbcType=NUMERIC}
+        </foreach>
+    </delete>
+    <delete id="deleteGoodDetailByGoodIdList" parameterType="java.lang.Long">
+        delete from products_shown_good_detail
+        where goodId in
+        <foreach collection="list" item="goodId" separator="," open="(" close=")">
+            #{goodId, jdbcType=NUMERIC}
+        </foreach>
+    </delete>
+    <delete id="deleteGoodDeliverWayByGoodIdList" parameterType="java.lang.Long">
+        delete from products_shown_good_deliver_way
+        where goodId in
+        <foreach collection="list" item="goodId" separator="," open="(" close=")">
+            #{goodId, jdbcType=NUMERIC}
+        </foreach>
+    </delete>
+    <delete id="deleteGoodDiscountByGoodIdList" parameterType="java.lang.Long">
+        delete from products_shown_good_discount
+        where goodId in
+        <foreach collection="list" item="goodId" separator="," open="(" close=")">
+            #{goodId, jdbcType=NUMERIC}
+        </foreach>
+    </delete>
 </mapper>

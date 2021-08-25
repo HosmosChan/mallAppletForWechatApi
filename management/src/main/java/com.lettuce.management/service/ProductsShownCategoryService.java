@@ -70,4 +70,32 @@ public interface ProductsShownCategoryService {
      * @date 2021-08-25
      */
     void save(Category category);
+
+    /**
+     * 更新分类信息
+     *
+     * @param category 分类信息
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    void update(Category category);
+
+    /**
+     * 根据id获取分类
+     *
+     * @param id 分类 id
+     * @return Category
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    Category getById(Long id);
+
+    /**
+     * 删除分类
+     *
+     * @param id 分类 id
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    void delete(Long id);
 }

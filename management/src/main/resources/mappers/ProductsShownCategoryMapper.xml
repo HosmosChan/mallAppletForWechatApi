@@ -49,8 +49,8 @@
     <select id="getCategoryByName" resultMap="CategoryResultMap">
         select
         <include refid="Category_List"/>
-        from products_shown_category
-        where categoryName = #{categoryName}
+        from products_shown_category as psc
+        where psc.categoryName = #{categoryName}
     </select>
     <insert id="save">
         insert into products_shown_category
@@ -58,4 +58,27 @@
         value
         (#{appId}, #{categoryId}, #{categoryName}, #{createUserId}, now())
     </insert>
+    <update id="update">
+        update products_shown_category
+        <set>
+            <if test="categoryName != null and categoryName != ''">
+                categoryName = #{categoryName},
+            </if>
+            <if test="gmtUserId != null and gmtUserId != ''">
+                gmtUserId = #{gmtUserId},
+            </if>
+            gmtTime = now()
+        </set>
+        where id = #{id}
+    </update>
+    <select id="getById" resultMap="CategoryResultMap">
+        select
+        <include refid="Category_List"/>
+        from products_shown_category as psc
+        where psc.id = #{id}
+    </select>
+    <delete id="delete">
+        delete from products_shown_category
+        where id = #{id}
+    </delete>
 </mapper>
