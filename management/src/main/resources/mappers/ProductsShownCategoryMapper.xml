@@ -46,4 +46,16 @@
         select count(1) from products_shown_category
         <include refid="where"/>
     </select>
+    <select id="getCategoryByName" resultMap="CategoryResultMap">
+        select
+        <include refid="Category_List"/>
+        from products_shown_category
+        where categoryName = #{categoryName}
+    </select>
+    <insert id="save">
+        insert into products_shown_category
+        (appId, categoryId, categoryName, createUserId, createTime)
+        value
+        (#{appId}, #{categoryId}, #{categoryName}, #{createUserId}, now())
+    </insert>
 </mapper>

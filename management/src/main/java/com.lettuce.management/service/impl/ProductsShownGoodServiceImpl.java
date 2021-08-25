@@ -70,18 +70,18 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     /**
      * 商品标题字符串过长导致文字超出的问题
      *
-     * @param goodForIndexVO 商品信息
-     * @return GoodForIndexVO
+     * @param goodBaseDto 商品信息
+     * @return GoodBaseDto
      * @author Hosmos
      * @date 2021-07-05
      */
-    private static GoodBaseDto shortenGoodTitle(GoodBaseDto goodForIndexVO) {
-        String goodName = goodForIndexVO.getGoodName();
+    private static GoodBaseDto shortenGoodTitle(GoodBaseDto goodBaseDto) {
+        String goodName = goodBaseDto.getGoodName();
         int goodNameLength = 10;
         if (goodName.length() > goodNameLength) {
             goodName = goodName.substring(0, goodNameLength) + "...";
-            goodForIndexVO.setGoodName(goodName);
+            goodBaseDto.setGoodName(goodName);
         }
-        return goodForIndexVO;
+        return goodBaseDto;
     }
 }

@@ -10,9 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -72,5 +70,24 @@ public class ProductsShownCategoryController {
                 return productsShownCategoryService.list(request.getParams(), request.getOffset(), request.getLimit());
             }
         }).handle(request);
+    }
+    /**
+     * 保存分类
+     *
+     * @param category 分类实体类
+     * @return Category
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    @RequiresPermissions("productsShown:category:add")
+    @PostMapping
+    @ApiOperation(value = "保存")
+    public Category save(@RequestBody Category category) {
+        Category d = productsShownCategoryService.getCategoryByName(category.getCategoryName());
+        if (d != null) {
+            throw new IllegalArgumentException("分类已存在");
+        }
+        productsShownCategoryService.save(category);
+        return category;
     }
 }

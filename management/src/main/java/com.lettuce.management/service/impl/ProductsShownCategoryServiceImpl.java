@@ -58,4 +58,18 @@ public class ProductsShownCategoryServiceImpl implements ProductsShownCategorySe
         params.put("appId", appId);
         return productsShownCategoryDao.list(params, offset, limit);
     }
+
+    @Override
+    public Category getCategoryByName(String categoryName) {
+        String appId = managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        return productsShownCategoryDao.getCategoryByName(categoryName, appId);
+    }
+
+    @Override
+    public void save(Category category) {
+        String appId = managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        category.setAppId(appId);
+        category.setCreateUserId(UserUtil.getCurrentUser().getId());
+        productsShownCategoryDao.save(category);
+    }
 }

@@ -60,4 +60,24 @@ public interface ProductsShownCategoryDao {
      * @date 2021-08-24
      */
     List<Category> list(Map<String, Object> params, Integer offset, Integer limit);
+
+    /**
+     * 根据分类名获取分类
+     *
+     * @param categoryName 分类名
+     * @param appId        app id
+     * @return Category
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    Category getCategoryByName(String categoryName, String appId);
+
+    /**
+     * 保存分类
+     *
+     * @param category 分类信息
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    void save(Category category);
 }

@@ -30,7 +30,44 @@ import java.util.Map;
  * @date 2021年08月24日
  */
 public interface ProductsShownCategoryService {
+    /**
+     * 分类信息列表个数，list中页码计数
+     *
+     * @param params 搜索参数
+     * @return int
+     * @author Hosmos
+     * @date 2021-08-24
+     */
     int count(Map<String, Object> params);
 
+    /**
+     * 通过搜索参数获取分类信息列表
+     *
+     * @param params 搜索参数
+     * @param offset 每页起始序列
+     * @param limit  每页显示个数
+     * @return List<Category>
+     * @author Hosmos
+     * @date 2021-08-24
+     */
     List<Category> list(Map<String, Object> params, Integer offset, Integer limit);
+
+    /**
+     * 通过分类名获取分类信息
+     *
+     * @param categoryName 分类名
+     * @return Category
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    Category getCategoryByName(String categoryName);
+
+    /**
+     * 保存分类信息
+     *
+     * @param category 分类实体类
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    void save(Category category);
 }
