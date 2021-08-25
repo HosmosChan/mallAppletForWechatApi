@@ -21,8 +21,8 @@
                                         <div class="col-md-10">
                                             <select name="type" class="form-control input-sm" id="type">
                                                 <option value="goodName">商品名</option>
-                                                <option value="categoryName">分类</option>
-                                                <option value="sellStatus">售卖状态</option>
+                                                <option value="categoryName">分類</option>
+                                                <option value="sellStatus">售賣狀態</option>
                                             </select>
                                         </div>
                                         <input id="message" type="text" class="form-control">
@@ -51,14 +51,14 @@
                         </tr>
                         <tr>
                             <th>商品id</th>
-                            <th>分类</th>
+                            <th>分類</th>
                             <th>商品名</th>
-                            <th>商品价格区间</th>
-                            <th>商品url</th>
+                            <th>商品價格區間</th>
+                            <th>商品頁面</th>
                             <th>商品封面</th>
-                            <th>库存</th>
-                            <th>状态</th>
-                            <th>开始售卖时间</th>
+                            <th>庫存</th>
+                            <th>狀態</th>
+                            <th>開始售賣時間</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -138,15 +138,15 @@
     });
 
     function del(id) {
-        layer.confirm('确定要删除吗？', {
-            btn: ['确定', '取消']
+        layer.confirm('確定要刪除嗎？', {
+            btn: ['確定', '取消']
         }, function () {
             $.ajax({
                 type: 'delete',
                 url: '/productsShown/good/' + id,
                 success: function (data) {
                     example.ajax.reload();
-                    layer.msg("删除成功");
+                    layer.msg("刪除成功");
                 }
             });
             layer.close(1);

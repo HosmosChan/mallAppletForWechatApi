@@ -7,19 +7,19 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <title>后台管理系统</title>
+    <title>後臺管理系統</title>
     <link rel="stylesheet" href="layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="css/global.css" media="all"/>
     <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css" media="all"/>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin" style="border-bottom: solid 5px #ff4a00;">
-    <!-- 标题栏 -->
+    <!-- 標題欄 -->
     <div class="layui-header header header-demo">
         <div class="layui-main">
             <div class="admin-login-box">
                 <a class="logo" style="left: 0;" href="/">
-                    <span style="font-size: 22px;">后台管理系统</span>
+                    <span style="font-size: 22px;">後臺管理系統</span>
                 </a>
                 <div class="admin-side-toggle">
                     <i class="fa fa-bars" aria-hidden="true"></i>
@@ -35,13 +35,13 @@
                         <dd>
                             <a href='javascript:;' lay-id="-999" data-url="pages/user/updateMyself.html">
                                 <i class="fa fa-user-circle" aria-hidden="true"></i>
-                                个人信息
+                                個人信息
                             </a>
                         </dd>
                         <dd>
                             <a href='javascript:;' lay-id="-998" data-url="pages/user/updateHeadImg.html">
                                 <i class="fa fa-drupal" aria-hidden="true"></i>
-                                头像
+                                頭像
                             </a>
                         </dd>
                         <dd>
@@ -55,7 +55,7 @@
             </ul>
         </div>
     </div>
-    <!-- 菜单 -->
+    <!-- 菜單 -->
     <div class="layui-side layui-bg-black" id="admin-side">
         <div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side">
             <ul id="menu" class="layui-nav layui-nav-tree" lay-filter="demo">
@@ -79,7 +79,7 @@
     </div>
     <div class="layui-footer footer footer-demo" id="admin-footer">
         <div>
-            <p>苟利国家生死以，岂因祸福避趋之。</p>
+            <p>苟利國家生死以，豈因禍福避趨之。</p>
         </div>
     </div>
     <div class="site-tree-mobile layui-hide">
@@ -124,7 +124,7 @@
                     }
                     li.append(a);
                     menu.append(li);
-                    //多级菜单
+                    //多級菜單
                     setChild(li, item.child)
 
                 });
@@ -148,13 +148,13 @@
                 var dl = $("<dl class='layui-nav-child'></dl>");
                 dl.append(dd);
                 parentElement.append(dl);
-                // 递归
+                // 遞歸
                 setChild(dd, item2.child);
             });
         }
     }
 
-    // 登陆用户头像昵称
+    // 登録用戶頭像昵稱
     showLoginInfo();
 
     function showLoginInfo() {
@@ -191,7 +191,7 @@
         element.on('nav(demo)', function (elem) {
             //layer.msg(elem.text());
         });
-        //触发事件
+        //觸發事件
         active = {
             tabAdd: function (obj) {
                 var lay_id = $(this).attr("lay-id");
