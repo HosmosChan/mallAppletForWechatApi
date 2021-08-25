@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>添加菜单</title>
+        <title>添加菜單</title>
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome/css/font-awesome.css">
     </head>
@@ -11,46 +11,46 @@
             <form class="form-horizontal" onsubmit="return false" id="form">
                 <fieldset>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">上级菜单</label>
+                        <label class="col-md-2 control-label">上級菜單</label>
                         <div class="col-md-10">
                             <select id="parentId" name="parentId" class="form-control input-sm"></select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">名称</label>
+                        <label class="col-md-2 control-label">名稱</label>
                         <div class="col-md-10">
-                            <input class="form-control" placeholder="名称" type="text" name="name" id="name"
+                            <input class="form-control" placeholder="名稱" type="text" name="name" id="name"
                                    data-bv-notempty="true"
-                                   data-bv-notempty-message="名称 不能为空">
+                                   data-bv-notempty-message="名稱 不能為空">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">样式</label>
+                        <label class="col-md-2 control-label">樣式</label>
                         <div class="col-md-10">
-                            <button onclick="selectCss()" class="btn btn-primary">选择</button>
+                            <button onclick="selectCss()" class="btn btn-primary">選擇</button>
                             <input type="hidden" name="css" id="css"/>
                             <i id="cssImg" class="fa"></i>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">链接</label>
+                        <label class="col-md-2 control-label">鏈接</label>
                         <div class="col-md-10">
-                            <input class="form-control" placeholder="链接" name="href" id="href"/>
+                            <input class="form-control" placeholder="鏈接" name="href" id="href"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">类型</label>
+                        <label class="col-md-2 control-label">類型</label>
                         <div class="col-md-10">
                             <select name="type" class="form-control input-sm">
-                                <option value="1">菜单</option>
-                                <option value="2">按钮</option>
+                                <option value="1">菜單</option>
+                                <option value="2">按鈕</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">权限</label>
+                        <label class="col-md-2 control-label">權限</label>
                         <div class="col-md-10">
-                            <input class="form-control" placeholder="权限" name="permission" id="permission"/>
+                            <input class="form-control" placeholder="權限" name="permission" id="permission"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -58,7 +58,7 @@
                         <div class="col-md-10">
                             <input class="form-control" placeholder="排序" name="sort" id="sort" type="number" value="100"
                                    data-bv-notempty="true"
-                                   data-bv-notempty-message="排序 不能为空">
+                                   data-bv-notempty-message="排序 不能為空">
                         </div>
                     </div>
                     <div class="form-actions">
@@ -114,7 +114,7 @@
     function selectCss() {
         layer.open({
             type: 2,
-            title: "样式",
+            title: "樣式",
             area: ['800px', '400px'],
             maxmin: true,
             shadeClose: true,

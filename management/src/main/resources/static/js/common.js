@@ -1,4 +1,4 @@
-//form序列化为json
+//form序列化為json
 $.fn.serializeObject = function () {
     var o = {};
     var a = this.serializeArray();
@@ -15,7 +15,7 @@ $.fn.serializeObject = function () {
     return o;
 };
 
-//获取url后的参数值
+//獲取url后的參數值
 function getUrlParam(key) {
     var href = window.location.href;
     var url = href.split("?");
@@ -31,7 +31,7 @@ function getUrlParam(key) {
     }
 }
 
-// 检查登录状态
+// 檢查登録狀態
 function loginInfo() {
     var user = "";
     $.ajax({

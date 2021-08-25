@@ -43,7 +43,7 @@ import javax.annotation.Resource;
  * @author Hosmos
  * @date 2021年07月13日
  */
-@Api(value = "login", tags = "登录接口")
+@Api(value = "login", tags = "登録接口")
 @RestController
 @RequestMapping
 public class ManagementLoginController {
@@ -54,7 +54,7 @@ public class ManagementLoginController {
     private ServerProperties serverProperties;
 
     @LogAnnotation
-    @ApiOperation(value = "web端登陆")
+    @ApiOperation(value = "web端登録")
     @PostMapping("/login")
     public void login(String username, String password) {
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
@@ -64,7 +64,7 @@ public class ManagementLoginController {
     }
 
     @LogAnnotation
-    @ApiOperation(value = "Restful方式登陆,前后端分离时登录接口")
+    @ApiOperation(value = "Restful方式登録,前後端分離時登録接口")
     @PostMapping("/login/restful")
     public Token restfulLogin(String username, String password) {
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
@@ -72,7 +72,7 @@ public class ManagementLoginController {
         return managementTokenManager.saveToken(usernamePasswordToken);
     }
 
-    @ApiOperation(value = "当前登录用户")
+    @ApiOperation(value = "當前登録用戶")
     @GetMapping("/login")
     public User getLoginInfo() {
         return UserUtil.getCurrentUser();

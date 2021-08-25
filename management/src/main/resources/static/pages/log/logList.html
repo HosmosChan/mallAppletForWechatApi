@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>日志列表</title>
+    <title>日誌列表</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
@@ -18,16 +18,16 @@
                             <td>
                                 <form class="form-inline" onsubmit="return false">
                                     <div class="form-group">
-                                        <label for="username">用户名：</label>
-                                        <input id="username" type="text" class="form-control" placeholder="昵称">
-                                        <label for="beginTime">时间：</label>
-                                        <input type="text" class="form-control" placeholder="开始时间" id="beginTime">
-                                        <input type="text" class="form-control" placeholder="结束时间" id="endTime">
-                                        <label for="flag">状态：</label>
+                                        <label for="username">用戶名：</label>
+                                        <input id="username" type="text" class="form-control" placeholder="昵稱">
+                                        <label for="beginTime">時間：</label>
+                                        <input type="text" class="form-control" placeholder="開始時間" id="beginTime">
+                                        <input type="text" class="form-control" placeholder="結束時間" id="endTime">
+                                        <label for="flag">狀態：</label>
                                         <select class="form-control input-sm" id="flag">
                                             <option value="">全部</option>
                                             <option value="1">成功</option>
-                                            <option value="0">失败</option>
+                                            <option value="0">失敗</option>
                                         </select>
                                         <button id="searchBt" class="layui-btn layui-btn-sm" permission="management:log:query">
                                             <i class="layui-icon">&#xe615;</i>搜索
@@ -47,11 +47,11 @@
                         </tr>
                         <tr>
                             <th width="5%">id</th>
-                            <th width="15%">用户名</th>
-                            <th width="20%">模块</th>
-                            <th width="5%">状态</th>
-                            <th>备注</th>
-                            <th width="15%">时间</th>
+                            <th width="15%">用戶名</th>
+                            <th width="20%">模塊</th>
+                            <th width="5%">狀態</th>
+                            <th>備註</th>
+                            <th width="15%">時間</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -91,7 +91,7 @@
                 "processing": false,
                 "serverSide": true,
                 "language": {
-                    "url": "/js/plugin/datatables/Chinese.lang"
+                    "url": "/js/plugin/datatables/TraditionalChinese.lang"
                 },
                 "ajax": {
                     "url": "/log",
@@ -125,7 +125,7 @@
                         "defaultContent": "",
                         "render": function (data, type, row) {
                             var flag = row['flag'];
-                            return flag ? "成功" : "失败";
+                            return flag ? "成功" : "失敗";
                         }
                     },
                     {"data": "remark", "defaultContent": ""},

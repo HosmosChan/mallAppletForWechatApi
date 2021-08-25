@@ -10,7 +10,7 @@
 		<fieldset>
 			<input type="hidden" id="id" name="id">
 			<div class="form-group">
-				<label class="col-md-2 control-label">标题</label>
+				<label class="col-md-2 control-label">標題</label>
 				<div class="col-md-10" id="subject" align="left">
 				</div>
 			</div>
@@ -23,7 +23,7 @@
 						<thead>
 							<tr>
 								<th>收件人</th>
-								<th>投递状态</th>
+								<th>投遞狀態</th>
 							</tr>
 						</thead>
 						<tbody id="toUsers">
@@ -35,7 +35,7 @@
 		</fieldset>
 		<fieldset>
 			<div class="form-group">
-				<label class="col-md-2 control-label">内容</label>
+				<label class="col-md-2 control-label">內容</label>
 				<div class="col-md-10" id="content">
 					
 				</div>
@@ -83,7 +83,7 @@
 						tr.append("<td>" + data[i]['toUser'] + "</td>");
 						
 						var status = data[i]['status'];
-						tr.append("<td>" + (status ? "投递成功":"<span style='color:red'>投递失败</span>") + "</td>");
+						tr.append("<td>" + (status ? "投遞成功":"<span style='color:red'>投遞失敗</span>") + "</td>");
 						$("#toUsers").append(tr);
 					}
 					

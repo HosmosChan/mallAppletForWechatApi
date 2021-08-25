@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>上传头像</title>
+    <title>上傳頭像</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
 </head>
 <body>
 <button type="button" class="layui-btn" id="test1">
-    <i class="layui-icon">&#xe67c;</i>上传头像
+    <i class="layui-icon">&#xe67c;</i>上傳頭像
 </button>
 <div id="headImgDiv">
 </div>
@@ -59,9 +59,9 @@
                     url: '/user?headImgUrl=' + url,
                     async: false,
                     success: function (data) {
-                        layer.msg("上传成功");
+                        layer.msg("上傳成功");
                         var src = domain + "/file" + url;
-                        var a = "<a target='_blank' href='" + src + "'><img src='" + src + "' alt='头像'/></a>";
+                        var a = "<a target='_blank' href='" + src + "'><img src='" + src + "' alt='頭像'/></a>";
                         $("#headImgDiv").html(a);
                         var img = parent.$(".admin-header-user img");
                         img.attr("src", src);

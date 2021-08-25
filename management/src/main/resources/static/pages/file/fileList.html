@@ -17,7 +17,7 @@
                         <tr>
                             <td>
                                 <button type="button" class="layui-btn" id="test1">
-                                    <i class="layui-icon">&#xe67c;</i>上传文件
+                                    <i class="layui-icon">&#xe67c;</i>上傳文件
                                 </button>
                             </td>
                             <!--<td align="right">
@@ -42,10 +42,10 @@
                         </tr>
                         <tr>
                             <th>url</th>
-                            <th>物理路径</th>
-                            <th>文件类型/格式</th>
-                            <th>应用</th>
-                            <th>修改时间</th>
+                            <th>物理路徑</th>
+                            <th>文件類型/格式</th>
+                            <th>應用</th>
+                            <th>修改時間</th>
                             <th>管理</th>
                         </tr>
                         </thead>
@@ -82,7 +82,7 @@
                 "processing": false,
                 "serverSide": true,
                 "language": {
-                    "url": "/js/plugin/datatables/Chinese.lang"
+                    "url": "/js/plugin/datatables/TraditionalChinese.lang"
                 },
                 "ajax": {
                     "url": "/files",
@@ -134,15 +134,15 @@
     }
 
     function del(id) {
-        layer.confirm('确定要删除吗？', {
-            btn: ['确定', '取消']
+        layer.confirm('確定要刪除嗎？', {
+            btn: ['確定', '取消']
         }, function () {
             $.ajax({
                 type: 'delete',
                 url: '/files/' + id,
                 success: function (data) {
                     example.ajax.reload();
-                    layer.msg("删除成功");
+                    layer.msg("刪除成功");
                 }
             });
 
@@ -157,11 +157,11 @@
     layui.use('upload', function () {
         var upload = layui.upload;
         upload.render({
-            elem: '#test1' //绑定元素
-            , accept: 'file' //允许上传的文件类型
-            , url: '/files' //上传接口
+            elem: '#test1' //綁定元素
+            , accept: 'file' //允許上傳的文件類型
+            , url: '/files' //上傳接口
             , done: function (res, index, upload) {
-                layer.msg("上传成功");
+                layer.msg("上傳成功");
                 example.ajax.reload();
             }
         });

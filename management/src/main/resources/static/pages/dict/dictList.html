@@ -79,7 +79,7 @@
                 "processing": false,
                 "serverSide": true,
                 "language": {
-                    "url": "/js/plugin/datatables/Chinese.lang"
+                    "url": "/js/plugin/datatables/TraditionalChinese.lang"
                 },
                 "ajax": {
                     "url": "/dict",
@@ -118,15 +118,15 @@
     });
 
     function del(id) {
-        layer.confirm('确定要删除吗？', {
-            btn: ['确定', '取消']
+        layer.confirm('確定要刪除嗎？', {
+            btn: ['確定', '取消']
         }, function () {
             $.ajax({
                 type: 'delete',
                 url: '/dict/' + id,
                 success: function (data) {
                     example.ajax.reload();
-                    layer.msg("删除成功");
+                    layer.msg("刪除成功");
                 }
             });
             layer.close(1);

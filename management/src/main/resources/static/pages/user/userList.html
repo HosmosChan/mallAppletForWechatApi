@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户列表</title>
+    <title>用戶列表</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
@@ -17,11 +17,11 @@
                         <td>
                             <form class="form-inline" onsubmit="return false">
                                 <div class="form-group">
-                                    <label for="username">用户名：</label>
-                                    <input id="username" type="text" class="form-control" placeholder="用户名">
-                                    <label for="nickName">昵称：</label>
-                                    <input id="nickName" type="text" class="form-control" placeholder="昵称">
-                                    <label for="status">状态：</label>
+                                    <label for="username">用戶名：</label>
+                                    <input id="username" type="text" class="form-control" placeholder="用戶名">
+                                    <label for="nickName">昵稱：</label>
+                                    <input id="nickName" type="text" class="form-control" placeholder="昵稱">
+                                    <label for="status">狀態：</label>
                                     <select class="form-control input-sm" id="status">
                                     </select>
                                     <button id="searchBt" class="layui-btn layui-btn-sm"
@@ -48,11 +48,11 @@
                     <tr>
                     </tr>
                     <tr>
-                        <th>用户名</th>
-                        <th>昵称</th>
-                        <th>电话</th>
-                        <th>状态</th>
-                        <th>最后登录时间</th>
+                        <th>用戶名</th>
+                        <th>昵稱</th>
+                        <th>電話</th>
+                        <th>狀態</th>
+                        <th>最後登録時間</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -87,7 +87,7 @@
                 "processing": false,
                 "serverSide": true,
                 "language": {
-                    "url": "/js/plugin/datatables/Chinese.lang"
+                    "url": "/js/plugin/datatables/TraditionalChinese.lang"
                 },
                 "ajax": {
                     "url": "/user",
@@ -132,8 +132,8 @@
     }
 
     function del(id) {
-        layer.confirm('确定要删除吗？', {
-            btn: ['确定', '取消']
+        layer.confirm('確定要刪除嗎？', {
+            btn: ['確定', '取消']
         }, function () {
             $.ajax({
                 type: 'delete',

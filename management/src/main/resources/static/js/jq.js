@@ -8,12 +8,12 @@ $.ajaxSetup({
 		if (code == 400) {
 			layer.msg(message);
 		} else if (code == 401) {
-			layer.msg('未登录');
+			layer.msg('未登録');
 		} else if (code == 403) {
-			console.log("未授权:" + message);
-			layer.msg('未授权');
+			console.log("未授權:" + message);
+			layer.msg('未授權');
 		} else if (code == 500) {
-			layer.msg('系统错误：' + message);
+			layer.msg('系統錯誤：' + message);
 		}
 	}
 });
@@ -25,7 +25,7 @@ function buttonDel(data, permission, permissions){
 		}
 	}
 	
-	var btn = $("<button class='layui-btn layui-btn-xs' title='删除' onclick='del(\"" + data +"\")'><i class='layui-icon'>&#xe640;</i></button>");
+	var btn = $("<button class='layui-btn layui-btn-xs' title='刪除' onclick='del(\"" + data +"\")'><i class='layui-icon'>&#xe640;</i></button>");
 	return btn.prop("outerHTML");
 }
 
@@ -36,7 +36,7 @@ function buttonEdit(href, permission, permissions){
 		}
 	}
 	
-	var btn = $("<button class='layui-btn layui-btn-xs' title='编辑' onclick='window.location=\"" + href +"\"'><i class='layui-icon'>&#xe642;</i></button>");
+	var btn = $("<button class='layui-btn layui-btn-xs' title='編輯' onclick='window.location=\"" + href +"\"'><i class='layui-icon'>&#xe642;</i></button>");
 	return btn.prop("outerHTML");
 }
 

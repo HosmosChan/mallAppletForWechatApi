@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>定时任务列表</title>
+    <title>定時任務列表</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
@@ -19,7 +19,7 @@
                                 <div class="form-group">
                                     <label for="description">描述：</label>
                                     <input id="description" type="text" class="form-control" placeholder="描述">
-                                    <label for="status">状态：</label>
+                                    <label for="status">狀態：</label>
                                     <select class="form-control input-sm" id="status">
                                         <option value="">全部</option>
                                         <option value="1">正常</option>
@@ -50,12 +50,12 @@
                     <tr>
                         <th>id</th>
                         <th>job名</th>
-                        <th>cron表达式</th>
+                        <th>cron表達式</th>
                         <th>bean名</th>
                         <th>方法名</th>
                         <th>描述</th>
-                        <th>状态</th>
-                        <th>修改时间</th>
+                        <th>狀態</th>
+                        <th>修改時間</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -85,7 +85,7 @@
                 "processing": false,
                 "serverSide": true,
                 "language": {
-                    "url": "/js/plugin/datatables/Chinese.lang"
+                    "url": "/js/plugin/datatables/TraditionalChinese.lang"
                 },
                 "ajax": {
                     "url": "/jobs",
@@ -135,7 +135,7 @@
                                 var del = buttonDel(id, "job:del", pers);
                                 return edit + del;
                             } else {
-                                return "<span style='color:red'>系统任务无操作</span>";
+                                return "<span style='color:red'>系統任務無操作</span>";
                             }
                         }
                     }
@@ -149,8 +149,8 @@
     });
 
     function del(id) {
-        layer.confirm('确定要取消吗？', {
-            btn: ['确定', '取消']
+        layer.confirm('確定要取消嗎？', {
+            btn: ['確定', '取消']
         }, function () {
             $.ajax({
                 type: 'delete',
