@@ -52,6 +52,9 @@
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script src="../../js/libs/jquery.treetable.js"></script>
 <script type="text/javascript">
+    layui.use('layer', function () {
+        var layer = layui.layer;
+    });
     var permissions = checkPermission();
     initMenuList();
 
@@ -99,10 +102,6 @@
             }
         });
     }
-
-    layui.use('layer', function () {
-        var layer = layui.layer;
-    });
 
     function del(id) {
         layer.confirm('確定要刪除嗎？', {

@@ -20,7 +20,8 @@
                                     <div class="form-group">
                                         <label for="type">type：</label>
                                         <input id="type" type="text" class="form-control" placeholder="type">
-                                        <button id="searchBt" class="layui-btn layui-btn-sm" permission="management:dict:query"><i
+                                        <button id="searchBt" class="layui-btn layui-btn-sm"
+                                                permission="management:dict:query"><i
                                                 class="layui-icon">&#xe615;</i>搜索
                                         </button>
                                     </div>
@@ -69,6 +70,9 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript">
+    layui.use('layer', function () {
+        var layer = layui.layer;
+    });
     var permission = checkPermission();
     var example;
 
@@ -112,10 +116,6 @@
                 "order": [[0, "asc"]]
             });
     }
-
-    layui.use('layer', function () {
-        var layer = layui.layer;
-    });
 
     function del(id) {
         layer.confirm('確定要刪除嗎？', {

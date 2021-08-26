@@ -79,6 +79,9 @@
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../js/dict.js"></script>
 <script type="text/javascript">
+    layui.use('layer', function () {
+        var layer = layui.layer;
+    });
     var permission = checkPermission();
     var example;
     var appletType = showDictSelect("appletType", "appletType", "全部");
@@ -143,10 +146,6 @@
                 "order": [[0, "desc"], [1, "asc"]]
             });
     }
-
-    layui.use('layer', function () {
-        var layer = layui.layer;
-    });
 
     function del(id) {
         layer.confirm('確定要刪除嗎？', {

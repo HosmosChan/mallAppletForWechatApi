@@ -19,7 +19,8 @@
                                 <div class="form-group">
                                     <label for="name">角色：</label>
                                     <input id="name" type="text" class="form-control" placeholder="角色">
-                                    <button id="searchBt" class="layui-btn layui-btn-sm" permission="management:role:query"><i
+                                    <button id="searchBt" class="layui-btn layui-btn-sm"
+                                            permission="management:role:query"><i
                                             class="layui-icon">&#xe615;</i>搜索
                                     </button>
                                 </div>
@@ -64,6 +65,9 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript">
+    layui.use('layer', function () {
+        var layer = layui.layer;
+    });
     var permissions = checkPermission();
     var example;
 
@@ -108,10 +112,6 @@
                 "order": [[2, "desc"]]
             });
     }
-
-    layui.use('layer', function () {
-        var layer = layui.layer;
-    });
 
     function del(id) {
         layer.confirm('確定要刪除嗎？', {
