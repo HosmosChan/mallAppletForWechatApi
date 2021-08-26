@@ -30,14 +30,6 @@ import java.util.Map;
  * @date 2021年08月24日
  */
 public interface ProductsShownCategoryDao {
-    /**
-     * 获取所有分类列表
-     *
-     * @return List<Category>
-     * @author Hosmos
-     * @date 2021-08-24
-     */
-    List<Category> listAll();
 
     /**
      * 获取分类个数

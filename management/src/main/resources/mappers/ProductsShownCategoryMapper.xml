@@ -29,11 +29,6 @@
             </if>
         </where>
     </sql>
-    <select id="listAll" resultMap="CategoryResultMap">
-        select
-        <include refid="Category_List"/>
-        from products_shown_category as psc
-    </select>
     <select id="list" resultMap="CategoryResultMap">
         select
         <include refid="Category_List"/>

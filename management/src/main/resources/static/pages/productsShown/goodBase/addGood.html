@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加商品</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../../../css/global.css" media="all"/>
+    <link rel="stylesheet" href="../../../css/font-awesome/css/font-awesome.css" media="all"/>
+</head>
+<body>
+<div class="layui-body" style="bottom: 0; top: 5px; left: 5px; right: 5px; border: solid 1px #5f5f5f;"
+     id="admin-body">
+    <div class="layui-tab admin-nav-card layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">网站设置</li>
+            <li>用户管理</li>
+            <li>权限分配</li>
+            <li>商品管理</li>
+            <li>订单管理</li>
+            <li>管理</li>
+        </ul>
+        <div class="layui-tab-content" style="padding: 5px 0 0 0;">
+            <div class="layui-tab-item layui-show">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form class="form-horizontal" onsubmit="return false" id="form">
+                        <fieldset>
+                            <div class='form-group'>
+                                <label class='col-md-2 control-label'>appId</label>
+                                <div class='col-md-10'>
+                                    <input class='form-control' placeholder='app id' type='text' name='appId' id='appId'
+                                           data-bv-notempty='true' data-bv-notempty-message='app id不能為空'>
+                                </div>
+                            </div>
+                            <div class='form-group'>
+                                <label class='col-md-2 control-label'>分類名</label>
+                                <div class='col-md-10'>
+                                    <input class='form-control' placeholder='分類名' type='text' name='categoryName'
+                                           id='categoryName'
+                                           data-bv-notempty='true' data-bv-notempty-message='分類名 不能為空'>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="layui-tab-item">2</div>
+            <div class="layui-tab-item">3</div>
+            <div class="layui-tab-item">4</div>
+            <div class="layui-tab-item">5</div>
+            <div class="layui-tab-item">6</div>
+        </div>
+    </div>
+    <div class="form-actions">
+        <div class="row" align="center">
+            <div class="col-md-12">
+                <button class="btn btn-primary" onclick="location.href='goodList.html'">返回
+                </button>
+                <button class="btn btn-primary" type="submit" onclick="add()">
+                    <i class="fa fa-save"></i> 保存
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../../../js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use(['layer', 'laydate'], function () {
+        var layer = layui.layer;
+    });
+    initData();
+
+    function initData() {
+        $.ajax({
+            type: 'get',
+            url: '/applet/appId',
+            async: false,
+            success: function (data) {
+                $('#appId').val(data);
+                if (data != null && data !== "") {
+                    document.getElementById("appId").readOnly = true;
+                }
+            }
+        });
+    }
+
+    function add() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        $.ajax({
+            type: 'post',
+            url: '/productsShown/category',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("添加成功", {shift: -1, time: 1000}, function () {
+                    location.href = "categoryList.html";
+                });
+            }
+        });
+    }
+
+    layui.use(['layer', 'element'], function () {
+        var $ = layui.jquery,
+            layer = layui.layer;
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //iframe自适应
+        function resize() {
+            var $content = $('.admin-nav-card .layui-tab-content');
+            $content.height($(this).height() - 147);
+            $content.find('iframe').each(function () {
+                $(this).height($content.height());
+            });
+        }
+
+        $(window).on('resize', function () {
+            var $content = $('.admin-nav-card .layui-tab-content');
+            $content.height($(this).height() - 147);
+            $content.find('iframe').each(function () {
+                $(this).height($content.height());
+            });
+        }).resize();
+        //toggle左侧菜单
+        $('.admin-side-toggle').on('click', function () {
+            var sideWidth = $('#admin-side').width();
+            if (sideWidth === 200) {
+                $('#admin-body').animate({
+                    left: '0'
+                });
+                $('#admin-footer').animate({
+                    left: '0'
+                });
+                $('#admin-side').animate({
+                    width: '0'
+                });
+            } else {
+                $('#admin-body').animate({
+                    left: '200px'
+                });
+                $('#admin-footer').animate({
+                    left: '200px'
+                });
+                $('#admin-side').animate({
+                    width: '200px'
+                });
+            }
+        });
+        //手机设备的简单适配
+        var treeMobile = $('.site-tree-mobile'),
+            shadeMobile = $('.site-mobile-shade');
+        treeMobile.on('click', function () {
+            $('body').addClass('site-mobile');
+        });
+        shadeMobile.on('click', function () {
+            $('body').removeClass('site-mobile');
+        });
+    });
+</script>
