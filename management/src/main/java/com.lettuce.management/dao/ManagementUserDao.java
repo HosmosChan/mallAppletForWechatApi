@@ -124,20 +124,32 @@ public interface ManagementUserDao {
     /**
      * 保存用户角色
      *
-     * @param userId      用户 id
-     * @param roleIds     角色 id 列表
+     * @param userId       用户 id
+     * @param roleIds      角色 id 列表
      * @param createUserId 创建用户 id
      * @author Hosmos
      * @date 2021-08-24
      */
     void saveUserRoles(Long userId, List<Long> roleIds, Long createUserId);
+
     /**
-     * 通过用户id获取app id
+     * 根据用户名获取用户id
      *
-     * @param userId user id
-     * @return String
+     * @param username 用户名
+     * @return Long
      * @author Hosmos
-     * @date 2021-08-25
+     * @date 2021-08-26
      */
-    String getAppIdByUserId(Long userId);
+    Long getIdByUsername(String username);
+
+    /**
+     * 根据id更改用户状态为锁定
+     *
+     * @param id        user id
+     * @param gmtUserId 修改用户 id
+     * @param status    用户状态
+     * @author Hosmos
+     * @date 2021-08-26
+     */
+    void delete(Long id, Long gmtUserId, Byte status);
 }

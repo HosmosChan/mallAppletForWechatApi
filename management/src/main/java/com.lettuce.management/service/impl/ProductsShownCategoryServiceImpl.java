@@ -1,13 +1,12 @@
 package com.lettuce.management.service.impl;
 
 import com.lettuce.common.utils.StrUtils;
-import com.lettuce.management.dao.ManagementUserDao;
+import com.lettuce.management.dao.ManagementAppletDao;
 import com.lettuce.management.dao.ProductsShownCategoryDao;
 import com.lettuce.management.dao.ProductsShownGoodDao;
 import com.lettuce.management.entity.Category;
 import com.lettuce.management.service.ProductsShownCategoryService;
 import com.lettuce.management.utils.UserUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,18 +47,18 @@ public class ProductsShownCategoryServiceImpl implements ProductsShownCategorySe
     @Autowired
     private ProductsShownGoodDao productsShownGoodDao;
     @Autowired
-    private ManagementUserDao managementUserDao;
+    private ManagementAppletDao managementAppletDao;
 
     @Override
     public int count(Map<String, Object> params) {
-        String appId = managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
         params.put("appId", appId);
         return productsShownCategoryDao.count(params);
     }
 
     @Override
     public List<Category> list(Map<String, Object> params, Integer offset, Integer limit) {
-        String appId = managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
         params.put("appId", appId);
         return productsShownCategoryDao.list(params, offset, limit);
     }

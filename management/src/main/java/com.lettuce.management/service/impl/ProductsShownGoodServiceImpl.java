@@ -1,7 +1,7 @@
 package com.lettuce.management.service.impl;
 
 import com.lettuce.common.utils.StrUtils;
-import com.lettuce.management.dao.ManagementUserDao;
+import com.lettuce.management.dao.ManagementAppletDao;
 import com.lettuce.management.dao.ProductsShownGoodDao;
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.entity.GoodBase;
@@ -47,7 +47,7 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     @Autowired
     private ProductsShownGoodDao productsShownGoodDao;
     @Autowired
-    private ManagementUserDao managementUserDao;
+    private ManagementAppletDao managementAppletDao;
 
     @Override
     public int count(Map<String, Object> params) {
@@ -56,7 +56,7 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
 
     @Override
     public List<GoodBaseDto> list(Map<String, Object> params, Integer offset, Integer limit) {
-        String appId = managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
         params.put("appId", appId);
         List<GoodBaseDto> goodBaseDtoList = productsShownGoodDao.list(params, offset, limit);
         for (GoodBaseDto goodBaseDto : goodBaseDtoList) {
@@ -70,7 +70,7 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     @Override
     public GoodBase getGoodByName(String goodName, String appId) {
         if (appId == null) {
-            appId = managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+            appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
         }
         return productsShownGoodDao.getGoodByName(goodName, appId);
     }
@@ -78,7 +78,7 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     @Override
     public void save(GoodBase goodBase) {
         if (StringUtils.isEmpty(goodBase.getAppId())) {
-            goodBase.setAppId(managementUserDao.getAppIdByUserId(UserUtil.getCurrentUser().getId()));
+            goodBase.setAppId(managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId()));
         }
         goodBase.setGoodId(StrUtils.createRamdomNo());
         goodBase.setCreateUserId(UserUtil.getCurrentUser().getId());

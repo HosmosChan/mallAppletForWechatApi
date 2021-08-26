@@ -66,7 +66,7 @@ public class ManagementUserController {
     @PutMapping
     @ApiOperation(value = "修改用户")
     @RequiresPermissions("management:user:add")
-    public User updateUser(@RequestBody UserDto userDto) {
+    public UserDto updateUser(@RequestBody UserDto userDto) {
         return managementUserService.updateUser(userDto);
     }
 
@@ -121,9 +121,10 @@ public class ManagementUserController {
         return managementUserService.getByUserId(id);
     }
 
-    @ApiOperation(value = "根据当前用户获取appId")
-    @GetMapping("/appId")
-    public String getAppIdByUserId() {
-        return managementUserService.getAppIdByUserId();
+    @RequiresPermissions("management:user:del")
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "删除")
+    public void delete(@PathVariable Long id) {
+        managementUserService.delete(id);
     }
 }

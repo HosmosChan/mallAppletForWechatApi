@@ -66,7 +66,7 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript">
-    var pers = checkPermission();
+    var permission = checkPermission();
     var example;
 
     function init() {
@@ -96,8 +96,8 @@
                         "render": function (data, type, row) {
                             var id = row['id'];
                             var href = "updateCategory.html?id=" + id;
-                            var edit = buttonEdit(href, "productsShown:category:add", pers);
-                            var del = buttonDel(id, "productsShown:category:del", pers);
+                            var edit = buttonEdit(href, "productsShown:category:add", permission);
+                            var del = buttonDel(id, "productsShown:category:del", permission);
                             return edit + del;
                         }
                     }

@@ -49,7 +49,7 @@ public class ManagementGenerateController {
 
     @ApiOperation("根据表名显示表信息")
     @GetMapping(params = {"tableName"})
-    @RequiresPermissions("generate:edit")
+    @RequiresPermissions("management:generate:edit")
     public GenerateDetail generateByTableName(String tableName) {
         GenerateDetail detail = new GenerateDetail();
         detail.setBeanName(managementGenerateService.upperFirstChar(tableName));
@@ -61,7 +61,7 @@ public class ManagementGenerateController {
     @LogAnnotation
     @ApiOperation("生成代码")
     @PostMapping
-    @RequiresPermissions("generate:edit")
+    @RequiresPermissions("management:generate:edit")
     public void save(@RequestBody GenerateInput input) {
         managementGenerateService.saveCode(input);
     }

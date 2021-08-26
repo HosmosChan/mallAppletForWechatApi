@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>添加分類</title>
+    <title>添加小程序信息</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
 </head>
 <body>
@@ -10,23 +10,44 @@
     <form class="form-horizontal" onsubmit="return false" id="form">
         <fieldset>
             <div class='form-group'>
-                <label class='col-md-2 control-label'>appId</label>
+                <label class='col-md-2 control-label'>用戶名</label>
                 <div class='col-md-10'>
-                    <input class='form-control' placeholder='app id' type='text' name='appId' id='appId'
-                           data-bv-notempty='true' data-bv-notempty-message='app id不能為空'>
+                    <input class='form-control' placeholder='用戶名' type='text' name='username' id='username'
+                           data-bv-notempty='true' data-bv-notempty-message='用戶名 不能為空'>
                 </div>
             </div>
             <div class='form-group'>
-                <label class='col-md-2 control-label'>分類名</label>
+                <label class='col-md-2 control-label'>appId</label>
                 <div class='col-md-10'>
-                    <input class='form-control' placeholder='分類名' type='text' name='categoryName' id='categoryName'
-                           data-bv-notempty='true' data-bv-notempty-message='分類名 不能為空'>
+                    <input class='form-control' placeholder='appId' type='text' name='appId' id='appId'
+                           data-bv-notempty='true' data-bv-notempty-message='appId 不能為空'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <label class='col-md-2 control-label'>小程序描述</label>
+                <div class='col-md-10'>
+                    <input class='form-control' placeholder='小程序描述' type='text' name='appletDescription'
+                           id='appletDescription'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <label class='col-md-2 control-label'>公司</label>
+                <div class='col-md-10'>
+                    <input class='form-control' placeholder='公司' type='text' name='company' id='company'>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="appletType">小程序類型</label>
+                <div class="col-md-10">
+                    <select name="appletType" class="form-control input-sm" id="appletType"
+                            data-bv-notempty='true' data-bv-notempty-message='小程序類型 不能為空'>
+                    </select>
                 </div>
             </div>
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
-                        <button class="btn btn-primary" onclick="location.href='categoryList.html'">返回</button>
+                        <button class="btn btn-primary" onclick="location.href='appletList.html'">返回</button>
                         <button class="btn btn-primary" type="submit" onclick="add()">
                             <i class="fa fa-save"></i> 保存
                         </button>
@@ -43,25 +64,12 @@
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/dict.js"></script>
 <script type="text/javascript">
     layui.use(['layer', 'laydate'], function () {
         var layer = layui.layer;
     });
-    initData();
-
-    function initData() {
-        $.ajax({
-            type: 'get',
-            url: '/applet/appId',
-            async: false,
-            success: function (data) {
-                $('#appId').val(data);
-                if (data != null && data !=="") {
-                    document.getElementById("appId").readOnly=true;
-                }
-            }
-        });
-    }
+    showDictSelect("appletType", "appletType", "");
 
     function add() {
         $('#form').bootstrapValidator();
@@ -73,12 +81,12 @@
         var formdata = $("#form").serializeObject();
         $.ajax({
             type: 'post',
-            url: '/productsShown/category',
+            url: '/applet',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("添加成功", {shift: -1, time: 1000}, function () {
-                    location.href = "categoryList.html";
+                    location.href = "appletList.html";
                 });
             }
         });

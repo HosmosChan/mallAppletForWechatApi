@@ -1,6 +1,7 @@
 package com.lettuce.management.service.impl;
 
 import com.lettuce.management.constants.ManagementUserConstants;
+import com.lettuce.management.dao.ManagementAppletDao;
 import com.lettuce.management.dao.ManagementUserDao;
 import com.lettuce.management.dto.UserDto;
 import com.lettuce.management.entity.User;
@@ -48,6 +49,8 @@ public class ManagementUserServiceImpl implements ManagementUserService {
     private static final Logger log = LoggerFactory.getLogger("adminLogger");
     @Autowired
     private ManagementUserDao managementUserDao;
+    @Autowired
+    private ManagementAppletDao managementAppletDao;
 
     @Override
     public User getUser(String username) {
@@ -74,7 +77,7 @@ public class ManagementUserServiceImpl implements ManagementUserService {
     }
 
     @Override
-    public User updateUser(UserDto userDto) {
+    public UserDto updateUser(UserDto userDto) {
         userDto.setGmtUserId(UserUtil.getCurrentUser().getId());
         managementUserDao.updateUser(userDto);
         saveUserRoles(userDto.getId(), userDto.getRoleIds());
@@ -112,9 +115,11 @@ public class ManagementUserServiceImpl implements ManagementUserService {
     }
 
     @Override
-    public String getAppIdByUserId() {
-        Long userId = UserUtil.getCurrentUser().getId();
-        return managementUserDao.getAppIdByUserId(userId);
+    public void delete(Long id) {
+        Long appletId = managementAppletDao.getByUserId(id).getId();
+        Byte status = 2;
+        managementAppletDao.delete(appletId, UserUtil.getCurrentUser().getId(), status);
+        managementUserDao.delete(id, UserUtil.getCurrentUser().getId(), status);
     }
 
     private void saveUserRoles(Long userId, List<Long> roleIds) {

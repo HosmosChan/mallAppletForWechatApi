@@ -64,6 +64,9 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/dict.js"></script>
 <script type="text/javascript">
+    layui.use(['layer', 'laydate'], function () {
+        var layer = layui.layer;
+    });
     initRoles();
     $('#form').bootstrapValidator();
 
@@ -88,7 +91,7 @@
             error: function () {
                 alert("用戶" + formdata.username + "已存在");
                 location.href = "addUser.html";
-            } 
+            }
         });
     }
 </script>

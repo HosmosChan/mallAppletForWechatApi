@@ -123,7 +123,8 @@
                             var id = row['id'];
                             var href = "updateUser.html?id=" + id;
                             var edit = buttonEdit(href, "management:user:add", permission);
-                            return edit;
+                            var del = buttonDel(id, "management:user:del", permission);
+                            return edit + del;
                         }
                     }
                 ],

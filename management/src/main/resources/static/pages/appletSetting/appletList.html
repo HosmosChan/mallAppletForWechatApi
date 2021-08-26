@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>商品列表</title>
+    <title>小程序id列表</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
@@ -18,24 +18,26 @@
                             <td>
                                 <form class="form-inline" onsubmit="return false">
                                     <div class="form-group">
-                                        <div class="col-md-10">
-                                            <select name="type" class="form-control input-sm" id="type">
-                                                <option value="goodName">商品名</option>
-                                                <option value="categoryName">分類</option>
-                                                <option value="sellStatus">售賣狀態</option>
-                                            </select>
-                                        </div>
-                                        <input id="message" type="text" class="form-control">
+                                        <label for="appletType">小程序類型：</label>
+                                        <select class="form-control input-sm" id="appletType">
+                                        </select>
+                                        <label for="company">公司：</label>
+                                        <input id="company" type="text" class="form-control" placeholder="公司">
+                                        <label for="appId">appId：</label>
+                                        <input id="appId" type="text" class="form-control" placeholder="appId">
+                                        <label for="appletStatus">小程序状态：</label>
+                                        <select class="form-control input-sm" id="appletStatus">
+                                        </select>
                                         <button id="searchBt" class="layui-btn layui-btn-sm"
-                                                permission="productsShown:good:query"><i
+                                                permission="management:applet:query"><i
                                                 class="layui-icon">&#xe615;</i>搜索
                                         </button>
                                     </div>
                                 </form>
                             </td>
                             <td align="right">
-                                <button class="layui-btn layui-btn-sm" onclick="location.href='addGood.html'"
-                                        permission="productsShown:good:add">
+                                <button class="layui-btn layui-btn-sm" onclick="location.href='addApplet.html'"
+                                        permission="management:applet:add">
                                     <i class="layui-icon">&#xe608;</i> 添加
                                 </button>
                             </td>
@@ -50,15 +52,12 @@
                         <tr>
                         </tr>
                         <tr>
-                            <th>商品id</th>
-                            <th>分類</th>
-                            <th>商品名</th>
-                            <th>商品價格區間</th>
-                            <th>商品頁面</th>
-                            <th>商品封面</th>
-                            <th>庫存</th>
-                            <th>狀態</th>
-                            <th>開始售賣時間</th>
+                            <th>用戶名</th>
+                            <th>小程序id</th>
+                            <th>小程序描述</th>
+                            <th>公司</th>
+                            <th>小程序類型</th>
+                            <th>状态</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -78,9 +77,12 @@
 <script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
+<script type="text/javascript" src="../../js/dict.js"></script>
 <script type="text/javascript">
     var permission = checkPermission();
     var example;
+    var appletType = showDictSelect("appletType", "appletType", "全部");
+    var appletStatus = showDictSelect("appletStatus", "appletStatus", "全部");
 
     function init() {
         example =
@@ -92,44 +94,53 @@
                     "url": "/js/plugin/datatables/TraditionalChinese.lang"
                 },
                 "ajax": {
-                    "url": "/productsShown/good",
+                    "url": "/applet/appletList",
                     "type": "get",
                     "data": function (d) {
-                        var type = $("#type").val();
-                        if ($("#type").val() == "goodName") {
-                            d.goodName = $("#message").val();
-                        } else if ($("#type").val() == "categoryName") {
-                            d.categoryName = $("#message").val();
-                        } else if ($("#type").val() == "sellStatus") {
-                            d.sellStatus = $("#message").val();
-                        }
+                        d.appletType = $('#appletType').val();
+                        d.company = $('#company').val();
+                        d.appId = $('#appId').val();
+                        d.status = $('#appletStatus').val();
+                    },
+                    "error": function (xhr, textStatus, errorThrown) {
+                        var msg = xhr.responseText;
+                        console.log(msg)
                     }
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
-                    {"data": "goodId", "defaultContent": ""},
-                    {"data": "categoryName", "defaultContent": ""},
-                    {"data": "goodName", "defaultContent": ""},
-                    {"data": "goodPrice", "defaultContent": ""},
-                    {"data": "goodUrl", "defaultContent": ""},
-                    {"data": "goodCoverImg", "defaultContent": ""},
-                    {"data": "stock", "defaultContent": ""},
-                    {"data": "sellStatus", "defaultContent": ""},
-                    {"data": "sellTime", "defaultContent": ""},
+                    {"data": "username", "defaultContent": ""},
+                    {"data": "appId", "defaultContent": ""},
+                    {"data": "appletDescription", "defaultContent": ""},
+                    {"data": "company", "defaultContent": ""},
+                    {
+                        "data": "appletType",
+                        "defaultContent": "",
+                        "render": function (data, type, row) {
+                            return appletType[data];
+                        }
+                    },
+                    {
+                        "data": "status",
+                        "defaultContent": "",
+                        "render": function (data, type, row) {
+                            return appletStatus[data];
+                        }
+                    },
                     {
                         "data": "",
                         "defaultContent": "",
                         "orderable": false,
                         "render": function (data, type, row) {
                             var id = row['id'];
-                            var href = "updateGood.html?id=" + id;
-                            var edit = buttonEdit(href, "productsShown:good:add", permission);
-                            var del = buttonDel(id, "productsShown:good:del", permission);
+                            var href = "updateApplet.html?id=" + id;
+                            var edit = buttonEdit(href, "management:applet:add", permission);
+                            var del = buttonDel(id, "management:applet:del", permission);
                             return edit + del;
                         }
                     }
                 ],
-                "order": [[0, "asc"]]
+                "order": [[0, "desc"], [1, "asc"]]
             });
     }
 
@@ -143,7 +154,7 @@
         }, function () {
             $.ajax({
                 type: 'delete',
-                url: '/productsShown/good/' + id,
+                url: '/applet/' + id,
                 success: function (data) {
                     example.ajax.reload();
                     layer.msg("刪除成功");

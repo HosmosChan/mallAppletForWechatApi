@@ -66,11 +66,11 @@ public interface ManagementUserService {
      * 更新用户信息
      *
      * @param userDto userDto实体类
-     * @return User
+     * @return UserDto
      * @author Hosmos
      * @date 2021-07-14
      */
-    User updateUser(UserDto userDto);
+    UserDto updateUser(UserDto userDto);
 
     /**
      * 修改密码
@@ -114,12 +114,13 @@ public interface ManagementUserService {
      * @date 2021-07-14
      */
     User getByUserId(Long id);
+
     /**
-     * 通过当前用户获取app id
+     * 根据id更改用户为失效
      *
-     * @return String
+     * @param id user id
      * @author Hosmos
-     * @date 2021-08-25
+     * @date 2021-08-26
      */
-    String getAppIdByUserId();
+    void delete(Long id);
 }

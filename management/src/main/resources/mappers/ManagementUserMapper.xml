@@ -107,9 +107,22 @@
             (#{roleId}, #{userId}, now(), #{createUserId})
         </foreach>
     </insert>
-    <select id="getAppIdByUserId" resultType="String">
-        select appId
-        from management_user_appid
-        where userId = #{userId}
+    <select id="getIdByUsername" resultType="java.lang.Long">
+        select id
+        from management_user
+        where username = #{username}
     </select>
+    <update id="delete">
+        update management_user
+        <set>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="gmtUserId != null and gmtUserId != ''">
+                gmtUserId = #{gmtUserId},
+            </if>
+            gmtTime = now()
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

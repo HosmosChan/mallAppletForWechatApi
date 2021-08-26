@@ -17,6 +17,9 @@
 <script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript">
+    layui.use(['layer', 'laydate'], function () {
+        var layer = layui.layer;
+    });
     var pro = window.location.protocol;
     var host = window.location.host;
     var domain = pro + "//" + host;

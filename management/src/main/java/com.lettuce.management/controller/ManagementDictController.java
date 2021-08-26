@@ -45,15 +45,7 @@ public class ManagementDictController {
     @Resource
     private ManagementDictService managementDictService;
 
-    /**
-     * 保存字典
-     *
-     * @param dict 字典实体类
-     * @return Dict
-     * @author Hosmos
-     * @date 2021-07-14
-     */
-    @RequiresPermissions("dict:add")
+    @RequiresPermissions("management:dict:add")
     @PostMapping
     @ApiOperation(value = "保存")
     public Dict save(@RequestBody Dict dict) {
@@ -71,7 +63,7 @@ public class ManagementDictController {
         return managementDictService.getById(id);
     }
 
-    @RequiresPermissions("dict:add")
+    @RequiresPermissions("management:dict:add")
     @PutMapping
     @ApiOperation(value = "修改")
     public Dict update(@RequestBody Dict dict) {
@@ -79,7 +71,7 @@ public class ManagementDictController {
         return dict;
     }
 
-    @RequiresPermissions("dict:query")
+    @RequiresPermissions("management:dict:query")
     @GetMapping(params = {"start", "length"})
     @ApiOperation(value = "列表")
     public PageTableResponse list(PageTableRequest request) {
@@ -96,7 +88,7 @@ public class ManagementDictController {
         }).handle(request);
     }
 
-    @RequiresPermissions("dict:del")
+    @RequiresPermissions("management:dict:del")
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除")
     public void delete(@PathVariable Long id) {

@@ -25,7 +25,7 @@
                                         <option value="1">正常</option>
                                         <option value="0">取消</option>
                                     </select>
-                                    <button id="searchBt" class="layui-btn layui-btn-sm" permission="job:query">
+                                    <button id="searchBt" class="layui-btn layui-btn-sm" permission="management:job:query">
                                         <i class="layui-icon">&#xe615;</i>搜索
                                     </button>
                                 </div>
@@ -33,7 +33,7 @@
                         </td>
                         <td align="right">
                             <button class="layui-btn layui-btn-sm" onclick="location.href='addJob.html'"
-                                    permission="job:add">
+                                    permission="management:job:add">
                                 <i class="layui-icon">&#xe608;</i> 添加
                             </button>
                         </td>
@@ -75,7 +75,7 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript">
-    var pers = checkPermission();
+    var permission = checkPermission();
     var example;
 
     function init() {
@@ -131,8 +131,8 @@
                             if (!isSysJob) {
                                 var id = row['id'];
                                 var href = "updateJob.html?id=" + id;
-                                var edit = buttonEdit(href, "job:add", pers);
-                                var del = buttonDel(id, "job:del", pers);
+                                var edit = buttonEdit(href, "management:job:add", permission);
+                                var del = buttonDel(id, "management:job:del", permission);
                                 return edit + del;
                             } else {
                                 return "<span style='color:red'>系統任務無操作</span>";

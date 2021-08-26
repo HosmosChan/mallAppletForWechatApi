@@ -67,7 +67,7 @@
 <script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript">
-    var pers = checkPermission();
+    var permission = checkPermission();
 
     var pro = window.location.protocol;
     var host = window.location.host;
@@ -123,7 +123,7 @@
                         "orderable": false,
                         "render": function (data, type, row) {
                             var id = row['id'];
-                            var del = buttonDel(id, "management:file:del", pers);
+                            var del = buttonDel(id, "management:file:del", permission);
                             return del;
                         }
                     },
