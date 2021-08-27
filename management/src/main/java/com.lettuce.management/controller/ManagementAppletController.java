@@ -106,13 +106,13 @@ public class ManagementAppletController {
 
     @GetMapping("/getCompany")
     @ApiOperation(value = "获取公司名和Id")
-    public Company getCompany() {
+    public List<Company> getCompany() {
         return managementAppletService.getCompany();
     }
 
     @GetMapping("/getCompanyByAppId")
     @ApiOperation(value = "根据app id获取公司名和Id")
-    public Company getCompanyByAppId(String appId) {
+    public List<Company> getCompanyByAppId(String appId) {
         return managementAppletService.getCompanyByAppId(appId);
     }
 }

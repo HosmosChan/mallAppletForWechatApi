@@ -113,12 +113,12 @@ public class ManagementAppletServiceImpl implements ManagementAppletService {
     }
 
     @Override
-    public Company getCompany() {
+    public List<Company> getCompany() {
         return managementAppletDao.getCompany();
     }
 
     @Override
-    public Company getCompanyByAppId(String appId) {
+    public List<Company> getCompanyByAppId(String appId) {
         return managementAppletDao.getCompanyByAppId(appId);
     }
 }

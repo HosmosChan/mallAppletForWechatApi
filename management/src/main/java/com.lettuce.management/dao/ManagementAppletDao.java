@@ -125,19 +125,19 @@ public interface ManagementAppletDao {
     /**
      * 获取公司名和Id
      *
-     * @return Company
+     * @return List<Company>
      * @author Hosmos
      * @date 2021-08-28
      */
-    Company getCompany();
+    List<Company> getCompany();
 
     /**
      * 获取公司名和Id
      *
      * @param appId app id
-     * @return Company
+     * @return List<Company>
      * @author Hosmos
      * @date 2021-08-28
      */
-    Company getCompanyByAppId(String appId);
+    List<Company> getCompanyByAppId(String appId);
 }

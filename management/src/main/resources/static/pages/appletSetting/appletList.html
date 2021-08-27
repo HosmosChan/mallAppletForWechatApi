@@ -21,8 +21,9 @@
                                         <label for="appletType">小程序類型：</label>
                                         <select class="form-control input-sm" id="appletType">
                                         </select>
-                                        <label for="company">公司：</label>
-                                        <input id="company" type="text" class="form-control" placeholder="公司">
+                                        <label for="companyId">公司：</label>
+                                        <select class="form-control input-sm" id="companyId">
+                                        </select>
                                         <label for="appId">appId：</label>
                                         <input id="appId" type="text" class="form-control" placeholder="appId">
                                         <label for="appletStatus">小程序状态：</label>
@@ -86,7 +87,7 @@
     var example;
     var appletType = showDictSelect("appletType", "appletType", "全部");
     var appletStatus = showDictSelect("appletStatus", "appletStatus", "全部");
-    var company = showCompany("companyId", "companyId", "全部");
+    var companyId = showCompany("companyId", "companyId", "全部");
 
     function init() {
         example =
@@ -117,10 +118,10 @@
                     {"data": "appId", "defaultContent": ""},
                     {"data": "appletDescription", "defaultContent": ""},
                     {
-                        "data": "company",
+                        "data": "companyId",
                         "defaultContent": "",
                         "render": function (data, type, row) {
-                            return company[data]
+                            return companyId[data]
                         }
                     },
                     {
