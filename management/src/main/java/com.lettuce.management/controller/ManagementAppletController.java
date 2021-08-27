@@ -4,6 +4,7 @@ import com.lettuce.common.utils.table.PageTableHandler;
 import com.lettuce.common.utils.table.PageTableRequest;
 import com.lettuce.common.utils.table.PageTableResponse;
 import com.lettuce.management.dto.AppletDto;
+import com.lettuce.management.entity.Company;
 import com.lettuce.management.service.ManagementAppletService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -101,5 +102,17 @@ public class ManagementAppletController {
     @ApiOperation(value = "删除")
     public void delete(@PathVariable Long id) {
         managementAppletService.delete(id);
+    }
+
+    @GetMapping("/getCompany")
+    @ApiOperation(value = "获取公司名和Id")
+    public Company getCompany() {
+        return managementAppletService.getCompany();
+    }
+
+    @GetMapping("/getCompanyByAppId")
+    @ApiOperation(value = "根据app id获取公司名和Id")
+    public Company getCompanyByAppId(String appId) {
+        return managementAppletService.getCompanyByAppId(appId);
     }
 }

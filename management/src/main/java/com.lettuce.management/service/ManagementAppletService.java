@@ -1,6 +1,7 @@
 package com.lettuce.management.service;
 
 import com.lettuce.management.dto.AppletDto;
+import com.lettuce.management.entity.Company;
 
 import java.util.List;
 import java.util.Map;
@@ -107,4 +108,23 @@ public interface ManagementAppletService {
      * @date 2021-08-26
      */
     void delete(Long id);
+
+    /**
+     * 获取公司名和Id
+     *
+     * @return Company
+     * @author Hosmos
+     * @date 2021-08-28
+     */
+    Company getCompany();
+
+    /**
+     * 获取公司名和Id
+     *
+     * @param appId app id
+     * @return Company
+     * @author Hosmos
+     * @date 2021-08-28
+     */
+    Company getCompanyByAppId(String appId);
 }

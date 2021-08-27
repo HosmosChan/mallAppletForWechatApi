@@ -7,7 +7,7 @@
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="appId" jdbcType="VARCHAR" property="appId"/>
         <result column="appletDescription" jdbcType="VARCHAR" property="appletDescription"/>
-        <result column="company" jdbcType="VARCHAR" property="company"/>
+        <result column="companyId" jdbcType="BIGINT" property="companyId"/>
         <result column="appletType" jdbcType="TINYINT" property="appletType"/>
         <result column="status" jdbcType="TINYINT" property="status"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
@@ -15,10 +15,22 @@
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
+    <resultMap id="CompanyResultMap" type="com.lettuce.management.entity.Company">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="companyId" jdbcType="BIGINT" property="companyId"/>
+        <result column="company" jdbcType="VARCHAR" property="company"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
+        <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
+        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
+    </resultMap>
     <sql id="Applet_List">
         mua.id, mua.userId, mua.appId, mua.appletDescription,
-        mua.company, mua.appletType, mua. status, mua.createTime,
+        mua.companyId, mua.appletType, mua. status, mua.createTime,
         mua.createUserId, mua.gmtTime, mua.gmtUserId
+    </sql>
+    <sql id="Company_List">
+        mc.id, mc.companyId, mc.company, mc.createTime, mc.createUserId, mc.gmtTime, mc.gmtUserId
     </sql>
     <sql id="where">
         <where>
@@ -26,8 +38,8 @@
                 <if test="params.appletType != null and params.appletType != ''">
                     and mua.appletType = #{params.appletType}
                 </if>
-                <if test="params.company != null and params.company != ''">
-                    and mua.company like concat('%', #{params.company}, '%')
+                <if test="params.companyId != null and params.companyId != ''">
+                    and mua.companyId like concat('%', #{params.companyId}, '%')
                 </if>
                 <if test="params.appId != null and params.appId != ''">
                     and mua.appId = #{params.appId}
@@ -42,7 +54,7 @@
         select appId
         from management_user_appid
         where userId = #{userId}
-        and status = 1
+          and status = 1
     </select>
     <select id="count" resultType="int">
         select count(1) from management_user_appid as mua
@@ -76,8 +88,8 @@
         <if test="appletDescription != null and appletDescription != ''">
             appletDescription,
         </if>
-        <if test="company != null and company != ''">
-            company,
+        <if test="companyId != null and companyId != ''">
+            companyId,
         </if>
         appletType, status, createUserId, createTime)
         value
@@ -85,8 +97,8 @@
         <if test="appletDescription != null and appletDescription != ''">
             #{appletDescription},
         </if>
-        <if test="company != null and company != ''">
-            #{company},
+        <if test="companyId != null and companyId != ''">
+            #{companyId},
         </if>
         #{appletType}, 0, #{createUserId}, now())
     </insert>
@@ -106,8 +118,8 @@
             <if test="appletDescription != null and appletDescription != ''">
                 appletDescription = #{appletDescription},
             </if>
-            <if test="company != null and company != ''">
-                company = #{company},
+            <if test="companyId != null and companyId != ''">
+                companyId = #{companyId},
             </if>
             <if test="appletType != null and appletType != ''">
                 appletType = #{appletType},
@@ -135,4 +147,16 @@
         </set>
         where id = #{id}
     </update>
+    <select id="getCompany" resultMap="CompanyResultMap">
+        select
+        <include refid="Company_List"/>
+        from management_company as mc
+    </select>
+    <select id="getCompanyByAppId" resultMap="CompanyResultMap">
+        select
+        <include refid="Company_List"/>
+        from management_company as mc
+        right join management_user_appid as mua on mc.companyId = mua.companyId
+        where mua.appId = #{appId}
+    </select>
 </mapper>

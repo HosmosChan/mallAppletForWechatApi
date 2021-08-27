@@ -207,6 +207,25 @@ CREATE TABLE `mall_good_tag_list`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for management_company
+-- ----------------------------
+DROP TABLE IF EXISTS `management_company`;
+CREATE TABLE `management_company`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `companyId` bigint NOT NULL,
+  `company` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `createTime` datetime NOT NULL,
+  `createUserId` bigint NOT NULL,
+  `gmtTime` datetime NULL DEFAULT NULL,
+  `gmtUserId` bigint NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of management_company
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for management_dict
 -- ----------------------------
 DROP TABLE IF EXISTS `management_dict`;
@@ -439,7 +458,7 @@ CREATE TABLE `management_user_appid`  (
   `userId` bigint(20) NOT NULL COMMENT '用户id',
   `appId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'appId',
   `appletDescription` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '小程序描述',
-  `company` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '小程序归属公司',
+  `companyId` bigint(20) NULL DEFAULT NULL COMMENT '小程序归属公司Id',
   `appletType` tinyint(4) NOT NULL COMMENT '小程序类型（0-商品展示，1-商城）',
   `status` tinyint(4) NOT NULL COMMENT '小程序状态（0-审核，1-正常，2-锁定）',
   `createUserId` bigint(20) NOT NULL COMMENT '创建用户id',

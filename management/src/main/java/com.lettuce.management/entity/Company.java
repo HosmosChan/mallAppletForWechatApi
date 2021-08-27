@@ -19,45 +19,17 @@ package com.lettuce.management.entity;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
- * 小程序配置实体类
+ * 公司配置实体类
  *
  * @author Hosmos
- * @date 2021年08月26日
+ * @date 2021年08月28日
  */
-public class Applet extends BaseEntity<Long> {
-    private static final long serialVersionUID = 4450156856974134760L;
-    private Long userId;
-    private String appId;
-    private String appletDescription;
+public class Company extends BaseEntity<Long> {
+    private static final long serialVersionUID = 4407111262328560508L;
     private Long companyId;
-    private Byte appletType;
-    private Byte status;
+    private String company;
     private Long createUserId;
     private Long gmtUserId;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getAppId() {
-        return appId;
-    }
-
-    public void setAppId(String appId) {
-        this.appId = appId;
-    }
-
-    public String getAppletDescription() {
-        return appletDescription;
-    }
-
-    public void setAppletDescription(String appletDescription) {
-        this.appletDescription = appletDescription;
-    }
 
     public Long getCompanyId() {
         return companyId;
@@ -67,20 +39,12 @@ public class Applet extends BaseEntity<Long> {
         this.companyId = companyId;
     }
 
-    public Byte getAppletType() {
-        return appletType;
+    public String getCompany() {
+        return company;
     }
 
-    public void setAppletType(Byte appletType) {
-        this.appletType = appletType;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public Long getCreateUserId() {

@@ -33,7 +33,7 @@
             <div class='form-group'>
                 <label class='col-md-2 control-label'>公司</label>
                 <div class='col-md-10'>
-                    <input class='form-control' placeholder='公司' type='text' name='company' id='company'>
+                    <select name="companyId" class="form-control input-sm" id="companyId"></select>
                 </div>
             </div>
             <div class="form-group">
@@ -70,6 +70,7 @@
         var layer = layui.layer;
     });
     showDictSelect("appletType", "appletType", "");
+    showCompany("companyId", "companyId", "");
 
     function add() {
         $('#form').bootstrapValidator();

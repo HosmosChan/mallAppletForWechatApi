@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">商品名</label>
                                 <div class="col-md-10">
-                                    <input class="form-control" placeholder="商品名" type="text" name="goodName"
+                                    <input class="form-control" type="text" name="goodName"
                                            id="goodName"
                                            data-bv-notempty="true" data-bv-notempty-message="商品名 不能為空">
                                 </div>
@@ -67,7 +67,7 @@
                                        style="display: none;">特價價格</label>
                                 <div class="col-md-10" id="specialPriceDiv">
                                     $ <input class="form-control-money" type="number" name="specialPrice"
-                                           id="specialPrice" value=0.00 step="0.01" style="display: none;">
+                                             id="specialPrice" value=0.00 step="0.01" style="display: none;">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -88,7 +88,32 @@
                     </form>
                 </div>
             </div>
-            <div class="layui-tab-item">2</div>
+            <div class="layui-tab-item">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form class="form-horizontal" onsubmit="return false" id="form2">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">商品描述</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" type="text" name="goodDescribe" id="goodDescribe">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">商品規格</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" type="text" name="goodSize" id="goodSize">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">公司</label>
+                                <div class="col-md-10">
+                                    <select name="companyId" class="form-control input-sm" id="companyId"></select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
             <div class="layui-tab-item">3</div>
             <div class="layui-tab-item">4</div>
             <div class="layui-tab-item">5</div>
@@ -118,19 +143,20 @@
     layui.use(['layer', 'laydate'], function () {
         var layer = layui.layer;
     });
-    layui.use('laydate', function(){
+    layui.use('laydate', function () {
         var laydate = layui.laydate;
 
         //执行一个laydate实例
         laydate.render({
             elem: '#sellTime' //指定元素
-            ,type: 'datetime'
-            ,format: 'yyyy-MM-dd HH:mm:ss'
+            , type: 'datetime'
+            , format: 'yyyy-MM-dd HH:mm:ss'
         });
     });
     initData();
     var appId = $('#appId').val().toString();
-    var categoryName = showCategoryByAppId("categoryId", "categoryName", "", appId);
+    showCategoryByAppId("categoryId", "categoryName", "", appId);
+    showCompanyByAppId("companyId", "companyId", "", appId);
     $('#goodMinPrice').blur(function () {
         var minPrice = $('#goodMinPrice').val();
         var maxPrice = $('#goodMaxPrice').val();
@@ -185,7 +211,14 @@
         if (!bootstrapValidator.isValid()) {
             return;
         }
+        $('#form2').bootstrapValidator();
+        var bootstrapValidator = $("#form2").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
         var formData = $("#form1").serializeObject();
+        var formData = $("#form2").addSerializeObject(formData);
         $.ajax({
             type: 'post',
             url: '/productsShown/good',

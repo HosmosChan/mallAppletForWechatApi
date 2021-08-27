@@ -3,6 +3,7 @@ package com.lettuce.management.service.impl;
 import com.lettuce.management.dao.ManagementAppletDao;
 import com.lettuce.management.dao.ManagementUserDao;
 import com.lettuce.management.dto.AppletDto;
+import com.lettuce.management.entity.Company;
 import com.lettuce.management.service.ManagementAppletService;
 import com.lettuce.management.utils.UserUtil;
 import org.slf4j.Logger;
@@ -109,5 +110,15 @@ public class ManagementAppletServiceImpl implements ManagementAppletService {
         Long gmtUserId = UserUtil.getCurrentUser().getId();
         Byte status = 2;
         managementAppletDao.delete(id, gmtUserId, status);
+    }
+
+    @Override
+    public Company getCompany() {
+        return managementAppletDao.getCompany();
+    }
+
+    @Override
+    public Company getCompanyByAppId(String appId) {
+        return managementAppletDao.getCompanyByAppId(appId);
     }
 }
