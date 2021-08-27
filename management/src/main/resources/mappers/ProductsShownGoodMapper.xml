@@ -169,6 +169,13 @@
             #{goodId, jdbcType=NUMERIC}
         </foreach>
     </delete>
+    <select id="getGoodByName" resultMap="GoodBaseResultMap">
+        select
+        <include refid="Good_Base_List"/>
+        from products_shown_good_base as psgb
+        where goodName = #{goodName}
+        and appId = #{appId}
+    </select>
     <insert id="saveBase">
         insert into products_shown_good_base
         (appId, goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl, isSpecialPrice, specialPrice, stock, sellTime, createUserId, createTime)

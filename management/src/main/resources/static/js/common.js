@@ -15,6 +15,23 @@ $.fn.serializeObject = function () {
     return o;
 };
 
+//將額外的form添加入json
+$.fn.addSerializeObject = function (form) {
+    var o = form;
+    var a = this.serializeArray();
+    $.each(a, function () {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+
 //獲取url后的參數值
 function getUrlParam(key) {
     var href = window.location.href;
