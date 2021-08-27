@@ -1,3 +1,17 @@
+parameters:
+  dns: http
+  status: dev
+  domain: localhost
+  port: 8082
+  productsShownType: productsShown
+  mallType: mall
+  productsShownPort: 8082
+  mallPort: 8083
+  file:
+    filePath: /files
+    carousel: /carousel
+    goodCover: /goodCover
+    good: /good
 server:
   port: 8082
   servlet:

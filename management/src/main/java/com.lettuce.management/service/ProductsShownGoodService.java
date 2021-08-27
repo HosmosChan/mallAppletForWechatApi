@@ -1,6 +1,7 @@
 package com.lettuce.management.service;
 
 import com.lettuce.management.dto.GoodBaseDto;
+import com.lettuce.management.dto.GoodDto;
 import com.lettuce.management.entity.GoodBase;
 
 import java.util.List;
@@ -54,22 +55,11 @@ public interface ProductsShownGoodService {
     List<GoodBaseDto> list(Map<String, Object> params, Integer offset, Integer limit);
 
     /**
-     * 通过商品名获取商品信息
-     *
-     * @param goodName 商品名
-     * @param appId    app id
-     * @return GoodBase
-     * @author Hosmos
-     * @date 2021-08-25
-     */
-    GoodBase getGoodByName(String goodName, String appId);
-
-    /**
      * 保存商品信息
      *
-     * @param goodBase 商品实体类
+     * @param goodDto 商品实体类
      * @author Hosmos
-     * @date 2021-08-25
+     * @date 2021-08-27
      */
-    void save(GoodBase goodBase);
+    void save(GoodDto goodDto);
 }

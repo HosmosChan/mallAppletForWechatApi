@@ -169,4 +169,10 @@
             #{goodId, jdbcType=NUMERIC}
         </foreach>
     </delete>
+    <insert id="saveBase">
+        insert into products_shown_good_base
+        (appId, goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl, isSpecialPrice, specialPrice, stock, sellTime, createUserId, createTime)
+        value
+        (#{appId}, #{goodId}, #{categoryId}, #{goodName}, #{goodMaxPrice}, #{goodMinPrice}, #{goodUrl}, #{isSpecialPrice}, #{specialPrice}, #{stock}, #{sellTime}, #{createUserId}, now())
+    </insert>
 </mapper>

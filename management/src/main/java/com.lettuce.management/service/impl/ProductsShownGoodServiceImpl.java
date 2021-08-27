@@ -1,9 +1,11 @@
 package com.lettuce.management.service.impl;
 
 import com.lettuce.common.utils.StrUtils;
+import com.lettuce.management.config.YmlConfig;
 import com.lettuce.management.dao.ManagementAppletDao;
 import com.lettuce.management.dao.ProductsShownGoodDao;
 import com.lettuce.management.dto.GoodBaseDto;
+import com.lettuce.management.dto.GoodDto;
 import com.lettuce.management.entity.GoodBase;
 import com.lettuce.management.service.ProductsShownGoodService;
 import com.lettuce.management.utils.UserUtil;
@@ -13,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +51,8 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     private ProductsShownGoodDao productsShownGoodDao;
     @Autowired
     private ManagementAppletDao managementAppletDao;
+    @Autowired
+    private YmlConfig ymlConfig;
 
     @Override
     public int count(Map<String, Object> params) {
@@ -68,21 +73,28 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     }
 
     @Override
-    public GoodBase getGoodByName(String goodName, String appId) {
-        if (appId == null) {
-            appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+    public void save(GoodDto goodDto) {
+        GoodBase d = productsShownGoodDao.getGoodByName(goodDto.getGoodName(), goodDto.getAppId());
+        if (d != null) {
+            throw new IllegalArgumentException("商品已存在");
         }
-        return productsShownGoodDao.getGoodByName(goodName, appId);
-    }
-
-    @Override
-    public void save(GoodBase goodBase) {
-        if (StringUtils.isEmpty(goodBase.getAppId())) {
-            goodBase.setAppId(managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId()));
+        goodDto.setGoodId(StrUtils.createRamdomNo());
+        goodDto.setCreateUserId(UserUtil.getCurrentUser().getId());
+        String pro = "pro";
+        if (pro.equals(ymlConfig.getStatus())) {
+            goodDto.setGoodUrl(ymlConfig.getDns() + "://" + ymlConfig.getProductsShownType() + "." + ymlConfig.getDomain() + "/good/detail/" + goodDto.getGoodId());
+        } else {
+            goodDto.setGoodUrl(ymlConfig.getDomain() + ":" + ymlConfig.getProductsShownPort() + "/good/detail/" + goodDto.getGoodId());
         }
-        goodBase.setGoodId(StrUtils.createRamdomNo());
-        goodBase.setCreateUserId(UserUtil.getCurrentUser().getId());
-        productsShownGoodDao.save(goodBase);
+        /*String fileType = ymlConfig.getFile().getCarousel();
+        if (goodDto.getGoodCoverImg() != null) {
+            if (pro.equals(ymlConfig.getStatus())) {
+                goodDto.setGoodCoverImg(ymlConfig.getDns() + "://" + ymlConfig.getProductsShownType() + "." + ymlConfig.getDomain() + ymlConfig.getFile().getFilePath() + ymlConfig.getProductsShownType() + fileType + "/" + goodDto.getGoodId());
+            } else {
+                goodDto.setGoodCoverImg(ymlConfig.getDomain() + ":" + ymlConfig.getProductsShownPort() + "/good/detail/" + goodDto.getGoodId());
+            }
+        }*/
+        productsShownGoodDao.saveBase(goodDto);
     }
 
     /**

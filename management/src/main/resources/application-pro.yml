@@ -1,3 +1,17 @@
+parameters:
+  dns: http
+  status: pro
+  domain: 8.210.94.154
+  port: 8081
+  productsShownType: productsShown
+  mallType: mall
+  productsShownPort: 8082
+  mallPort: 8083
+  file:
+    filePath: /files
+    carousel: /carousel
+    goodCover: /goodCover
+    good: /good
 server:
   port: 8081
   servlet:
@@ -44,7 +58,7 @@ mybatis:
   configuration:
     mapUnderscoreToCamelCase: true
 files:
-  path: ${file-path:/home/testProject/mallAppletForWechatApi/file}
+  path: ${file-path:/home/files}
 logging:
   config: classpath:logback-admin.xml
 log:

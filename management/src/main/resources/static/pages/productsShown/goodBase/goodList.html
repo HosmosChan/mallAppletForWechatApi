@@ -18,13 +18,13 @@
                             <td>
                                 <form class="form-inline" onsubmit="return false">
                                     <div class="form-group">
-                                        <div class="col-md-10">
-                                            <select name="type" class="form-control input-sm" id="type">
-                                                <option value="goodName">商品名</option>
-                                                <option value="categoryName">分類</option>
-                                                <option value="sellStatus">售賣狀態</option>
-                                            </select>
-                                        </div>
+                                        <label for="type">查询类型：</label>
+                                        <select name="type" class="form-control input-sm" id="type">
+                                            <option value="goodName">商品名</option>
+                                            <option value="categoryName">分類</option>
+                                            <option value="sellStatus">售賣狀態</option>
+                                        </select>
+                                        <label for="message">内容：</label>
                                         <input id="message" type="text" class="form-control">
                                         <button id="searchBt" class="layui-btn layui-btn-sm"
                                                 permission="productsShown:good:query"><i

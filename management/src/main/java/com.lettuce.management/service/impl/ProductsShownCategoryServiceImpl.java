@@ -99,4 +99,9 @@ public class ProductsShownCategoryServiceImpl implements ProductsShownCategorySe
         }
         productsShownCategoryDao.delete(id);
     }
+
+    @Override
+    public List<Category> getCategoryByAppId(String appId) {
+        return productsShownCategoryDao.getCategoryByAppId(appId);
+    }
 }

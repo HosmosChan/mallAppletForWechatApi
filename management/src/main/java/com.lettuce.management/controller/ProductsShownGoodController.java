@@ -4,6 +4,7 @@ import com.lettuce.common.utils.table.PageTableHandler;
 import com.lettuce.common.utils.table.PageTableRequest;
 import com.lettuce.common.utils.table.PageTableResponse;
 import com.lettuce.management.dto.GoodBaseDto;
+import com.lettuce.management.dto.GoodDto;
 import com.lettuce.management.entity.GoodBase;
 import com.lettuce.management.service.ProductsShownGoodService;
 import io.swagger.annotations.Api;
@@ -58,7 +59,7 @@ public class ProductsShownGoodController {
     @GetMapping
     @ApiOperation(value = "商品查询")
     @RequiresPermissions("productsShown:good:query")
-    public PageTableResponse listFiles(PageTableRequest request) {
+    public PageTableResponse list(PageTableRequest request) {
         return new PageTableHandler(new PageTableHandler.CountHandler() {
             @Override
             public int count(PageTableRequest request) {
@@ -74,20 +75,16 @@ public class ProductsShownGoodController {
     /**
      * 保存商品
      *
-     * @param goodBase 商品实体类
-     * @return Category
+     * @param goodDto good dto
+     * @return GoodDto
      * @author Hosmos
-     * @date 2021-08-25
+     * @date 2021-08-27
      */
-    @RequiresPermissions("productsShown:category:add")
+    @RequiresPermissions("productsShown:good:add")
     @PostMapping
     @ApiOperation(value = "保存")
-    public GoodBase save(@RequestBody GoodBase goodBase) {
-        GoodBase d = productsShownGoodService.getGoodByName(goodBase.getGoodName(), goodBase.getAppId());
-        if (d != null) {
-            throw new IllegalArgumentException("商品已存在");
-        }
-        productsShownGoodService.save(goodBase);
-        return goodBase;
+    public GoodDto save(@RequestBody GoodDto goodDto) {
+        productsShownGoodService.save(goodDto);
+        return goodDto;
     }
 }

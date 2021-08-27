@@ -99,4 +99,13 @@ public interface ProductsShownCategoryService {
      * @date 2021-08-25
      */
     void delete(Long id);
+    /**
+     * 根据AppId获取分类
+     *
+     * @param appId app id
+     * @return List<Category>
+     * @author Hosmos
+     * @date 2021-08-27
+     */
+    List<Category> getCategoryByAppId(String appId);
 }

@@ -96,4 +96,11 @@ public class ProductsShownCategoryController {
     public void delete(@PathVariable Long id) {
         productsShownCategoryService.delete(id);
     }
+
+    @GetMapping("/getCategoryByAppId")
+    @ApiOperation(value = "根据AppId获取分类")
+    public List<Category> getCategoryByAppId(String appId) {
+        return productsShownCategoryService.getCategoryByAppId(appId);
+    }
+
 }

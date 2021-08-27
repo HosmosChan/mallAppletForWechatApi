@@ -76,4 +76,10 @@
         delete from products_shown_category
         where id = #{id}
     </delete>
+    <select id="getCategoryByAppId" resultMap="CategoryResultMap">
+        select
+        <include refid="Category_List"/>
+        from products_shown_category as psc
+        where psc.appId = #{appId}
+    </select>
 </mapper>

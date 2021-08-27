@@ -1,6 +1,7 @@
 package com.lettuce.management.dao;
 
 import com.lettuce.management.dto.GoodBaseDto;
+import com.lettuce.management.dto.GoodDto;
 import com.lettuce.management.entity.GoodBase;
 
 import java.util.List;
@@ -120,11 +121,11 @@ public interface ProductsShownGoodDao {
     GoodBase getGoodByName(String goodName, String appId);
 
     /**
-     * 保存商品信息
+     * 保存商品基础信息
      *
-     * @param goodBase 商品实体类
+     * @param goodDto 商品 gto
      * @author Hosmos
-     * @date 2021-08-25
+     * @date 2021-08-27
      */
-    void save(GoodBase goodBase);
+    void saveBase(GoodDto goodDto);
 }

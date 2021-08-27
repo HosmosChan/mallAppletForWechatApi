@@ -13,31 +13,75 @@
      id="admin-body">
     <div class="layui-tab admin-nav-card layui-tab-brief">
         <ul class="layui-tab-title">
-            <li class="layui-this">网站设置</li>
-            <li>用户管理</li>
-            <li>权限分配</li>
-            <li>商品管理</li>
-            <li>订单管理</li>
-            <li>管理</li>
+            <li class="layui-this">商品基础信息</li>
+            <li>商品信息</li>
+            <li>商品优惠信息</li>
+            <li>商品配送信息</li>
+            <li>商品详情</li>
         </ul>
         <div class="layui-tab-content" style="padding: 5px 0 0 0;">
             <div class="layui-tab-item layui-show">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <form class="form-horizontal" onsubmit="return false" id="form">
+                    <form class="form-horizontal" onsubmit="return false" id="form1">
                         <fieldset>
-                            <div class='form-group'>
-                                <label class='col-md-2 control-label'>appId</label>
-                                <div class='col-md-10'>
-                                    <input class='form-control' placeholder='app id' type='text' name='appId' id='appId'
-                                           data-bv-notempty='true' data-bv-notempty-message='app id不能為空'>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">appId</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" placeholder="app id" type="text" name="appId" id="appId"
+                                           data-bv-notempty="true" data-bv-notempty-message="app id不能為空">
                                 </div>
                             </div>
-                            <div class='form-group'>
-                                <label class='col-md-2 control-label'>分類名</label>
-                                <div class='col-md-10'>
-                                    <input class='form-control' placeholder='分類名' type='text' name='categoryName'
-                                           id='categoryName'
-                                           data-bv-notempty='true' data-bv-notempty-message='分類名 不能為空'>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">分類</label>
+                                <div class="col-md-10">
+                                    <select name="categoryName" class="form-control input-sm" id="categoryName"
+                                            data-bv-notempty="true" data-bv-notempty-message="分類 不能為空">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">商品名</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" placeholder="商品名" type="text" name="goodName"
+                                           id="goodName"
+                                           data-bv-notempty="true" data-bv-notempty-message="商品名 不能為空">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">價格區間</label>
+                                <div class="col-md-10">
+                                    $ <input class="form-control-money" type="number" name="goodMinPrice"
+                                             id="goodMinPrice" value=0.00 step="0.01"> -
+                                    $ <input class="form-control-money" type="number" name="goodMaxPrice"
+                                             id="goodMaxPrice" value=0.00 step="0.01">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">是否特價</label>
+                                <div class="col-md-10">
+                                    <input type="checkbox" name="isSpecialPrice" id="isSpecialPrice">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" id="specialPriceTitle"
+                                       style="display: none;">特價價格</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" type="number" name="specialPrice"
+                                           id="specialPrice" value=0.00 step="0.01" style="display: none;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">庫存</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" type="number" name="stock"
+                                           id="stock" value=0>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">售賣時間</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" type="datetime-local" name="sellTime"
+                                           id="sellTime" data-bv-notempty="true" data-bv-notempty-message="售賣時間 不能為空">
                                 </div>
                             </div>
                         </fieldset>
@@ -48,7 +92,6 @@
             <div class="layui-tab-item">3</div>
             <div class="layui-tab-item">4</div>
             <div class="layui-tab-item">5</div>
-            <div class="layui-tab-item">6</div>
         </div>
     </div>
     <div class="form-actions">
@@ -70,11 +113,41 @@
 <script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../../js/common.js"></script>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/dict.js"></script>
 <script type="text/javascript">
     layui.use(['layer', 'laydate'], function () {
         var layer = layui.layer;
     });
     initData();
+    var appId = $('#appId').val().toString();
+    var categoryName = showCategoryByAppId("categoryName", "categoryName", "", appId);
+    $('#goodMinPrice').blur(function () {
+        var minPrice = $('#goodMinPrice').val();
+        var maxPrice = $('#goodMaxPrice').val();
+        if (minPrice > maxPrice) {
+            $('#goodMaxPrice').val(minPrice);
+        }
+    });
+    $('#goodMaxPrice').blur(function () {
+        var minPrice = $('#goodMinPrice').val();
+        var maxPrice = $('#goodMaxPrice').val();
+        if (minPrice > maxPrice) {
+            $('#goodMaxPrice').val(minPrice);
+        }
+    });
+    $(function () {
+        $("#isSpecialPrice").click(function () {
+            if (this.checked == true) {
+                $('#specialPrice').show();
+                $('#specialPriceTitle').show();
+                $('#specialPrice').val(0);
+            } else {
+                $('#specialPrice').hide();
+                $('#specialPrice').val(null);
+                $('#specialPriceTitle').hide();
+            }
+        });
+    });
 
     function initData() {
         $.ajax({
@@ -91,21 +164,25 @@
     }
 
     function add() {
-        $('#form').bootstrapValidator();
-        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        $('#form1').bootstrapValidator();
+        var bootstrapValidator = $("#form1").data('bootstrapValidator');
         bootstrapValidator.validate();
         if (!bootstrapValidator.isValid()) {
             return;
         }
-        var formdata = $("#form").serializeObject();
+        var form1 = $("#form1").serializeObject();
+        var formData = {};//新建参数对象
+        form1(function (e) {
+            formData[e.name] = e.value;
+        });
         $.ajax({
             type: 'post',
-            url: '/productsShown/category',
+            url: '/productsShown/good',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(formdata),
+            data: JSON.stringify(formData),
             success: function (data) {
                 layer.msg("添加成功", {shift: -1, time: 1000}, function () {
-                    location.href = "categoryList.html";
+                    location.href = "goodList.html";
                 });
             }
         });
