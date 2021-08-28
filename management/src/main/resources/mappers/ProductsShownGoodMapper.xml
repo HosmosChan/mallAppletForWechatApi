@@ -39,11 +39,19 @@
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
+    <resultMap id="ManagementDeliverWayResultMap" type="com.lettuce.management.entity.DeliverWay">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="deliverWay" jdbcType="VARCHAR" property="deliverWay"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
+        <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
+        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
+    </resultMap>
     <resultMap id="GoodDeliverWayResultMap" type="com.lettuce.management.entity.GoodDeliverWay">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="appId" jdbcType="BIGINT" property="appId"/>
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
-        <result column="deliverWay" jdbcType="TINYINT" property="deliverWay"/>
+        <result column="deliverWay" jdbcType="BIGINT" property="deliverWay"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
@@ -81,6 +89,9 @@
     <sql id="Good_Detail_List">
         psgd.id, psgd.appId, psgd.goodId, goodDescribe, goodSize, companyId, psgd.createTime,
         psgd.createUserId, psgd.gmtTime, psgd.gmtUserId
+    </sql>
+    <sql id="Management_Deliver_Way_List">
+        mdwl.id, mdwl.deliverWay
     </sql>
     <sql id="Good_Deliver_Way_List">
         psgdw.id, psgdw.appId, psgdw.goodId, deliverWay, psgdw.createTime, psgdw.createUserId,
@@ -180,9 +191,25 @@
     </select>
     <insert id="saveBase">
         insert into products_shown_good_base
-        (appId, goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl, isSpecialPrice, specialPrice, isDiscount, stock, sellStatus, sellTime, createUserId, createTime)
+        (appId, goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl,
+        <if test="isSpecialPrice != null and isSpecialPrice != ''">
+            isSpecialPrice,
+        </if>
+        specialPrice,
+        <if test="isDiscount != null and isDiscount != ''">
+            isDiscount,
+        </if>
+        stock, sellStatus, sellTime, createUserId, createTime)
         value
-        (#{appId}, #{goodId}, #{categoryId}, #{goodName}, #{goodMaxPrice}, #{goodMinPrice}, #{goodUrl}, #{isSpecialPrice}, #{specialPrice}, #{isDiscount}, #{stock}, #{sellStatus}, #{sellTime}, #{createUserId}, now())
+        (#{appId}, #{goodId}, #{categoryId}, #{goodName}, #{goodMaxPrice}, #{goodMinPrice}, #{goodUrl},
+        <if test="isSpecialPrice != null and isSpecialPrice != ''">
+            #{isSpecialPrice},
+        </if>
+        #{specialPrice},
+        <if test="isDiscount != null and isDiscount != ''">
+            #{isDiscount},
+        </if>
+        #{stock}, #{sellStatus}, #{sellTime}, #{createUserId}, now())
     </insert>
     <insert id="saveDetail">
         insert into products_shown_good_detail
@@ -195,5 +222,18 @@
         (appId, goodId, discountOff, fullPrice, createUserId, createTime)
         value
         (#{appId}, #{goodId}, #{discountOff}, #{fullPrice}, #{createUserId}, now())
+    </insert>
+    <select id="listAll" resultMap="ManagementDeliverWayResultMap">
+        select
+        <include refid="Management_Deliver_Way_List"/>
+        from management_deliver_way as mdwl
+        order by mdwl.id asc
+    </select>
+    <insert id="saveDeliverWay">
+        insert into products_shown_good_deliver_way(appId, goodId, deliverWay, createUserId, createTime)
+        values
+        <foreach collection="goodDeliverWayList" item="goodDeliverWay" separator=",">
+            (#{goodDeliverWay.appId}, #{goodDeliverWay.goodId}, #{goodDeliverWay.deliverWay}, #{goodDeliverWay.createUserId}, now())
+        </foreach>
     </insert>
 </mapper>

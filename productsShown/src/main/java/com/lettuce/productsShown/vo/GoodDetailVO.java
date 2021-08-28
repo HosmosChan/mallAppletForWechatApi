@@ -52,7 +52,7 @@ public class GoodDetailVO implements Serializable {
     private Long companyId;
     private Double discountOff;
     private BigDecimal fullPrice;
-    private List<String> deliverWay;
+    private List<Long> deliverWay;
 
     public String getAppId() {
         return appId;
@@ -206,11 +206,11 @@ public class GoodDetailVO implements Serializable {
         this.fullPrice = fullPrice;
     }
 
-    public List<String> getDeliverWay() {
+    public List<Long> getDeliverWay() {
         return deliverWay;
     }
 
-    public void setDeliverWay(List<String> deliverWay) {
+    public void setDeliverWay(List<Long> deliverWay) {
         this.deliverWay = deliverWay;
     }
 }

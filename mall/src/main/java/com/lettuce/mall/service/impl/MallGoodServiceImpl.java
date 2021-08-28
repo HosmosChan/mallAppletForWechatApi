@@ -148,7 +148,7 @@ public class MallGoodServiceImpl implements MallGoodService {
         }
         GoodDetail goodDetail = mallGoodDao.getGoodDetailInfo(goodId, appId);
         List<GoodDeliverWay> goodDeliverWay = mallGoodDao.getGoodDeliverWay(goodId, appId);
-        List<Byte> goodDeliverWayList = new ArrayList<>();
+        List<Long> goodDeliverWayList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(goodDeliverWay)) {
             for (GoodDeliverWay goodDeliverWayStr : goodDeliverWay) {
                 goodDeliverWayList.add(goodDeliverWayStr.getDeliverWay());

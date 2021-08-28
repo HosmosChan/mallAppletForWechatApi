@@ -35,7 +35,7 @@ public class GoodDto extends GoodBase {
     private Long companyId;
     private Double discountOff;
     private BigDecimal fullPrice;
-    private List<String> deliverWay;
+    private List<Long> deliverWay;
 
     public String getGoodDescribe() {
         return goodDescribe;
@@ -77,11 +77,11 @@ public class GoodDto extends GoodBase {
         this.fullPrice = fullPrice;
     }
 
-    public List<String> getDeliverWay() {
+    public List<Long> getDeliverWay() {
         return deliverWay;
     }
 
-    public void setDeliverWay(List<String> deliverWay) {
+    public void setDeliverWay(List<Long> deliverWay) {
         this.deliverWay = deliverWay;
     }
 }

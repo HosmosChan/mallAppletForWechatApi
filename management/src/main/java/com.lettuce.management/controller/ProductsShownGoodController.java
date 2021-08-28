@@ -1,11 +1,13 @@
 package com.lettuce.management.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.lettuce.common.utils.table.PageTableHandler;
 import com.lettuce.common.utils.table.PageTableRequest;
 import com.lettuce.common.utils.table.PageTableResponse;
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
-import com.lettuce.management.entity.GoodBase;
+import com.lettuce.management.entity.DeliverWay;
 import com.lettuce.management.service.ProductsShownGoodService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -48,6 +50,7 @@ public class ProductsShownGoodController {
     private static final Logger log = LoggerFactory.getLogger("adminLogger");
     @Resource
     private ProductsShownGoodService productsShownGoodService;
+
     /**
      * 商品查询
      *
@@ -72,6 +75,7 @@ public class ProductsShownGoodController {
             }
         }).handle(request);
     }
+
     /**
      * 保存商品
      *
@@ -86,5 +90,37 @@ public class ProductsShownGoodController {
     public GoodDto save(@RequestBody GoodDto goodDto) {
         productsShownGoodService.save(goodDto);
         return goodDto;
+    }
+
+    /**
+     * 所有配送方式
+     *
+     * @return JSONArray
+     * @author Hosmos
+     * @date 2021-08-27
+     */
+    @GetMapping("/deliverWay/all")
+    @ApiOperation(value = "所有配送方式")
+    public JSONArray deliverWayAll() {
+        List<DeliverWay> deliverWayAll = productsShownGoodService.listAll();
+        JSONArray array = new JSONArray();
+        setDeliverWayTree(deliverWayAll, array);
+        return array;
+    }
+
+    /**
+     * 设置配送方式树
+     *
+     * @param deliverWayAll 所有配送方式列表
+     * @param array          用JSONArray显示permission
+     * @author Hosmos
+     * @date 2021-08-27
+     */
+    private void setDeliverWayTree(List<DeliverWay> deliverWayAll, JSONArray array) {
+        for (DeliverWay per : deliverWayAll) {
+            String string = JSONObject.toJSONString(per);
+            JSONObject deliverWay = (JSONObject) JSONObject.parse(string);
+            array.add(deliverWay);
+        }
     }
 }

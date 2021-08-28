@@ -2,7 +2,9 @@ package com.lettuce.management.dao;
 
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
+import com.lettuce.management.entity.DeliverWay;
 import com.lettuce.management.entity.GoodBase;
+import com.lettuce.management.entity.GoodDeliverWay;
 
 import java.util.List;
 import java.util.Map;
@@ -146,4 +148,20 @@ public interface ProductsShownGoodDao {
      * @date 2021-08-28
      */
     void saveDiscount(GoodDto goodDto);
+    /**
+     * 获取所有配送方式
+     *
+     * @return List<DeliverWay>
+     * @author Hosmos
+     * @date 2021-08-28
+     */
+    List<DeliverWay> listAll();
+    /**
+     * 保存配送方式信息
+     *
+     * @param goodDeliverWayList 配送方式列表
+     * @author Hosmos
+     * @date 2021-08-28
+     */
+    void saveDeliverWay(List<GoodDeliverWay> goodDeliverWayList);
 }

@@ -143,7 +143,7 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
         }
         GoodDetail goodDetail = productsShownGoodDao.getGoodDetailInfo(goodId, appId);
         List<GoodDeliverWay> goodDeliverWay = productsShownGoodDao.getGoodDeliverWay(goodId, appId);
-        List<String> goodDeliverWayList = null;
+        List<Long> goodDeliverWayList = null;
         if (!CollectionUtils.isEmpty(goodDeliverWay)) {
             for (GoodDeliverWay goodDeliverWayStr : goodDeliverWay) {
                 goodDeliverWayList.add(goodDeliverWayStr.getDeliverWay());

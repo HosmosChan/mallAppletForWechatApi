@@ -6,17 +6,18 @@ import com.lettuce.management.dao.ManagementAppletDao;
 import com.lettuce.management.dao.ProductsShownGoodDao;
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
+import com.lettuce.management.entity.DeliverWay;
 import com.lettuce.management.entity.GoodBase;
+import com.lettuce.management.entity.GoodDeliverWay;
 import com.lettuce.management.service.ProductsShownGoodService;
 import com.lettuce.management.utils.UserUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +67,7 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
         String orderBy = (String) params.get("orderBy");
         String orderByGoodPriceDesc = " order by goodPrice desc";
         String orderByGoodPriceAsc = " order by goodPrice asc";
-        if(orderByGoodPriceDesc.equals(orderBy)) {
+        if (orderByGoodPriceDesc.equals(orderBy)) {
             orderBy = " order by goodMinPrice desc";
             params.put("orderBy", orderBy);
         } else if (orderByGoodPriceAsc.equals(orderBy)) {
@@ -106,9 +107,27 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
         }*/
         productsShownGoodDao.saveBase(goodDto);
         productsShownGoodDao.saveDetail(goodDto);
-        if (goodDto.getIsDiscount() == 1) {
-            productsShownGoodDao.saveDiscount(goodDto);
+        if(goodDto.getIsDiscount() != null) {
+            if (goodDto.getIsDiscount() == 1) {
+                productsShownGoodDao.saveDiscount(goodDto);
+            }
         }
+        GoodDeliverWay goodDeliverWay = new GoodDeliverWay();
+        goodDeliverWay.setAppId(goodDto.getAppId());
+        goodDeliverWay.setGoodId(goodDto.getGoodId());
+        goodDeliverWay.setCreateUserId(goodDto.getCreateUserId());
+        List<Long> deliverWay = goodDto.getDeliverWay();
+        List<GoodDeliverWay> goodDeliverWayList = new ArrayList<>();
+        goodDeliverWayList.add(goodDeliverWay);
+        for (int i = 1; i < deliverWay.size(); i++) {
+            goodDeliverWayList.get(i - 1).setDeliverWay(deliverWay.get(i));
+        }
+        productsShownGoodDao.saveDeliverWay(goodDeliverWayList);
+    }
+
+    @Override
+    public List<DeliverWay> listAll() {
+        return productsShownGoodDao.listAll();
     }
 
     /**

@@ -26,10 +26,21 @@ package com.lettuce.mall.entity;
  */
 public class GoodDeliverWay extends BaseEntity<Long> {
     private static final long serialVersionUID = -265910838120062021L;
+    private String appId;
     private Long goodId;
-    private Byte deliverWay;
+    private Long deliverWay;
     private Long createUserId;
     private Long gmtUserId;
+
+    @Override
+    public String getAppId() {
+        return appId;
+    }
+
+    @Override
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     public Long getGoodId() {
         return goodId;
@@ -39,11 +50,11 @@ public class GoodDeliverWay extends BaseEntity<Long> {
         this.goodId = goodId;
     }
 
-    public Byte getDeliverWay() {
+    public Long getDeliverWay() {
         return deliverWay;
     }
 
-    public void setDeliverWay(Byte deliverWay) {
+    public void setDeliverWay(Long deliverWay) {
         this.deliverWay = deliverWay;
     }
 

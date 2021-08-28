@@ -1,4 +1,7 @@
-package com.lettuce.productsShown.entity;
+package com.lettuce.management.entity;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Code is far away from bug with the animal protected
@@ -19,42 +22,22 @@ package com.lettuce.productsShown.entity;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 配送方式实体类
  *
  * @author Hosmos
- * @description 商品配送方式实体类
- * @date 2021年07月06日
+ * @date 2021年08月28日
  */
-public class GoodDeliverWay extends BaseEntity<Long> {
-    private static final long serialVersionUID = -265910838120062021L;
-    private String appId;
-    private Long goodId;
-    private Long deliverWay;
+public class DeliverWay extends BaseEntity<Long> {
+    private static final long serialVersionUID = -6581947132581299155L;
+    private String deliverWay;
     private Long createUserId;
     private Long gmtUserId;
 
-    @Override
-    public String getAppId() {
-        return appId;
-    }
-
-    @Override
-    public void setAppId(String appId) {
-        this.appId = appId;
-    }
-
-    public Long getGoodId() {
-        return goodId;
-    }
-
-    public void setGoodId(Long goodId) {
-        this.goodId = goodId;
-    }
-
-    public Long getDeliverWay() {
+    public String getDeliverWay() {
         return deliverWay;
     }
 
-    public void setDeliverWay(Long deliverWay) {
+    public void setDeliverWay(String deliverWay) {
         this.deliverWay = deliverWay;
     }
 

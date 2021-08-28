@@ -2,7 +2,7 @@ package com.lettuce.management.service;
 
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
-import com.lettuce.management.entity.GoodBase;
+import com.lettuce.management.entity.DeliverWay;
 
 import java.util.List;
 import java.util.Map;
@@ -62,4 +62,13 @@ public interface ProductsShownGoodService {
      * @date 2021-08-27
      */
     void save(GoodDto goodDto);
+
+    /**
+     * 获取所有配送方式列表
+     *
+     * @return List<DeliverWay>
+     * @author Hosmos
+     * @date 2021-08-28
+     */
+    List<DeliverWay> listAll();
 }

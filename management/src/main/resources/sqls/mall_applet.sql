@@ -86,9 +86,9 @@ CREATE TABLE `mall_good_base`  (
   `goodPrice` decimal(10, 2) NOT NULL COMMENT '商品原价',
   `goodUrl` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商品详情跳转Url',
   `goodCoverImg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商品封面图片',
-  `isSpecialPrice` tinyint(4) NOT NULL COMMENT '是否特价（0-否，1-是）',
+  `isSpecialPrice` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否特价（0-否，1-是）',
   `SpecialPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '特价优惠金额',
-  `isDiscount` tinyint(4) NOT NULL COMMENT '是否满折（0-否，1-是）',
+  `isDiscount` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否满折（0-否，1-是）',
   `paymentNo` int(11) NOT NULL DEFAULT 0 COMMENT '购买人数',
   `stock` int(11) NOT NULL DEFAULT 0 COMMENT '库存',
   `markNo` int(11) NOT NULL DEFAULT 0 COMMENT '收藏人数',
@@ -113,7 +113,7 @@ CREATE TABLE `mall_good_deliver_way`  (
   `tid` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `appId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'appId',
   `goodId` bigint(20) NOT NULL COMMENT '商品Id',
-  `deliverWay` tinyint(4) NOT NULL DEFAULT 0 COMMENT '配送方式',
+  `deliverWay` bigint(20) NOT NULL DEFAULT 0 COMMENT '配送方式',
   `createUserId` bigint(20) NOT NULL COMMENT '创建者Id',
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
@@ -211,19 +211,39 @@ CREATE TABLE `mall_good_tag_list`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `management_company`;
 CREATE TABLE `management_company`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `companyId` bigint NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `companyId` bigint(20) NOT NULL,
   `company` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `createTime` datetime NOT NULL,
-  `createUserId` bigint NOT NULL,
-  `gmtTime` datetime NULL DEFAULT NULL,
-  `gmtUserId` bigint NULL DEFAULT NULL,
+  `createTime` datetime(0) NOT NULL,
+  `createUserId` bigint(20) NOT NULL,
+  `gmtTime` datetime(0) NULL DEFAULT NULL,
+  `gmtUserId` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of management_company
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for management_deliver_way
+-- ----------------------------
+DROP TABLE IF EXISTS `management_deliver_way`;
+CREATE TABLE `management_deliver_way`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `deliverWay` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `createTime` datetime(0) NOT NULL COMMENT '创建时间',
+  `createUserId` int(11) NOT NULL COMMENT '创建用户Id',
+  `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+  `gmtUserId` int(11) NULL DEFAULT NULL COMMENT '修改用户Id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of management_deliver_way
+-- ----------------------------
+INSERT INTO `management_deliver_way` VALUES (1, '自提', '2021-08-28 21:57:42', 1, NULL, NULL);
+INSERT INTO `management_deliver_way` VALUES (2, '送货上门', '2021-08-28 21:57:56', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for management_dict
@@ -250,6 +270,9 @@ INSERT INTO `management_dict` VALUES (5, 'appletType', '1', '商城', '2021-08-2
 INSERT INTO `management_dict` VALUES (6, 'appletStatus', '0', '審覈', '2021-08-26 22:17:29', NULL);
 INSERT INTO `management_dict` VALUES (7, 'appletStatus', '1', '正常', '2021-08-26 22:17:43', NULL);
 INSERT INTO `management_dict` VALUES (8, 'appletStatus', '2', '鎖定', '2021-08-26 22:18:01', NULL);
+INSERT INTO `management_dict` VALUES (9, 'sellStatus', '0', '審覈', '2021-08-28 22:04:35', NULL);
+INSERT INTO `management_dict` VALUES (10, 'sellStatus', '1', '上架', '2021-08-28 22:04:55', NULL);
+INSERT INTO `management_dict` VALUES (11, 'sellStatus', '2', '下架', '2021-08-28 22:05:06', NULL);
 
 -- ----------------------------
 -- Table structure for management_logs
@@ -322,12 +345,12 @@ INSERT INTO `management_permission` VALUES (31, 0, '字典管理', 'fa-reddit', 
 INSERT INTO `management_permission` VALUES (32, 31, '查詢', '', '', 2, 'management:dict:query', 1, '2021-07-14 17:47:41', 1, NULL, NULL);
 INSERT INTO `management_permission` VALUES (33, 31, '新增', '', '', 2, 'management:dict:add', 2, '2021-07-14 17:47:41', 1, NULL, NULL);
 INSERT INTO `management_permission` VALUES (34, 31, '刪除', '', '', 2, 'management:dict:del', 3, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (35, 0, '微信小程序權限', 'fa-weixin', '', 1, '', 14, '2021-08-24 22:24:39', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (36, 35, '小程序配置表', '', 'pages/appletSetting/appletList.html', 1, '', 1, '2021-08-26 19:40:06', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (35, 0, '微信小程序權限', 'fa-weixin', '', 1, '', 13, '2021-08-24 22:24:39', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (36, 35, '小程序配置表', 'fa-weixin', 'pages/appletSetting/applet/appletList.html', 1, '', 2, '2021-08-26 19:40:06', 1, '2021-08-28 18:15:17', 1);
 INSERT INTO `management_permission` VALUES (37, 36, '查询', '', '', 2, 'management:applet:query', 1, '2021-08-26 19:41:19', 1, NULL, NULL);
 INSERT INTO `management_permission` VALUES (38, 36, '新增', '', '', 2, 'management:applet:add', 2, '2021-08-26 19:41:49', 1, NULL, NULL);
 INSERT INTO `management_permission` VALUES (39, 36, '删除', '', '', 2, 'management:applet:del', 3, '2021-08-26 19:42:30', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (40, 0, '商品展示', 'fa-list', '', 1, '', 13, '2021-08-24 20:46:03', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (40, 0, '商品展示', 'fa-list', '', 1, '', 14, '2021-08-24 20:46:03', 1, NULL, NULL);
 INSERT INTO `management_permission` VALUES (41, 40, '商品展示-分類管理', 'fa-th', 'pages/productsShown/category/categoryList.html', 1, '', 1, '2021-08-24 20:49:33', 1, NULL, NULL);
 INSERT INTO `management_permission` VALUES (42, 41, '查詢', '', '', 2, 'productsShown:category:query', 1, '2021-08-24 20:53:01', 1, NULL, NULL);
 INSERT INTO `management_permission` VALUES (43, 41, '新增', '', '', 2, 'productsShown:category:add', 2, '2021-08-24 20:57:00', 1, NULL, NULL);
@@ -337,6 +360,10 @@ INSERT INTO `management_permission` VALUES (46, 45, '查詢', '', '', 2, 'produc
 INSERT INTO `management_permission` VALUES (47, 45, '新增', '', '', 2, 'productsShown:good:add', 2, '2021-08-24 21:12:13', 1, NULL, NULL);
 INSERT INTO `management_permission` VALUES (48, 45, '刪除', '', '', 2, 'productsShown:good:del', 3, '2021-08-24 21:13:21', 1, NULL, NULL);
 INSERT INTO `management_permission` VALUES (49, 45, '封面上傳', 'fa-cloud-upload', '', 2, 'productsShown:good:add', 4, '2021-08-24 22:36:41', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (50, 35, '公司配置表', 'fa-building', 'pages/appletSetting/company/companyList.html', 1, '', 1, '2021-08-28 18:13:31', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (51, 50, '查询', '', '', 2, 'management:company:query', 1, '2021-08-28 18:14:20', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (52, 50, '新增', '', '', 2, 'management:company:add', 2, '2021-08-28 18:14:41', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (53, 50, '删除', '', '', 2, 'management:company:del', 3, '2021-08-28 18:14:59', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for management_role
@@ -422,6 +449,10 @@ INSERT INTO `management_role_permission` VALUES (1, 46);
 INSERT INTO `management_role_permission` VALUES (1, 47);
 INSERT INTO `management_role_permission` VALUES (1, 48);
 INSERT INTO `management_role_permission` VALUES (1, 49);
+INSERT INTO `management_role_permission` VALUES (1, 50);
+INSERT INTO `management_role_permission` VALUES (1, 51);
+INSERT INTO `management_role_permission` VALUES (1, 52);
+INSERT INTO `management_role_permission` VALUES (1, 53);
 
 -- ----------------------------
 -- Table structure for management_user
@@ -472,8 +503,8 @@ CREATE TABLE `management_user_appid`  (
 -- ----------------------------
 -- Records of management_user_appid
 -- ----------------------------
-INSERT INTO `management_user_appid` VALUES (1, 1, '1', 'test', NULL, 0, 1, 1, '2021-08-26 20:01:58', 1, '2021-08-26 22:54:45');
-INSERT INTO `management_user_appid` VALUES (2, 2, '123', NULL, 1, 0, 1, 1, '2021-08-26 21:29:31', 1, '2021-08-26 22:54:33');
+INSERT INTO `management_user_appid` VALUES (1, 1, '1', 'test', 20210828194940776, 0, 1, 1, '2021-08-26 20:01:58', 1, '2021-08-28 19:50:03');
+INSERT INTO `management_user_appid` VALUES (2, 2, '123', NULL, 20210828194940776, 0, 1, 1, '2021-08-26 21:29:31', 1, '2021-08-28 19:49:56');
 
 -- ----------------------------
 -- Table structure for management_user_role
@@ -592,7 +623,7 @@ CREATE TABLE `products_shown_good_deliver_way`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `appId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'appId',
   `goodId` bigint(20) NOT NULL COMMENT '商品Id',
-  `deliverWay` tinyint(4) NOT NULL DEFAULT 0 COMMENT '配送方式',
+  `deliverWay` bigint(20) NOT NULL DEFAULT 0 COMMENT '配送方式',
   `createUserId` bigint(20) NOT NULL COMMENT '创建者Id',
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
@@ -609,7 +640,7 @@ CREATE TABLE `products_shown_good_detail`  (
   `appId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'appId',
   `goodId` bigint(20) NOT NULL COMMENT '商品Id',
   `goodDescribe` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '商品介绍',
-  `goodSize` double NOT NULL COMMENT '规格',
+  `goodSize` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规格',
   `companyId` bigint(20) NULL DEFAULT NULL COMMENT '公司Id',
   `createUserId` bigint(20) NOT NULL COMMENT '创建者Id',
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',

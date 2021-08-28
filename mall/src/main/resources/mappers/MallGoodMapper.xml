@@ -42,7 +42,7 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="appId" jdbcType="BIGINT" property="appId"/>
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
-        <result column="deliverWay" jdbcType="TINYINT" property="deliverWay"/>
+        <result column="deliverWay" jdbcType="BIGINT" property="deliverWay"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
