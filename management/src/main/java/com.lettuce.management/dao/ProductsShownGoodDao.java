@@ -128,4 +128,12 @@ public interface ProductsShownGoodDao {
      * @date 2021-08-27
      */
     void saveBase(GoodDto goodDto);
+    /**
+     * 保存商品詳細信息
+     *
+     * @param goodDto 商品 gto
+     * @author Hosmos
+     * @date 2021-08-28
+     */
+    void saveDetail(GoodDto goodDto);
 }

@@ -184,4 +184,10 @@
         value
         (#{appId}, #{goodId}, #{categoryId}, #{goodName}, #{goodMaxPrice}, #{goodMinPrice}, #{goodUrl}, #{isSpecialPrice}, #{specialPrice}, #{stock}, #{sellStatus}, #{sellTime}, #{createUserId}, now())
     </insert>
+    <insert id="saveDetail">
+        insert into products_shown_good_detail
+        (appId, goodId, goodDescribe, goodSize, companyId, createUserId, createTime)
+            value
+            (#{appId}, #{goodId}, #{goodDescribe}, #{goodSize}, #{companyId}, #{createUserId}, now())
+    </insert>
 </mapper>

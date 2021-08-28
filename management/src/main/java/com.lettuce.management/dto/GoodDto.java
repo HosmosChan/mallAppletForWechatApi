@@ -27,4 +27,31 @@ import com.lettuce.management.entity.GoodBase;
  */
 public class GoodDto extends GoodBase {
     private static final long serialVersionUID = -3945849058875084283L;
+    private String goodDescribe;
+    private String goodSize;
+    private Long companyId;
+
+    public String getGoodDescribe() {
+        return goodDescribe;
+    }
+
+    public void setGoodDescribe(String goodDescribe) {
+        this.goodDescribe = goodDescribe;
+    }
+
+    public String getGoodSize() {
+        return goodSize;
+    }
+
+    public void setGoodSize(String goodSize) {
+        this.goodSize = goodSize;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
 }

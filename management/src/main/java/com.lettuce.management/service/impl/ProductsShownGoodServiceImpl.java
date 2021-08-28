@@ -95,6 +95,7 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
             }
         }*/
         productsShownGoodDao.saveBase(goodDto);
+        productsShownGoodDao.saveDetail(goodDto);
     }
 
     /**
