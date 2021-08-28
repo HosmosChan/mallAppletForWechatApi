@@ -63,6 +63,16 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     public List<GoodBaseDto> list(Map<String, Object> params, Integer offset, Integer limit) {
         String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
         params.put("appId", appId);
+        String orderBy = (String) params.get("orderBy");
+        String orderByGoodPriceDesc = " order by goodPrice desc";
+        String orderByGoodPriceAsc = " order by goodPrice asc";
+        if(orderByGoodPriceDesc.equals(orderBy)) {
+            orderBy = " order by goodMinPrice desc";
+            params.put("orderBy", orderBy);
+        } else if (orderByGoodPriceAsc.equals(orderBy)) {
+            orderBy = " order by goodMinPrice asc";
+            params.put("orderBy", orderBy);
+        }
         List<GoodBaseDto> goodBaseDtoList = productsShownGoodDao.list(params, offset, limit);
         for (GoodBaseDto goodBaseDto : goodBaseDtoList) {
             shortenGoodTitle(goodBaseDto);
