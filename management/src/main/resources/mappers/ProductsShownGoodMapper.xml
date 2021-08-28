@@ -191,25 +191,10 @@
     </select>
     <insert id="saveBase">
         insert into products_shown_good_base
-        (appId, goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl,
-        <if test="isSpecialPrice != null and isSpecialPrice != ''">
-            isSpecialPrice,
-        </if>
-        specialPrice,
-        <if test="isDiscount != null and isDiscount != ''">
-            isDiscount,
-        </if>
-        stock, sellStatus, sellTime, createUserId, createTime)
+        (appId, goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl, isSpecialPrice, specialPrice, isDiscount, stock, sellStatus, sellTime, createUserId, createTime)
         value
-        (#{appId}, #{goodId}, #{categoryId}, #{goodName}, #{goodMaxPrice}, #{goodMinPrice}, #{goodUrl},
-        <if test="isSpecialPrice != null and isSpecialPrice != ''">
-            #{isSpecialPrice},
-        </if>
-        #{specialPrice},
-        <if test="isDiscount != null and isDiscount != ''">
-            #{isDiscount},
-        </if>
-        #{stock}, #{sellStatus}, #{sellTime}, #{createUserId}, now())
+        (#{appId}, #{goodId}, #{categoryId}, #{goodName}, #{goodMaxPrice}, #{goodMinPrice}, #{goodUrl}, #{isSpecialPrice},
+        #{specialPrice}, #{isDiscount}, #{stock}, #{sellStatus}, #{sellTime}, #{createUserId}, now())
     </insert>
     <insert id="saveDetail">
         insert into products_shown_good_detail

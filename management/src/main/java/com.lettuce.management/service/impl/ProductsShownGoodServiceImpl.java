@@ -105,22 +105,28 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
                 goodDto.setGoodCoverImg(ymlConfig.getDomain() + ":" + ymlConfig.getProductsShownPort() + "/good/detail/" + goodDto.getGoodId());
             }
         }*/
+        if (goodDto.getIsSpecialPrice() == null) {
+            goodDto.setIsSpecialPrice((byte) 0);
+        }
+        if (goodDto.getIsDiscount() == null) {
+            goodDto.setIsDiscount((byte) 0);
+        }
         productsShownGoodDao.saveBase(goodDto);
         productsShownGoodDao.saveDetail(goodDto);
-        if(goodDto.getIsDiscount() != null) {
+        if (goodDto.getIsDiscount() != null) {
             if (goodDto.getIsDiscount() == 1) {
                 productsShownGoodDao.saveDiscount(goodDto);
             }
         }
-        GoodDeliverWay goodDeliverWay = new GoodDeliverWay();
-        goodDeliverWay.setAppId(goodDto.getAppId());
-        goodDeliverWay.setGoodId(goodDto.getGoodId());
-        goodDeliverWay.setCreateUserId(goodDto.getCreateUserId());
         List<Long> deliverWay = goodDto.getDeliverWay();
         List<GoodDeliverWay> goodDeliverWayList = new ArrayList<>();
-        goodDeliverWayList.add(goodDeliverWay);
         for (int i = 1; i < deliverWay.size(); i++) {
-            goodDeliverWayList.get(i - 1).setDeliverWay(deliverWay.get(i));
+            GoodDeliverWay goodDeliverWay = new GoodDeliverWay();
+            goodDeliverWay.setAppId(goodDto.getAppId());
+            goodDeliverWay.setGoodId(goodDto.getGoodId());
+            goodDeliverWay.setCreateUserId(goodDto.getCreateUserId());
+            goodDeliverWay.setDeliverWay(deliverWay.get(i));
+            goodDeliverWayList.add(goodDeliverWay);
         }
         productsShownGoodDao.saveDeliverWay(goodDeliverWayList);
     }

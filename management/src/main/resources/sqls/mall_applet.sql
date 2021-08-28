@@ -56,7 +56,7 @@ CREATE TABLE `mall_carousel`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_id_parentId`(`isDeleted`, `usePlaceId`, `goodId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '轮播图表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '轮播图表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for mall_dict
@@ -71,7 +71,7 @@ CREATE TABLE `mall_dict`  (
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for mall_good_base
@@ -103,7 +103,7 @@ CREATE TABLE `mall_good_base`  (
   INDEX `idx_discount`(`sellStatus`, `isSpecialPrice`) USING BTREE,
   INDEX `idx_no_payment`(`sellStatus`, `paymentNo`) USING BTREE,
   INDEX `idx_time_create`(`sellStatus`, `sellTime`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品基础信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品基础信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for mall_good_deliver_way
@@ -119,7 +119,7 @@ CREATE TABLE `mall_good_deliver_way`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`tid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for mall_good_detail
@@ -137,7 +137,7 @@ CREATE TABLE `mall_good_detail`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for mall_good_discount
@@ -154,7 +154,7 @@ CREATE TABLE `mall_good_discount`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for mall_good_info
@@ -172,7 +172,7 @@ CREATE TABLE `mall_good_info`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for mall_good_tag
@@ -188,7 +188,7 @@ CREATE TABLE `mall_good_tag`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for mall_good_tag_list
@@ -204,7 +204,7 @@ CREATE TABLE `mall_good_tag_list`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for management_company
@@ -242,8 +242,8 @@ CREATE TABLE `management_deliver_way`  (
 -- ----------------------------
 -- Records of management_deliver_way
 -- ----------------------------
-INSERT INTO `management_deliver_way` VALUES (1, '自提', '2021-08-28 21:57:42', 1, NULL, NULL);
-INSERT INTO `management_deliver_way` VALUES (2, '送货上门', '2021-08-28 21:57:56', 1, NULL, NULL);
+INSERT INTO `management_deliver_way` VALUES (1, '自提', '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_deliver_way` VALUES (2, '送货上门', '2021-01-01 00:00:00', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for management_dict
@@ -257,22 +257,22 @@ CREATE TABLE `management_dict`  (
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of management_dict
 -- ----------------------------
-INSERT INTO `management_dict` VALUES (1, 'userStatus', '0', '審覈', '2017-11-17 16:26:06', NULL);
-INSERT INTO `management_dict` VALUES (2, 'userStatus', '1', '正常', '2017-11-17 16:26:06', NULL);
-INSERT INTO `management_dict` VALUES (3, 'userStatus', '2', '鎖定', '2018-12-27 11:36:42', NULL);
-INSERT INTO `management_dict` VALUES (4, 'appletType', '0', '商品展示', '2021-08-26 17:41:08', NULL);
-INSERT INTO `management_dict` VALUES (5, 'appletType', '1', '商城', '2021-08-26 17:41:25', NULL);
-INSERT INTO `management_dict` VALUES (6, 'appletStatus', '0', '審覈', '2021-08-26 22:17:29', NULL);
-INSERT INTO `management_dict` VALUES (7, 'appletStatus', '1', '正常', '2021-08-26 22:17:43', NULL);
-INSERT INTO `management_dict` VALUES (8, 'appletStatus', '2', '鎖定', '2021-08-26 22:18:01', NULL);
-INSERT INTO `management_dict` VALUES (9, 'sellStatus', '0', '審覈', '2021-08-28 22:04:35', NULL);
-INSERT INTO `management_dict` VALUES (10, 'sellStatus', '1', '上架', '2021-08-28 22:04:55', NULL);
-INSERT INTO `management_dict` VALUES (11, 'sellStatus', '2', '下架', '2021-08-28 22:05:06', NULL);
+INSERT INTO `management_dict` VALUES (1, 'userStatus', '0', '審覈', '2021-01-01 00:00:00', NULL);
+INSERT INTO `management_dict` VALUES (2, 'userStatus', '1', '正常', '2021-01-01 00:00:00', NULL);
+INSERT INTO `management_dict` VALUES (3, 'userStatus', '2', '鎖定', '2021-01-01 00:00:00', NULL);
+INSERT INTO `management_dict` VALUES (4, 'appletType', '0', '商品展示', '2021-01-01 00:00:00', NULL);
+INSERT INTO `management_dict` VALUES (5, 'appletType', '1', '商城', '2021-01-01 00:00:00', NULL);
+INSERT INTO `management_dict` VALUES (6, 'appletStatus', '0', '審覈', '2021-01-01 00:00:00', NULL);
+INSERT INTO `management_dict` VALUES (7, 'appletStatus', '1', '正常', '2021-01-01 00:00:00', NULL);
+INSERT INTO `management_dict` VALUES (8, 'appletStatus', '2', '鎖定', '2021-01-01 00:00:00', NULL);
+INSERT INTO `management_dict` VALUES (9, 'sellStatus', '0', '審覈', '2021-01-01 00:00:00', NULL);
+INSERT INTO `management_dict` VALUES (10, 'sellStatus', '1', '上架', '2021-01-01 00:00:00', NULL);
+INSERT INTO `management_dict` VALUES (11, 'sellStatus', '2', '下架', '2021-01-01 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for management_logs
@@ -286,7 +286,7 @@ CREATE TABLE `management_logs`  (
   `remark` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '备注',
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for management_permission
@@ -306,64 +306,64 @@ CREATE TABLE `management_permission`  (
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `gmtUserId` int(11) NULL DEFAULT NULL COMMENT '修改用户Id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of management_permission
 -- ----------------------------
-INSERT INTO `management_permission` VALUES (1, 0, '用戶管理', 'fa-users', 'pages/user/userList.html', 1, '', 1, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (2, 1, '用戶查詢', 'fa-user', 'pages/user/userList.html', 1, '', 1, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (3, 2, '查詢', '', '', 2, 'management:user:query', 1, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (4, 2, '新增', '', '', 2, 'management:user:add', 2, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (5, 2, '删除', '', '', 2, 'management:user:del', 1, '2021-08-26 22:12:09', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (6, 1, '修改密碼', 'fa-pencil-square-o', 'pages/user/changePassword.html', 1, 'management:user:password', 2, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (7, 0, '系統設置', 'fa-gears', '', 1, '', 2, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (8, 7, '菜單', 'fa-cog', 'pages/menu/menuList.html', 1, '', 1, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (9, 8, '查詢', '', '', 2, 'management:menu:query', 1, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (10, 8, '新增', '', '', 2, 'management:menu:add', 2, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (11, 8, '刪除', '', '', 2, 'management:menu:del', 3, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (12, 7, '角色', 'fa-user-secret', 'pages/role/roleList.html', 1, '', 2, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (13, 12, '查詢', '', '', 2, 'management:role:query', 1, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (14, 12, '新增', '', '', 2, 'management:role:add', 2, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (15, 12, '刪除', '', '', 2, 'management:role:del', 3, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (16, 0, '文件管理', 'fa-folder-open', 'pages/file/fileList.html', 1, '', 3, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (17, 16, '查詢', '', '', 2, 'management:file:query', 1, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (18, 16, '刪除', '', '', 2, 'management:file:del', 2, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (19, 0, '數據源監控', 'fa-eye', 'druid/index.html', 1, '', 4, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (20, 0, '接口swagger', 'fa-file-pdf-o', 'swagger-ui.html', 1, '', 5, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (21, 0, '代碼生成', 'fa-wrench', 'pages/generate/editGenerate.html', 1, 'management:generate:edit', 6, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (22, 0, '代碼生成', 'fa-wrench', 'pages/generate/editGenerate.html', 1, 'management:generate:edit', 6, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (23, 0, '日誌查询', 'fa-reorder', 'pages/log/logList.html', 1, 'management:log:query', 8, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (24, 0, '定時任務管理', 'fa-tasks', 'pages/job/jobList.html', 1, '', 10, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (25, 24, '查詢', '', '', 2, 'management:job:query', 1, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (26, 24, '新增', '', '', 2, 'management:job:add', 2, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (27, 24, '刪除', '', '', 2, 'management:job:del', 3, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (28, 0, 'excel導出', 'fa-arrow-circle-down', 'pages/excel/sql.html', 1, '', 11, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (29, 28, '導出', '', '', 2, 'management:excel:down', 1, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (30, 28, '頁面顯示數據', '', '', 2, 'management:excel:show:datas', 2, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (31, 0, '字典管理', 'fa-reddit', 'pages/dict/dictList.html', 1, '', 12, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (32, 31, '查詢', '', '', 2, 'management:dict:query', 1, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (33, 31, '新增', '', '', 2, 'management:dict:add', 2, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (34, 31, '刪除', '', '', 2, 'management:dict:del', 3, '2021-07-14 17:47:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (35, 0, '微信小程序權限', 'fa-weixin', '', 1, '', 13, '2021-08-24 22:24:39', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (36, 35, '小程序配置表', 'fa-weixin', 'pages/appletSetting/applet/appletList.html', 1, '', 2, '2021-08-26 19:40:06', 1, '2021-08-28 18:15:17', 1);
-INSERT INTO `management_permission` VALUES (37, 36, '查询', '', '', 2, 'management:applet:query', 1, '2021-08-26 19:41:19', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (38, 36, '新增', '', '', 2, 'management:applet:add', 2, '2021-08-26 19:41:49', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (39, 36, '删除', '', '', 2, 'management:applet:del', 3, '2021-08-26 19:42:30', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (40, 0, '商品展示', 'fa-list', '', 1, '', 14, '2021-08-24 20:46:03', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (41, 40, '商品展示-分類管理', 'fa-th', 'pages/productsShown/category/categoryList.html', 1, '', 1, '2021-08-24 20:49:33', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (42, 41, '查詢', '', '', 2, 'productsShown:category:query', 1, '2021-08-24 20:53:01', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (43, 41, '新增', '', '', 2, 'productsShown:category:add', 2, '2021-08-24 20:57:00', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (44, 41, '刪除', '', '', 2, 'productsShown:category:del', 3, '2021-08-24 20:57:42', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (45, 40, '商品展示-商品管理', 'fa-cube', 'pages/productsShown/goodBase/goodList.html', 1, '', 2, '2021-08-24 21:10:25', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (46, 45, '查詢', '', '', 2, 'productsShown:good:query', 1, '2021-08-24 21:11:10', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (47, 45, '新增', '', '', 2, 'productsShown:good:add', 2, '2021-08-24 21:12:13', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (48, 45, '刪除', '', '', 2, 'productsShown:good:del', 3, '2021-08-24 21:13:21', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (49, 45, '封面上傳', 'fa-cloud-upload', '', 2, 'productsShown:good:add', 4, '2021-08-24 22:36:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (50, 35, '公司配置表', 'fa-building', 'pages/appletSetting/company/companyList.html', 1, '', 1, '2021-08-28 18:13:31', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (51, 50, '查询', '', '', 2, 'management:company:query', 1, '2021-08-28 18:14:20', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (52, 50, '新增', '', '', 2, 'management:company:add', 2, '2021-08-28 18:14:41', 1, NULL, NULL);
-INSERT INTO `management_permission` VALUES (53, 50, '删除', '', '', 2, 'management:company:del', 3, '2021-08-28 18:14:59', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (1, 0, '用戶管理', 'fa-users', 'pages/user/userList.html', 1, '', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (2, 1, '用戶查詢', 'fa-user', 'pages/user/userList.html', 1, '', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (3, 2, '查詢', '', '', 2, 'management:user:query', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (4, 2, '新增', '', '', 2, 'management:user:add', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (5, 2, '删除', '', '', 2, 'management:user:del', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (6, 1, '修改密碼', 'fa-pencil-square-o', 'pages/user/changePassword.html', 1, 'management:user:password', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (7, 0, '系統設置', 'fa-gears', '', 1, '', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (8, 7, '菜單', 'fa-cog', 'pages/menu/menuList.html', 1, '', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (9, 8, '查詢', '', '', 2, 'management:menu:query', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (10, 8, '新增', '', '', 2, 'management:menu:add', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (11, 8, '刪除', '', '', 2, 'management:menu:del', 3, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (12, 7, '角色', 'fa-user-secret', 'pages/role/roleList.html', 1, '', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (13, 12, '查詢', '', '', 2, 'management:role:query', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (14, 12, '新增', '', '', 2, 'management:role:add', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (15, 12, '刪除', '', '', 2, 'management:role:del', 3, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (16, 0, '文件管理', 'fa-folder-open', 'pages/file/fileList.html', 1, '', 3, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (17, 16, '查詢', '', '', 2, 'management:file:query', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (18, 16, '刪除', '', '', 2, 'management:file:del', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (19, 0, '數據源監控', 'fa-eye', 'druid/index.html', 1, '', 4, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (20, 0, '接口swagger', 'fa-file-pdf-o', 'swagger-ui.html', 1, '', 5, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (21, 0, '代碼生成', 'fa-wrench', 'pages/generate/editGenerate.html', 1, 'management:generate:edit', 6, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (22, 0, '代碼生成', 'fa-wrench', 'pages/generate/editGenerate.html', 1, 'management:generate:edit', 6, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (23, 0, '日誌查询', 'fa-reorder', 'pages/log/logList.html', 1, 'management:log:query', 8, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (24, 0, '定時任務管理', 'fa-tasks', 'pages/job/jobList.html', 1, '', 10, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (25, 24, '查詢', '', '', 2, 'management:job:query', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (26, 24, '新增', '', '', 2, 'management:job:add', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (27, 24, '刪除', '', '', 2, 'management:job:del', 3, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (28, 0, 'excel導出', 'fa-arrow-circle-down', 'pages/excel/sql.html', 1, '', 11, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (29, 28, '導出', '', '', 2, 'management:excel:down', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (30, 28, '頁面顯示數據', '', '', 2, 'management:excel:show:datas', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (31, 0, '字典管理', 'fa-reddit', 'pages/dict/dictList.html', 1, '', 12, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (32, 31, '查詢', '', '', 2, 'management:dict:query', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (33, 31, '新增', '', '', 2, 'management:dict:add', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (34, 31, '刪除', '', '', 2, 'management:dict:del', 3, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (35, 0, '微信小程序權限', 'fa-weixin', '', 1, '', 13, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (36, 35, '小程序配置表', 'fa-weixin', 'pages/appletSetting/applet/appletList.html', 1, '', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (37, 36, '查询', '', '', 2, 'management:applet:query', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (38, 36, '新增', '', '', 2, 'management:applet:add', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (39, 36, '删除', '', '', 2, 'management:applet:del', 3, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (40, 0, '商品展示', 'fa-list', '', 1, '', 14, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (41, 40, '商品展示-分類管理', 'fa-th', 'pages/productsShown/category/categoryList.html', 1, '', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (42, 41, '查詢', '', '', 2, 'productsShown:category:query', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (43, 41, '新增', '', '', 2, 'productsShown:category:add', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (44, 41, '刪除', '', '', 2, 'productsShown:category:del', 3, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (45, 40, '商品展示-商品管理', 'fa-cube', 'pages/productsShown/goodBase/goodList.html', 1, '', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (46, 45, '查詢', '', '', 2, 'productsShown:good:query', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (47, 45, '新增', '', '', 2, 'productsShown:good:add', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (48, 45, '刪除', '', '', 2, 'productsShown:good:del', 3, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (49, 45, '封面上傳', 'fa-cloud-upload', '', 2, 'productsShown:good:add', 4, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (50, 35, '公司配置表', 'fa-building', 'pages/appletSetting/company/companyList.html', 1, '', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (51, 50, '查询', '', '', 2, 'management:company:query', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (52, 50, '新增', '', '', 2, 'management:company:add', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (53, 50, '删除', '', '', 2, 'management:company:del', 3, '2021-01-01 00:00:00', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for management_role
@@ -378,14 +378,12 @@ CREATE TABLE `management_role`  (
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `gmtUserId` int(11) NULL DEFAULT NULL COMMENT '修改用户Id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of management_role
 -- ----------------------------
-INSERT INTO `management_role` VALUES (1, 'Programmer', '開發員', '2021-07-08 19:02:34', 1, '2021-08-26 22:28:50', 1);
-INSERT INTO `management_role` VALUES (2, 'Manager', '管理員', '2021-08-23 21:34:05', 1, '2021-08-26 19:43:04', 1);
-INSERT INTO `management_role` VALUES (3, 'WechatProductsShownManager', '小程序商品展示管理員', '2021-08-24 22:30:39', 1, NULL, NULL);
+INSERT INTO `management_role` VALUES (1, 'Programmer', '開發員', '2021-01-01 00:00:00', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for management_role_permission
@@ -473,13 +471,12 @@ CREATE TABLE `management_user`  (
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `gmtUserId` int(11) NULL DEFAULT NULL COMMENT '修改用户Id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of management_user
 -- ----------------------------
-INSERT INTO `management_user` VALUES (1, 'Hosmos', 'd21b17bf5e282557c88e972bc933ca1c', 'd28bdac96883bb09c41034617c9bf0b6', 'Hosmos', '', '63147116', 1, '2021-08-25 20:07:24', '2018-12-03 15:19:13', 1, '2021-07-16 17:15:09', 1);
-INSERT INTO `management_user` VALUES (2, 'test', 'f082acc667b886d792556449dc791d38', '0a1b4d281eb52ea4abc0e0890ddbffd6', 'test', NULL, '', 1, NULL, '2021-07-16 17:01:18', 1, '2021-08-26 22:49:16', 1);
+INSERT INTO `management_user` VALUES (1, 'Hosmos', 'd21b17bf5e282557c88e972bc933ca1c', 'd28bdac96883bb09c41034617c9bf0b6', 'Hosmos', '', '63147116', 1, '2021-01-01 00:00:00', '2021-01-01 00:00:00', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for management_user_appid
@@ -498,13 +495,11 @@ CREATE TABLE `management_user_appid`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改用户id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of management_user_appid
 -- ----------------------------
-INSERT INTO `management_user_appid` VALUES (1, 1, '1', 'test', 20210828194940776, 0, 1, 1, '2021-08-26 20:01:58', 1, '2021-08-28 19:50:03');
-INSERT INTO `management_user_appid` VALUES (2, 2, '123', NULL, 20210828194940776, 0, 1, 1, '2021-08-26 21:29:31', 1, '2021-08-28 19:49:56');
 
 -- ----------------------------
 -- Table structure for management_user_role
@@ -521,8 +516,7 @@ CREATE TABLE `management_user_role`  (
 -- ----------------------------
 -- Records of management_user_role
 -- ----------------------------
-INSERT INTO `management_user_role` VALUES (1, 1, '2021-08-26 22:38:17', 1);
-INSERT INTO `management_user_role` VALUES (2, 3, '2021-08-26 22:49:16', 1);
+INSERT INTO `management_user_role` VALUES (1, 1, '2021-01-01 00:00:00', 1);
 
 -- ----------------------------
 -- Table structure for products_shown_carousel
@@ -544,7 +538,7 @@ CREATE TABLE `products_shown_carousel`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_id_parentId`(`isDeleted`, `usePlaceId`, `goodId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '轮播图表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '轮播图表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for products_shown_category
@@ -560,12 +554,12 @@ CREATE TABLE `products_shown_category`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of products_shown_category
 -- ----------------------------
-INSERT INTO `products_shown_category` VALUES (1, '123', 20210825215109668, '测试', 1, '2021-08-25 21:51:09', NULL, NULL);
+INSERT INTO `products_shown_category` VALUES (1, '123', 20210825215109668, '测试', 1, '2021-01-01 00:00:00', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for products_shown_dict
@@ -580,7 +574,7 @@ CREATE TABLE `products_shown_dict`  (
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for products_shown_good_base
@@ -596,9 +590,9 @@ CREATE TABLE `products_shown_good_base`  (
   `goodMinPrice` decimal(10, 2) NOT NULL COMMENT '商品最低原价',
   `goodUrl` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商品详情跳转Url',
   `goodCoverImg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品封面图片',
-  `isSpecialPrice` tinyint(4) NOT NULL COMMENT '是否特价（0-否，1-是）',
+  `isSpecialPrice` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否特价（0-否，1-是）',
   `specialPrice` decimal(10, 2) NULL DEFAULT NULL COMMENT '特价优惠金额',
-  `isDiscount` tinyint(4) NOT NULL COMMENT '是否满折（0-否，1-是）',
+  `isDiscount` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否满折（0-否，1-是）',
   `paymentNo` int(11) NOT NULL DEFAULT 0 COMMENT '购买人数',
   `stock` int(11) NOT NULL DEFAULT 0 COMMENT '库存',
   `markNo` int(11) NOT NULL DEFAULT 0 COMMENT '收藏人数',
@@ -613,7 +607,7 @@ CREATE TABLE `products_shown_good_base`  (
   INDEX `idx_discount`(`sellStatus`, `isSpecialPrice`) USING BTREE,
   INDEX `idx_no_payment`(`sellStatus`, `paymentNo`) USING BTREE,
   INDEX `idx_time_create`(`sellStatus`, `sellTime`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品基础信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品基础信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for products_shown_good_deliver_way
@@ -629,7 +623,7 @@ CREATE TABLE `products_shown_good_deliver_way`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for products_shown_good_detail
@@ -647,7 +641,7 @@ CREATE TABLE `products_shown_good_detail`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for products_shown_good_discount
@@ -664,7 +658,7 @@ CREATE TABLE `products_shown_good_discount`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for products_shown_good_info
@@ -682,6 +676,6 @@ CREATE TABLE `products_shown_good_info`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

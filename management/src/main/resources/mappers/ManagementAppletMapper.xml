@@ -157,7 +157,7 @@
         right join management_user_appid as mua on mc.companyId = mua.companyId
         where 1 = 1
         <if test="appId != null and appId != ''">
-            and mua.appId = #{appId},
+            and mua.appId = #{appId}
         </if>
     </select>
 </mapper>
