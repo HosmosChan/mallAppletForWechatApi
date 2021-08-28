@@ -3,6 +3,7 @@ package com.lettuce.management.dto;
 import com.lettuce.management.entity.GoodBase;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Code is far away from bug with the animal protected
@@ -34,6 +35,7 @@ public class GoodDto extends GoodBase {
     private Long companyId;
     private Double discountOff;
     private BigDecimal fullPrice;
+    private List<String> deliverWay;
 
     public String getGoodDescribe() {
         return goodDescribe;
@@ -73,5 +75,13 @@ public class GoodDto extends GoodBase {
 
     public void setFullPrice(BigDecimal fullPrice) {
         this.fullPrice = fullPrice;
+    }
+
+    public List<String> getDeliverWay() {
+        return deliverWay;
+    }
+
+    public void setDeliverWay(List<String> deliverWay) {
+        this.deliverWay = deliverWay;
     }
 }

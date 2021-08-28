@@ -150,7 +150,26 @@
                     </form>
                 </div>
             </div>
-            <div class="layui-tab-item">4</div>
+            <div class="layui-tab-item">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form class="form-horizontal" onsubmit="return false" id="form4">
+                        <fieldset>
+                            {empty name="$deliverWay"}
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">配送方式</label>
+                                <div class="col-md-10">
+                                    <select name="deliverWay[]" class="form-control input-sm" id="deliverWay[0]" style="width: 25%;"></select>
+                                </div>
+                                <div class="layui-input-block">
+                                    <button id="addWay" type="button" class="layui-btn layui-btn-warm layui-btn-sm">
+                                        <i class="layui-icon">&#xe654;</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
             <div class="layui-tab-item">5</div>
         </div>
     </div>
@@ -193,6 +212,7 @@
     showCategoryByAppId("categoryId", "categoryName", "", appId);
     showCompanyByAppId("companyId", "companyId", "", appId);
     showDictSelect("sellStatus", "sellStatus", "");
+    showDictSelect("deliverWay", "deliverWay", "");
     $('#goodMinPrice').blur(function () {
         var minPrice = $('#goodMinPrice').val();
         var maxPrice = $('#goodMaxPrice').val();

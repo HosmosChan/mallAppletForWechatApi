@@ -113,7 +113,7 @@ CREATE TABLE `mall_good_deliver_way`  (
   `tid` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `appId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'appId',
   `goodId` bigint(20) NOT NULL COMMENT '商品Id',
-  `deliverWay` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '配送方式',
+  `deliverWay` tinyint(4) NOT NULL DEFAULT 0 COMMENT '配送方式',
   `createUserId` bigint(20) NOT NULL COMMENT '创建者Id',
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
@@ -421,6 +421,7 @@ INSERT INTO `management_role_permission` VALUES (1, 45);
 INSERT INTO `management_role_permission` VALUES (1, 46);
 INSERT INTO `management_role_permission` VALUES (1, 47);
 INSERT INTO `management_role_permission` VALUES (1, 48);
+INSERT INTO `management_role_permission` VALUES (1, 49);
 
 -- ----------------------------
 -- Table structure for management_user
@@ -528,12 +529,12 @@ CREATE TABLE `products_shown_category`  (
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of products_shown_category
 -- ----------------------------
-INSERT INTO `products_shown_category` VALUES (4, '123', 20210825215109668, '测试', 1, '2021-08-25 21:51:09', NULL, NULL);
+INSERT INTO `products_shown_category` VALUES (1, '123', 20210825215109668, '测试', 1, '2021-08-25 21:51:09', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for products_shown_dict
@@ -591,7 +592,7 @@ CREATE TABLE `products_shown_good_deliver_way`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `appId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'appId',
   `goodId` bigint(20) NOT NULL COMMENT '商品Id',
-  `deliverWay` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '配送方式',
+  `deliverWay` tinyint(4) NOT NULL DEFAULT 0 COMMENT '配送方式',
   `createUserId` bigint(20) NOT NULL COMMENT '创建者Id',
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',
