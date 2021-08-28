@@ -84,6 +84,14 @@
                                            id="sellTime" data-bv-notempty="true" data-bv-notempty-message="售賣時間 不能為空">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">售賣狀態</label>
+                                <div class="col-md-10">
+                                    <select name="sellStatus" class="form-control input-sm" id="sellStatus"
+                                            data-bv-notempty="true" data-bv-notempty-message="售賣狀態 不能為空">
+                                    </select>
+                                </div>
+                            </div>
                         </fieldset>
                     </form>
                 </div>
@@ -157,6 +165,7 @@
     var appId = $('#appId').val().toString();
     showCategoryByAppId("categoryId", "categoryName", "", appId);
     showCompanyByAppId("companyId", "companyId", "", appId);
+    showDictSelect("sellStatus", "sellStatus", "");
     $('#goodMinPrice').blur(function () {
         var minPrice = $('#goodMinPrice').val();
         var maxPrice = $('#goodMaxPrice').val();

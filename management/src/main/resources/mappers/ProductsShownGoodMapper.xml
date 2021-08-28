@@ -7,7 +7,6 @@
         <result column="appId" jdbcType="VARCHAR" property="appId"/>
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
         <result column="categoryId" jdbcType="BIGINT" property="categoryId"/>
-        <result column="categoryName" jdbcType="VARCHAR" property="categoryName"/>
         <result column="goodName" jdbcType="VARCHAR" property="goodName"/>
         <result column="goodMaxPrice" jdbcType="DECIMAL" property="goodMaxPrice"/>
         <result column="goodMinPrice" jdbcType="DECIMAL" property="goodMinPrice"/>
@@ -104,8 +103,8 @@
                 <if test="params.goodId != null and params.goodId != ''">
                     and psgb.goodId = #{params.goodId}
                 </if>
-                <if test="params.categoryName != null and params.categoryName != ''">
-                    and psc.categoryName like CONCAT('%',#{params.categoryName},'%')
+                <if test="params.categoryId != null and params.categoryId != ''">
+                    and psgb.categoryId = #{params.categoryId}
                 </if>
                 <if test="params.goodName != null and params.goodName != ''">
                     and psgb.goodName like CONCAT('%',#{params.goodName},'%')
@@ -118,16 +117,14 @@
     </sql>
     <select id="list" resultMap="GoodBaseResultMap">
         select
-        <include refid="Good_Base_List"/>, psc.categoryName
+        <include refid="Good_Base_List"/>
         from products_shown_good_base as psgb
-        left join products_shown_category as psc on psgb.categoryId = psc.categoryId
         <include refid="GoodBaseWhere"/>
         ${params.orderBy}
         limit #{offset}, #{limit}
     </select>
     <select id="count" resultType="int">
         select count(1) from products_shown_good_base as psgb
-        left join products_shown_category as psc on psgb.categoryId = psc.categoryId
         <include refid="GoodBaseWhere"/>
     </select>
     <select id="getGoodIdByCategoryId" resultType="java.lang.Long">
@@ -173,13 +170,18 @@
         select
         <include refid="Good_Base_List"/>
         from products_shown_good_base as psgb
-        where goodName = #{goodName}
-        and appId = #{appId}
+        where 1 = 1
+        <if test="goodName != null and goodName != ''">
+            and psgb.goodName = #{goodName}
+        </if>
+        <if test="appId != null and appId != ''">
+            and psgb.appId = #{appId}
+        </if>
     </select>
     <insert id="saveBase">
         insert into products_shown_good_base
-        (appId, goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl, isSpecialPrice, specialPrice, stock, sellTime, createUserId, createTime)
+        (appId, goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl, isSpecialPrice, specialPrice, stock, sellStatus, sellTime, createUserId, createTime)
         value
-        (#{appId}, #{goodId}, #{categoryId}, #{goodName}, #{goodMaxPrice}, #{goodMinPrice}, #{goodUrl}, #{isSpecialPrice}, #{specialPrice}, #{stock}, #{sellTime}, #{createUserId}, now())
+        (#{appId}, #{goodId}, #{categoryId}, #{goodName}, #{goodMaxPrice}, #{goodMinPrice}, #{goodUrl}, #{isSpecialPrice}, #{specialPrice}, #{stock}, #{sellStatus}, #{sellTime}, #{createUserId}, now())
     </insert>
 </mapper>

@@ -18,14 +18,14 @@
                             <td>
                                 <form class="form-inline" onsubmit="return false">
                                     <div class="form-group">
-                                        <label for="type">查询类型：</label>
-                                        <select name="type" class="form-control input-sm" id="type">
-                                            <option value="goodName">商品名</option>
-                                            <option value="categoryName">分類</option>
-                                            <option value="sellStatus">售賣狀態</option>
+                                        <label for="goodName">商品名：</label>
+                                        <input id="goodName" type="text" class="form-control" placeholder="商品名">
+                                        <label for="categoryId">分類：</label>
+                                        <select class="form-control input-sm" id="categoryId">
                                         </select>
-                                        <label for="message">内容：</label>
-                                        <input id="message" type="text" class="form-control" placeholder="内容">
+                                        <label for="sellStatus">售賣狀態：</label>
+                                        <select class="form-control input-sm" id="sellStatus">
+                                        </select>
                                         <button id="searchBt" class="layui-btn layui-btn-sm"
                                                 permission="productsShown:good:query"><i
                                                 class="layui-icon">&#xe615;</i>搜索
@@ -78,12 +78,30 @@
 <script type="text/javascript" src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
 <script type="text/javascript" src="../../../js/my/permission.js"></script>
+<script type="text/javascript" src="../../../js/dict.js"></script>
 <script type="text/javascript">
     layui.use('layer', function () {
         var layer = layui.layer;
     });
     var permission = checkPermission();
+    var appId = getAppId();
     var example;
+    var categoryId = showCategoryByAppId("categoryId", "categoryName", "全部", appId);
+    var sellStatus = showDictSelect("sellStatus", "sellStatus", "全部");
+
+    function getAppId() {
+        var appId;
+        $.ajax({
+            type: 'get',
+            url: '/applet/appId',
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            success: function (data) {
+                appId = data;
+            }
+        });
+        return appId;
+    }
 
     function init() {
         example =
@@ -98,26 +116,33 @@
                     "url": "/productsShown/good",
                     "type": "get",
                     "data": function (d) {
-                        var type = $("#type").val();
-                        if ($("#type").val() == "goodName") {
-                            d.goodName = $("#message").val();
-                        } else if ($("#type").val() == "categoryName") {
-                            d.categoryName = $("#message").val();
-                        } else if ($("#type").val() == "sellStatus") {
-                            d.sellStatus = $("#message").val();
-                        }
+                        d.goodName = $("#goodName").val();
+                        d.categoryId = $("#categoryId").val();
+                        d.sellStatus = $("#sellStatus").val();
                     }
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
                     {"data": "goodId", "defaultContent": ""},
-                    {"data": "categoryName", "defaultContent": ""},
+                    {
+                        "data": "categoryId",
+                        "defaultContent": "",
+                        "render": function (data, type, row) {
+                            return categoryId[data];
+                        }
+                    },
                     {"data": "goodName", "defaultContent": ""},
                     {"data": "goodPrice", "defaultContent": ""},
                     {"data": "goodUrl", "defaultContent": ""},
                     {"data": "goodCoverImg", "defaultContent": ""},
                     {"data": "stock", "defaultContent": ""},
-                    {"data": "sellStatus", "defaultContent": ""},
+                    {
+                        "data": "sellStatus",
+                        "defaultContent": "",
+                        "render": function (data, type, row) {
+                            return sellStatus[data];
+                        }
+                    },
                     {"data": "sellTime", "defaultContent": ""},
                     {
                         "data": "",
