@@ -15,7 +15,7 @@
         <ul class="layui-tab-title">
             <li class="layui-this">商品基础信息</li>
             <li>商品信息</li>
-            <li>商品优惠信息</li>
+            <li id="discountInfo" style="display: none;">商品优惠信息</li>
             <li>商品配送信息</li>
             <li>商品详情</li>
         </ul>
@@ -71,6 +71,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-md-2 control-label">是否有折扣</label>
+                                <div class="col-md-10">
+                                    <input type="checkbox" name="isDiscount" id="isDiscount">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-md-2 control-label">庫存</label>
                                 <div class="col-md-10">
                                     <input class="form-control" type="number" name="stock"
@@ -122,7 +128,28 @@
                     </form>
                 </div>
             </div>
-            <div class="layui-tab-item">3</div>
+            <div class="layui-tab-item">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form class="form-horizontal" onsubmit="return false" id="form3" style="display: none;">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">打多少折</label>
+                                <div class="col-md-10">
+                                   - <input class="form-control-money" type="number" name="discountOff"
+                                           id="discountOff" value=0 step="1"> %
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">滿多少錢</label>
+                                <div class="col-md-10">
+                                    $ <input class="form-control-money" type="number" name="fullPrice"
+                                             id="fullPrice" value=0.00 step="0.01">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
             <div class="layui-tab-item">4</div>
             <div class="layui-tab-item">5</div>
         </div>
@@ -180,6 +207,12 @@
             $('#goodMaxPrice').val(minPrice);
         }
     });
+    $('#discountOff').blur(function () {
+        var discountOff = $('#discountOff').val();
+        if (discountOff > 100) {
+            $('#discountOff').val(100);
+        }
+    });
     $(function () {
         $("#isSpecialPrice").click(function () {
             if (this.checked == true) {
@@ -190,6 +223,21 @@
                 $('#specialPriceDiv').hide();
                 $('#specialPriceTitle').hide();
                 $('#specialPrice').val(null);
+            }
+        });
+    });
+    $(function () {
+        $("#isDiscount").click(function () {
+            if (this.checked == true) {
+                $('#discountInfo').show();
+                $('#form3').show();
+                $('#discountOff').val(0);
+                $('#fullPrice').val(0);
+            } else {
+                $('#discountInfo').hide();
+                $('#form3').hide();
+                $('#discountOff').val(null);
+                $('#fullPrice').val(null);
             }
         });
     });
@@ -214,6 +262,11 @@
         } else if ($('#isSpecialPrice').val() === ("off")) {
             $('#isSpecialPrice').val(0);
         }
+        if ($('#isDiscount').val() === ("on")) {
+            $('#isDiscount').val(1);
+        } else if ($('#isDiscount').val() === ("off")) {
+            $('#isDiscount').val(0);
+        }
         $('#form1').bootstrapValidator();
         var bootstrapValidator = $("#form1").data('bootstrapValidator');
         bootstrapValidator.validate();
@@ -226,8 +279,15 @@
         if (!bootstrapValidator.isValid()) {
             return;
         }
+        $('#form3').bootstrapValidator();
+        var bootstrapValidator = $("#form3").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
         var formData = $("#form1").serializeObject();
         var formData = $("#form2").addSerializeObject(formData);
+        var formData = $("#form3").addSerializeObject(formData);
         $.ajax({
             type: 'post',
             url: '/productsShown/good',

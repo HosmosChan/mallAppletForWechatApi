@@ -106,6 +106,9 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
         }*/
         productsShownGoodDao.saveBase(goodDto);
         productsShownGoodDao.saveDetail(goodDto);
+        if (goodDto.getIsDiscount() == 1) {
+            productsShownGoodDao.saveDiscount(goodDto);
+        }
     }
 
     /**
