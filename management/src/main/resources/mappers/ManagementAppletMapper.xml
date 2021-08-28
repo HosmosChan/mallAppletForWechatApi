@@ -39,7 +39,7 @@
                     and mua.appletType = #{params.appletType}
                 </if>
                 <if test="params.companyId != null and params.companyId != ''">
-                    and mua.companyId like concat('%', #{params.companyId}, '%')
+                    and mua.companyId = #{params.companyId}
                 </if>
                 <if test="params.appId != null and params.appId != ''">
                     and mua.appId = #{params.appId}
@@ -74,7 +74,10 @@
         <include refid="Applet_List"/>, mu.username
         from management_user_appid as mua
         left join management_user as mu on mua.userId = mu.id
-        where mua.appId = #{appId}
+        where 1 = 1
+        <if test="appId != null and appId != ''">
+            and mua.appId = #{appId}
+        </if>
     </select>
     <select id="getByUserId" resultMap="AppletResultMap">
         select
@@ -147,16 +150,14 @@
         </set>
         where id = #{id}
     </update>
-    <select id="getCompany" resultMap="CompanyResultMap">
-        select
-        <include refid="Company_List"/>
-        from management_company as mc
-    </select>
     <select id="getCompanyByAppId" resultMap="CompanyResultMap">
         select
         <include refid="Company_List"/>
         from management_company as mc
         right join management_user_appid as mua on mc.companyId = mua.companyId
-        where mua.appId = #{appId}
+        where 1 = 1
+        <if test="appId != null and appId != ''">
+            and mua.appId = #{appId},
+        </if>
     </select>
 </mapper>

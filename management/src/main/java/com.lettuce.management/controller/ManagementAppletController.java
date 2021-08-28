@@ -104,12 +104,6 @@ public class ManagementAppletController {
         managementAppletService.delete(id);
     }
 
-    @GetMapping("/getCompany")
-    @ApiOperation(value = "获取公司名和Id")
-    public List<Company> getCompany() {
-        return managementAppletService.getCompany();
-    }
-
     @GetMapping("/getCompanyByAppId")
     @ApiOperation(value = "根据app id获取公司名和Id")
     public List<Company> getCompanyByAppId(String appId) {

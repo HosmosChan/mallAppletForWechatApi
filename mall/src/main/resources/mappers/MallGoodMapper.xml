@@ -99,7 +99,7 @@
         from mall_good_base as mgb
         where isSpecialPrice = 1
         and sellStatus = 1
-        <if test="appId!=null">
+        <if test="appId != null and appId != ''">
             and mgb.appId = #{appId}
         </if>
         <if test="number!=null">
@@ -115,7 +115,7 @@
         on mgb.goodId = mgd.goodId
         where isDiscount = 1
         and sellStatus = 1
-        <if test="appId!=null">
+        <if test="appId != null and appId != ''">
             and mgb.appId = #{appId}
         </if>
         <if test="number!=null">
@@ -127,7 +127,7 @@
         <include refid="Good_Base_List"/>
         from mall_good_base as mgb
         where sellStatus = 1
-        <if test="appId!=null">
+        <if test="appId != null and appId != ''">
             and mgb.appId = #{appId}
         </if>
         order by paymentNo desc
@@ -140,7 +140,7 @@
         <include refid="Good_Base_List"/>
         from mall_good_base as mgb
         where sellStatus = 1
-        <if test="appId!=null">
+        <if test="appId != null and appId != ''">
             and mgb.appId = #{appId}
         </if>
         order by sellTime desc
@@ -153,7 +153,7 @@
         <include refid="Good_Base_List"/>
         from mall_good_base as mgb
         where sellStatus = 1
-        <if test="appId!=null">
+        <if test="appId != null and appId != ''">
             and mgb.appId = #{appId}
         </if>
         and mgb.goodId = #{goodId}
@@ -163,7 +163,7 @@
         <include refid="Good_Detail_List"/>
         from mall_good_detail as mgd
         where mgd.goodId = #{goodId}
-        <if test="appId!=null">
+        <if test="appId != null and appId != ''">
             and mgd.appId = #{appId}
         </if>
     </select>
@@ -172,7 +172,7 @@
         <include refid="Good_Deliver_Way_List"/>
         from mall_good_deliver_way as mgdw
         where mgdw.goodId = #{goodId}
-        <if test="appId!=null">
+        <if test="appId != null and appId != ''">
             and mgdw.appId = #{appId}
         </if>
     </select>
@@ -181,7 +181,7 @@
         <include refid="Good_Discount_List"/>
         from mall_good_Discount as mgdi
         where mgdi.goodId = #{goodId}
-        <if test="appId!=null">
+        <if test="appId != null and appId != ''">
             and mgdi.appId = #{appId}
         </if>
     </select>
@@ -190,7 +190,7 @@
         <include refid="Good_Info_List"/>
         from mall_good_info as mgi
         where mgi.goodId = #{goodId}
-        <if test="appId!=null">
+        <if test="appId != null and appId != ''">
             and mgi.appId = #{appId}
         </if>
         order by infoRank asc

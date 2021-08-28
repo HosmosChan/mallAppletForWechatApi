@@ -90,7 +90,7 @@ function getCompany(type) {
     if (v == null || v == "" || v == "{}") {
         $.ajax({
             type: 'get',
-            url: '/applet/getCompany',
+            url: '/company/getCompany',
             async: false,
             success: function (data) {
                 v = {};

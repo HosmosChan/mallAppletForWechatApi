@@ -2,33 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>修改分類</title>
+    <title>添加公司</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form">
         <fieldset>
-            <input type="hidden" id="id" name="id">
             <div class='form-group'>
-                <label class='col-md-2 control-label'>分類id</label>
+                <label class='col-md-2 control-label'>公司名</label>
                 <div class='col-md-10'>
-                    <input class='form-control' type='text' name='categoryId' id='categoryId'
-                           readonly="readonly">
-                </div>
-            </div>
-            <div class='form-group'>
-                <label class='col-md-2 control-label'>分類名</label>
-                <div class='col-md-10'>
-                    <input class='form-control' type='text' name='categoryName' id='categoryName'
-                           data-bv-notempty='true' data-bv-notempty-message='分類名 不能為空'>
+                    <input class='form-control' type='text' name='company' id='company'
+                           data-bv-notempty='true' data-bv-notempty-message='公司名 不能為空'>
                 </div>
             </div>
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
-                        <button class="btn btn-primary" onclick="location.href='categoryList.html'">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="update()">
+                        <button class="btn btn-primary" onclick="location.href='companyList.html'">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="add()">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -44,29 +36,13 @@
 <script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../../js/common.js"></script>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/dict.js"></script>
 <script type="text/javascript">
     layui.use(['layer', 'laydate'], function () {
         var layer = layui.layer;
     });
-    initData();
 
-    function initData() {
-        var id = getUrlParam("id");
-        if (id != "") {
-            $.ajax({
-                type: 'get',
-                url: '/productsShown/category/' + id,
-                async: false,
-                success: function (data) {
-                    $('#id').val(data.id);
-                    $('#categoryId').val(data.categoryId);
-                    $('#categoryName').val(data.categoryName);
-                }
-            });
-        }
-    }
-
-    function update() {
+    function add() {
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
@@ -75,13 +51,13 @@
         }
         var formdata = $("#form").serializeObject();
         $.ajax({
-            type: 'put',
-            url: '/productsShown/category',
+            type: 'post',
+            url: '/company',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
-                layer.msg("修改成功", {shift: -1, time: 1000}, function () {
-                    location.href = "categoryList.html";
+                layer.msg("添加成功", {shift: -1, time: 1000}, function () {
+                    location.href = "companyList.html";
                 });
             }
         });

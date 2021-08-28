@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>小程序id列表</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
+    <title>公司列表</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../../layui/css/layui.css" media="all"/>
 </head>
 <body>
 <div>
@@ -18,27 +18,19 @@
                             <td>
                                 <form class="form-inline" onsubmit="return false">
                                     <div class="form-group">
-                                        <label for="appletType">小程序類型：</label>
-                                        <select class="form-control input-sm" id="appletType">
-                                        </select>
-                                        <label for="companyId">公司：</label>
+                                        <label for="companyId">公司名：</label>
                                         <select class="form-control input-sm" id="companyId">
                                         </select>
-                                        <label for="appId">appId：</label>
-                                        <input id="appId" type="text" class="form-control" placeholder="appId">
-                                        <label for="appletStatus">小程序状态：</label>
-                                        <select class="form-control input-sm" id="appletStatus">
-                                        </select>
                                         <button id="searchBt" class="layui-btn layui-btn-sm"
-                                                permission="management:applet:query"><i
+                                                permission="management:company:query"><i
                                                 class="layui-icon">&#xe615;</i>搜索
                                         </button>
                                     </div>
                                 </form>
                             </td>
                             <td align="right">
-                                <button class="layui-btn layui-btn-sm" onclick="location.href='addApplet.html'"
-                                        permission="management:applet:add">
+                                <button class="layui-btn layui-btn-sm" onclick="location.href='addCompany.html'"
+                                        permission="management:company:add">
                                     <i class="layui-icon">&#xe608;</i> 添加
                                 </button>
                             </td>
@@ -53,12 +45,9 @@
                         <tr>
                         </tr>
                         <tr>
-                            <th>用戶名</th>
-                            <th>小程序id</th>
-                            <th>小程序描述</th>
-                            <th>公司</th>
-                            <th>小程序類型</th>
-                            <th>状态</th>
+                            <th>公司id</th>
+                            <th>公司名</th>
+                            <th>创建时间</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -72,21 +61,19 @@
 </div>
 </body>
 </html>
-<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="../../js/jq.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="../../layui/layui.js"></script>
-<script type="text/javascript" src="../../js/my/permission.js"></script>
-<script type="text/javascript" src="../../js/dict.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/my/permission.js"></script>
+<script type="text/javascript" src="../../../js/dict.js"></script>
 <script type="text/javascript">
     layui.use('layer', function () {
         var layer = layui.layer;
     });
     var permission = checkPermission();
     var example;
-    var appletType = showDictSelect("appletType", "appletType", "全部");
-    var appletStatus = showDictSelect("appletStatus", "appletStatus", "全部");
     var companyId = showCompany("companyId", "companyId", "全部");
 
     function init() {
@@ -99,13 +86,10 @@
                     "url": "/js/plugin/datatables/TraditionalChinese.lang"
                 },
                 "ajax": {
-                    "url": "/applet/appletList",
+                    "url": "/company/companyList",
                     "type": "get",
                     "data": function (d) {
-                        d.appletType = $('#appletType').val();
                         d.companyId = $('#companyId').val();
-                        d.appId = $('#appId').val();
-                        d.status = $('#appletStatus').val();
                     },
                     "error": function (xhr, textStatus, errorThrown) {
                         var msg = xhr.responseText;
@@ -114,39 +98,18 @@
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
-                    {"data": "username", "defaultContent": ""},
-                    {"data": "appId", "defaultContent": ""},
-                    {"data": "appletDescription", "defaultContent": ""},
-                    {
-                        "data": "companyId",
-                        "defaultContent": "",
-                        "render": function (data, type, row) {
-                            return companyId[data]
-                        }
-                    },
-                    {
-                        "data": "appletType",
-                        "defaultContent": "",
-                        "render": function (data, type, row) {
-                            return appletType[data];
-                        }
-                    },
-                    {
-                        "data": "status",
-                        "defaultContent": "",
-                        "render": function (data, type, row) {
-                            return appletStatus[data];
-                        }
-                    },
+                    {"data": "companyId", "defaultContent": ""},
+                    {"data": "company", "defaultContent": ""},
+                    {"data": "createTime", "defaultContent": ""},
                     {
                         "data": "",
                         "defaultContent": "",
                         "orderable": false,
                         "render": function (data, type, row) {
                             var id = row['id'];
-                            var href = "updateApplet.html?id=" + id;
-                            var edit = buttonEdit(href, "management:applet:add", permission);
-                            var del = buttonDel(id, "management:applet:del", permission);
+                            var href = "updateCompany.html?id=" + id;
+                            var edit = buttonEdit(href, "management:company:add", permission);
+                            var del = buttonDel(id, "management:company:del", permission);
                             return edit + del;
                         }
                     }
@@ -161,7 +124,7 @@
         }, function () {
             $.ajax({
                 type: 'delete',
-                url: '/applet/' + id,
+                url: '/company/' + id,
                 success: function (data) {
                     example.ajax.reload();
                     layer.msg("刪除成功");

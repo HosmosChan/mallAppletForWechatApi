@@ -112,15 +112,6 @@ public interface ManagementAppletService {
     /**
      * 获取公司名和Id
      *
-     * @return List<Company>
-     * @author Hosmos
-     * @date 2021-08-28
-     */
-    List<Company> getCompany();
-
-    /**
-     * 获取公司名和Id
-     *
      * @param appId app id
      * @return List<Company>
      * @author Hosmos

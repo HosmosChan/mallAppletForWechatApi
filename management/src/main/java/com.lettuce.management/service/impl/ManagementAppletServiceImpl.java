@@ -33,6 +33,7 @@ import java.util.Map;
  * 　　┗┳┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
+ * 小程序配置实现层
  *
  * @author Hosmos
  * @date 2021年08月26日
@@ -110,11 +111,6 @@ public class ManagementAppletServiceImpl implements ManagementAppletService {
         Long gmtUserId = UserUtil.getCurrentUser().getId();
         Byte status = 2;
         managementAppletDao.delete(id, gmtUserId, status);
-    }
-
-    @Override
-    public List<Company> getCompany() {
-        return managementAppletDao.getCompany();
     }
 
     @Override

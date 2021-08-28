@@ -28,7 +28,7 @@
         from mall_carousel
         where isDeleted = 0
         and usePlaceId = #{usePlaceId}
-        <if test="appId!=null">
+        <if test="appId != null and appId != ''">
             and appId = #{appId}
         </if>
         <if test="goodId!=null">

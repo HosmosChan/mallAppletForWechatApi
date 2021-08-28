@@ -80,6 +80,9 @@
         select
         <include refid="Category_List"/>
         from products_shown_category as psc
-        where psc.appId = #{appId}
+        where 1 = 1
+        <if test="appId != null and appId != ''">
+            and psc.appId = #{appId}
+        </if>
     </select>
 </mapper>

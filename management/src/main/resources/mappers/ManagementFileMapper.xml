@@ -29,7 +29,10 @@
         select
         <include refid="File_List"/>
         from file_info
-        where id = #{id} and appId = #{appId}
+        where id = #{id}
+        <if test="appId != null and appId != ''">
+            and appId = #{appId}
+        </if>
     </select>
     <insert id="save">
         insert into file_info
@@ -50,6 +53,9 @@
     </select>
     <delete id="delete">
         delete from file_info
-        where id = #{id} and appId = #{appId}
+        where id = #{id}
+        <if test="appId != null and appId != ''">
+            and appId = #{appId}
+        </if>
     </delete>
 </mapper>

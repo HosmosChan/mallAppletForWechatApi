@@ -44,7 +44,7 @@
             <if test="categoryId!=null and categoryId!=''">
                 and categoryId = #{categoryId}
             </if>
-            <if test="appId!=null and appId!=''">
+            <if test="appId != null and appId != ''">
                 and mgb.appId = #{appId}
             </if>
         </where>
@@ -80,7 +80,7 @@
             <if test="categoryId!=null and categoryId!=''">
                 and categoryId = #{categoryId}
             </if>
-            <if test="appId!=null and appId!=''">
+            <if test="appId != null and appId != ''">
                 and mgb.appId = #{appId}
             </if>
         </where>

@@ -473,7 +473,7 @@ CREATE TABLE `management_user_appid`  (
 -- Records of management_user_appid
 -- ----------------------------
 INSERT INTO `management_user_appid` VALUES (1, 1, '1', 'test', NULL, 0, 1, 1, '2021-08-26 20:01:58', 1, '2021-08-26 22:54:45');
-INSERT INTO `management_user_appid` VALUES (2, 2, '123', NULL, 'Gemdale', 0, 1, 1, '2021-08-26 21:29:31', 1, '2021-08-26 22:54:33');
+INSERT INTO `management_user_appid` VALUES (2, 2, '123', NULL, 1, 0, 1, 1, '2021-08-26 21:29:31', 1, '2021-08-26 22:54:33');
 
 -- ----------------------------
 -- Table structure for management_user_role
