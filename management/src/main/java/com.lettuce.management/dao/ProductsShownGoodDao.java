@@ -148,6 +148,7 @@ public interface ProductsShownGoodDao {
      * @date 2021-08-28
      */
     void saveDiscount(GoodDto goodDto);
+
     /**
      * 获取所有配送方式
      *
@@ -155,7 +156,8 @@ public interface ProductsShownGoodDao {
      * @author Hosmos
      * @date 2021-08-28
      */
-    List<DeliverWay> listAll();
+    List<DeliverWay> listAllDeliverWay();
+
     /**
      * 保存配送方式信息
      *
@@ -164,4 +166,15 @@ public interface ProductsShownGoodDao {
      * @date 2021-08-28
      */
     void saveDeliverWay(List<GoodDeliverWay> goodDeliverWayList);
+
+    /**
+     * 根據分類id獲取商品
+     *
+     * @param appId app id
+     * @param categoryId 分類 id
+     * @return List<GoodBase>
+     * @author Hosmos
+     * @date 2021-08-28
+     */
+    List<GoodBase> getGoodByCategoryId(String appId, Long categoryId);
 }

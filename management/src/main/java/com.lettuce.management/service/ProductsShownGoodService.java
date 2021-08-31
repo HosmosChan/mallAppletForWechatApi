@@ -3,6 +3,7 @@ package com.lettuce.management.service;
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
 import com.lettuce.management.entity.DeliverWay;
+import com.lettuce.management.entity.GoodBase;
 
 import java.util.List;
 import java.util.Map;
@@ -70,5 +71,15 @@ public interface ProductsShownGoodService {
      * @author Hosmos
      * @date 2021-08-28
      */
-    List<DeliverWay> listAll();
+    List<DeliverWay> listAllDeliverWay();
+
+    /**
+     * 根據分類Id獲取商品
+     *
+     * @param categoryId 分類 Id
+     * @return List<GoodBase>
+     * @author Hosmos
+     * @date 2021-08-30
+     */
+    List<GoodBase> getGoodByCategoryId(Long categoryId);
 }

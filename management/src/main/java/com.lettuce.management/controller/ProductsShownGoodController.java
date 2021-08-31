@@ -8,6 +8,8 @@ import com.lettuce.common.utils.table.PageTableResponse;
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
 import com.lettuce.management.entity.DeliverWay;
+import com.lettuce.management.entity.GoodBase;
+import com.lettuce.management.entity.GoodInfo;
 import com.lettuce.management.service.ProductsShownGoodService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -102,17 +104,26 @@ public class ProductsShownGoodController {
     @GetMapping("/deliverWay/all")
     @ApiOperation(value = "所有配送方式")
     public JSONArray deliverWayAll() {
-        List<DeliverWay> deliverWayAll = productsShownGoodService.listAll();
+        List<DeliverWay> deliverWayAll = productsShownGoodService.listAllDeliverWay();
         JSONArray array = new JSONArray();
         setDeliverWayTree(deliverWayAll, array);
         return array;
     }
 
+    @GetMapping("/getGoodByCategoryId")
+    @ApiOperation(value = "根據分類Id獲取商品")
+    public List<GoodBase> getGoodByCategoryId(Long categoryId) {
+        return productsShownGoodService.getGoodByCategoryId(categoryId);
+    }
+
+    /*@PostMapping("/addGoodInfo")
+    @ApiOperation(value = "添加商品詳情信息圖片")
+    public List<GoodInfo> */
     /**
      * 设置配送方式树
      *
      * @param deliverWayAll 所有配送方式列表
-     * @param array          用JSONArray显示permission
+     * @param array         用JSONArray显示permission
      * @author Hosmos
      * @date 2021-08-27
      */

@@ -208,7 +208,7 @@
         value
         (#{appId}, #{goodId}, #{discountOff}, #{fullPrice}, #{createUserId}, now())
     </insert>
-    <select id="listAll" resultMap="ManagementDeliverWayResultMap">
+    <select id="listAllDeliverWay" resultMap="ManagementDeliverWayResultMap">
         select
         <include refid="Management_Deliver_Way_List"/>
         from management_deliver_way as mdwl
@@ -221,4 +221,10 @@
             (#{goodDeliverWay.appId}, #{goodDeliverWay.goodId}, #{goodDeliverWay.deliverWay}, #{goodDeliverWay.createUserId}, now())
         </foreach>
     </insert>
+    <select id="getGoodByCategoryId" resultMap="GoodBaseResultMap">
+        select
+        <include refid="Good_Base_List"/>
+        from products_shown_good_base as psgb
+        where psgb.categoryId = #{categoryId}
+    </select>
 </mapper>

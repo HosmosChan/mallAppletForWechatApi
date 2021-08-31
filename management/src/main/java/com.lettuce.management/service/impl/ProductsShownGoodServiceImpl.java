@@ -132,8 +132,14 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     }
 
     @Override
-    public List<DeliverWay> listAll() {
-        return productsShownGoodDao.listAll();
+    public List<DeliverWay> listAllDeliverWay() {
+        return productsShownGoodDao.listAllDeliverWay();
+    }
+
+    @Override
+    public List<GoodBase> getGoodByCategoryId(Long categoryId) {
+        String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        return productsShownGoodDao.getGoodByCategoryId(appId, categoryId);
     }
 
     /**
