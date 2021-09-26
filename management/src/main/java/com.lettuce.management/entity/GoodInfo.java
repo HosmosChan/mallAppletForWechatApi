@@ -26,12 +26,33 @@ package com.lettuce.management.entity;
  */
 public class GoodInfo extends BaseEntity<Long> {
     private static final long serialVersionUID = -8946506737843746740L;
+    private String pictureId;
+    private String appId;
     private Long goodId;
     private Byte infoType;
-    private String info;
-    private Integer infoRank;
+    private String contentType;
+    private Long size;
+    private String path;
+    private String url;
+    private Integer type;
     private Long createUserId;
     private Long gmtUserId;
+
+    public String getPictureId() {
+        return pictureId;
+    }
+
+    public void setPictureId(String pictureId) {
+        this.pictureId = pictureId;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     public Long getGoodId() {
         return goodId;
@@ -49,20 +70,44 @@ public class GoodInfo extends BaseEntity<Long> {
         this.infoType = infoType;
     }
 
-    public String getInfo() {
-        return info;
+    public String getContentType() {
+        return contentType;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
     }
 
-    public Integer getInfoRank() {
-        return infoRank;
+    public Long getSize() {
+        return size;
     }
 
-    public void setInfoRank(Integer infoRank) {
-        this.infoRank = infoRank;
+    public void setSize(Long size) {
+        this.size = size;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Long getCreateUserId() {

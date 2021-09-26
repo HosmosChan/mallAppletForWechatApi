@@ -48,7 +48,7 @@ public class YmlConfig {
         private String filePath;
         private String carousel;
         private String goodCover;
-        private String good;
+        private String goodInfo;
 
         public String getFilePath() {
             return filePath;
@@ -74,12 +74,12 @@ public class YmlConfig {
             this.goodCover = goodCover;
         }
 
-        public String getGood() {
-            return good;
+        public String getGoodInfo() {
+            return goodInfo;
         }
 
-        public void setGood(String good) {
-            this.good = good;
+        public void setGoodInfo(String goodInfo) {
+            this.goodInfo = goodInfo;
         }
     }
 

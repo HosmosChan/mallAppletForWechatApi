@@ -35,4 +35,10 @@ public interface ManagementUserConstants {
      * 登陆token(nginx中默认header无视下划线)
      */
     String LOGIN_TOKEN = "login-token";
+    /**
+     * 文件类型
+     */
+    Byte CAROUSEL = 0;
+    Byte GOOD_COVER = 1;
+    Byte GOOD_INFO = 2;
 }

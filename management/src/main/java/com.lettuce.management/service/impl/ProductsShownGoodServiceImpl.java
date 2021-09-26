@@ -1,21 +1,26 @@
 package com.lettuce.management.service.impl;
 
+import com.lettuce.common.utils.FileUtil;
 import com.lettuce.common.utils.StrUtils;
 import com.lettuce.management.config.YmlConfig;
+import com.lettuce.management.constants.ManagementUserConstants;
 import com.lettuce.management.dao.ManagementAppletDao;
 import com.lettuce.management.dao.ProductsShownGoodDao;
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
-import com.lettuce.management.entity.DeliverWay;
-import com.lettuce.management.entity.GoodBase;
-import com.lettuce.management.entity.GoodDeliverWay;
+import com.lettuce.management.dto.GoodInfoListDto;
+import com.lettuce.management.entity.*;
 import com.lettuce.management.service.ProductsShownGoodService;
 import com.lettuce.management.utils.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +53,8 @@ import java.util.Map;
 @Service
 public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     private static final Logger log = LoggerFactory.getLogger("adminLogger");
+    @Value("${files.path}")
+    private String filesPath;
     @Autowired
     private ProductsShownGoodDao productsShownGoodDao;
     @Autowired
@@ -140,6 +147,48 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     public List<GoodBase> getGoodByCategoryId(Long categoryId) {
         String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
         return productsShownGoodDao.getGoodByCategoryId(appId, categoryId);
+    }
+
+    @Override
+    public int goodInfoCount(Map<String, Object> params) {
+        String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        params.put("appId", appId);
+        return productsShownGoodDao.goodInfoCount(params);
+    }
+
+    @Override
+    public List<GoodInfoListDto> goodInfoList(Map<String, Object> params, Integer offset, Integer limit) {
+        String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        params.put("appId", appId);
+        return productsShownGoodDao.goodInfoList(params, offset, limit);
+    }
+
+    @Override
+    public GoodInfo addGoodInfo(MultipartFile file, HttpServletRequest request) throws IOException {
+        String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        String fileOriginalName = file.getOriginalFilename();
+        Long id = StrUtils.createRamdomNo();
+        String md5 = FileUtil.fileMd5(file.getInputStream());
+        GoodInfo fileInfo = new GoodInfo();
+        fileOriginalName = fileOriginalName.substring(fileOriginalName.lastIndexOf("."));
+        String pathname = FileUtil.getPath() + md5 + fileOriginalName;
+        String fullPath = filesPath + ymlConfig.getFile().getGoodInfo() + pathname;
+        FileUtil.saveFile(file, fullPath);
+        long size = file.getSize();
+        String contentType = file.getContentType();
+        fileInfo.setId(id);
+        fileInfo.setPictureId(md5);
+        fileInfo.setAppId(appId);
+        fileInfo.setGoodId(Long.parseLong(request.getParameter("goodId")));
+        fileInfo.setInfoType(ManagementUserConstants.GOOD_INFO);
+        fileInfo.setContentType(contentType);
+        fileInfo.setSize(size);
+        fileInfo.setPath(fullPath);
+        fileInfo.setUrl(pathname);
+        fileInfo.setType(contentType.startsWith("image/") ? 1 : 0);
+        fileInfo.setCreateUserId(UserUtil.getCurrentUser().getId());
+        productsShownGoodDao.addGoodInfo(fileInfo);
+        return fileInfo;
     }
 
     /**

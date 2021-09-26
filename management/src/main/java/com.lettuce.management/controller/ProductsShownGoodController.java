@@ -5,20 +5,24 @@ import com.alibaba.fastjson.JSONObject;
 import com.lettuce.common.utils.table.PageTableHandler;
 import com.lettuce.common.utils.table.PageTableRequest;
 import com.lettuce.common.utils.table.PageTableResponse;
+import com.lettuce.management.annotation.LogAnnotation;
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
+import com.lettuce.management.dto.GoodInfoListDto;
 import com.lettuce.management.entity.DeliverWay;
 import com.lettuce.management.entity.GoodBase;
 import com.lettuce.management.entity.GoodInfo;
 import com.lettuce.management.service.ProductsShownGoodService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -116,9 +120,47 @@ public class ProductsShownGoodController {
         return productsShownGoodService.getGoodByCategoryId(categoryId);
     }
 
-    /*@PostMapping("/addGoodInfo")
+    /**
+     * 商品查询
+     *
+     * @param request 查询詳情信息圖片信息
+     * @return PageTableResponse
+     * @author Hosmos
+     * @date 2021-09-24
+     */
+    @GetMapping("/goodInfo")
+    @ApiOperation(value = "商品詳情信息圖片查询")
+    @RequiresPermissions("productsShown:good:query")
+    public PageTableResponse goodInfoList(PageTableRequest request) {
+        return new PageTableHandler(new PageTableHandler.CountHandler() {
+            @Override
+            public int count(PageTableRequest request) {
+                return productsShownGoodService.goodInfoCount(request.getParams());
+            }
+        }, new PageTableHandler.ListHandler() {
+            @Override
+            public List<GoodInfoListDto> list(PageTableRequest request) {
+                return productsShownGoodService.goodInfoList(request.getParams(), request.getOffset(), request.getLimit());
+            }
+        }).handle(request);
+    }
+
+    /**
+     * 添加商品詳情信息圖片
+     *
+     * @param file    文件
+     * @param request 返回参数
+     * @return GoodInfo
+     * @author Hosmos
+     * @date 2021-09-26
+     */
+    @LogAnnotation
+    @PostMapping("/addGoodInfo")
     @ApiOperation(value = "添加商品詳情信息圖片")
-    public List<GoodInfo> */
+    public GoodInfo addGoodInfo(MultipartFile file, HttpServletRequest request) throws IOException {
+        return productsShownGoodService.addGoodInfo(file, request);
+    }
+
     /**
      * 设置配送方式树
      *

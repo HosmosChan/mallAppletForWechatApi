@@ -80,7 +80,7 @@ public class StrUtils {
      */
     public static synchronized Long createRamdomNo() {
         String today = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-        String code = createCode(3);
+        String code = createCode(2);
         String out_trade_no = today + code;
         return Long.parseLong(out_trade_no.trim());
     }

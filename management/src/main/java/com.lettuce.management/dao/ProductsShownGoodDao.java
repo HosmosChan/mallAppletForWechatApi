@@ -2,9 +2,11 @@ package com.lettuce.management.dao;
 
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
+import com.lettuce.management.dto.GoodInfoListDto;
 import com.lettuce.management.entity.DeliverWay;
 import com.lettuce.management.entity.GoodBase;
 import com.lettuce.management.entity.GoodDeliverWay;
+import com.lettuce.management.entity.GoodInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -177,4 +179,33 @@ public interface ProductsShownGoodDao {
      * @date 2021-08-28
      */
     List<GoodBase> getGoodByCategoryId(String appId, Long categoryId);
+    /**
+     * 获取商品詳情信息圖片个数
+     *
+     * @param params 搜索参数
+     * @return int
+     * @author Hosmos
+     * @date 2021-09-24
+     */
+    int goodInfoCount(Map<String, Object> params);
+    /**
+     * 获取商品詳情信息圖片列表
+     *
+     * @param params 搜索参数
+     * @param offset 顺序
+     * @param limit  页码
+     * @return List<GoodInfoListDto>
+     * @author Hosmos
+     * @date 2021-09-24
+     */
+    List<GoodInfoListDto> goodInfoList(Map<String, Object> params, Integer offset, Integer limit);
+    /**
+     * 添加商品詳情信息圖片
+     *
+     * @param goodInfo 商品詳情信息圖片
+     * @return GoodInfo
+     * @author Hosmos
+     * @date 2021-09-26
+     */
+    void addGoodInfo(GoodInfo goodInfo);
 }

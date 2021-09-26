@@ -139,3 +139,37 @@ function getCompanyByAppId(type, param) {
     }
     return JSON.parse(sessionStorage[type]);
 }
+
+function showGoodByCategoryId(id, type, all, param) {
+    var data = getGoodByCategoryId(type, param);
+    var select = $("#" + id);
+    select.empty();
+
+    if (all != undefined || all) {
+        select.append("<option value=''>" + all + "</option>");
+    }
+
+    $.each(data, function (k, v) {
+        select.append("<option value ='" + k + "'>" + v + "</option>");
+    });
+
+    return data;
+}
+
+function getGoodByCategoryId(type, param) {
+    var v = sessionStorage[type];
+    $.ajax({
+        type: 'get',
+        url: '/productsShown/good/getGoodByCategoryId',
+        data: 'categoryId=' + param,
+        async: false,
+        success: function (data) {
+            v = {};
+            $.each(data, function (i, d) {
+                v[d.goodId] = d.goodName;
+            });
+            sessionStorage[type] = JSON.stringify(v);
+        }
+    });
+    return JSON.parse(sessionStorage[type]);
+}

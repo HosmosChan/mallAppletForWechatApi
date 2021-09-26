@@ -4,25 +4,33 @@
     <meta charset="UTF-8">
     <title>添加商品詳情</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../../../css/global.css" media="all"/>
+    <link rel="stylesheet" href="../../../css/font-awesome/css/font-awesome.css" media="all"/>
+    <link rel="stylesheet" href="../../../css/ztree/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/ztree/demo.css" type="text/css">
 </head>
 <body>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div class="layui-tab-item">
+<div class="layui-tab-item layui-show">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="layui-upload">
             <label class="col-md-2 control-label">分類</label>
             <div class="col-md-10">
                 <select name="categoryId" class="form-control input-sm" id="categoryId"
-                        data-bv-notempty="true" data-bv-notempty-message="分類 不能為空">
+                        data-bv-notempty="true" data-bv-notempty-message="分類 不能為空"
+                        onchange="changeGoodList()">
                 </select>
             </div>
             <label class="col-md-2 control-label">商品名</label>
             <div class="col-md-10">
-                <input class="form-control" type="text" name="goodName"
-                       id="goodName"
-                       data-bv-notempty="true" data-bv-notempty-message="商品名 不能為空">
+                <select name="goodId" class="form-control input-sm" id="goodId"
+                        data-bv-notempty="true" data-bv-notempty-message="商品名 不能為空"
+                        onchange="changeGoodId()">
+                </select>
             </div>
-            <button type="button" class="layui-btn layui-btn-normal" id="goodInfoList">選擇文件</button>
-            <div class="layui-upload-list" style="max-width: 1000px;">
+            <button type="button" class="layui-btn layui-btn-normal" id="goodInfoList" style="display: none;">選擇文件
+            </button>
+            <div class="layui-upload-list" style="max-width: 1000px; display: none;" id="table">
                 <table class="layui-table">
                     <colgroup>
                         <col>
@@ -40,8 +48,13 @@
                     </thead>
                     <tbody id="demoList"></tbody>
                 </table>
+                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                    预览图：
+                    <div class="layui-upload-list" id="demo2"></div>
+                </blockquote>
             </div>
-            <button type="button" class="layui-btn" id="goodInfoListAction">開始上傳</button>
+            <button type="button" class="layui-btn" id="goodInfoListAction" style="display: none;">開始上傳</button>
+            <button type="button" class="layui-btn" id="return" onclick="location.href='goodInfoList.html'">返回</button>
         </div>
     </div>
 </div>
@@ -52,80 +65,114 @@
 <script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../../js/common.js"></script>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../../js/dict.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="../../../js/my/ztree-deliver.js"></script>
 <script type="text/javascript">
-    layui.use(['layer', 'laydate'], function () {
+    var files;
+    layui.use(['layer', 'upload', 'element'], function () {
         var layer = layui.layer;
-    });
-    showCategoryByAppId("categoryId", "categoryName", "", appId);
+        var $ = layui.jquery
+            , upload = layui.upload
+            , element = layui.element;
+        //演示多文件列表
+        var uploadListIns = upload.render({
+            elem: '#goodInfoList', //綁定元素
+            elemList: $('#demoList'), //列表元素对象
+            url: '/productsShown/good/addGoodInfo', //此处用的是第三方的 http 请求演示，实际使用时改成您自己的上传接口即可。
+            accept: 'file', //允許上傳的文件類型
+            multiple: true,
+            number: 3,
+            auto: false,
+            bindAction: '#goodInfoListAction',
+            choose: function (obj) {
+                var that = this;
+                files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                //读取本地文件
+                obj.preview(function (index, file, result) {
+                    var tr = $(['<tr id="upload-' + index + '">'
+                        , '<td>' + file.name + '</td>'
+                        , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                        , '<td><div class="layui-progress" lay-filter="progress-demo-' + index + '"><div class="layui-progress-bar" lay-percent=""></div></div></td>'
+                        , '<td>'
+                        , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                        , '</td>'
+                        , '</tr>'].join(''));
 
-    //演示多文件列表
-    var uploadListIns = upload.render({
-        elem: '#testList', //綁定元素
-        elemList: $('#goodInfoList'), //列表元素对象
-        url: '/productsShown/good/addGoodInfo', //此处用的是第三方的 http 请求演示，实际使用时改成您自己的上传接口即可。
-        accept: 'file', //允許上傳的文件類型
-        multiple: true,
-        number: 3,
-        auto: false,
-        bindAction: '#goodInfoListAction',
-        data: {
-            categoryId: '#categoryId',
-            goodId: '#goodId',
-        },
-        choose: function (obj) {
-            var that = this;
-            var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
-            //读取本地文件
-            obj.preview(function (index, file, result) {
-                var tr = $(['<tr id="upload-' + index + '">'
-                    , '<td>' + file.name + '</td>'
-                    , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
-                    , '<td><div class="layui-progress" lay-filter="progress-demo-' + index + '"><div class="layui-progress-bar" lay-percent=""></div></div></td>'
-                    , '<td>'
-                    , '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
-                    , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
-                    , '</td>'
-                    , '</tr>'].join(''));
+                    //删除
+                    tr.find('.demo-delete').on('click', function () {
+                        delete files[index]; //删除对应的文件
+                        tr.remove();
+                        uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                    });
 
-                //单个重传
-                tr.find('.demo-reload').on('click', function () {
-                    obj.upload(index, file);
+                    that.elemList.append(tr);
+                    element.render('progress'); //渲染新加的进度条组件
+                    $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">');
                 });
-
-                //删除
-                tr.find('.demo-delete').on('click', function () {
-                    delete files[index]; //删除对应的文件
-                    tr.remove();
-                    uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
-                });
-
-                that.elemList.append(tr);
-                element.render('progress'); //渲染新加的进度条组件
-            });
-        }
-        , done: function (res, index, upload) { //成功的回调
-            var that = this;
-            if (res.code == 0) { //上传成功
+            }
+            , before: function () {
+                this.data = {
+                    goodId: document.getElementById("goodId").value
+                }
+            }
+            , done: function (res, index, upload) { //成功的回调
+                var that = this;
+                if (res.code == 0) { //上传成功
+                    var tr = that.elemList.find('tr#upload-' + index)
+                        , tds = tr.children();
+                    tds.eq(3).html(''); //清空操作
+                    delete this.files[index]; //删除文件队列已经上传成功的文件
+                    return;
+                }
+                this.error(index, upload);
+            }
+            , allDone: function (obj) { //多文件上传完毕后的状态回调
+                console.log(obj)
+            }
+            , error: function (index, upload) { //错误回调
+                var that = this;
                 var tr = that.elemList.find('tr#upload-' + index)
                     , tds = tr.children();
-                tds.eq(3).html(''); //清空操作
-                delete this.files[index]; //删除文件队列已经上传成功的文件
-                return;
+                tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
             }
-            this.error(index, upload);
-        }
-        , allDone: function (obj) { //多文件上传完毕后的状态回调
-            console.log(obj)
-        }
-        , error: function (index, upload) { //错误回调
-            var that = this;
-            var tr = that.elemList.find('tr#upload-' + index)
-                , tds = tr.children();
-            tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
-        }
-        , progress: function (n, elem, e, index) { //注意：index 参数为 layui 2.6.6 新增
-            element.progress('progress-demo-' + index, n + '%'); //执行进度条。n 即为返回的进度百分比
-        }
+            , progress: function (n, elem, e, index) { //注意：index 参数为 layui 2.6.6 新增
+                element.progress('progress-demo-' + index, n + '%'); //执行进度条。n 即为返回的进度百分比
+            }
+        });
     });
+    var permission = checkPermission();
+    var appId = getAppId();
+    showCategoryByAppId("categoryId", "categoryName", "", appId);
+
+    function changeGoodList() {
+        showGoodByCategoryId("goodId", "goodName", "", document.getElementById("categoryId").value);
+    }
+
+    function changeGoodId() {
+        if ($('#goodId').val() === "") {
+            $('#goodInfoList').hide();
+            $('#table').hide();
+            $('#goodInfoListAction').hide();
+        } else {
+            $('#goodInfoList').show();
+            $('#table').show();
+            $('#goodInfoListAction').show();
+        }
+    }
+
+    function getAppId() {
+        var appId;
+        $.ajax({
+            type: 'get',
+            url: '/applet/appId',
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            success: function (data) {
+                appId = data;
+            }
+        });
+        return appId;
+    }
 </script>

@@ -227,4 +227,10 @@
         from products_shown_good_base as psgb
         where psgb.categoryId = #{categoryId}
     </select>
+    <insert id="addGoodInfo">
+        insert into products_shown_good_info
+        (pictureId, appId, goodId, infoType, contentType, size, path, url, type, createTime,createUserId)
+        values
+            (#{pictureId}, #{appId}, #{goodId}, #{infoType}, #{contentType}, #{size}, #{path}, #{url}, #{type}, now(), #{createUserId})
+    </insert>
 </mapper>
