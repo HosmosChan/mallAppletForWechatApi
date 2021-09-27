@@ -94,7 +94,7 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(GoodDto goodDto) {
-        GoodBase d = productsShownGoodDao.getGoodByName(goodDto.getGoodName(), goodDto.getAppId());
+        GoodBase d = productsShownGoodDao.getGoodByParam(null, goodDto.getGoodName(), goodDto.getAppId());
         if (d != null) {
             throw new IllegalArgumentException("商品已存在");
         }
@@ -166,12 +166,12 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
         List<GoodInfoListDto> goodInfoList = new ArrayList<>();
         List<GoodBaseDto> goodBaseDtoList = productsShownGoodDao.getGoodBaseByGoodId(goodInfoIdList);
         List<GoodInfo> allGoodInfoList = productsShownGoodDao.allGoodInfoList();
-        for (Long goodId:goodInfoIdList
-             ) {
+        for (Long goodId : goodInfoIdList
+        ) {
             GoodInfoListDto goodInfoListDto = new GoodInfoListDto();
             goodInfoListDto.setGoodId(goodId);
-            for (GoodBaseDto goodBaseDto:goodBaseDtoList
-                 ) {
+            for (GoodBaseDto goodBaseDto : goodBaseDtoList
+            ) {
                 if (goodBaseDto.getGoodId().equals(goodId)) {
                     goodInfoListDto.setAppId(goodBaseDto.getAppId());
                     goodInfoListDto.setGoodName(goodBaseDto.getGoodName());
@@ -179,8 +179,8 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
                 }
             }
             List<GoodInfo> goodInfos = new ArrayList<>();
-            for (GoodInfo goodInfo:allGoodInfoList
-                 ) {
+            for (GoodInfo goodInfo : allGoodInfoList
+            ) {
                 if (goodInfo.getGoodId().equals(goodId)) {
                     goodInfos.add(goodInfo);
                 }
@@ -204,8 +204,8 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
         String pathname = "/" + goodId + "/" + md5 + fileOriginalName;
         String fullPath = filesPath + ymlConfig.getFile().getGoodInfo() + pathname;
         List<GoodInfo> d = productsShownGoodDao.getGoodInfoById(goodId, appId);
-        for (GoodInfo goodInfo:d
-             ) {
+        for (GoodInfo goodInfo : d
+        ) {
             if (goodInfo.getPictureId().equals(md5)) {
                 return null;
             }
@@ -226,6 +226,24 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
         fileInfo.setCreateUserId(UserUtil.getCurrentUser().getId());
         productsShownGoodDao.addGoodInfo(fileInfo);
         return fileInfo;
+    }
+
+    @Override
+    public GoodBaseDto getGoodByParam(Long goodId, String goodName, String appId) {
+        return productsShownGoodDao.getGoodByParam(goodId, goodName, appId);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteGoodInfo(MultipartFile file, HttpServletRequest request) {
+        Long goodId = Long.parseLong(request.getParameter("goodId"));
+        String appId = request.getParameter("appId");
+        List<GoodInfo> d = productsShownGoodDao.getGoodInfoById(goodId, appId);
+        productsShownGoodDao.deleteGoodInfo(goodId, appId);
+        for (GoodInfo goodInfo : d
+        ) {
+            FileUtil.deleteFile(goodInfo.getPath());
+        }
     }
 
     /**

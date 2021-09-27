@@ -101,6 +101,22 @@ public class ProductsShownGoodController {
     }
 
     /**
+     * 通过相關參數获取商品信息
+     *
+     * @param goodId   商品 id
+     * @param goodName 商品名
+     * @param appId    app id
+     * @return GoodBaseDto
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    @GetMapping("/getGoodByParam")
+    @ApiOperation(value = "通过相關參數获取商品信息")
+    public GoodBaseDto getGoodByParam(Long goodId, String goodName, String appId) {
+        return productsShownGoodService.getGoodByParam(goodId, goodName, appId);
+    }
+
+    /**
      * 所有配送方式
      *
      * @return JSONArray
@@ -160,6 +176,36 @@ public class ProductsShownGoodController {
     @PostMapping("/addGoodInfo")
     @ApiOperation(value = "添加商品詳情信息圖片")
     public LayuiFile addGoodInfo(MultipartFile file, HttpServletRequest request) throws IOException {
+        GoodInfo fileInfo = productsShownGoodService.addGoodInfo(file, request);
+        LayuiFile layuiFile = new LayuiFile();
+        LayuiFile.LayuiFileData data = new LayuiFile.LayuiFileData();
+        data.setTitle(file.getOriginalFilename());
+        if (fileInfo != null) {
+            data.setSrc(request.getParameter("domain") + "/mallAppletForWechatApi/files/goodInfo" + fileInfo.getUrl());
+            layuiFile.setCode(0);
+            layuiFile.setMsg("上传文件成功：" + file.getName());
+        } else {
+            layuiFile.setCode(1);
+            layuiFile.setMsg("上传文件失败：" + file.getName());
+        }
+        layuiFile.setData(data);
+        return layuiFile;
+    }
+
+    /**
+     * 更新商品詳情信息圖片
+     *
+     * @param file    文件
+     * @param request 返回参数
+     * @return LayuiFile
+     * @author Hosmos
+     * @date 2021-09-28
+     */
+    @LogAnnotation
+    @PostMapping("/updateGoodInfo")
+    @ApiOperation(value = "更新商品詳情信息圖片")
+    public LayuiFile updateGoodInfo(MultipartFile file, HttpServletRequest request) throws IOException {
+        productsShownGoodService.deleteGoodInfo(file, request);
         GoodInfo fileInfo = productsShownGoodService.addGoodInfo(file, request);
         LayuiFile layuiFile = new LayuiFile();
         LayuiFile.LayuiFileData data = new LayuiFile.LayuiFileData();

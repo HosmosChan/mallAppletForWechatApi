@@ -113,15 +113,16 @@ public interface ProductsShownGoodDao {
     void deleteGoodDiscountByGoodIdList(List<Long> goodIdList);
 
     /**
-     * 通过商品名获取商品信息
+     * 通过相關參數获取商品信息
      *
+     * @param goodId   商品 id
      * @param goodName 商品名
      * @param appId    app id
-     * @return GoodBase
+     * @return GoodBaseDto
      * @author Hosmos
      * @date 2021-08-25
      */
-    GoodBase getGoodByName(String goodName, String appId);
+    GoodBaseDto getGoodByParam(Long goodId, String goodName, String appId);
 
     /**
      * 保存商品基础信息
@@ -219,11 +220,12 @@ public interface ProductsShownGoodDao {
      * @date 2021-09-24
      */
     List<GoodInfo> allGoodInfoList();
+
     /**
      * 根据商品Id查询商品詳情信息圖片
      *
      * @param goodId 商品id
-     * @param appId app id
+     * @param appId  app id
      * @return List<GoodInfo>
      * @author Hosmos
      * @date 2021-09-27
@@ -239,4 +241,13 @@ public interface ProductsShownGoodDao {
      * @date 2021-09-26
      */
     void addGoodInfo(GoodInfo goodInfo);
+    /**
+     * 删除商品詳情信息圖片
+     *
+     * @param goodId 商品 id
+     * @param appId appId
+     * @author Hosmos
+     * @date 2021-09-28
+     */
+    void deleteGoodInfo(long goodId, String appId);
 }

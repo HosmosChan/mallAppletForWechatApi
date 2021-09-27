@@ -222,10 +222,6 @@ CREATE TABLE `management_company`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of management_company
--- ----------------------------
-
--- ----------------------------
 -- Table structure for management_deliver_way
 -- ----------------------------
 DROP TABLE IF EXISTS `management_deliver_way`;
@@ -237,7 +233,7 @@ CREATE TABLE `management_deliver_way`  (
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `gmtUserId` int(11) NULL DEFAULT NULL COMMENT '修改用户Id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of management_deliver_way
@@ -364,6 +360,10 @@ INSERT INTO `management_permission` VALUES (50, 35, '公司配置表', 'fa-build
 INSERT INTO `management_permission` VALUES (51, 50, '查询', '', '', 2, 'management:company:query', 1, '2021-01-01 00:00:00', 1, NULL, NULL);
 INSERT INTO `management_permission` VALUES (52, 50, '新增', '', '', 2, 'management:company:add', 2, '2021-01-01 00:00:00', 1, NULL, NULL);
 INSERT INTO `management_permission` VALUES (53, 50, '删除', '', '', 2, 'management:company:del', 3, '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (54, 40, '商品展示-商品詳細信息圖片上傳', 'fa-picture-o', 'pages/productsShown/goodInfo/goodInfoList.html', 1, '', 3, '2021-08-30 15:01:17', 1, '2021-09-28 01:19:06', 1);
+INSERT INTO `management_permission` VALUES (55, 54, '查詢', '', '', 2, 'productsShown:goodInfo:query', 1, '2021-08-30 15:06:55', 1, NULL, NULL);
+INSERT INTO `management_permission` VALUES (56, 54, '上傳', '', '', 2, 'productsShown:goodInfo:add', 2, '2021-08-30 15:07:52', 1, '2021-08-30 15:08:54', 1);
+INSERT INTO `management_permission` VALUES (57, 54, '刪除', '', '', 2, 'productsShown:goodInfo:del', 3, '2021-08-30 15:08:31', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for management_role
@@ -383,7 +383,7 @@ CREATE TABLE `management_role`  (
 -- ----------------------------
 -- Records of management_role
 -- ----------------------------
-INSERT INTO `management_role` VALUES (1, 'Programmer', '開發員', '2021-01-01 00:00:00', 1, NULL, NULL);
+INSERT INTO `management_role` VALUES (1, 'Programmer', '開發員', '2021-01-01 00:00:00', 1, '2021-09-24 15:40:21', 1);
 
 -- ----------------------------
 -- Table structure for management_role_permission
@@ -451,6 +451,10 @@ INSERT INTO `management_role_permission` VALUES (1, 50);
 INSERT INTO `management_role_permission` VALUES (1, 51);
 INSERT INTO `management_role_permission` VALUES (1, 52);
 INSERT INTO `management_role_permission` VALUES (1, 53);
+INSERT INTO `management_role_permission` VALUES (1, 54);
+INSERT INTO `management_role_permission` VALUES (1, 55);
+INSERT INTO `management_role_permission` VALUES (1, 56);
+INSERT INTO `management_role_permission` VALUES (1, 57);
 
 -- ----------------------------
 -- Table structure for management_user
@@ -496,10 +500,6 @@ CREATE TABLE `management_user_appid`  (
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of management_user_appid
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for management_user_role
@@ -555,11 +555,6 @@ CREATE TABLE `products_shown_category`  (
   `gmtTime` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of products_shown_category
--- ----------------------------
-INSERT INTO `products_shown_category` VALUES (1, '123', 20210825215109668, '测试', 1, '2021-01-01 00:00:00', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for products_shown_dict
@@ -666,11 +661,15 @@ CREATE TABLE `products_shown_good_discount`  (
 DROP TABLE IF EXISTS `products_shown_good_info`;
 CREATE TABLE `products_shown_good_info`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `pictureId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '文件id',
   `appId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'appId',
   `goodId` bigint(20) NOT NULL COMMENT '商品Id',
-  `infoType` tinyint(4) NOT NULL COMMENT '信息类型(0-文本，1-图片)',
-  `info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '信息内容',
-  `infoRank` int(11) NOT NULL COMMENT '信息排序',
+  `infoType` tinyint(4) NOT NULL COMMENT '文件类型(0: 轮播图, 1: 商品封面, 2: 商品详情页)',
+  `contentType` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '文件类型/格式',
+  `size` bigint(20) NOT NULL COMMENT '文件大小',
+  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '物理路径',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '文件缓存地址url',
+  `type` int NOT NULL COMMENT '类型(1: 图片, 2: 非图片)',
   `createUserId` bigint(20) NOT NULL COMMENT '创建者Id',
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
   `gmtUserId` bigint(20) NULL DEFAULT NULL COMMENT '修改者Id',

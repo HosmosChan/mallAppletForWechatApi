@@ -7,6 +7,7 @@
         <result column="appId" jdbcType="VARCHAR" property="appId"/>
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
         <result column="categoryId" jdbcType="BIGINT" property="categoryId"/>
+        <result column="categoryName" jdbcType="VARCHAR" property="categoryName"/>
         <result column="goodName" jdbcType="VARCHAR" property="goodName"/>
         <result column="goodMaxPrice" jdbcType="DECIMAL" property="goodMaxPrice"/>
         <result column="goodMinPrice" jdbcType="DECIMAL" property="goodMinPrice"/>
@@ -201,11 +202,15 @@
             #{goodIdList, jdbcType=NUMERIC}
         </foreach>
     </delete>
-    <select id="getGoodByName" resultMap="GoodBaseResultMap">
+    <select id="getGoodByParam" resultMap="GoodBaseResultMap">
         select
-        <include refid="Good_Base_List"/>
+        <include refid="Good_Base_List"/>, psc.categoryName
         from products_shown_good_base as psgb
+        right join products_shown_category as psc on psgb.categoryId = psc.categoryId
         where 1 = 1
+        <if test="goodId != null and goodId != ''">
+            and psgb.goodId = #{goodId}
+        </if>
         <if test="goodName != null and goodName != ''">
             and psgb.goodName = #{goodName}
         </if>
@@ -291,4 +296,8 @@
         values (#{pictureId}, #{appId}, #{goodId}, #{infoType}, #{contentType}, #{size}, #{path}, #{url}, #{type},
                 now(), #{createUserId})
     </insert>
+    <delete id="deleteGoodInfo">
+        delete from products_shown_good_info
+        where goodId = #{goodId} and appId = #{appId}
+    </delete>
 </mapper>

@@ -121,4 +121,26 @@ public interface ProductsShownGoodService {
      * @date 2021-09-26
      */
     GoodInfo addGoodInfo(MultipartFile file, HttpServletRequest request) throws IOException;
+
+    /**
+     * 通过相關參數获取商品信息
+     *
+     * @param goodId   商品 id
+     * @param goodName 商品名
+     * @param appId    app id
+     * @return GoodBaseDto
+     * @author Hosmos
+     * @date 2021-08-25
+     */
+    GoodBaseDto getGoodByParam(Long goodId, String goodName, String appId);
+
+    /**
+     * 删除商品詳情信息圖片
+     *
+     * @param file    文件
+     * @param request 请求信息
+     * @author Hosmos
+     * @date 2021-09-28
+     */
+    void deleteGoodInfo(MultipartFile file, HttpServletRequest request);
 }
