@@ -2,7 +2,6 @@ package com.lettuce.management.dao;
 
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
-import com.lettuce.management.dto.GoodInfoListDto;
 import com.lettuce.management.entity.DeliverWay;
 import com.lettuce.management.entity.GoodBase;
 import com.lettuce.management.entity.GoodDeliverWay;
@@ -172,13 +171,14 @@ public interface ProductsShownGoodDao {
     /**
      * 根據分類id獲取商品
      *
-     * @param appId app id
+     * @param appId      app id
      * @param categoryId 分類 id
      * @return List<GoodBase>
      * @author Hosmos
      * @date 2021-08-28
      */
     List<GoodBase> getGoodByCategoryId(String appId, Long categoryId);
+
     /**
      * 获取商品詳情信息圖片个数
      *
@@ -188,17 +188,48 @@ public interface ProductsShownGoodDao {
      * @date 2021-09-24
      */
     int goodInfoCount(Map<String, Object> params);
+
     /**
-     * 获取商品詳情信息圖片列表
+     * 获取商品詳情信息圖片商品Id列表
      *
      * @param params 搜索参数
      * @param offset 顺序
      * @param limit  页码
-     * @return List<GoodInfoListDto>
+     * @return List<String>
+     * @author Hosmos
+     * @date 2021-09-27
+     */
+    List<Long> goodInfoIdList(Map<String, Object> params, Integer offset, Integer limit);
+
+    /**
+     * 根据商品Id获取商品基础信息
+     *
+     * @param goodInfoIdList 商品Id List
+     * @return List<GoodBaseDto>
+     * @author Hosmos
+     * @date 2021-09-27
+     */
+    List<GoodBaseDto> getGoodBaseByGoodId(List<Long> goodInfoIdList);
+
+    /**
+     * 获取商品詳情信息圖片列表
+     *
+     * @return GoodInfo
      * @author Hosmos
      * @date 2021-09-24
      */
-    List<GoodInfoListDto> goodInfoList(Map<String, Object> params, Integer offset, Integer limit);
+    List<GoodInfo> allGoodInfoList();
+    /**
+     * 根据商品Id查询商品詳情信息圖片
+     *
+     * @param goodId 商品id
+     * @param appId app id
+     * @return List<GoodInfo>
+     * @author Hosmos
+     * @date 2021-09-27
+     */
+    List<GoodInfo> getGoodInfoById(Long goodId, String appId);
+
     /**
      * 添加商品詳情信息圖片
      *

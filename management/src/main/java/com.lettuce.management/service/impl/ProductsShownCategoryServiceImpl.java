@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,7 @@ public class ProductsShownCategoryServiceImpl implements ProductsShownCategorySe
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(Category category) {
         category.setCategoryId(StrUtils.createRamdomNo());
         category.setCreateUserId(UserUtil.getCurrentUser().getId());
@@ -76,6 +78,7 @@ public class ProductsShownCategoryServiceImpl implements ProductsShownCategorySe
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void update(Category category) {
         category.setGmtUserId(UserUtil.getCurrentUser().getId());
         productsShownCategoryDao.update(category);
@@ -87,6 +90,7 @@ public class ProductsShownCategoryServiceImpl implements ProductsShownCategorySe
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
         Long CategoryId = productsShownCategoryDao.getById(id).getCategoryId();
         List<Long> goodIdList = productsShownGoodDao.getGoodIdByCategoryId(CategoryId);

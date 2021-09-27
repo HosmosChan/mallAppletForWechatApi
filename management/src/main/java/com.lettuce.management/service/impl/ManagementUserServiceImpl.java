@@ -77,6 +77,7 @@ public class ManagementUserServiceImpl implements ManagementUserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public UserDto updateUser(UserDto userDto) {
         userDto.setGmtUserId(UserUtil.getCurrentUser().getId());
         managementUserDao.updateUser(userDto);
@@ -115,6 +116,7 @@ public class ManagementUserServiceImpl implements ManagementUserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
         Long appletId = managementAppletDao.getByUserId(id).getId();
         Byte status = 2;

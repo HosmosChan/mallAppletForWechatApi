@@ -47,7 +47,6 @@
                         <tr>
                         </tr>
                         <tr>
-                            <th>商品id</th>
                             <th>分類</th>
                             <th>商品名</th>
                             <th>商品详细信息图片缩略图</th>
@@ -79,6 +78,9 @@
     var appId = getAppId();
     var example;
     var categoryId = showCategoryByAppId("categoryId", "categoryName", "全部", appId);
+    var pro = window.location.protocol;
+    var host = window.location.host;
+    var domain = pro + "//" + host;
 
     function getAppId() {
         var appId;
@@ -113,7 +115,6 @@
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
-                    {"data": "goodId", "defaultContent": ""},
                     {
                         "data": "categoryId",
                         "defaultContent": "",
@@ -123,26 +124,27 @@
                     },
                     {"data": "goodName", "defaultContent": ""},
                     {
-                        "data": "goodInfo",
+                        "data": "goodInfoList",
                         "defaultContent": "",
                         "render": function (data, type, row) {
                             var imgList = "";
                             imgList += "<div class='picbox li'>"
                             var i = 0;
                             while (data[i] != null) {
-                                imgList +="<img src= " + data[i].goodInfoList.path + " alt='Base64 encoded image' width='40' height='30'/>";
+                                var src = domain + "/mallAppletForWechatApi/files/goodInfo" + data[i].url;
+                                imgList += "<img src= " + src + " height='100' style='margin-right: 10px'/>";
+                                i++;
                             }
-                            imgList +="</div>";
+                            imgList += "</div>";
                             return imgList;
                         }
                     },
                     {
-                        "data": "",
+                        "data": "goodId",
                         "defaultContent": "",
                         "orderable": false,
                         "render": function (data, type, row) {
-                            var id = row['id'];
-                            var href = "updateGoodInfo.html?id=" + id;
+                            var href = "updateGoodInfo.html?goodId=" + data;
                             var edit = buttonEdit(href, "productsShown:good:add", permission);
                             return edit;
                         }

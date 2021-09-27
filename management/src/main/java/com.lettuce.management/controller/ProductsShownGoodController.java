@@ -9,7 +9,9 @@ import com.lettuce.management.annotation.LogAnnotation;
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
 import com.lettuce.management.dto.GoodInfoListDto;
+import com.lettuce.management.dto.LayuiFile;
 import com.lettuce.management.entity.DeliverWay;
+import com.lettuce.management.entity.FileInfo;
 import com.lettuce.management.entity.GoodBase;
 import com.lettuce.management.entity.GoodInfo;
 import com.lettuce.management.service.ProductsShownGoodService;
@@ -150,15 +152,28 @@ public class ProductsShownGoodController {
      *
      * @param file    文件
      * @param request 返回参数
-     * @return GoodInfo
+     * @return LayuiFile
      * @author Hosmos
      * @date 2021-09-26
      */
     @LogAnnotation
     @PostMapping("/addGoodInfo")
     @ApiOperation(value = "添加商品詳情信息圖片")
-    public GoodInfo addGoodInfo(MultipartFile file, HttpServletRequest request) throws IOException {
-        return productsShownGoodService.addGoodInfo(file, request);
+    public LayuiFile addGoodInfo(MultipartFile file, HttpServletRequest request) throws IOException {
+        GoodInfo fileInfo = productsShownGoodService.addGoodInfo(file, request);
+        LayuiFile layuiFile = new LayuiFile();
+        LayuiFile.LayuiFileData data = new LayuiFile.LayuiFileData();
+        data.setTitle(file.getOriginalFilename());
+        if (fileInfo != null) {
+            data.setSrc(request.getParameter("domain") + "/mallAppletForWechatApi/files/goodInfo" + fileInfo.getUrl());
+            layuiFile.setCode(0);
+            layuiFile.setMsg("上传文件成功：" + file.getName());
+        } else {
+            layuiFile.setCode(1);
+            layuiFile.setMsg("上传文件失败：" + file.getName());
+        }
+        layuiFile.setData(data);
+        return layuiFile;
     }
 
     /**

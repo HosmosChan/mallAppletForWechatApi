@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -91,6 +92,7 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(GoodDto goodDto) {
         GoodBase d = productsShownGoodDao.getGoodByName(goodDto.getGoodName(), goodDto.getAppId());
         if (d != null) {
@@ -160,26 +162,61 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     public List<GoodInfoListDto> goodInfoList(Map<String, Object> params, Integer offset, Integer limit) {
         String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
         params.put("appId", appId);
-        return productsShownGoodDao.goodInfoList(params, offset, limit);
+        List<Long> goodInfoIdList = productsShownGoodDao.goodInfoIdList(params, offset, limit);
+        List<GoodInfoListDto> goodInfoList = new ArrayList<>();
+        List<GoodBaseDto> goodBaseDtoList = productsShownGoodDao.getGoodBaseByGoodId(goodInfoIdList);
+        List<GoodInfo> allGoodInfoList = productsShownGoodDao.allGoodInfoList();
+        for (Long goodId:goodInfoIdList
+             ) {
+            GoodInfoListDto goodInfoListDto = new GoodInfoListDto();
+            goodInfoListDto.setGoodId(goodId);
+            for (GoodBaseDto goodBaseDto:goodBaseDtoList
+                 ) {
+                if (goodBaseDto.getGoodId().equals(goodId)) {
+                    goodInfoListDto.setAppId(goodBaseDto.getAppId());
+                    goodInfoListDto.setGoodName(goodBaseDto.getGoodName());
+                    goodInfoListDto.setCategoryId(goodBaseDto.getCategoryId());
+                }
+            }
+            List<GoodInfo> goodInfos = new ArrayList<>();
+            for (GoodInfo goodInfo:allGoodInfoList
+                 ) {
+                if (goodInfo.getGoodId().equals(goodId)) {
+                    goodInfos.add(goodInfo);
+                }
+            }
+            goodInfoListDto.setGoodInfoList(goodInfos);
+            goodInfoList.add(goodInfoListDto);
+        }
+        return goodInfoList;
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public GoodInfo addGoodInfo(MultipartFile file, HttpServletRequest request) throws IOException {
         String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        Long goodId = Long.parseLong(request.getParameter("goodId"));
         String fileOriginalName = file.getOriginalFilename();
         Long id = StrUtils.createRamdomNo();
         String md5 = FileUtil.fileMd5(file.getInputStream());
         GoodInfo fileInfo = new GoodInfo();
         fileOriginalName = fileOriginalName.substring(fileOriginalName.lastIndexOf("."));
-        String pathname = FileUtil.getPath() + md5 + fileOriginalName;
+        String pathname = "/" + goodId + "/" + md5 + fileOriginalName;
         String fullPath = filesPath + ymlConfig.getFile().getGoodInfo() + pathname;
+        List<GoodInfo> d = productsShownGoodDao.getGoodInfoById(goodId, appId);
+        for (GoodInfo goodInfo:d
+             ) {
+            if (goodInfo.getPictureId().equals(md5)) {
+                return null;
+            }
+        }
         FileUtil.saveFile(file, fullPath);
         long size = file.getSize();
         String contentType = file.getContentType();
         fileInfo.setId(id);
         fileInfo.setPictureId(md5);
         fileInfo.setAppId(appId);
-        fileInfo.setGoodId(Long.parseLong(request.getParameter("goodId")));
+        fileInfo.setGoodId(goodId);
         fileInfo.setInfoType(ManagementUserConstants.GOOD_INFO);
         fileInfo.setContentType(contentType);
         fileInfo.setSize(size);

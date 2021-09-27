@@ -4,6 +4,7 @@ import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
 import com.lettuce.management.dto.GoodInfoListDto;
 import com.lettuce.management.entity.DeliverWay;
+import com.lettuce.management.entity.FileInfo;
 import com.lettuce.management.entity.GoodBase;
 import com.lettuce.management.entity.GoodInfo;
 import org.springframework.web.multipart.MultipartFile;
@@ -113,8 +114,8 @@ public interface ProductsShownGoodService {
     /**
      * 添加商品詳情信息圖片
      *
-     * @param file 文件
-     * @param goodId   商品 id
+     * @param file    文件
+     * @param request 请求信息
      * @return GoodInfo
      * @author Hosmos
      * @date 2021-09-26

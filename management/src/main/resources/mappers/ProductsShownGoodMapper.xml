@@ -70,11 +70,15 @@
     </resultMap>
     <resultMap id="GoodInfoResultMap" type="com.lettuce.management.entity.GoodInfo">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="appId" jdbcType="BIGINT" property="appId"/>
+        <result column="pictureId" jdbcType="VARCHAR" property="pictureId"/>
+        <result column="appId" jdbcType="VARCHAR" property="appId"/>
         <result column="goodId" jdbcType="BIGINT" property="goodId"/>
         <result column="infoType" jdbcType="TINYINT" property="infoType"/>
-        <result column="info" jdbcType="VARCHAR" property="info"/>
-        <result column="infoRank" jdbcType="INTEGER" property="infoRank"/>
+        <result column="contentType" jdbcType="VARCHAR" property="contentType"/>
+        <result column="size" jdbcType="BIGINT" property="size"/>
+        <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
@@ -102,8 +106,9 @@
         psgd.createTime, psgd.gmtUserId, psgd.gmtTime
     </sql>
     <sql id="Good_Info_List">
-        psgi.id, psgi.appId, psgi.goodId, infoType, info, infoRank, psgi.createUserId,
-        psgi.createTime, psgi.gmtUserId, psgi.gmtTime
+        psgi.id, psgi.pictureId, psgi.appId, psgi.goodId, psgi.infoType, psgi.contentType,
+        psgi.size, psgi.path, psgi.url, psgi.type, psgi.createUserId, psgi.createTime,
+        psgi.gmtUserId, psgi.gmtTime
     </sql>
     <sql id="GoodBaseWhere">
         <where>
@@ -126,6 +131,24 @@
             </if>
         </where>
     </sql>
+    <sql id="GoodInfoWhere">
+        <where>
+            <if test="params != null and params != ''">
+                <if test="params.appId != null and params.appId != ''">
+                    and psgb.appId = #{params.appId}
+                </if>
+                <if test="params.goodId != null and params.goodId != ''">
+                    and psgb.goodId = #{params.goodId}
+                </if>
+                <if test="params.categoryId != null and params.categoryId != ''">
+                    and psgb.categoryId = #{params.categoryId}
+                </if>
+                <if test="params.goodName != null and params.goodName != ''">
+                    and psgb.goodName like CONCAT('%',#{params.goodName},'%')
+                </if>
+            </if>
+        </where>
+    </sql>
     <select id="list" resultMap="GoodBaseResultMap">
         select
         <include refid="Good_Base_List"/>
@@ -139,42 +162,43 @@
         <include refid="GoodBaseWhere"/>
     </select>
     <select id="getGoodIdByCategoryId" resultType="java.lang.Long">
-        select goodId from products_shown_good_base
+        select goodId
+        from products_shown_good_base
         where categoryId = #{categoryId}
     </select>
     <delete id="deleteGoodBaseByGoodIdList" parameterType="java.lang.Long">
         delete from products_shown_good_base
         where goodId in
-        <foreach collection="list" item="goodId" separator="," open="(" close=")">
-            #{goodId, jdbcType=NUMERIC}
+        <foreach collection="list" item="goodIdList" separator="," open="(" close=")">
+            #{goodIdList, jdbcType=NUMERIC}
         </foreach>
     </delete>
     <delete id="deleteGoodInfoByGoodIdList" parameterType="java.lang.Long">
         delete from products_shown_good_info
         where goodId in
-        <foreach collection="list" item="goodId" separator="," open="(" close=")">
-            #{goodId, jdbcType=NUMERIC}
+        <foreach collection="list" item="goodIdList" separator="," open="(" close=")">
+            #{goodIdList, jdbcType=NUMERIC}
         </foreach>
     </delete>
     <delete id="deleteGoodDetailByGoodIdList" parameterType="java.lang.Long">
         delete from products_shown_good_detail
         where goodId in
-        <foreach collection="list" item="goodId" separator="," open="(" close=")">
-            #{goodId, jdbcType=NUMERIC}
+        <foreach collection="list" item="goodIdList" separator="," open="(" close=")">
+            #{goodIdList, jdbcType=NUMERIC}
         </foreach>
     </delete>
     <delete id="deleteGoodDeliverWayByGoodIdList" parameterType="java.lang.Long">
         delete from products_shown_good_deliver_way
         where goodId in
-        <foreach collection="list" item="goodId" separator="," open="(" close=")">
-            #{goodId, jdbcType=NUMERIC}
+        <foreach collection="list" item="goodIdList" separator="," open="(" close=")">
+            #{goodIdList, jdbcType=NUMERIC}
         </foreach>
     </delete>
     <delete id="deleteGoodDiscountByGoodIdList" parameterType="java.lang.Long">
         delete from products_shown_good_discount
         where goodId in
-        <foreach collection="list" item="goodId" separator="," open="(" close=")">
-            #{goodId, jdbcType=NUMERIC}
+        <foreach collection="list" item="goodIdList" separator="," open="(" close=")">
+            #{goodIdList, jdbcType=NUMERIC}
         </foreach>
     </delete>
     <select id="getGoodByName" resultMap="GoodBaseResultMap">
@@ -191,22 +215,23 @@
     </select>
     <insert id="saveBase">
         insert into products_shown_good_base
-        (appId, goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl, isSpecialPrice, specialPrice, isDiscount, stock, sellStatus, sellTime, createUserId, createTime)
-        value
-        (#{appId}, #{goodId}, #{categoryId}, #{goodName}, #{goodMaxPrice}, #{goodMinPrice}, #{goodUrl}, #{isSpecialPrice},
-        #{specialPrice}, #{isDiscount}, #{stock}, #{sellStatus}, #{sellTime}, #{createUserId}, now())
+        (appId, goodId, categoryId, goodName, goodMaxPrice, goodMinPrice, goodUrl, isSpecialPrice, specialPrice,
+         isDiscount, stock, sellStatus, sellTime, createUserId, createTime)
+            value
+            (#{appId}, #{goodId}, #{categoryId}, #{goodName}, #{goodMaxPrice}, #{goodMinPrice}, #{goodUrl}, #{isSpecialPrice},
+            #{specialPrice}, #{isDiscount}, #{stock}, #{sellStatus}, #{sellTime}, #{createUserId}, now())
     </insert>
     <insert id="saveDetail">
         insert into products_shown_good_detail
         (appId, goodId, goodDescribe, goodSize, companyId, createUserId, createTime)
-        value
-        (#{appId}, #{goodId}, #{goodDescribe}, #{goodSize}, #{companyId}, #{createUserId}, now())
+            value
+            (#{appId}, #{goodId}, #{goodDescribe}, #{goodSize}, #{companyId}, #{createUserId}, now())
     </insert>
     <insert id="saveDiscount">
         insert into products_shown_good_discount
-        (appId, goodId, discountOff, fullPrice, createUserId, createTime)
-        value
-        (#{appId}, #{goodId}, #{discountOff}, #{fullPrice}, #{createUserId}, now())
+            (appId, goodId, discountOff, fullPrice, createUserId, createTime)
+            value
+            (#{appId}, #{goodId}, #{discountOff}, #{fullPrice}, #{createUserId}, now())
     </insert>
     <select id="listAllDeliverWay" resultMap="ManagementDeliverWayResultMap">
         select
@@ -218,7 +243,8 @@
         insert into products_shown_good_deliver_way(appId, goodId, deliverWay, createUserId, createTime)
         values
         <foreach collection="goodDeliverWayList" item="goodDeliverWay" separator=",">
-            (#{goodDeliverWay.appId}, #{goodDeliverWay.goodId}, #{goodDeliverWay.deliverWay}, #{goodDeliverWay.createUserId}, now())
+            (#{goodDeliverWay.appId}, #{goodDeliverWay.goodId}, #{goodDeliverWay.deliverWay},
+            #{goodDeliverWay.createUserId}, now())
         </foreach>
     </insert>
     <select id="getGoodByCategoryId" resultMap="GoodBaseResultMap">
@@ -227,10 +253,42 @@
         from products_shown_good_base as psgb
         where psgb.categoryId = #{categoryId}
     </select>
+    <select id="goodInfoCount" resultType="int">
+        select count(distinct psgi.goodId) from products_shown_good_info as psgi
+        left join products_shown_good_base as psgb on psgi.goodId = psgb.goodId
+        <include refid="GoodBaseWhere"/>
+    </select>
+    <select id="getGoodBaseByGoodId" resultMap="GoodBaseResultMap">
+        select
+        <include refid="Good_Base_List"/>
+        from products_shown_good_base as psgb
+        where psgb.goodId in
+        <foreach collection="list" item="goodInfoIdList" separator="," open="(" close=")">
+            #{goodInfoIdList, jdbcType=NUMERIC}
+        </foreach>
+    </select>
+    <select id="goodInfoIdList" resultType="java.lang.Long">
+        select DISTINCT psgi.goodId from products_shown_good_info as psgi
+        left join products_shown_good_base as psgb on psgi.goodId = psgb.goodId
+        <include refid="GoodBaseWhere"/>
+        ${params.orderBy}
+        limit #{offset}, #{limit}
+    </select>
+    <select id="allGoodInfoList" resultMap="GoodInfoResultMap">
+        select
+        <include refid="Good_Info_List"/>
+        from products_shown_good_info as psgi
+    </select>
+    <select id="getGoodInfoById" resultMap="GoodInfoResultMap">
+        select
+        <include refid="Good_Info_List"/>
+        from products_shown_good_info as psgi
+        where psgi.goodId = #{goodId} and psgi.appId = #{appId}
+    </select>
     <insert id="addGoodInfo">
         insert into products_shown_good_info
-        (pictureId, appId, goodId, infoType, contentType, size, path, url, type, createTime,createUserId)
-        values
-            (#{pictureId}, #{appId}, #{goodId}, #{infoType}, #{contentType}, #{size}, #{path}, #{url}, #{type}, now(), #{createUserId})
+        (pictureId, appId, goodId, infoType, contentType, size, path, url, type, createTime, createUserId)
+        values (#{pictureId}, #{appId}, #{goodId}, #{infoType}, #{contentType}, #{size}, #{path}, #{url}, #{type},
+                now(), #{createUserId})
     </insert>
 </mapper>

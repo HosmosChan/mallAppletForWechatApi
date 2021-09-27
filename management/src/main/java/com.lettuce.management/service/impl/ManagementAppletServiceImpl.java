@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -68,6 +69,7 @@ public class ManagementAppletServiceImpl implements ManagementAppletService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(AppletDto appletDto) {
         Long userId = managementUserDao.getIdByUsername(appletDto.getUsername());
         if (userId != null) {
@@ -90,6 +92,7 @@ public class ManagementAppletServiceImpl implements ManagementAppletService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void update(AppletDto appletDto) {
         Long userId = managementUserDao.getIdByUsername(appletDto.getUsername());
         if (userId != null) {
@@ -107,6 +110,7 @@ public class ManagementAppletServiceImpl implements ManagementAppletService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
         Long gmtUserId = UserUtil.getCurrentUser().getId();
         Byte status = 2;
