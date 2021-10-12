@@ -28,6 +28,36 @@
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
+    <resultMap id="GoodResultMap" type="com.lettuce.management.dto.GoodDto">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="appId" jdbcType="VARCHAR" property="appId"/>
+        <result column="goodId" jdbcType="BIGINT" property="goodId"/>
+        <result column="categoryId" jdbcType="BIGINT" property="categoryId"/>
+        <result column="goodName" jdbcType="VARCHAR" property="goodName"/>
+        <result column="goodMaxPrice" jdbcType="DECIMAL" property="goodMaxPrice"/>
+        <result column="goodMinPrice" jdbcType="DECIMAL" property="goodMinPrice"/>
+        <result column="goodPrice" jdbcType="VARCHAR" property="goodPrice"/>
+        <result column="goodUrl" jdbcType="VARCHAR" property="goodUrl"/>
+        <result column="goodCoverImg" jdbcType="VARCHAR" property="goodCoverImg"/>
+        <result column="isSpecialPrice" jdbcType="TINYINT" property="isSpecialPrice"/>
+        <result column="specialPrice" jdbcType="DECIMAL" property="specialPrice"/>
+        <result column="isDiscount" jdbcType="TINYINT" property="isDiscount"/>
+        <result column="paymentNo" jdbcType="INTEGER" property="paymentNo"/>
+        <result column="stock" jdbcType="INTEGER" property="stock"/>
+        <result column="markNo" jdbcType="INTEGER" property="markNo"/>
+        <result column="commentNo" jdbcType="INTEGER" property="commentNo"/>
+        <result column="sellStatus" jdbcType="TINYINT" property="sellStatus"/>
+        <result column="sellTime" jdbcType="TIMESTAMP" property="sellTime"/>
+        <result column="goodDescribe" jdbcType="VARCHAR" property="goodDescribe"/>
+        <result column="goodSize" jdbcType="DOUBLE" property="goodSize"/>
+        <result column="companyId" jdbcType="BIGINT" property="companyId"/>
+        <result column="discountOff" jdbcType="DOUBLE" property="discountOff"/>
+        <result column="fullPrice" jdbcType="DECIMAL" property="fullPrice"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
+        <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
+        <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
+    </resultMap>
     <resultMap id="GoodDetailResultMap" type="com.lettuce.management.entity.GoodDetail">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="appId" jdbcType="BIGINT" property="appId"/>
@@ -96,15 +126,16 @@
         psgd.createUserId, psgd.gmtTime, psgd.gmtUserId
     </sql>
     <sql id="Management_Deliver_Way_List">
-        mdwl.id, mdwl.deliverWay
+        mdw.id, mdw.deliverWay, mdw.createTime, mdw.createUserId,
+        mdw.gmtTime, mdw.gmtUserId
     </sql>
     <sql id="Good_Deliver_Way_List">
         psgdw.id, psgdw.appId, psgdw.goodId, deliverWay, psgdw.createTime, psgdw.createUserId,
         psgdw.gmtTime, psgdw.gmtUserId
     </sql>
     <sql id="Good_Discount_List">
-        psgd.id, psgd.appId, psgd.goodId, discountOff, fullPrice, psgd.createUserId,
-        psgd.createTime, psgd.gmtUserId, psgd.gmtTime
+        psgdis.id, psgd.appId, psgdis.goodId, discountOff, fullPrice, psgdis.createUserId,
+        psgdis.createTime, psgdis.gmtUserId, psgdis.gmtTime
     </sql>
     <sql id="Good_Info_List">
         psgi.id, psgi.pictureId, psgi.appId, psgi.goodId, psgi.infoType, psgi.contentType,
@@ -202,7 +233,7 @@
             #{goodIdList, jdbcType=NUMERIC}
         </foreach>
     </delete>
-    <select id="getGoodByParam" resultMap="GoodBaseResultMap">
+    <select id="getGoodBaseByParam" resultMap="GoodBaseResultMap">
         select
         <include refid="Good_Base_List"/>, psc.categoryName
         from products_shown_good_base as psgb
@@ -241,8 +272,8 @@
     <select id="listAllDeliverWay" resultMap="ManagementDeliverWayResultMap">
         select
         <include refid="Management_Deliver_Way_List"/>
-        from management_deliver_way as mdwl
-        order by mdwl.id asc
+        from management_deliver_way as mdw
+        order by mdw.id asc
     </select>
     <insert id="saveDeliverWay">
         insert into products_shown_good_deliver_way(appId, goodId, deliverWay, createUserId, createTime)
@@ -276,6 +307,7 @@
         select DISTINCT psgi.goodId from products_shown_good_info as psgi
         left join products_shown_good_base as psgb on psgi.goodId = psgb.goodId
         <include refid="GoodBaseWhere"/>
+        and psgi.infoType = 2
         ${params.orderBy}
         limit #{offset}, #{limit}
     </select>
@@ -283,12 +315,13 @@
         select
         <include refid="Good_Info_List"/>
         from products_shown_good_info as psgi
+        where psgi.infoType = 2
     </select>
     <select id="getGoodInfoById" resultMap="GoodInfoResultMap">
         select
         <include refid="Good_Info_List"/>
         from products_shown_good_info as psgi
-        where psgi.goodId = #{goodId} and psgi.appId = #{appId}
+        where psgi.goodId = #{goodId} and psgi.appId = #{appId} and psgi.infoType = 2
     </select>
     <insert id="addGoodInfo">
         insert into products_shown_good_info
@@ -298,6 +331,35 @@
     </insert>
     <delete id="deleteGoodInfo">
         delete from products_shown_good_info
-        where goodId = #{goodId} and appId = #{appId}
+        where goodId = #{goodId} and appId = #{appId} and infoType = 2
     </delete>
+    <select id="getGoodByParam" resultMap="GoodResultMap">
+        select
+        <include refid="Good_Base_List"/>,
+               psgd.goodDescribe, psgd.goodSize, psgd.companyId, psgdis.discountOff, psgdis.fullPrice
+        from products_shown_good_base as psgb
+        left join products_shown_good_detail as psgd on psgb.goodId = psgd.goodId
+        left join products_shown_good_discount as psgdis on psgb.goodId = psgdis.goodId
+        where 1 = 1
+        <if test="goodId != null and goodId != ''">
+            and psgb.goodId = #{goodId}
+        </if>
+        <if test="appId != null and appId != ''">
+            and psgb.appId = #{appId}
+        </if>
+    </select>
+    <select id="getDeliverWayByGoodId" resultMap="ManagementDeliverWayResultMap">
+        select
+        <include refid="Management_Deliver_Way_List"/>
+        from management_deliver_way as mdw
+        inner join products_shown_good_deliver_way as psgdw
+        on mdw.id = psgdw.deliverWay
+        where 1 = 1
+        <if test="goodId != null and goodId != ''">
+            and psgdw.goodId = #{goodId}
+        </if>
+        <if test="appId != null and appId != ''">
+            and psgdw.appId = #{appId}
+        </if>
+    </select>
 </mapper>

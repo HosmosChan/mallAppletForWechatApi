@@ -147,10 +147,10 @@
                         "defaultContent": "",
                         "orderable": false,
                         "render": function (data, type, row) {
-                            var id = row['id'];
-                            var href = "updateGood.html?id=" + id;
+                            var goodId = row['goodId'];
+                            var href = "updateGood.html?goodId=" + goodId;
                             var edit = buttonEdit(href, "productsShown:good:add", permission);
-                            var del = buttonDel(id, "productsShown:good:del", permission);
+                            var del = buttonDel(goodId, "productsShown:good:del", permission);
                             return edit + del;
                         }
                     }

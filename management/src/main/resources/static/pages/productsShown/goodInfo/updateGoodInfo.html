@@ -124,7 +124,6 @@
             , before: function () {
                 this.data = {
                     goodId: document.getElementById("goodId").value,
-                    appId: appId,
                     domain: domain,
                 }
             }
@@ -161,7 +160,7 @@
             $('#goodId').val(goodId);
             $.ajax({
                 type: 'get',
-                url: '/productsShown/good/getGoodByParam?goodId=' + goodId + '&appId=' + appId,
+                url: '/productsShown/good/getGoodBaseByParam?goodId=' + goodId + '&appId=' + appId,
                 async: false,
                 success: function (data) {
                     $('#categoryId').val(data.categoryId);

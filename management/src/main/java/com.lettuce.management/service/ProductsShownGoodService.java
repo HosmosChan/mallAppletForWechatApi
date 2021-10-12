@@ -4,7 +4,6 @@ import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
 import com.lettuce.management.dto.GoodInfoListDto;
 import com.lettuce.management.entity.DeliverWay;
-import com.lettuce.management.entity.FileInfo;
 import com.lettuce.management.entity.GoodBase;
 import com.lettuce.management.entity.GoodInfo;
 import org.springframework.web.multipart.MultipartFile;
@@ -123,7 +122,7 @@ public interface ProductsShownGoodService {
     GoodInfo addGoodInfo(MultipartFile file, HttpServletRequest request) throws IOException;
 
     /**
-     * 通过相關參數获取商品信息
+     * 通过相關參數获取商品基础信息
      *
      * @param goodId   商品 id
      * @param goodName 商品名
@@ -132,7 +131,7 @@ public interface ProductsShownGoodService {
      * @author Hosmos
      * @date 2021-08-25
      */
-    GoodBaseDto getGoodByParam(Long goodId, String goodName, String appId);
+    GoodBaseDto getGoodBaseByParam(Long goodId, String goodName, String appId);
 
     /**
      * 删除商品詳情信息圖片
@@ -143,4 +142,24 @@ public interface ProductsShownGoodService {
      * @date 2021-09-28
      */
     void deleteGoodInfo(MultipartFile file, HttpServletRequest request);
+
+    /**
+     * 通过相關參數获取商品信息
+     *
+     * @param goodId 商品 id
+     * @return GoodDto
+     * @author Hosmos
+     * @date 2021-10-08
+     */
+    GoodDto getGoodByParam(Long goodId);
+
+    /**
+     * 根据商品id获取配送方式
+     *
+     * @param goodId 商品id
+     * @return List<DeliverWay>
+     * @author Hosmos
+     * @date 2021-10-10
+     */
+    List<DeliverWay> getDeliverWayByGoodId(Long goodId);
 }

@@ -10,12 +10,10 @@ import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
 import com.lettuce.management.dto.GoodInfoListDto;
 import com.lettuce.management.dto.LayuiFile;
-import com.lettuce.management.entity.DeliverWay;
-import com.lettuce.management.entity.FileInfo;
-import com.lettuce.management.entity.GoodBase;
-import com.lettuce.management.entity.GoodInfo;
+import com.lettuce.management.entity.*;
 import com.lettuce.management.service.ProductsShownGoodService;
 import io.swagger.annotations.*;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,7 +99,7 @@ public class ProductsShownGoodController {
     }
 
     /**
-     * 通过相關參數获取商品信息
+     * 通过相關參數获取商品基础信息
      *
      * @param goodId   商品 id
      * @param goodName 商品名
@@ -110,10 +108,10 @@ public class ProductsShownGoodController {
      * @author Hosmos
      * @date 2021-08-25
      */
-    @GetMapping("/getGoodByParam")
-    @ApiOperation(value = "通过相關參數获取商品信息")
-    public GoodBaseDto getGoodByParam(Long goodId, String goodName, String appId) {
-        return productsShownGoodService.getGoodByParam(goodId, goodName, appId);
+    @GetMapping("/getGoodBaseByParam")
+    @ApiOperation(value = "通过相關參數获取商品基础信息")
+    public GoodBaseDto getGoodBaseByParam(Long goodId, String goodName, String appId) {
+        return productsShownGoodService.getGoodBaseByParam(goodId, goodName, appId);
     }
 
     /**
@@ -132,10 +130,46 @@ public class ProductsShownGoodController {
         return array;
     }
 
+    /**
+     * 根據分類Id獲取商品
+     *
+     * @param categoryId 分類 id
+     * @return List<GoodBase>
+     * @author Hosmos
+     * @date 2021-08-27
+     */
     @GetMapping("/getGoodByCategoryId")
     @ApiOperation(value = "根據分類Id獲取商品")
     public List<GoodBase> getGoodByCategoryId(Long categoryId) {
         return productsShownGoodService.getGoodByCategoryId(categoryId);
+    }
+
+    /**
+     * 通过相關參數获取商品信息
+     *
+     * @param goodId 商品 id
+     * @return GoodDto
+     * @author Hosmos
+     * @date 2021-10-08
+     */
+    @GetMapping("/getGoodByParam")
+    @ApiOperation(value = "通过相關參數获取商品信息")
+    public GoodDto getGoodByParam(Long goodId) {
+        return productsShownGoodService.getGoodByParam(goodId);
+    }
+
+    /**
+     * 根据商品id获取配送方式
+     *
+     * @param goodId 商品id
+     * @return List<DeliverWay>
+     * @author Hosmos
+     * @date 2021-10-10
+     */
+    @GetMapping(params = "goodId", value = "/getDeliverWayByGoodId")
+    @ApiOperation(value = "根据商品id获取配送方式")
+    public List<DeliverWay> getDeliverWayByGoodId(Long goodId) {
+        return productsShownGoodService.getDeliverWayByGoodId(goodId);
     }
 
     /**
@@ -196,7 +230,7 @@ public class ProductsShownGoodController {
      * 更新商品詳情信息圖片
      *
      * @param file    文件
-     * @param request 返回参数
+     * @param request 请求参数
      * @return LayuiFile
      * @author Hosmos
      * @date 2021-09-28

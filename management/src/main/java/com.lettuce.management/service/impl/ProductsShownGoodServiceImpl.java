@@ -94,7 +94,7 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(GoodDto goodDto) {
-        GoodBase d = productsShownGoodDao.getGoodByParam(null, goodDto.getGoodName(), goodDto.getAppId());
+        GoodBase d = productsShownGoodDao.getGoodBaseByParam(null, goodDto.getGoodName(), goodDto.getAppId());
         if (d != null) {
             throw new IllegalArgumentException("商品已存在");
         }
@@ -229,21 +229,34 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     }
 
     @Override
-    public GoodBaseDto getGoodByParam(Long goodId, String goodName, String appId) {
-        return productsShownGoodDao.getGoodByParam(goodId, goodName, appId);
+    public GoodBaseDto getGoodBaseByParam(Long goodId, String goodName, String appId) {
+        return productsShownGoodDao.getGoodBaseByParam(goodId, goodName, appId);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteGoodInfo(MultipartFile file, HttpServletRequest request) {
         Long goodId = Long.parseLong(request.getParameter("goodId"));
-        String appId = request.getParameter("appId");
+        String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
         List<GoodInfo> d = productsShownGoodDao.getGoodInfoById(goodId, appId);
         productsShownGoodDao.deleteGoodInfo(goodId, appId);
         for (GoodInfo goodInfo : d
         ) {
             FileUtil.deleteFile(goodInfo.getPath());
         }
+    }
+
+    @Override
+    public GoodDto getGoodByParam(Long goodId) {
+        String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        GoodDto result = productsShownGoodDao.getGoodByParam(goodId, appId);
+        return result;
+    }
+
+    @Override
+    public List<DeliverWay> getDeliverWayByGoodId(Long goodId) {
+        String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        return productsShownGoodDao.getDeliverWayByGoodId(goodId, appId);
     }
 
     /**

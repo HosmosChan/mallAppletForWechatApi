@@ -19,7 +19,6 @@
             <li>商品信息</li>
             <li id="discountInfo" style="display: none;">商品优惠信息</li>
             <li>商品配送信息</li>
-            <li>商品详情</li>
         </ul>
         <div class="layui-tab-content" style="padding: 5px 0 0 0;">
             <div class="layui-tab-item layui-show">
@@ -206,7 +205,7 @@
         });
     });
     initData();
-    var appId = $('#appId').val().toString();
+    var appId = $('#appId').val();
     showCategoryByAppId("categoryId", "categoryName", "", appId);
     showCompanyByAppId("companyId", "companyId", "", appId);
     showDictSelect("sellStatus", "sellStatus", "");

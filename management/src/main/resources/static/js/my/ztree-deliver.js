@@ -26,7 +26,7 @@ function getDeliverTree() {
 function initDeliverWayDatas(goodId) {
     $.ajax({
         type: 'get',
-        url: '/productsShown/good/deliverWay/DeliverWayByGoodId?goodId=' + goodId,
+        url: '/productsShown/good/getDeliverWayByGoodId?goodId=' + goodId,
         success: function (data) {
             var length = data.length;
             var ids = [];
