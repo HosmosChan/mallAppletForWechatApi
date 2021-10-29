@@ -29,6 +29,7 @@ public class Category extends BaseEntity<Long> {
     private String appId;
     private Long categoryId;
     private String categoryName;
+    private String categoryImg;
     private Long createUserId;
     private Long gmtUserId;
 
@@ -54,6 +55,14 @@ public class Category extends BaseEntity<Long> {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getCategoryImg() {
+        return categoryImg;
+    }
+
+    public void setCategoryImg(String categoryImg) {
+        this.categoryImg = categoryImg;
     }
 
     public Long getCreateUserId() {

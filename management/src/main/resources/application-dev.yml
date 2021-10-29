@@ -12,6 +12,7 @@ parameters:
     carousel: /carousel
     goodCover: /goodCover
     goodInfo: /goodInfo
+    category: /category
 server:
   port: 8081
   servlet:

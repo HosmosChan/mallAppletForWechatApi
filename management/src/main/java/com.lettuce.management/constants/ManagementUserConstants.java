@@ -41,4 +41,5 @@ public interface ManagementUserConstants {
     Byte CAROUSEL = 0;
     Byte GOOD_COVER = 1;
     Byte GOOD_INFO = 2;
+    Byte CATEGORY = 3;
 }

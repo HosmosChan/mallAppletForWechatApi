@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../../css/ztree/demo.css" type="text/css"></head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <form class="form-horizontal" onsubmit="return false" id="form">
+    <form class="form-horizontal" enctype="multipart/form-data" id="form">
         <fieldset>
             <div class='form-group'>
                 <label class='col-md-2 control-label'>appId</label>
@@ -27,11 +27,19 @@
                            data-bv-notempty='true' data-bv-notempty-message='分類名 不能為空'>
                 </div>
             </div>
+            <div class='form-group'>
+                <label class='col-md-2 control-label'>分類圖標</label>
+                <div class='col-md-10'>
+                    <input type="file" name="uploadImage" id="uploadImage">
+                </div>
+            </div>
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
-                        <button class="btn btn-primary" onclick="location.href='categoryList.html'">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="add()">
+                        <button class="btn btn-primary" type="button" onclick="location.href='categoryList.html'">
+                            <i class="fa fa-backward"></i> 返回
+                        </button>
+                        <button class="btn btn-primary" type="button" onclick="add()">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -68,18 +76,21 @@
     }
 
     function add() {
-        $('#form').bootstrapValidator();
-        var bootstrapValidator = $("#form").data('bootstrapValidator');
-        bootstrapValidator.validate();
-        if (!bootstrapValidator.isValid()) {
+        var formdata = new FormData();
+        if ($('#uploadImage').get(0).files[0] == null) {
+            layer.msg("請選擇分類圖標", {shift: -1, time: 1000}, function () {
+            });
             return;
         }
-        var formdata = $("#form").serializeObject();
+        formdata.append('uploadImage',$('#uploadImage').get(0).files[0]);
+        formdata.append('appId',document.getElementById("appId").value);
+        formdata.append('categoryName',document.getElementById("categoryName").value);
         $.ajax({
             type: 'post',
             url: '/productsShown/category',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(formdata),
+            contentType: false,
+            data: formdata,
+            processData: false,
             success: function (data) {
                 layer.msg("添加成功", {shift: -1, time: 1000}, function () {
                     location.href = "categoryList.html";

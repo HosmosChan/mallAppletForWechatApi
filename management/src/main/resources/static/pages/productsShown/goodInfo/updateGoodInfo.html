@@ -105,6 +105,12 @@
                         , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
                         , '<td><div class="layui-progress" lay-filter="progress-demo-' + index + '"><div class="layui-progress-bar" lay-percent=""></div></div></td>'
                         , '<td>'
+                        , '<td>'
+                        , '<label class="col-md-2 control-label">排序</label>'
+                        , '<div class="col-md-10">'
+                        , '<input class="form-control" placeholder="排序" name="sort" id="sort-' + index + '" type="number" value="100" data-bv-notempty="true" data-bv-notempty-message="排序 不能為空">'
+                        , '</div>'
+                        , '</td>'
                         , '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重傳</button>'
                         , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">刪除</button>'
                         , '</td>'
@@ -121,9 +127,10 @@
                     $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img-' + index + ' " style="margin-right: 10px; height: 150px">');
                 });
             }
-            , before: function () {
+            , before: function (index) {
                 this.data = {
                     goodId: document.getElementById("goodId").value,
+                    sort: document.getElementById("sort-" + index).value,
                     domain: domain,
                 }
             }

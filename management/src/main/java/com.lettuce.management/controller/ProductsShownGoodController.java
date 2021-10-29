@@ -6,6 +6,7 @@ import com.lettuce.common.utils.table.PageTableHandler;
 import com.lettuce.common.utils.table.PageTableRequest;
 import com.lettuce.common.utils.table.PageTableResponse;
 import com.lettuce.management.annotation.LogAnnotation;
+import com.lettuce.management.constants.ManagementUserConstants;
 import com.lettuce.management.dto.GoodBaseDto;
 import com.lettuce.management.dto.GoodDto;
 import com.lettuce.management.dto.GoodInfoListDto;
@@ -13,7 +14,6 @@ import com.lettuce.management.dto.LayuiFile;
 import com.lettuce.management.entity.*;
 import com.lettuce.management.service.ProductsShownGoodService;
 import io.swagger.annotations.*;
-import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -173,6 +173,35 @@ public class ProductsShownGoodController {
     }
 
     /**
+     * 上传商品封面
+     *
+     * @param file    文件
+     * @param request 请求参数
+     * @return LayuiFile
+     * @author Hosmos
+     * @date 2021-10-11
+     */
+    @PostMapping("/uploadCover")
+    @ApiOperation(value = "上传商品封面")
+    @RequiresPermissions("productsShown:good:add")
+    public LayuiFile uploadCover(MultipartFile file, HttpServletRequest request) throws IOException {
+        GoodInfo fileInfo = productsShownGoodService.uploadCover(file, request);
+        LayuiFile layuiFile = new LayuiFile();
+        LayuiFile.LayuiFileData data = new LayuiFile.LayuiFileData();
+        data.setTitle(file.getOriginalFilename());
+        if (fileInfo != null) {
+            data.setSrc(request.getParameter("domain") + "/mallAppletForWechatApi/files/goodCover" + fileInfo.getUrl());
+            layuiFile.setCode(0);
+            layuiFile.setMsg("上传文件成功：" + file.getName());
+        } else {
+            layuiFile.setCode(1);
+            layuiFile.setMsg("上传文件失败：" + file.getName());
+        }
+        layuiFile.setData(data);
+        return layuiFile;
+    }
+
+    /**
      * 商品查询
      *
      * @param request 查询詳情信息圖片信息
@@ -227,33 +256,17 @@ public class ProductsShownGoodController {
     }
 
     /**
-     * 更新商品詳情信息圖片
+     * 删除商品詳情信息圖片
      *
-     * @param file    文件
-     * @param request 请求参数
-     * @return LayuiFile
+     * @param goodId 商品 id
      * @author Hosmos
-     * @date 2021-09-28
+     * @date 2021-10-18
      */
     @LogAnnotation
-    @PostMapping("/updateGoodInfo")
-    @ApiOperation(value = "更新商品詳情信息圖片")
-    public LayuiFile updateGoodInfo(MultipartFile file, HttpServletRequest request) throws IOException {
-        productsShownGoodService.deleteGoodInfo(file, request);
-        GoodInfo fileInfo = productsShownGoodService.addGoodInfo(file, request);
-        LayuiFile layuiFile = new LayuiFile();
-        LayuiFile.LayuiFileData data = new LayuiFile.LayuiFileData();
-        data.setTitle(file.getOriginalFilename());
-        if (fileInfo != null) {
-            data.setSrc(request.getParameter("domain") + "/mallAppletForWechatApi/files/goodInfo" + fileInfo.getUrl());
-            layuiFile.setCode(0);
-            layuiFile.setMsg("上传文件成功：" + file.getName());
-        } else {
-            layuiFile.setCode(1);
-            layuiFile.setMsg("上传文件失败：" + file.getName());
-        }
-        layuiFile.setData(data);
-        return layuiFile;
+    @DeleteMapping("/deleteGoodInfo/{goodId}")
+    @ApiOperation(value = "删除商品詳情信息圖片")
+    public void deleteGoodInfo(@PathVariable Long goodId) {
+        productsShownGoodService.deleteGoodInfo(goodId, ManagementUserConstants.GOOD_INFO);
     }
 
     /**

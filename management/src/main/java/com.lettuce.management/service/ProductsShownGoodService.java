@@ -136,12 +136,12 @@ public interface ProductsShownGoodService {
     /**
      * 删除商品詳情信息圖片
      *
-     * @param file    文件
-     * @param request 请求信息
+     * @param goodId   商品 id
+     * @param infoType 類型
      * @author Hosmos
-     * @date 2021-09-28
+     * @date 2021-10-18
      */
-    void deleteGoodInfo(MultipartFile file, HttpServletRequest request);
+    void deleteGoodInfo(Long goodId, Byte infoType);
 
     /**
      * 通过相關參數获取商品信息
@@ -162,4 +162,15 @@ public interface ProductsShownGoodService {
      * @date 2021-10-10
      */
     List<DeliverWay> getDeliverWayByGoodId(Long goodId);
+
+    /**
+     * 上传商品封面
+     *
+     * @param file    文件
+     * @param request 请求参数
+     * @return LayuiFile
+     * @author Hosmos
+     * @date 2021-10-11
+     */
+    GoodInfo uploadCover(MultipartFile file, HttpServletRequest request) throws IOException;
 }

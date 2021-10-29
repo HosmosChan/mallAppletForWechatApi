@@ -5,13 +5,14 @@
         <result column="appId" jdbcType="VARCHAR" property="appId"/>
         <result column="categoryId" jdbcType="BIGINT" property="categoryId"/>
         <result column="categoryName" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="categoryImg" jdbcType="VARCHAR" property="categoryImg"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="createUserId" jdbcType="BIGINT" property="createUserId"/>
         <result column="gmtTime" jdbcType="TIMESTAMP" property="gmtTime"/>
         <result column="gmtUserId" jdbcType="BIGINT" property="gmtUserId"/>
     </resultMap>
     <sql id="Category_List">
-        psc.id, psc.appId, psc.categoryId, categoryName, psc.createUserId,
+        psc.id, psc.appId, psc.categoryId, categoryName, categoryImg, psc.createUserId,
         psc.createTime, psc.gmtUserId, psc.gmtTime
     </sql>
     <sql id="where">
@@ -49,15 +50,18 @@
     </select>
     <insert id="save">
         insert into products_shown_category
-        (appId, categoryId, categoryName, createUserId, createTime)
+        (appId, categoryId, categoryName, categoryImg, createUserId, createTime)
         value
-        (#{appId}, #{categoryId}, #{categoryName}, #{createUserId}, now())
+        (#{appId}, #{categoryId}, #{categoryName}, #{categoryImg}, #{createUserId}, now())
     </insert>
     <update id="update">
         update products_shown_category
         <set>
             <if test="categoryName != null and categoryName != ''">
                 categoryName = #{categoryName},
+            </if>
+            <if test="categoryImg != null and categoryImg != ''">
+                categoryImg = #{categoryImg},
             </if>
             <if test="gmtUserId != null and gmtUserId != ''">
                 gmtUserId = #{gmtUserId},

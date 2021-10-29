@@ -46,6 +46,7 @@
                         <tr>
                             <th>分類id</th>
                             <th>分類名</th>
+                            <th>分類圖標</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -92,6 +93,19 @@
                 "columns": [
                     {"data": "categoryId", "defaultContent": ""},
                     {"data": "categoryName", "defaultContent": ""},
+                    {
+                        "data": "categoryImg",
+                        "defaultContent": "",
+                        "render": function (data, type, row) {
+                            var imgList = "";
+                            if (data != null) {
+                                imgList += "<div class='picbox li'>"
+                                imgList += "<img src= " + data + " height='100' style='margin-right: 10px'/>";
+                                imgList += "</div>";
+                            }
+                            return imgList;
+                        }
+                    },
                     {
                         "data": "",
                         "defaultContent": "",

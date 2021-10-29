@@ -144,14 +144,30 @@
                         "defaultContent": "",
                         "orderable": false,
                         "render": function (data, type, row) {
-                            var href = "updateGoodInfo.html?goodId=" + data;
-                            var edit = buttonEdit(href, "productsShown:good:add", permission);
-                            return edit;
+                            var goodId = row['goodId'];
+                            var del = buttonDel(goodId, "productsShown:good:del", permission);
+                            return del;
                         }
                     }
                 ],
                 "order": [[0, "asc"]]
             });
+    }
+
+    function del(id) {
+        layer.confirm('確定要刪除嗎？', {
+            btn: ['確定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: '/productsShown/good/deleteGoodInfo/' + id,
+                success: function (data) {
+                    example.ajax.reload();
+                    layer.msg("刪除成功");
+                }
+            });
+            layer.close(1);
+        });
     }
 
     $("#searchBt").click(function () {

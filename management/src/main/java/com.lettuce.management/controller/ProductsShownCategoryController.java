@@ -11,8 +11,10 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -67,21 +69,23 @@ public class ProductsShownCategoryController {
     @RequiresPermissions("productsShown:category:add")
     @PostMapping
     @ApiOperation(value = "保存")
-    public Category save(@RequestBody Category category) {
-        Category d = productsShownCategoryService.getCategoryByName(category.getCategoryName(), category.getAppId());
+    public void save(@RequestParam(value = "uploadImage", required = false) MultipartFile file,
+                     @RequestParam(value = "appId", required = false) String appId,
+                     @RequestParam(value = "categoryName", required = false) String categoryName) throws IOException {
+        Category d = productsShownCategoryService.getCategoryByName(categoryName, appId);
         if (d != null) {
             throw new IllegalArgumentException("分类已存在");
         }
-        productsShownCategoryService.save(category);
-        return category;
+        productsShownCategoryService.save(file, appId, categoryName);
     }
 
     @RequiresPermissions("productsShown:category:add")
-    @PutMapping
+    @PostMapping
     @ApiOperation(value = "修改")
-    public Category update(@RequestBody Category category) {
-        productsShownCategoryService.update(category);
-        return category;
+    public void update(@RequestParam(value = "uploadImage", required = false) MultipartFile file,
+                           @RequestParam(value = "appId", required = false) String appId,
+                           @RequestParam(value = "categoryName", required = false) String categoryName) throws IOException {
+        productsShownCategoryService.update(file, appId, categoryName);
     }
 
     @GetMapping("/{id}")

@@ -413,25 +413,6 @@ INSERT INTO `management_role_permission` VALUES (1, 12);
 INSERT INTO `management_role_permission` VALUES (1, 13);
 INSERT INTO `management_role_permission` VALUES (1, 14);
 INSERT INTO `management_role_permission` VALUES (1, 15);
-INSERT INTO `management_role_permission` VALUES (1, 16);
-INSERT INTO `management_role_permission` VALUES (1, 17);
-INSERT INTO `management_role_permission` VALUES (1, 18);
-INSERT INTO `management_role_permission` VALUES (1, 19);
-INSERT INTO `management_role_permission` VALUES (1, 20);
-INSERT INTO `management_role_permission` VALUES (1, 21);
-INSERT INTO `management_role_permission` VALUES (1, 22);
-INSERT INTO `management_role_permission` VALUES (1, 23);
-INSERT INTO `management_role_permission` VALUES (1, 24);
-INSERT INTO `management_role_permission` VALUES (1, 25);
-INSERT INTO `management_role_permission` VALUES (1, 26);
-INSERT INTO `management_role_permission` VALUES (1, 27);
-INSERT INTO `management_role_permission` VALUES (1, 28);
-INSERT INTO `management_role_permission` VALUES (1, 29);
-INSERT INTO `management_role_permission` VALUES (1, 30);
-INSERT INTO `management_role_permission` VALUES (1, 31);
-INSERT INTO `management_role_permission` VALUES (1, 32);
-INSERT INTO `management_role_permission` VALUES (1, 33);
-INSERT INTO `management_role_permission` VALUES (1, 34);
 INSERT INTO `management_role_permission` VALUES (1, 35);
 INSERT INTO `management_role_permission` VALUES (1, 36);
 INSERT INTO `management_role_permission` VALUES (1, 37);
@@ -548,6 +529,7 @@ CREATE TABLE `products_shown_category`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `appId` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'app id',
   `categoryId` bigint(20) NOT NULL COMMENT '分类id',
+  `categoryImg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '分类图片',
   `categoryName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '分类名',
   `createUserId` bigint(20) NOT NULL COMMENT '创建者Id',
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',

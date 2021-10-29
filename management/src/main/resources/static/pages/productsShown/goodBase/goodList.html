@@ -132,7 +132,19 @@
                     },
                     {"data": "goodName", "defaultContent": ""},
                     {"data": "goodPrice", "defaultContent": ""},
-                    {"data": "goodCoverImg", "defaultContent": ""},
+                    {
+                        "data": "goodCoverImg",
+                        "defaultContent": "",
+                        "render": function (data, type, row) {
+                            var imgList = "";
+                            if (data != null) {
+                                imgList += "<div class='picbox li'>"
+                                imgList += "<img src= " + data + " height='100' style='margin-right: 10px'/>";
+                                imgList += "</div>";
+                            }
+                            return imgList;
+                        }
+                    },
                     {"data": "stock", "defaultContent": ""},
                     {
                         "data": "sellStatus",

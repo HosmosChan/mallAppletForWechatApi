@@ -224,13 +224,14 @@ public interface ProductsShownGoodDao {
     /**
      * 根据商品Id查询商品詳情信息圖片
      *
-     * @param goodId 商品id
-     * @param appId  app id
+     * @param goodId   商品id
+     * @param appId    app id
+     * @param infoType 信息类型
      * @return List<GoodInfo>
      * @author Hosmos
      * @date 2021-09-27
      */
-    List<GoodInfo> getGoodInfoById(Long goodId, String appId);
+    List<GoodInfo> getGoodInfoById(Long goodId, String appId, Byte infoType);
 
     /**
      * 添加商品詳情信息圖片
@@ -250,7 +251,7 @@ public interface ProductsShownGoodDao {
      * @author Hosmos
      * @date 2021-09-28
      */
-    void deleteGoodInfo(long goodId, String appId);
+    void deleteGoodInfo(long goodId, String appId, Byte infoType);
 
     /**
      * 根据商品Id查询商品信息
@@ -273,4 +274,25 @@ public interface ProductsShownGoodDao {
      * @date 2021-10-09
      */
     List<DeliverWay> getDeliverWayByGoodId(Long goodId, String appId);
+
+    /**
+     * 更新商品基础信息表中CoverImg字段
+     *
+     * @param goodId    商品 id
+     * @param appId     app id
+     * @param fullPath  封面地址
+     * @param gmtUserId 修改用户Id
+     * @author Hosmos
+     * @date 2021-10-18
+     */
+    void updateGoodCoverImg(Long goodId, String appId, String fullPath, Long gmtUserId);
+
+    /**
+     * 更新商品封面
+     *
+     * @param fileInfo 商品封面
+     * @author Hosmos
+     * @date 2021-10-18
+     */
+    void updateGoodCover(GoodInfo fileInfo);
 }

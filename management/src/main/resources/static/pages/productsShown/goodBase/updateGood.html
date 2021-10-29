@@ -121,12 +121,6 @@
                                     <input class="form-control" type="text" name="goodSize" id="goodSize">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">公司</label>
-                                <div class="col-md-10">
-                                    <select name="companyId" class="form-control input-sm" id="companyId"></select>
-                                </div>
-                            </div>
                         </fieldset>
                     </form>
                 </div>
@@ -235,12 +229,13 @@
                 layer.msg('上传中', {icon: 16, time: 0});
             }
             , done: function (res) {
-                //如果上传失败
-                if (res.code > 0) {
+                //上传成功的一些操作
+                if (res.code === 0) {
+                    element.progress('demo', '100%');
+                    return layer.msg('上传成功');
+                } else { //如果上传失败
                     return layer.msg('上传失败');
                 }
-                //上传成功的一些操作
-                //……
                 $('#demoText').html(''); //置空上传失败的状态
             }
             , error: function () {
@@ -381,13 +376,6 @@
                     }
                     $('#goodDescribe').val(data.goodDescribe);
                     $('#goodSize').val(data.goodSize);
-                    var companyId = document.getElementById('companyId');
-                    for (var i = 0; i < companyId.options.length; i++) {
-                        if (companyId.options[i].value == data.companyId) {
-                            companyId.options[i].selected = true;
-                            break;
-                        }
-                    }
                     $('#discountOff').val(data.discountOff);
                     $('#fullPrice').val(data.fullPrice);
                     initDeliverWayDatas(data.goodId);

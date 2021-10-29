@@ -203,7 +203,7 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
         fileOriginalName = fileOriginalName.substring(fileOriginalName.lastIndexOf("."));
         String pathname = "/" + goodId + "/" + md5 + fileOriginalName;
         String fullPath = filesPath + ymlConfig.getFile().getGoodInfo() + pathname;
-        List<GoodInfo> d = productsShownGoodDao.getGoodInfoById(goodId, appId);
+        List<GoodInfo> d = productsShownGoodDao.getGoodInfoById(goodId, appId, ManagementUserConstants.GOOD_INFO);
         for (GoodInfo goodInfo : d
         ) {
             if (goodInfo.getPictureId().equals(md5)) {
@@ -235,11 +235,10 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteGoodInfo(MultipartFile file, HttpServletRequest request) {
-        Long goodId = Long.parseLong(request.getParameter("goodId"));
+    public void deleteGoodInfo(Long goodId, Byte infoType) {
         String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
-        List<GoodInfo> d = productsShownGoodDao.getGoodInfoById(goodId, appId);
-        productsShownGoodDao.deleteGoodInfo(goodId, appId);
+        List<GoodInfo> d = productsShownGoodDao.getGoodInfoById(goodId, appId, infoType);
+        productsShownGoodDao.deleteGoodInfo(goodId, appId, infoType);
         for (GoodInfo goodInfo : d
         ) {
             FileUtil.deleteFile(goodInfo.getPath());
@@ -257,6 +256,46 @@ public class ProductsShownGoodServiceImpl implements ProductsShownGoodService {
     public List<DeliverWay> getDeliverWayByGoodId(Long goodId) {
         String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
         return productsShownGoodDao.getDeliverWayByGoodId(goodId, appId);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public GoodInfo uploadCover(MultipartFile file, HttpServletRequest request) throws IOException {
+        String appId = managementAppletDao.getAppIdByUserId(UserUtil.getCurrentUser().getId());
+        Long goodId = Long.parseLong(request.getParameter("goodId"));
+        List<GoodInfo> data = productsShownGoodDao.getGoodInfoById(goodId, appId, ManagementUserConstants.GOOD_COVER);
+        GoodInfo fileInfo = new GoodInfo();
+        Long id = StrUtils.createRamdomNo();
+        fileInfo.setId(id);
+        String md5 = FileUtil.fileMd5(file.getInputStream());
+        fileInfo.setPictureId(md5);
+        fileInfo.setAppId(appId);
+        fileInfo.setGoodId(goodId);
+        fileInfo.setInfoType(ManagementUserConstants.GOOD_COVER);
+        String contentType = file.getContentType();
+        fileInfo.setContentType(contentType);
+        long size = file.getSize();
+        fileInfo.setSize(size);
+        String fileOriginalName = file.getOriginalFilename();
+        fileOriginalName = fileOriginalName.substring(fileOriginalName.lastIndexOf("."));
+        String pathname = "/" + goodId + "/" + md5 + fileOriginalName;
+        String fullPath = filesPath + ymlConfig.getFile().getGoodCover() + pathname;
+        fileInfo.setPath(fullPath);
+        fileInfo.setUrl(pathname);
+        fileInfo.setType(contentType.startsWith("image/") ? 1 : 0);
+        Long userId = UserUtil.getCurrentUser().getId();
+        fileInfo.setCreateUserId(userId);
+        fileInfo.setGmtUserId(userId);
+        productsShownGoodDao.updateGoodCoverImg(goodId, appId, fullPath, UserUtil.getCurrentUser().getId());
+        if (data != null && data.size() > 0) {
+            GoodInfo fileData = data.get(0);
+            productsShownGoodDao.updateGoodCover(fileInfo);
+            FileUtil.deleteFile(fileData.getPath());
+        } else {
+            productsShownGoodDao.addGoodInfo(fileInfo);
+        }
+        FileUtil.saveFile(file, fullPath);
+        return fileInfo;
     }
 
     /**

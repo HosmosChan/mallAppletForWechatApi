@@ -1,7 +1,9 @@
 package com.lettuce.management.service;
 
 import com.lettuce.management.entity.Category;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +58,7 @@ public interface ProductsShownCategoryService {
      * 通过分类名获取分类信息
      *
      * @param categoryName 分类名
-     * @param appId app id
+     * @param appId        app id
      * @return Category
      * @author Hosmos
      * @date 2021-08-25
@@ -66,20 +68,24 @@ public interface ProductsShownCategoryService {
     /**
      * 保存分类信息
      *
-     * @param category 分类实体类
+     * @param file         文件
+     * @param appId        app id
+     * @param categoryName 分类名
      * @author Hosmos
      * @date 2021-08-25
      */
-    void save(Category category);
+    void save(MultipartFile file, String appId, String categoryName) throws IOException;
 
     /**
      * 更新分类信息
      *
-     * @param category 分类信息
+     * @param file         文件
+     * @param appId        app id
+     * @param categoryName 分类名
      * @author Hosmos
      * @date 2021-08-25
      */
-    void update(Category category);
+    void update(MultipartFile file, String appId, String categoryName) throws IOException;
 
     /**
      * 根据id获取分类
@@ -99,6 +105,7 @@ public interface ProductsShownCategoryService {
      * @date 2021-08-25
      */
     void delete(Long id);
+
     /**
      * 根据AppId获取分类
      *

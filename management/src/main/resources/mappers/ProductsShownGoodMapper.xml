@@ -321,7 +321,7 @@
         select
         <include refid="Good_Info_List"/>
         from products_shown_good_info as psgi
-        where psgi.goodId = #{goodId} and psgi.appId = #{appId} and psgi.infoType = 2
+        where psgi.goodId = #{goodId} and psgi.appId = #{appId} and psgi.infoType = #{infoType}
     </select>
     <insert id="addGoodInfo">
         insert into products_shown_good_info
@@ -331,7 +331,7 @@
     </insert>
     <delete id="deleteGoodInfo">
         delete from products_shown_good_info
-        where goodId = #{goodId} and appId = #{appId} and infoType = 2
+        where goodId = #{goodId} and appId = #{appId} and infoType = #{infoType}
     </delete>
     <select id="getGoodByParam" resultMap="GoodResultMap">
         select
@@ -362,4 +362,19 @@
             and psgdw.appId = #{appId}
         </if>
     </select>
+    <update id="updateGoodCoverImg">
+        update products_shown_good_base
+        <set>
+            goodCoverImg = #{fullPath}, gmtUserId = #{gmtUserId}, gmtTime = now()
+        </set>
+        where goodId = #{goodId} and appId = #{appId}
+    </update>
+    <update id="updateGoodCover">
+        update products_shown_good_info
+        <set>
+            pictureId = #{pictureId}, contentType = #{contentType}, size = #{size}, path = #{path},
+            url = #{url}, type = #{type}, gmtUserId = #{gmtUserId}, gmtTime = now()
+        </set>
+        where goodId = #{goodId} and appId = #{appId} and infoType = #{infoType}
+    </update>
 </mapper>

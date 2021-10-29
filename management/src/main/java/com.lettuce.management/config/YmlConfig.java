@@ -49,6 +49,7 @@ public class YmlConfig {
         private String carousel;
         private String goodCover;
         private String goodInfo;
+        private String category;
 
         public String getFilePath() {
             return filePath;
@@ -80,6 +81,14 @@ public class YmlConfig {
 
         public void setGoodInfo(String goodInfo) {
             this.goodInfo = goodInfo;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+        public void setCategory(String category) {
+            this.category = category;
         }
     }
 
