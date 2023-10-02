@@ -52,7 +52,7 @@ public class ProductsShownCategoryController {
     @GetMapping
     @ApiOperation(value = "分类查询")
     @RequiresPermissions("productsShown:category:query")
-    public PageTableResponse listFiles(PageTableRequest request) {
+    public PageTableResponse list(PageTableRequest request) {
         return new PageTableHandler(new PageTableHandler.CountHandler() {
             @Override
             public int count(PageTableRequest request) {
